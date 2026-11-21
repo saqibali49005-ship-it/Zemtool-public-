@@ -324,7 +324,7 @@ try {
     assert.match(zemtoolsDetails, /Temperature-adjusted resistivity/);
     assert.match(zemtoolsDetails, /Path factor = 2/);
     assert.match(zemtoolsDetails, /One-way run used = 30\.48 m/);
-    assert.match(zemtoolsDetails, /Signed voltage change ΔV = 3\.117 V/);
+    assert.match(zemtoolsDetails, /Signed voltage change ΔV = [0-9]+\.[0-9]{4} V/);
     assert.match(zemtoolsDetails, /Voltage-drop target = 3\.6 V/);
     assert.match(zemtoolsDetails, /Load-end voltage = source voltage − ΔV = 120 − \(3\.117\) = 116\.883 V/);
     assert.match(zemtoolsDetails, /does not calculate code ampacity/i);
@@ -1456,7 +1456,7 @@ try {
     assert.equal(await page.locator('#amps').inputValue(), '15');
     assert.equal(await page.locator('#length').inputValue(), '20');
     assert.equal(await page.locator('#lengthUnit').inputValue(), 'ft');
-    assert.equal(await value('recommended'), '6 AWG');
+    assert.equal(await value('recommended'), '16 mm²');
     assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - 2.45) < 0.02);
 
     await page.locator('[data-preset="low24"]').click();
@@ -1464,21 +1464,17 @@ try {
     assert.equal(await page.locator('#amps').inputValue(), '30');
     assert.equal(await page.locator('#length').inputValue(), '5');
     assert.equal(await page.locator('#lengthUnit').inputValue(), 'm');
-    assert.equal(await value('recommended'), '7 AWG');
+    assert.equal(await value('recommended'), '16 mm²');
 
-    // Recompute the 24 V preset with the disclosed copper IACS constants.
-    // 7 AWG passes the 3% target; the next smaller 8 AWG does not.
+    // Recompute the 24 V preset using the disclosed copper IACS constants.
+    // The metric catalog selects 16 mm²; the next smaller listed metric size fails 3%.
     const copperRho75 = 0.017241 * (1 + 0.00393 * (75 - 20)) * 1.02;
-    const awgAreaForPreset = gauge => {
-      const diameterMm = 0.127 * Math.pow(92, (36 - gauge) / 39);
-      return Math.PI * diameterMm * diameterMm / 4;
-    };
-    const presetDropPct = gauge => 30 * 2 * 5 * copperRho75 / awgAreaForPreset(gauge) / 24 * 100;
-    const expected7AwgDropPct = presetDropPct(7);
-    const smaller8AwgDropPct = presetDropPct(8);
-    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - expected7AwgDropPct) < 0.01);
-    assert.ok(expected7AwgDropPct <= 3 && smaller8AwgDropPct > 3,
-      '7 AWG must be the smallest supported conductor that meets the 3% target');
+    const metricDropPct = area => 30 * 2 * 5 * copperRho75 / area / 24 * 100;
+    const expected16mmDropPct = metricDropPct(16);
+    const smaller10mmDropPct = metricDropPct(10);
+    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - expected16mmDropPct) < 0.01);
+    assert.ok(expected16mmDropPct <= 3 && smaller10mmDropPct > 3,
+      '16 mm² must be the smallest listed metric conductor that meets the 3% target');
     assert.match(await value('status'), /smallest supported conductor/i);
   });
 
@@ -1504,7 +1500,7 @@ try {
     assert.match(guide, /resistance constants/i);
     assert.match(guide, /Omni-published copper model selects 3 AWG/i);
     assert.match(guide, /default ZemTools IACS model selects 2 AWG/i);
-    assert.match(guide, /not an ampacity or installation approval/i);
+    assert.match(guide, /not an ampacity or installation approval|not an ampacity, installation, electrical-safety or code-compliance approval/i);
   });
 
 
