@@ -1,22 +1,52 @@
 <!doctype html>
 <html lang="en">
-<head><script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<head><script defer src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
 <base href="/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b2f66">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Wire Size Calculator | Voltage Drop, AC, DC &amp; Solar</title>
-<meta name="description" content="Calculate wire size and voltage drop for AC, DC, solar and inverter circuits using load, distance, cable material and target drop.">
+<title>Wire Size &amp; Wire Gauge Calculator | Voltage Drop</title>
+<meta name="description" content="Use this wire size or wire gauge calculator for DC or AC voltage drop. Enter load, voltage, cable length and target to estimate AWG/KCMIL or metric mm² sizes.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://zemtools.com/wire-size-calculator/">
-<meta property="og:type" content="website"><meta property="og:title" content="Wire Size &amp; Voltage Drop Calculator"><meta property="og:description" content="Find a planning-level cable size from voltage, load, distance and voltage-drop target for DC, AC, solar and inverter wiring."><meta property="og:url" content="https://zemtools.com/wire-size-calculator/"><meta property="og:image" content="https://zemtools.com/social-preview.png"><meta name="twitter:card" content="summary">
+<meta property="og:type" content="website"><meta property="og:title" content="Wire Size &amp; Wire Gauge Calculator | Voltage Drop"><meta property="og:description" content="Use this wire size or wire gauge calculator for DC or AC voltage drop. Enter load, voltage, cable length and target to estimate AWG/KCMIL or metric mm² sizes."><meta property="og:url" content="https://zemtools.com/wire-size-calculator/"><meta property="og:image" content="https://zemtools.com/social-preview.png"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Wire Size &amp; Wire Gauge Calculator | Voltage Drop"><meta name="twitter:description" content="Use this wire size or wire gauge calculator for DC or AC voltage drop. Enter load, voltage, cable length and target to estimate AWG/KCMIL or metric mm² sizes.">
 <link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean">
+<link rel="stylesheet" href="/master-header.css?v=20261115-tap-highlight-1">
 <link rel="stylesheet" href="master-related-tools.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Wire Size & Voltage Drop Calculator","url":"https://zemtools.com/wire-size-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level wire size and voltage drop calculator for DC, single-phase AC and three-phase circuits."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Energy & Electrical","item":"https://zemtools.com/energy-electrical/"},{"@type":"ListItem","position":3,"name":"Wire Size & Voltage Drop Calculator","item":"https://zemtools.com/wire-size-calculator/"}]}</script>
 <style>.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
 @media(max-width:700px){.wire-tool .choice-grid{grid-template-columns:1fr}.wire-tool .input-row{grid-template-columns:1fr}.wire-tool .result-grid{grid-template-columns:1fr}.wire-tool .comparison-row{grid-template-columns:1fr 1fr}.wire-tool .comparison-row span:last-child{grid-column:1/-1}.wire-page{overflow-x:clip}}
+
+.wire-tool .choice-grid.is-two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.wire-tool .assumptions{margin-top:14px;padding:12px 14px;border:1px solid #d8e5f3;border-radius:12px;background:#f8fbff}
+.wire-tool .assumptions p{margin:7px 0 0}
+.wire-tool .result-main{overflow-wrap:anywhere}.wire-tool #calculationDetails summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;cursor:pointer;color:#173b62}.wire-tool .calculation-breakdown{white-space:pre-line;overflow-wrap:anywhere;margin:10px 0 0;padding:12px;border:1px solid #d7e5f2;border-radius:10px;background:#f7fbff;color:#294765;font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
+.wire-tool .field input:focus,.wire-tool .field select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}
+@media(max-width:700px){.wire-tool .choice-grid.is-two{grid-template-columns:1fr}}
+.wire-tool .choice-grid.is-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wire-tool .reactance-toggle{display:flex;align-items:center;gap:9px;cursor:pointer}
+.wire-tool .reactance-toggle input{width:18px;height:18px;min-height:18px}
+@media(max-width:700px){.wire-tool .choice-grid.is-three{grid-template-columns:1fr}}
+.wire-tool .result-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.wire-tool .result-action{border:1px solid #c6d9ec;background:#f7fbff;color:#244d79;border-radius:10px;padding:9px 12px;font-weight:800;font-size:13px;cursor:pointer}
+.wire-tool .result-action:hover{background:#edf6ff}
+.wire-tool .manual-table-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.wire-tool #manualTableFile{max-width:100%;font:inherit;font-size:14px}
+.wire-tool #manualTableImportStatus{min-width:0}
+@media print{
+  body.tool-page.wire-page{background:#fff!important}
+  body.wire-page>header,body.wire-page>footer,body.wire-page>.skip-link{display:none!important}
+  body.wire-page .wire-tool> :not(.layout){display:none!important}
+  body.wire-page .wire-tool .layout{display:block!important;margin:0!important;padding:0!important;max-width:none!important}
+  body.wire-page .wire-tool .tool-card{display:none!important}
+  body.wire-page .wire-tool .result-card{display:block!important;width:100%!important;max-width:none!important;box-shadow:none!important;border:0!important}
+  body.wire-page .wire-tool .result-actions{display:none!important}
+  body.wire-page .wire-tool .danger-note{break-inside:avoid}
+  body.wire-page .wire-tool #calculationDetails{display:block!important}
+  body.wire-page .wire-tool #calculationDetails #calculationBreakdown{display:block!important}
+}
 </style>
 </head>
 <body class="tool-page wire-page">
@@ -24,68 +54,170 @@
 <header class="site-header zem-header">
 <div class="header-inner">
 <a class="brand" href="/"><div class="brand-mark">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
-<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
 
-<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
 </div>
 </header>
 <main id="main-content" class="wire-tool">
 <section class="hero-shell">
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="energy-electrical/">Energy &amp; Electrical</a><span class="crumb-sep">›</span><span>Wire Size &amp; Voltage Drop Calculator</span></nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="/energy-electrical/">Energy &amp; Electrical</a><span class="crumb-sep">›</span><span>Wire Size &amp; Voltage Drop Calculator</span></nav>
 <div class="hero"><div class="tool-icon" aria-hidden="true">⚡</div><div><h1>Wire Size &amp; Voltage Drop Calculator</h1><p>Find a planning-level cable size from voltage, load, distance and your voltage-drop target for DC, single-phase AC and three-phase circuits.</p></div></div>
-<div class="info-callout"><div class="info-icon">i</div><div><strong>Designed around the real sizing problem</strong>Enter watts or amps, use the actual one-way cable distance, choose copper or aluminum, and get the next standard metric size plus an approximate AWG equivalent. The calculation is transparent so you can see why the recommendation changes.</div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>Three practical wire-sizing tasks</strong>Find the smallest supported AWG/KCMIL or metric size that meets your voltage-drop target, check an existing conductor, or calculate the longest one-way run for a selected size. Every result states its material, temperature, construction and power-factor assumptions.</div></div>
+<div class="danger-note" id="safetyNotice" role="note"><strong>Important — planning estimate only.</strong> This calculator models voltage drop and cable impedance; it does not determine a safe or code-compliant conductor size. Before installation, have a qualified electrical professional verify ampacity, cable type, terminals, installation conditions, protective devices, grounding and the locally adopted electrical requirements.</div>
 </section>
 
 <section class="layout" aria-label="Wire size calculator">
 <article class="card tool-card">
 <div class="card-head"><h2>Size Your Cable</h2><button id="clearBtn" class="secondary" type="button">↻ Clear</button></div>
 <div class="preset-row" aria-label="Quick presets">
-<button class="preset" data-preset="solar">☀ Solar DC</button><button class="preset" data-preset="battery">🔋 48V Inverter</button><button class="preset" data-preset="home">🏠 230V Home</button><button class="preset" data-preset="three">⚡ 400V 3-Phase</button>
+<button class="preset" data-preset="low12">🔋 12V Battery / Vehicle</button><button class="preset" data-preset="low24">🔌 24V DC System</button><button class="preset" data-preset="battery">🔋 48V Inverter</button><button class="preset" data-preset="solar">☀ PV String DC</button><button class="preset" data-preset="home">🏠 230V Home</button><button class="preset" data-preset="three">⚡ 400V 3-Phase</button>
 </div>
 
-<div class="section-label">1. Circuit type</div>
+
+
+<div class="section-label">1. Calculation task</div>
+<div class="choice-grid is-three" role="group" aria-label="Calculation task">
+<button class="choice active" data-task="find" aria-pressed="true" type="button">Find minimum size</button>
+<button class="choice" data-task="check" aria-pressed="false" type="button">Calculate voltage drop</button>
+<button class="choice" data-task="distance" aria-pressed="false" type="button">Maximum cable distance</button>
+</div>
+
+<div class="section-label">2. Size standard and conductor</div>
+<div class="field"><label for="sizeStandard">Conductor size standard</label><select id="sizeStandard"><option value="us" selected>U.S. AWG / KCMIL</option><option value="metric">Metric mm²</option></select><div class="hint">U.S. mode uses AWG/KCMIL sizes; metric mode uses a separate mm² series.</div></div>
+<div class="field"><label for="calculationMethod">Calculation reference</label><select id="calculationMethod"><option value="zemtools" selected>ZemTools IACS reference model</option><option value="paige">Paige Electric published K-factor (127°F / 53°C)</option><option value="omni">Omni Calculator published copper model</option><option value="manual">Manufacturer cable impedance (manual R/X)</option></select><div class="hint" id="calculationMethodHint">ZemTools reference: 100% IACS copper / EC 1350 aluminium, entered conductor temperature, construction factor and optional approximate reactance.</div></div>
+<div class="field hidden" id="selectedSizeField"><label for="selectedSize">Conductor size to check</label><select id="selectedSize"></select><div class="hint">Used for voltage-drop and maximum-distance calculations. The selected size is not silently changed.</div></div>
+
+<div class="section-label">3. Circuit and load</div>
 <div class="choice-grid" role="group" aria-label="Circuit type">
 <button class="choice active" data-circuit="dc" aria-pressed="true" type="button">DC</button><button class="choice" data-circuit="single" aria-pressed="false" type="button">AC Single-Phase</button><button class="choice" data-circuit="three" aria-pressed="false" type="button">AC 3-Phase</button>
 </div>
+<div class="choice-grid is-two" role="group" aria-label="Load input type">
+<button class="choice active" data-load="amps" aria-pressed="true" type="button">I know current (A)</button><button class="choice" data-load="watts" aria-pressed="false" type="button">I know real power (W)</button>
+</div>
+<div class="field"><label for="voltage">System voltage (V)</label><input id="voltage" type="number" min="0.001" step="any" value="48" inputmode="decimal"><div class="hint">For three-phase, enter line-to-line voltage. Use the nominal source voltage.</div></div>
+<div class="field" id="ampsField"><label for="amps">Total design current at the load (A)</label><input id="amps" type="number" min="0.001" step="any" value="60" inputmode="decimal"><div class="hint">Enter the total design current for this cable run. Motor-table current and code-specific multipliers are not calculated here.</div></div>
+<div class="field hidden" id="wattsField"><label for="watts">Real load power (W)</label><input id="watts" type="number" min="0.001" step="any" value="3000" inputmode="decimal"></div>
+<div class="field hidden" id="pfField"><label for="pf">Power factor (PF)</label><input id="pf" type="number" min="0.001" max="1" step="0.01" value="1.00" inputmode="decimal"><div class="hint" id="pfHint">Unity PF is assumed only when explicitly displayed. Real-power mode requires a valid PF.</div></div>
 
-<div class="section-label">2. Load</div>
-<div class="choice-grid" role="group" aria-label="Load input type">
-<button class="choice active" data-load="amps" aria-pressed="true" type="button">I know Amps</button><button class="choice" data-load="watts" aria-pressed="false" type="button">I know Watts</button><button class="choice" data-load="power" aria-pressed="false" type="button">Power + PF</button>
+<div class="section-label">4. Cable run and target</div>
+<div class="field" id="lengthField"><label for="length">One-way cable length</label><div class="input-row"><input id="length" type="number" min="0.001" step="any" value="5" inputmode="decimal"><select id="lengthUnit" aria-label="Length unit"><option value="m">metres</option><option value="ft">feet</option></select></div><div class="hint">Enter physical one-way source-to-load distance. The circuit model handles the electrical path factor.</div></div>
+<div class="field"><label for="target">Maximum voltage-drop target</label><div class="input-row"><input id="target" type="number" min="0.001" step="any" value="3" inputmode="decimal"><select id="targetUnit" aria-label="Voltage-drop target unit"><option value="percent" selected>percent (%)</option><option value="volts">volts (V)</option></select></div><div class="hint">Use either a percentage or an absolute voltage drop. The equivalent percentage must be between 0.1% and 10%. This is a planning target, not a universal code limit.</div><div class="preset-row target-quick-actions" aria-label="Quick voltage-drop target choices"><button class="preset" type="button" data-target-preset="3">Quick target: 3%</button><button class="preset" type="button" data-target-preset="5">Quick target: 5%</button></div><div class="hint">These buttons set an editable planning target only. They do not establish a code requirement or confirm that a cable is suitable.</div></div>
+
+<div class="section-label">5. Conductor properties</div>
+<div class="field"><label for="material">Conductor material</label><select id="material"><option value="cu">Copper (annealed reference)</option><option value="al1350">Aluminium EC 1350 reference (61.2% IACS average)</option></select><div class="hint">These are generic resistivity references, not a specific cable product. Alloy/temper, stranding, manufacturing tolerances and actual conductor temperature can change resistance; use the selected cable manufacturer data for detailed design.</div></div>
+<div class="field"><label for="construction">Conductor construction assumption</label><select id="construction"><option value="solid">Solid / reference conductor (1.00)</option><option value="stranded" selected>Class B/C stranded estimate (1.02)</option></select></div>
+<div class="field"><label for="temperature">Assumed conductor temperature (°C)</label><input id="temperature" type="number" min="20" max="90" step="any" value="75" list="temperature-presets" inputmode="decimal"><datalist id="temperature-presets"><option value="20"><option value="53"><option value="60"><option value="75"><option value="90"></datalist><div class="hint">Supported resistance-model range: 20–90°C. This is not an insulation or terminal temperature rating.</div></div>
+<div class="field"><label for="parallelSets">Parallel conductor sets</label><input id="parallelSets" type="number" min="1" max="16" step="1" value="1" inputmode="numeric"><div class="hint">Model assumes identical conductor sets share total current equally (per polarity/phase as applicable). Parallel wiring has separate installation/code requirements that this tool does not verify.</div></div>
+
+<div class="section-label">6. Optional external ampacity cross-check</div>
+<div class="field"><label for="ampacityTableFile">Import user-supplied allowable-ampacity table (CSV or TSV)</label><input id="ampacityTableFile" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values"><div class="hint">Optional. Import two columns: exact conductor size and final allowable current in amperes per conductor. Maximum file size: 256 KB.</div></div>
+<div class="manual-table-actions"><button id="downloadAmpacityTableTemplate" class="result-action" type="button">Download ampacity CSV template</button><span id="ampacityTableImportStatus" class="hint" role="status" aria-live="polite">No external ampacity table loaded; results are voltage-drop only.</span></div>
+<div class="field"><label for="ampacityMaterial">Material used by the ampacity source</label><select id="ampacityMaterial"><option value="cu" selected>Copper</option><option value="al1350">Aluminium</option></select><div class="hint">Must match the selected conductor material. In manufacturer R/X mode, choose the material of the cable represented by the external rating table.</div></div>
+<div class="field"><label for="ampacitySource">Ampacity source / document reference</label><input id="ampacitySource" type="text" maxlength="180" placeholder="Manufacturer data sheet, code table and edition, or document/page"><div class="hint">Enter a traceable source description. ZemTools does not verify the source, licence, table edition or the applicability of its ratings.</div></div>
+<div class="field"><label class="reactance-toggle" for="ampacityFinalConfirmed"><input id="ampacityFinalConfirmed" type="checkbox"> I confirm these are final allowable A-per-conductor values after all applicable installation, ambient, conductor-count and terminal corrections.</label><div class="hint">Do not enter uncorrected base table ampacity here. A qualified professional must establish the final values for the actual cable and installation.</div></div>
+<div class="field"><label for="ampacityTable">External allowable ampacity (A per conductor)</label><textarea id="ampacityTable" rows="5" spellcheck="false" placeholder="Size,AllowableAmpacityA"></textarea><div class="hint">Enter one row per conductor size, using the exact label in the selected AWG/KCMIL or metric list. Only listed sizes receive a manual comparison. The minimum-size task still selects by voltage drop only; supplied ampacity never filters or automatically upsizes a conductor. In parallel mode the value is compared with modeled current per set. ZemTools does not derive, verify or certify the supplied ampacity.</div></div>
+<div class="danger-note">This optional screen is a comparison against user-entered values only. It is not an NEC lookup, code-compliance check, installation derating calculator or safety approval. The table must match the selected conductor material and actual installation; a qualified electrical professional must establish the values and verify parallel-conductor eligibility.</div>
+
+<div class="field" id="reactanceToggleField"><label class="reactance-toggle" for="useReactance"><input id="useReactance" type="checkbox"> Include approximate AC reactance (advanced)</label><div class="hint">Optional geometry-based estimate. It uses an equivalent solid-round radius, not strand-specific GMR; cable lay, armour, sheath, proximity effects and manufacturer R/X data can differ. Leave off when geometry is unknown; default AC mode uses X = 0.</div></div>
+<div id="reactanceFields" class="hidden">
+<div class="field"><label for="frequency">AC frequency</label><select id="frequency"><option value="" selected>Choose frequency</option><option value="50">50 Hz</option><option value="60">60 Hz</option></select></div>
+<div class="field"><label for="pfDirection">Power-factor direction</label><select id="pfDirection"><option value="lagging" selected>Lagging (inductive)</option><option value="leading">Leading (capacitive)</option></select><div class="hint">Used only for the approximate reactance term. Confirm the actual load characteristic.</div></div>
+<div class="field" id="singleSpacingField"><label for="singleSpacing">Single-phase conductor centre spacing (inches)</label><input id="singleSpacing" type="number" min="0.001" step="any" value="" inputmode="decimal"><div class="hint">Enter the actual centre-to-centre spacing of the outgoing and return conductors.</div></div>
+<div id="threeSpacingFields" class="hidden">
+<div class="field"><label for="spacingAB">Three-phase spacing A–B (inches)</label><input id="spacingAB" type="number" min="0.001" step="any" value="" inputmode="decimal"></div>
+<div class="field"><label for="spacingBC">Three-phase spacing B–C (inches)</label><input id="spacingBC" type="number" min="0.001" step="any" value="" inputmode="decimal"></div>
+<div class="field"><label for="spacingCA">Three-phase spacing C–A (inches)</label><input id="spacingCA" type="number" min="0.001" step="any" value="" inputmode="decimal"></div>
+<div class="hint">The model uses the geometric mean of the three phase spacings. Do not substitute cable outside diameter for conductor centre spacing.</div>
+</div>
+</div>
+<div id="manualImpedanceFields" class="hidden">
+<div class="field"><label for="manualInputMode">Manufacturer impedance input</label><select id="manualInputMode"><option value="single" selected>One selected conductor (single R/X pair)</option><option value="table">Multiple conductor sizes (R/X table)</option></select><div class="hint">Use a single pair to check one cable, or provide a per-size table to search only the conductor sizes listed in that manufacturer data.</div></div>
+<div class="field"><label for="manualImpedanceUnits">Manufacturer R/X input units</label><select id="manualImpedanceUnits"><option value="per1000ft">Ω / 1000 ft</option><option value="perKm">Ω / km</option></select><div class="hint">This unit applies to single-value entry, pasted rows and imported files. The calculator converts values internally to Ω / 1000 ft.</div></div>
+<div id="manualSingleFields">
+<div class="field"><label id="manualResistanceLabel" for="manualResistance">Manufacturer conductor resistance (Ω / 1000 ft)</label><input id="manualResistance" type="number" min="0.000001" step="any" value="" inputmode="decimal"><div class="hint">Enter DC resistance or AC effective resistance per conductor at the actual operating temperature, conductor size and installation arrangement.</div></div>
+<div class="field"><label id="manualReactanceLabel" for="manualReactance">Manufacturer AC reactance (Ω / 1000 ft)</label><input id="manualReactance" type="number" min="0" step="any" value="0" inputmode="decimal"><div class="hint">Enter per-conductor reactance at the actual system frequency. Use 0 only when reactance is unavailable or intentionally neglected.</div></div>
+</div>
+<div id="manualTableFields" class="hidden">
+<div class="field"><label for="manualTableFile">Import manufacturer R/X table (CSV or tab-separated file)</label><input id="manualTableFile" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values"><div class="hint">Import a cable-maker spreadsheet saved as CSV or tab-separated text. Columns: exact conductor size, resistance, reactance — using the selected units above. A header row such as Size, Resistance, Reactance is optional. Maximum file size: 256 KB.</div></div>
+<div class="manual-table-actions"><button id="downloadManualTableTemplate" class="result-action" type="button">Download blank CSV template</button><span id="manualTableImportStatus" class="hint" role="status" aria-live="polite">You can also paste rows below.</span></div>
+<div class="field"><label for="manualTable">Manufacturer R/X table (one row per conductor size)</label><textarea id="manualTable" rows="7" spellcheck="false" placeholder="10 AWG,1.24,0.062&#10;8 AWG,0.7780,0.0520&#10;6 AWG,0.4910,0.0450"></textarea><div class="hint">Paste CSV or tab-separated rows. Quoted fields and a UTF-8 BOM are supported; values use the selected R/X units above. Example values are illustrative only; replace them with the actual cable manufacturer's data at the applicable operating temperature and frequency.</div></div>
+<div class="hint">Minimum-size mode returns the smallest passing conductor among the rows you supply only. It cannot evaluate omitted sizes, so this is not a guaranteed minimum across the full AWG/KCMIL or metric ladder. In check and distance modes, choose a size present in the table.</div>
+</div>
+<div class="field"><label for="manualFrequency">Manufacturer R/X reference frequency</label><select id="manualFrequency"><option value="50" selected>50 Hz</option><option value="60">60 Hz</option></select></div>
+<div class="field"><label for="manualPfDirection">Power-factor direction</label><select id="manualPfDirection"><option value="lagging" selected>Lagging (inductive)</option><option value="leading">Leading (capacitive)</option></select></div>
+<div class="hint">R and X are applied exactly as entered; this mode does not add a separate material, temperature, strand or installation correction. It uses the simplified R cosφ + X sinφ voltage-drop form. User-supplied data is not verified by ZemTools and does not include any manufacturer's full cable database or code-based ampacity calculation.</div>
 </div>
 
-<div class="field"><label for="voltage">System voltage (V)</label><input id="voltage" type="number" min="0.1" step="any" value="48" inputmode="decimal"><div class="hint">Use the nominal source voltage. For solar PV, use the actual string/system voltage used for the run.</div></div>
-<div class="field" id="ampsField"><label for="amps">Load current (A)</label><input id="amps" type="number" min="0" step="any" value="60" inputmode="decimal"><div class="hint">Enter the design current for the cable run.</div></div>
-<div class="field hidden" id="wattsField"><label for="watts">Load power (W)</label><input id="watts" type="number" min="0" step="any" value="3000" inputmode="decimal"></div>
-<div class="field hidden" id="pfField"><label for="pf">Power factor (cos φ)</label><input id="pf" type="number" min="0.1" max="1" step="0.01" value="0.90" inputmode="decimal"><div class="hint">Used only when calculating AC current from watts.</div></div>
-
-<div class="section-label">3. Cable run</div>
-<div class="field"><label for="length">One-way cable length</label><div class="input-row"><input id="length" type="number" min="0" step="any" value="5" inputmode="decimal"><select id="lengthUnit" aria-label="Length unit"><option value="m">metres</option><option value="ft">feet</option></select></div><div class="hint">Enter the physical one-way distance. The calculator applies the circuit path factor automatically.</div></div>
-<div class="field"><label for="material">Conductor material</label><select id="material"><option value="cu">Copper</option><option value="al">Aluminum</option></select></div>
-<div class="field"><label for="target">Maximum voltage drop</label><select id="target"><option value="1">1%</option><option value="2" selected>2%</option><option value="3">3%</option><option value="5">5%</option><option value="10">10%</option></select><div class="hint">This is a planning target, not a universal code limit. The appropriate limit depends on the installation and jurisdiction.</div></div>
-
-<button id="calculateBtn" class="primary" type="button">⚡ Calculate Recommended Cable →</button>
-<div class="danger-note">Voltage-drop sizing is only one part of cable selection. Final installations also require checks for ampacity, insulation temperature, installation method, protection, short-circuit withstand and the electrical code that applies to the project.</div>
+<button id="calculateBtn" class="primary" type="button">Calculate planning estimate →</button>
+<div class="danger-note">Voltage-drop and impedance planning estimates only. AC results use a simplified steady-load R cosφ + X sinφ approximation, not a full phasor, network/load-flow or transient analysis. The optional ampacity screen only compares user-entered final per-conductor values; it does not calculate NEC ampacity, continuous-load or motor-table multipliers, breaker/fuse sizing, installation derating, grounding, short-circuit withstand or terminal limits. Neither a passing voltage-drop result nor an external ampacity comparison proves a cable is safe or code-compliant.</div>
 </article>
 
+
+
 <aside class="card result-card" aria-live="polite">
-<h2>▥ &nbsp; Recommendation</h2>
-<div id="status" class="status">Enter your circuit details and calculate.</div>
-<div class="result-main"><div class="result-label">Recommended standard size</div><div id="recommended" class="result-value">—</div><div id="recommendedSub" class="result-sub">Your result will appear here.</div></div>
-<div class="result-grid">
-<div class="stat"><div class="stat-icon">↕</div><strong>Voltage Drop</strong><span id="dropPct">—</span></div>
-<div class="stat"><div class="stat-icon">V</div><strong>Voltage Lost</strong><span id="dropV">—</span></div>
-<div class="stat"><div class="stat-icon">⚡</div><strong>Voltage at Load</strong><span id="loadV">—</span></div>
-<div class="stat"><div class="stat-icon">♨</div><strong>Power Lost</strong><span id="lossW">—</span></div>
-<div class="stat stat-wide"><div class="stat-icon">I</div><strong>Calculated Current</strong><span id="resultCurrent">—</span></div>
+<h2 id="resultTitle">▥ &nbsp; Voltage-drop planning result</h2>
+<div class="danger-note" id="resultSafetyNote" role="note">A result that meets the selected voltage-drop target is <strong>not</strong> an ampacity, installation, electrical-safety or code-compliance approval.</div>
+<div class="result-actions" aria-label="Result actions">
+<button id="copySummaryBtn" class="result-action" type="button">Copy result summary</button>
+<button id="printResultBtn" class="result-action" type="button">Print / Save PDF</button>
+<span id="resultActionStatus" class="hint" role="status" aria-live="polite"></span>
 </div>
-<div class="comparison"><strong>Why this size?</strong><div id="whyText" class="hint">The calculator will compare the calculated minimum area with standard cable sizes.</div><div id="comparisonRows"></div></div>
+<div id="status" class="status">Enter your circuit details and calculate.</div>
+<div class="result-main"><div class="result-label" id="resultLabel">Selected conductor</div><div id="recommended" class="result-value">—</div><div id="recommendedSub" class="result-sub">Your result will appear here.</div></div>
+<div class="result-grid">
+<div class="stat"><div class="stat-icon">↕</div><strong id="dropPctLabel">Voltage Drop</strong><span id="dropPct">—</span></div>
+<div class="stat"><div class="stat-icon">V</div><strong id="dropVLabel">Voltage Lost</strong><span id="dropV">—</span></div>
+<div class="stat"><div class="stat-icon">⚡</div><strong>Voltage at Load</strong><span id="loadV">—</span></div>
+<div class="stat"><div class="stat-icon">♨</div><strong>Conductor I²R Loss</strong><span id="lossW">—</span></div>
+<div class="stat"><div class="stat-icon">I</div><strong>Total Load Current</strong><span id="resultCurrent">—</span></div>
+<div class="stat"><div class="stat-icon">ϕ</div><strong>Current per Set</strong><span id="currentPerSet">—</span></div>
+<div class="stat stat-wide hidden" id="ampacityRow"><div class="stat-icon">A</div><strong>User-supplied allowable ampacity / conductor</strong><span id="ampacityValue">—</span></div>
+<div class="stat"><div class="stat-icon">A</div><strong>Area per Conductor</strong><span id="areaPerConductor">—</span></div>
+<div class="stat"><div class="stat-icon">Σ</div><strong>Total Parallel Area</strong><span id="totalArea">—</span></div>
+<div class="stat"><div class="stat-icon">⌀</div><strong>Equivalent Solid Diameter</strong><span id="equivDiameter">—</span></div>
+<div class="stat stat-wide hidden" id="maxDistanceRow"><div class="stat-icon">↔</div><strong>Maximum One-way Distance</strong><span id="maxDistance">—</span></div>
+<div class="stat stat-wide hidden" id="reactanceRow"><div class="stat-icon">X</div><strong>Estimated Reactance</strong><span id="reactanceValue">—</span></div>
+</div>
+<div class="comparison"><strong id="comparisonTitle">Candidate comparison</strong><div id="whyText" class="hint">The calculator will compare supported conductor sizes against your voltage-drop target.</div><div id="comparisonRows"></div></div>
+<div class="comparison hidden" id="materialComparison"><strong>Copper and aluminium comparison</strong><div class="hint">Both material results use the same circuit, target, temperature, construction, spacing and parallel-set assumptions. Voltage-drop sizing only.</div><div id="materialComparisonRows"></div></div>
+<div class="assumptions"><strong>Calculation assumptions</strong><p id="resultAssumptions" class="hint">Assumptions will appear with the result.</p></div>
+<details class="comparison" id="calculationDetails"><summary><strong>Calculation breakdown</strong><span class="hint">See the actual values and equation used for this result.</span></summary><pre id="calculationBreakdown" class="calculation-breakdown">Calculate to see the values substituted into the selected model.</pre></details>
+<div class="danger-note">This remains a simplified planning estimate. AC calculations use a first-order steady-load approximation rather than a full phasor or network solution. Any external ampacity value is supplied by the user and is not validated by ZemTools. Parallel installation permission, NEC compliance and installation-specific correction factors are not checked. Optional AC reactance is approximate and requires actual conductor geometry.</div>
 </aside>
+
 </section>
 
 <section class="support-grid">
-<article class="card"><h2>What the Calculator Does</h2><p>It converts your load into current when needed, calculates conductor resistance from material and cross-sectional area, applies the correct circuit path factor, and selects the smallest standard metric size that meets your chosen voltage-drop target.</p></article>
+<article class="card"><h2>What the Calculator Does</h2><p>It converts real load power to current when needed, applies material and temperature assumptions, and evaluates AWG/KCMIL or metric candidates. You can find a minimum size, calculate voltage drop for an existing conductor, or estimate the maximum one-way cable distance.</p></article>
 <article class="card"><h2>Useful for Solar &amp; Inverters</h2><p>DC mode is suited to planning runs such as solar-array wiring, battery-to-inverter cables and other low-voltage DC loads. One-way length is doubled internally for the outgoing and return conductors.</p></article>
-<article class="card"><h2>Formula</h2><div class="formula">Vdrop = I × R × path factor</div><p>The path factor is 2 for DC and single-phase circuits and √3 for balanced three-phase calculations.</p></article>
+<article class="card"><h2>Formula</h2><div class="formula">R(T) = K × ρ20 × [1 + α20(T − 20)] / A</div><p>DC and single-phase use a 2× path factor; balanced three-phase uses √3. AC drop can optionally include a geometry-based reactance estimate: ΔV ≈ I × L × path factor × (R × PF + X × sinφ), divided by parallel sets. With reactance off, X = 0.</p></article>
+</section>
+
+<section class="card source-notes" aria-labelledby="calculation-reference-title">
+<h2 id="calculation-reference-title">Calculation References &amp; Model Assumptions</h2>
+<p>The selectable reference profiles use published calculation methods and material references. Their constants are shown so you can compare assumptions; none of these references makes this page a cable approval or code-compliance tool.</p>
+<ul>
+<li><strong>Default annealed-copper reference:</strong> the NIST Copper Wire Tables list a 20°C volume resistivity of 0.017241 Ω·mm²/m and a resistance temperature coefficient of 0.00393/°C. <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/circ/nbscircular31e4.pdf" target="_blank" rel="noopener noreferrer">Read the NIST Copper Wire Tables (PDF)</a>.</li>
+<li><strong>Paige reference profile:</strong> Paige publishes K factors of 11.2 for copper and 17.4 for aluminium at 127°F (53°C). <a href="https://paigeconnected.com/calculators/wiresize-calculator" target="_blank" rel="noopener noreferrer">Read Paige’s wire-size instructions and equations</a>.</li>
+<li><strong>Omni published-copper profile:</strong> Omni publishes a 20°C copper resistivity of 0.0168 Ω·mm²/m and a temperature coefficient of 0.00404/°C. This profile is copper-only because that article does not provide a numerical aluminium reference. <a href="https://www.omnicalculator.com/physics/wire-size" target="_blank" rel="noopener noreferrer">Read Omni’s wire-size methodology</a>.</li>
+
+</ul>
+<p class="sub">The default EC 1350 aluminium value is a generic reference model, not a guarantee for every alloy, temper or cable product. For a specific cable, use its manufacturer’s resistance and reactance data at the actual operating conditions. The manual R/X option accepts user-supplied values; ZemTools does not independently verify them.</p>
+</section>
+
+<section class="card" id="model-difference-guide">
+<h2>Why can wire-size calculators give different results?</h2>
+<p>Two calculators can show different voltage drops or minimum conductor sizes even when the visible inputs look identical. Compare the calculation basis before treating a different result as an error.</p>
+<ul>
+<li><strong>Conductor reference:</strong> copper and aluminium resistance values vary by material specification, alloy, temper, stranding and the source's reference temperature. A generic resistivity model may not match a particular cable datasheet.</li>
+<li><strong>Temperature and construction:</strong> resistance rises with conductor temperature. Solid-wire assumptions, stranded-conductor factors and the temperature used by the source can change the result.</li>
+<li><strong>Length and circuit path:</strong> some tools ask for one-way distance while others ask for total conductor length. DC and single-phase models include the outgoing and return path; balanced three-phase uses a different path relationship.</li>
+<li><strong>AC impedance:</strong> power factor and conductor reactance can matter on larger or longer AC runs. A resistance-only estimate may differ from a cable-specific R/X calculation.</li>
+<li><strong>What the tool is selecting:</strong> a voltage-drop-only candidate is not the same as a conductor selected after ampacity, installation, terminal and locally adopted code checks.</li>
+</ul>
+<p>For a reproducible comparison, match the circuit type, source voltage, design current, one-way length, material, conductor temperature, voltage-drop target and calculation reference. ZemTools keeps its IACS reference, Paige's published K-factor profile, Omni's published copper profile and user-entered manufacturer R/X data separate rather than blending their assumptions.</p>
+<p>One published-profile example illustrates why that matters: for 120 V single-phase, 25 A, 100 m one-way, copper at 50°C and a 3% target, the Omni-published copper model selects 3 AWG, while the default ZemTools IACS model selects 2 AWG. The difference follows their published resistance constants at this borderline size. Check the actual cable data and model assumptions for the project; neither result is an ampacity or installation approval.</p>
 </section>
 
 <section class="card">
@@ -97,102 +229,837 @@
 <li><strong>Enter one-way cable length.</strong> Measure the physical distance from the source to the load. Do not enter the combined outgoing-and-return length; the calculator applies its path factor.</li>
 <li><strong>Select material and voltage-drop target.</strong> Choose copper or aluminum and a target suitable for your design brief. A smaller permitted voltage drop can require a larger conductor.</li>
 </ol>
-<p>After calculating, review the displayed voltage drop and the assumptions behind the result. Then check ampacity, protection, installation conditions and the applicable electrical requirements separately before specifying a cable.</p>
+<p>Choose one of three tasks: find a minimum size, calculate drop for a conductor you already have, or calculate the maximum one-way run for that conductor. You can enter the target as a percentage or volts, and model equal-sharing parallel sets. For AC, the optional reactance estimate requires actual conductor spacing and frequency. After calculating, separately check ampacity, protection, installation conditions and applicable electrical requirements before specifying a cable.</p>
 </section>
 
 <section class="card">
-<h2>Worked example: a 48 V DC battery cable run</h2>
-<p>For a simple planning example, use the calculator's default values: 48 V DC, 60 A, a 5 m one-way run, copper conductor and a 2% voltage-drop target. These are example inputs, not a recommendation for a particular installation.</p>
+<h2>Worked example: 120 V single-phase, 20 A</h2>
+<p>For the stated model assumptions—100 ft one-way, copper, 75°C, Class B/C stranded estimate, PF 1.00 and a 3% voltage-drop target—the smallest passing U.S. candidate is 8 AWG.</p>
 <ul>
-<li><strong>Allowed voltage drop:</strong> 2% of 48 V = 0.96 V.</li>
-<li><strong>Calculated minimum cross-sectional area:</strong> approximately 10.78 mm² using the calculator's fixed copper-resistance model.</li>
-<li><strong>Next size in the calculator's metric size list:</strong> 16 mm².</li>
-<li><strong>Estimated drop at 16 mm²:</strong> approximately 0.65 V, or 1.35% of 48 V.</li>
+<li><strong>10 AWG:</strong> approximately 4.96 V drop (4.13%), so it exceeds the target.</li>
+<li><strong>8 AWG:</strong> approximately 3.12 V drop (2.60%), so it meets the selected voltage-drop target.</li>
 </ul>
-<p>The example shows why the calculator rounds up to a listed metric size that meets the selected voltage-drop target under its model. It does <strong>not</strong> prove that the cable's current-carrying capacity, fuse, terminals or installation are suitable.</p>
+<p>This is a voltage-drop-only illustration. It does not establish ampacity suitability or a final cable specification.</p>
+<div class="example-note" id="low-voltage-example">
+<h3>Low-voltage example: 12 V DC, 15 A</h3>
+<p>For a 20 ft one-way run using copper at 75°C, the Class B/C stranded estimate and a 3% target, the default ZemTools IACS model selects <strong>6 AWG</strong> with approximately <strong>2.45% voltage drop</strong>.</p>
+<p>At 12 V, even a modest current can make cable length and voltage-drop target important. This example is a voltage-drop calculation only; it does not select a fuse or verify battery fault current, ampacity, terminals or installation requirements.</p>
+</div>
 </section>
 
 <section class="card">
 <h2>What this voltage-drop estimate does not model</h2>
-<p>The calculation uses fixed conductor-resistivity values and a simplified resistance-based voltage-drop model. It does not calculate cable ampacity, conductor operating-temperature corrections, AC cable reactance, motor starting or locked-rotor current, short-circuit withstand, protective-device ratings or installation-specific correction factors.</p>
+<p>The generic resistance calculation applies a first-order temperature correction. The optional AC reactance estimate uses user-supplied geometry; it is not manufacturer-specific impedance data. The calculator does not calculate NEC ampacity, motor-table sizing, continuous-load multipliers, motor starting or locked-rotor current, short-circuit withstand, protective-device ratings or installation-specific ampacity corrections. Its optional ampacity screen only compares final per-conductor limits supplied by the user; it does not generate or validate those limits.</p>
 <p>Those checks can change the required cable size. Use the cable manufacturer's data, the equipment instructions and the electrical code adopted for the installation. Where the design is safety-critical, have the selection checked by a qualified electrician or electrical designer.</p>
 </section>
 
-<section class="card"><h2>Wire-size result: what to verify next</h2><p>The recommendation on this page is a voltage-drop planning result based on the values entered. It should not be treated as a final cable specification or as proof that a conductor can safely carry the load.</p><h3>Before selecting a cable</h3><ul><li>Check the conductor's allowable ampacity for its material, insulation temperature rating, installation method and ambient conditions.</li><li>Apply required adjustment and correction factors for grouped conductors and environmental conditions.</li><li>Confirm terminal temperature limitations, overcurrent protection, short-circuit requirements, grounding and bonding.</li><li>Use the manufacturer's datasheet for the exact cable construction and the locally adopted electrical code.</li></ul><p>For a second planning comparison, use the <a href="https://www.southwire.com/calculator-vdrop" rel="noopener noreferrer">Southwire Voltage Drop Calculator</a> where its supported inputs match your circuit. Different tools may use different conductor-temperature or resistance assumptions, so compare the assumptions as well as the result.</p><p class="sub">For installations governed by the US NEC, consult the edition adopted by the authority having jurisdiction and the official <a href="https://www.nfpa.org/codes-and-standards/nfpa-70-standard-development/70" rel="noopener noreferrer">NFPA 70 information</a>. This calculator does not replace a qualified electrical design review.</p></section>
+<section class="card"><h2>Wire-size result: what to verify next</h2><p>The recommendation on this page is a voltage-drop planning result based on the values entered. It should not be treated as a final cable specification or as proof that a conductor can safely carry the load.</p><h3>Before selecting a cable</h3><ul><li>Check the conductor's allowable ampacity for its material, insulation temperature rating, installation method and ambient conditions.</li><li>Apply required adjustment and correction factors for grouped conductors and environmental conditions.</li><li>Confirm terminal temperature limitations, overcurrent protection, short-circuit requirements, grounding and bonding.</li><li>Use the manufacturer's datasheet for the exact cable construction and the locally adopted electrical code.</li></ul><p>For a cable-specific estimate, consult the exact manufacturer’s technical datasheet and confirm that its resistance and reactance values match the operating temperature, frequency and installation. Different models can use different assumptions, so compare the stated calculation basis rather than only the displayed result.</p><p class="sub">For installations governed by the US NEC, consult the edition adopted by the authority having jurisdiction and the official <a href="https://www.nfpa.org/codes-and-standards/nfpa-70-standard-development/70" rel="noopener noreferrer">NFPA 70 information</a>. This calculator does not replace a qualified electrical design review.</p></section>
 <section class="card faq-card">
 <h2>Frequently Asked Questions</h2>
+<div class="faq"><button type="button"><span>Is wire size the same as wire gauge?</span><span class="faq-icon">+</span></button><div class="faq-answer">In U.S. usage, wire gauge usually refers to the American Wire Gauge (AWG) number: a lower AWG number means a larger conductor. Metric cable sizes are stated by nominal cross-sectional area in mm², not by an AWG number. This calculator keeps AWG/KCMIL and metric mm² candidates in separate size series so you can choose the standard used for your project.</div></div>
 <div class="faq"><button type="button"><span>Does the calculator automatically double cable length?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Enter one-way physical distance. DC and single-phase calculations use a 2× path factor for the outgoing and return conductors. Balanced three-phase uses √3 × one-way length in the voltage-drop calculation.</div></div>
 <div class="faq"><button type="button"><span>Can I use watts instead of amps?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. For DC and single-phase AC the calculator derives current from watts and voltage, with power factor applied when relevant. For three-phase AC, it uses the three-phase power relationship and the selected power factor.</div></div>
 <div class="faq"><button type="button"><span>Does a passing voltage-drop result mean the cable is safe?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Voltage drop is only one design check. Ampacity, insulation rating, installation method, ambient temperature, grouping, protection and local electrical requirements must also be checked before an installation is finalized.</div></div>
-<div class="faq"><button type="button"><span>Why does low-voltage wiring often need a larger cable?</span><span class="faq-icon">+</span></button><div class="faq-answer">For the same power, lower voltage requires more current. Higher current creates more voltage drop and resistive loss, so a low-voltage 12V, 24V or 48V run can need substantially more conductor area than a higher-voltage circuit of the same power.</div></div>
+<div class="faq"><button type="button"><span>Can I use this as a 12V, 24V or 48V wire gauge calculator?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Select DC mode, enter the system voltage (for example 12 V, 24 V or 48 V), total design current, one-way cable length and a voltage-drop target. The calculator estimates conductor size from its declared resistance model and accounts for the outgoing and return path. At the same power, a lower voltage requires more current and can need a larger conductor. This remains a voltage-drop planning estimate; it does not select fuses, check battery fault current or confirm cable ampacity and installation rules.</div></div>
 <div class="faq"><button type="button"><span>Can I use this for an inverter or battery cable?</span><span class="faq-icon">+</span></button><div class="faq-answer">You can use DC mode for a voltage-drop planning estimate when you already know the design current, nominal voltage and one-way cable distance. The result does not account for inverter surge current, battery fault current, fuse selection, terminal limits or the cable maker's installation requirements. Check the inverter manual and cable datasheet before choosing a cable.</div></div>
-<div class="faq"><button type="button"><span>Does this calculator check ampacity or current-carrying capacity?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. It selects a listed metric cross-section to meet the chosen voltage-drop target in its simplified model. Ampacity depends on cable construction, insulation rating, installation method, ambient temperature, grouping and local electrical rules, and must be checked separately.</div></div>
-<div class="faq"><button type="button"><span>Can I use it to choose a cable for an air compressor or motor?</span><span class="faq-icon">+</span></button><div class="faq-answer">Use it only as a voltage-drop estimate when the correct design current and one-way run length are already known. It does not calculate motor starting or locked-rotor current, overload protection or motor-circuit requirements, so it must not be used by itself to select a motor cable.</div></div>
-<div class="faq"><button type="button"><span>Are the AWG and mm² values exact equivalents?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. AWG and metric cross-sectional sizes are different standards. The calculator shows an approximate AWG equivalent for the selected metric size; use the actual cable datasheet and applicable standard when purchasing or specifying cable.</div></div>
+<div class="faq"><button type="button"><span>Does this calculator check ampacity or current-carrying capacity?</span><span class="faq-icon">+</span></button><div class="faq-answer">It does not derive ampacity from code tables or installation rules. You may optionally enter a final allowable ampacity per conductor that has already been established from an appropriate licensed or traceable source for the exact cable and installation, after all applicable adjustments and terminal limits. ZemTools only compares that supplied value with modeled current per parallel set; it does not verify the source, perform derating, or establish code compliance or safety.</div></div>
+<div class="faq"><button type="button"><span>Is this a dedicated air compressor wire size calculator?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. It can estimate voltage drop for an air-compressor cable only after the correct design current, supply voltage, phase and one-way run length have been established from the equipment nameplate and applicable motor-circuit requirements. It does not derive motor full-load current from horsepower, apply motor-conductor multipliers, calculate starting or locked-rotor voltage dip, or size the breaker, overload protection or grounding conductor. Do not use this page alone to select a compressor motor circuit; have the complete design checked against the compressor manual and locally adopted electrical code.</div></div>
+<div class="faq"><button type="button"><span>Can I calculate maximum cable distance?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Select Maximum cable distance, choose the conductor size, enter voltage, load and voltage-drop target. The calculator returns a one-way distance under its declared resistance/optional reactance assumptions. It does not verify ampacity or installation-code requirements.</div></div>
 </section>
 
 <section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
-<a class="related-item" href="conduit-fill-calculator/"><div><strong>Conduit Fill Calculator</strong><span>Check conduit fill using the conductors you plan to install.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="/conduit-fill-calculator/"><div><strong>Conduit Fill Calculator</strong><span>Check conduit fill using the conductors you plan to install.</span></div><span aria-hidden="true">›</span></a>
 </div></section>
 </main>
-<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
 
 
-<script>
+<script type="module">
 (function(){
 'use strict';
-const metric=[1,1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240];
-const awg=[['20',0.518],['18',0.823],['16',1.31],['14',2.08],['12',3.31],['10',5.26],['8',8.37],['6',13.3],['4',21.15],['3',26.67],['2',33.62],['1',42.41],['1/0',53.49],['2/0',67.43],['3/0',85.01],['4/0',107.2]];
-const rho={cu:0.01724,al:0.0282};
-let circuit='dc',loadMode='amps';
-const $=id=>document.getElementById(id);
-function fmt(n,d=2){if(!isFinite(n))return '—';return n.toLocaleString(undefined,{maximumFractionDigits:d});}
-function setCircuit(v){circuit=v;document.querySelectorAll('[data-circuit]').forEach(b=>{const active=b.dataset.circuit===v;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});if(v==='dc'){$('voltage').value=48;$('pfField').classList.add('hidden')}else{$('voltage').value=v==='three'?400:230;if(loadMode!=='amps')$('pfField').classList.remove('hidden')}}
-function setLoad(v){loadMode=v;document.querySelectorAll('[data-load]').forEach(b=>{const active=b.dataset.load===v;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});$('ampsField').classList.toggle('hidden',v!=='amps');$('wattsField').classList.toggle('hidden',v==='amps');$('pfField').classList.toggle('hidden',v==='amps'||v==='watts'&&circuit==='dc')}
-function current(){const V=Number($('voltage').value), W=Number($('watts').value), A=Number($('amps').value), pf=Math.min(1,Math.max(.1,Number($('pf').value)||1));if(loadMode==='amps')return A;if(!V||!W)return NaN;if(circuit==='three')return W/(Math.sqrt(3)*V*pf);if(circuit==='single')return W/(V*pf);return W/V}
-function lengthM(){const L=Number($('length').value);return $('lengthUnit').value==='ft'?L*0.3048:L}
-function pathFactor(){return circuit==='three'?Math.sqrt(3):2}
-function awgForArea(area){for(let i=0;i<awg.length;i++)if(awg[i][1]>=area)return awg[i][0];return '4/0+'}
-function calculate(){
- const V=Number($('voltage').value), I=current(), L=lengthM(), target=Number($('target').value), material=$('material').value;
- if(!(V>0)||!(I>0)||!(L>0)||!(target>0)){ $('status').className='status warn';$('status').textContent='Enter valid positive voltage, load, length and target values.';return}
- const allowed=V*target/100, minArea=(rho[material]*L*pathFactor()*I)/allowed;
- const exceedsAvailable=minArea>metric[metric.length-1];
- const size=metric.find(x=>x>=minArea)||metric[metric.length-1];
- const R=rho[material]/size, drop=I*R*L*pathFactor(), pct=drop/V*100, loadV=V-drop;
- // Balanced three-phase real-power loss is 3 × I² × R × one-way length.
- // DC and single-phase use the outgoing-and-return path factor of 2.
- const loss=I*I*R*L*(circuit==='three'?3:2);
- const awgLabel=awgForArea(size);
- const selectedPass=!exceedsAvailable&&pct<=target+1e-9;
- $('recommended').textContent=exceedsAvailable?'No listed size meets target':size+' mm²';
- $('recommendedSub').textContent=exceedsAvailable
-   ? 'Largest listed size: '+size+' mm² · calculated minimum '+fmt(minArea,2)+' mm²'
-   : 'Approx. '+awgLabel+' AWG · '+(material==='cu'?'Copper':'Aluminum');
- $('dropPct').textContent=fmt(pct,2)+'%';
- $('dropV').textContent=fmt(drop,3)+' V';
- $('loadV').textContent=fmt(loadV,3)+' V';
- $('lossW').textContent=fmt(loss,2)+' W';
- $('resultCurrent').textContent=fmt(I,2)+' A';
- $('status').className='status '+(selectedPass?'ok':'warn');
- $('status').textContent=selectedPass?'Meets your voltage-drop target.':'The available standard list reaches its largest size; review the run or target.';
- $('whyText').textContent='The calculated minimum cross-sectional area is '+fmt(minArea,2)+' mm². The calculator rounds up to the next standard metric size so the selected size is not smaller than the calculated requirement.';
- const prev=metric[Math.max(0,metric.indexOf(size)-2)], rows=[prev,size,metric[metric.indexOf(size)+1]].filter((x,i,a)=>x&&a.indexOf(x)===i);
- $('comparisonRows').innerHTML='<div class="comparison-row"><strong>Size</strong><strong>Drop</strong><span>Status</span></div>'+rows.map(s=>{const d=I*(rho[material]/s)*L*pathFactor(),p=d/V*100;return '<div class="comparison-row"><strong>'+s+' mm²</strong><strong>'+fmt(p,2)+'%</strong><span>'+(p<=target?'Within target':'Above target')+'</span></div>'}).join('');
+
+function awgArea(n){
+  const diameterMm=0.127*Math.pow(92,(36-n)/39);
+  return Math.PI*diameterMm*diameterMm/4;
 }
-function preset(name){
- const p={solar:{c:'dc',l:'amps',v:400,a:12,len:30,unit:'m',mat:'cu',t:2},battery:{c:'dc',l:'watts',v:48,w:3000,len:2,unit:'m',mat:'cu',t:2},home:{c:'single',l:'amps',v:230,a:16,len:25,unit:'m',mat:'cu',t:3},three:{c:'three',l:'amps',v:400,a:25,len:40,unit:'m',mat:'cu',t:3}}[name];if(!p)return;setCircuit(p.c);setLoad(p.l);$('voltage').value=p.v;$('amps').value=p.a||'';$('watts').value=p.w||'';$('length').value=p.len;$('lengthUnit').value=p.unit;$('material').value=p.mat;$('target').value=p.t;calculate()}
-document.querySelectorAll('[data-circuit]').forEach(b=>b.onclick=()=>{setCircuit(b.dataset.circuit);document.querySelectorAll('[data-circuit]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.circuit===b.dataset.circuit));calculate()});
-document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{setLoad(b.dataset.load);document.querySelectorAll('[data-load]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.load===b.dataset.load));calculate()});
-document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));
-$('calculateBtn').onclick=calculate;
-$('clearBtn').onclick=()=>{location.reload()};
-document.querySelectorAll('.faq button').forEach(b=>b.onclick=()=>{const f=b.parentElement;f.classList.toggle('open');b.querySelector('.faq-icon').textContent=f.classList.contains('open')?'−':'+'});
-['voltage','amps','watts','pf','length','lengthUnit','material','target'].forEach(id=>$(id).addEventListener('input',calculate));
-$('lengthUnit').addEventListener('change',calculate);$('material').addEventListener('change',calculate);$('target').addEventListener('change',calculate);
+const standards={
+  us:(function(){
+    const out=[];
+    for(let n=20;n>=1;n--) out.push({name:n+' AWG',area:awgArea(n)});
+    ['1/0','2/0','3/0','4/0'].forEach(function(label,index){out.push({name:label+' AWG',area:awgArea(-index)});});
+    [250,300,350,400,500,600,700,750,800,900,1000,1250,1500,1750,2000].forEach(function(k){out.push({name:k+' KCMIL',area:k*0.506707479});});
+    return out;
+  })(),
+  metric:[0.5,0.75,1,1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240,300,400,500,630,800,1000].map(function(a){return {name:a+' mm²',area:a};})
+};
+const materials={
+  cu:{label:'Copper, annealed reference',rho20:0.017241,alpha20:0.00393},
+  al1350:{label:'Aluminium EC 1350 reference',rho20:0.028172,alpha20:0.00403}
+};
+const constructionFactors={solid:1,stranded:1.02};
+let circuit='dc',loadMode='amps',task='find';
+const $=function(id){return document.getElementById(id);};
+const num=function(id){return Number($(id).value);};
+const finitePositive=function(v){return Number.isFinite(v)&&v>0;};
+function fmt(v,d){return Number(v).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:d===undefined?2:d});}
+function detectManualTableDelimiter(line){
+  let quoted=false,counts={',':0,'\t':0,';':0};
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'&&quoted&&line[i+1]==='"'){i++;continue;}
+    if(ch==='"'){quoted=!quoted;continue;}
+    if(!quoted&&Object.prototype.hasOwnProperty.call(counts,ch))counts[ch]++;
+  }
+  return ['\t',';',','].sort(function(a,b){return counts[b]-counts[a];})[0]||',';
+}
+function splitManualTableRow(line,delimiter){
+  const columns=[];let field='',quoted=false,malformed=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){
+      if(quoted&&line[i+1]==='"'){field+='"';i++;}
+      else if(!quoted&&field.length===0)quoted=true;
+      else if(quoted)quoted=false;
+      else malformed=true;
+    }else if(ch===delimiter&&!quoted){columns.push(field.trim());field='';}
+    else field+=ch;
+  }
+  if(quoted)malformed=true;
+  columns.push(field.trim());
+  return malformed?null:columns;
+}
+function parseManualImpedanceTable(){
+  const rows=Object.create(null),errors=[];
+  const list=standards[$('sizeStandard').value]||standards.us;
+  const text=$('manualTable').value.replace(/^\uFEFF/,'');
+  const lines=text.split(/\r?\n/);
+  const first=lines.find(function(line){return line.trim().length>0;})||'';
+  const delimiter=detectManualTableDelimiter(first);
+  lines.forEach(function(line,index){
+    const trimmed=line.trim();if(!trimmed)return;
+    const columns=splitManualTableRow(trimmed,delimiter);
+    if(!columns){errors.push('Line '+(index+1)+': malformed quoted field.');return;}
+    if(/^(size|conductor|wire)$/i.test(columns[0]||'')&&/^(resistance|r)$/i.test(columns[1]||'')&&/^(reactance|x)$/i.test(columns[2]||''))return;
+    if(columns.length!==3){errors.push('Line '+(index+1)+': use conductor size, resistance, reactance.');return;}
+    const candidate=list.find(function(c){return c.name===columns[0];});
+    if(!candidate){errors.push('Line '+(index+1)+': '+columns[0]+' is not a supported size in the selected standard.');return;}
+    const parseValue=function(value){
+      const raw=value.trim();
+      const decimalComma=(delimiter===';'||delimiter==='\t')&&/^[+-]?\d+,\d+(?:[eE][+-]?\d+)?$/.test(raw);
+      return Number(decimalComma?raw.replace(',','.'):raw);
+    };
+    const resistance=parseValue(columns[1]),reactance=parseValue(columns[2]);
+    if(!finitePositive(resistance)||!Number.isFinite(reactance)||reactance<0){errors.push('Line '+(index+1)+': resistance must be positive and reactance must be zero or positive.');return;}
+    if(Object.prototype.hasOwnProperty.call(rows,candidate.name)){errors.push('Line '+(index+1)+': duplicate conductor size '+candidate.name+'.');return;}
+    rows[candidate.name]={resistance:resistance,reactance:reactance};
+  });
+  return {rows:rows,errors:errors};
+}
+function parseAmpacityTable(){
+  const rows=Object.create(null),errors=[];
+  const list=standards[$('sizeStandard').value]||standards.us;
+  const raw=$('ampacityTable').value.replace(/^\uFEFF/,'');
+  const lines=raw.split(/\r?\n/);
+  const first=lines.find(function(line){return line.trim().length>0;})||'';
+  const delimiter=detectManualTableDelimiter(first);
+  lines.forEach(function(line,index){
+    const trimmed=line.trim();if(!trimmed)return;
+    const columns=splitManualTableRow(trimmed,delimiter);
+    if(!columns){errors.push('Line '+(index+1)+': malformed quoted ampacity field.');return;}
+    const headerSize=(columns[0]||'').trim().toLowerCase();
+    const headerAmp=(columns[1]||'').trim().toLowerCase().replace(/[^a-z]/g,'');
+    if(/^(size|conductor|wire)$/.test(headerSize)&&/^(allowableampacity|allowableampacitya|ampacity|ampacitya|finalallowableampacity|finalallowableampacya|allowablecurrent|allowablecurrenta)$/.test(headerAmp))return;
+    if(columns.length!==2){errors.push('Line '+(index+1)+': use conductor size and final allowable ampacity in amperes.');return;}
+    const candidate=list.find(function(c){return c.name===columns[0];});
+    if(!candidate){errors.push('Line '+(index+1)+': '+columns[0]+' is not a supported size in the selected standard.');return;}
+    const rawValue=columns[1].trim();
+    const decimalComma=(delimiter===';'||delimiter==='\t')&&/^[+-]?\d+,\d+(?:[eE][+-]?\d+)?$/.test(rawValue);
+    const allowableAmpacity=Number(decimalComma?rawValue.replace(',','.'):rawValue);
+    if(!finitePositive(allowableAmpacity)){errors.push('Line '+(index+1)+': final allowable ampacity must be a positive finite number of amperes.');return;}
+    if(Object.prototype.hasOwnProperty.call(rows,candidate.name)){errors.push('Line '+(index+1)+': duplicate conductor size '+candidate.name+'.');return;}
+    rows[candidate.name]={allowableAmpacity:allowableAmpacity};
+  });
+  return {rows:rows,errors:errors};
+}
+function candidates(){
+  let list=standards[$('sizeStandard').value]||standards.us;
+  if($('calculationMethod').value==='manual'&&$('manualInputMode').value==='table'&&task==='find'){
+    const impedance=parseManualImpedanceTable();
+    list=list.filter(function(c){return Object.prototype.hasOwnProperty.call(impedance.rows,c.name);});
+  }
+  if($('calculationMethod').value==='paige'&&task==='find'&&$('sizeStandard').value==='us'){
+    const common=/^(20|18|16|14|12|10|8|6|4|3|2|1) AWG$|^(1\/0|2\/0|3\/0|4\/0) AWG$|^[0-9,]+ KCMIL$/;
+    list=list.filter(function(c){return common.test(c.name);});
+  }
+  return list;
+}
+function currentStandard(){return $('sizeStandard').value==='us'?'U.S. AWG / KCMIL':'Metric mm²';}
+function setActive(selector,attr,value){
+  document.querySelectorAll(selector).forEach(function(b){
+    const active=b.dataset[attr]===value;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',String(active));
+  });
+}
+function updateSelectedOptions(){
+  const select=$('selectedSize'),old=select.value,list=candidates();
+  select.innerHTML=list.map(function(c){return '<option value="'+c.name+'">'+c.name+' — '+fmt(c.area,3)+' mm²</option>';}).join('');
+  if(!list.length){select.innerHTML='<option value="">No matching supplied table sizes</option>';return;}
+  if(list.some(function(c){return c.name===old;}))select.value=old;
+  else if(list.some(function(c){return c.name==='10 AWG';}))select.value='10 AWG';
+  else select.value=list[0].name;
+}
+function updateReactanceVisibility(){
+  const enabled=$('useReactance').checked&&circuit!=='dc'&&$('calculationMethod').value==='zemtools';
+  $('reactanceToggleField').classList.toggle('hidden',circuit==='dc'||$('calculationMethod').value!=='zemtools');
+  $('reactanceFields').classList.toggle('hidden',!enabled);
+  $('singleSpacingField').classList.toggle('hidden',circuit==='three');
+  $('threeSpacingFields').classList.toggle('hidden',circuit!=='three');
+}
+function updatePowerFactorVisibility(){
+  const method=$('calculationMethod').value;
+  const referenceIgnoresPf=(method==='paige'||method==='omni')&&loadMode==='amps';
+  $('pfField').classList.toggle('hidden',circuit==='dc'||referenceIgnoresPf);
+  if(circuit!=='dc'&&(method==='paige'||method==='omni')&&loadMode==='watts'){
+    $('pfHint').textContent='Used only to convert real load power into line current. This published voltage-drop equation does not apply another PF multiplier.';
+  }
+}
+function updateManualInputVisibility(){
+  const tableMode=$('manualInputMode').value==='table';
+  $('manualSingleFields').classList.toggle('hidden',tableMode);
+  $('manualTableFields').classList.toggle('hidden',!tableMode);
+}
+function updateCalculationMethod(){
+  const method=$('calculationMethod').value;
+  const copperOnly=method==='omni';
+  const paige=method==='paige';
+  const manual=method==='manual';
+  const materialOptions=$('material').options;
+  for(let i=0;i<materialOptions.length;i++){
+    if(materialOptions[i].value==='al1350')materialOptions[i].disabled=copperOnly;
+  }
+  if(copperOnly&&$('material').value!=='cu')$('material').value='cu';
+  $('construction').disabled=method!=='zemtools';
+  $('temperature').disabled=paige||manual;
+  $('material').disabled=manual;
+  $('manualImpedanceFields').classList.toggle('hidden',!manual);
+  if(method!=='zemtools')$('useReactance').checked=false;
+  const hints={
+    zemtools:'ZemTools reference: 100% IACS copper / EC 1350 aluminium, entered conductor temperature, construction factor and optional approximate reactance.',
+    paige:'Paige published K factors: copper 11.2 and aluminium 17.4 at 127°F (53°C). The 53°C basis is fixed; a common AWG/KCMIL candidate ladder is used. The published equation does not add PF or cable reactance corrections.',
+    omni:'Omni published copper reference: ρ20 = 0.0168 Ω·mm²/m and α = 0.00404/°C. Copper only. Uses 2 for DC/single-phase and √3 for balanced three-phase; its published sizing example steps up to a supported AWG size.',
+    manual:'Enter manufacturer cable R/X values in the selected units at actual operating conditions. This is a manufacturer-data impedance calculation for checking an existing conductor or maximum distance; minimum-size search is unavailable from one fixed R/X pair.'
+  };
+  $('calculationMethodHint').textContent=hints[method]||hints.zemtools;
+  updateManualInputVisibility();
+  updateManualImpedanceUnitLabels();
+  updateReactanceVisibility();
+  updatePowerFactorVisibility();
+  if(task!=='find')updateSelectedOptions();
+}
+function setTask(v){
+  task=v;setActive('[data-task]','task',v);
+  $('selectedSizeField').classList.toggle('hidden',v==='find');
+  $('lengthField').classList.toggle('hidden',v==='distance');
+  $('calculateBtn').textContent=v==='find'?'Calculate voltage-drop size →':v==='check'?'Calculate voltage drop →':'Calculate maximum distance →';
+  $('resultTitle').textContent=v==='find'?'▥  Voltage-drop size estimate':v==='check'?'▥  Voltage-drop check':'▥  Maximum-distance estimate';
+  $('resultLabel').textContent=v==='find'?'Selected conductor':'Conductor being evaluated';
+  $('comparisonTitle').textContent=v==='find'?'Candidate comparison':'Selected conductor calculation';
+  updateSelectedOptions();
+  calculate();
+}
+function setCircuit(v){
+  circuit=v;setActive('[data-circuit]','circuit',v);
+  $('voltage').value=v==='dc'?48:v==='three'?400:120;
+  if(v==='dc')$('pfField').classList.add('hidden');
+  else{
+    $('pfField').classList.remove('hidden');
+    if(loadMode==='amps'&&!finitePositive(num('pf')))$('pf').value='1.00';
+    $('pfHint').textContent=loadMode==='amps'?'Assumed unity PF (1.00) is prefilled as an explicit assumption. Edit it when known.':'Required for AC real-power mode; enter 0 < PF ≤ 1.';
+  }
+  updateReactanceVisibility();
+  updatePowerFactorVisibility();
+  calculate();
+}
+function setLoad(v){
+  loadMode=v;setActive('[data-load]','load',v);
+  $('ampsField').classList.toggle('hidden',v!=='amps');
+  $('wattsField').classList.toggle('hidden',v!=='watts');
+  $('pfField').classList.toggle('hidden',circuit==='dc');
+  if(circuit!=='dc'){
+    if(v==='watts'&&$('pf').dataset.userEdited!=='true')$('pf').value='';
+    if(v==='amps'&&!finitePositive(num('pf')))$('pf').value='1.00';
+    $('pfHint').textContent=v==='amps'?'Assumed unity PF (1.00) is prefilled as an explicit assumption. Edit it when known.':'Required for AC real-power mode; enter 0 < PF ≤ 1.';
+  }
+  updatePowerFactorVisibility();
+  calculate();
+}
+function lengthMetres(value,unit){
+  const v=value===undefined?num('length'):value;
+  const u=unit===undefined?$('lengthUnit').value:unit;
+  return u==='ft'?v*0.3048:v;
+}
+function readInputs(){
+  const V=num('voltage'),L=task==='distance'?1:lengthMetres(),rawTarget=num('target');
+  const method=$('calculationMethod').value;
+  const manualInputMode=$('manualInputMode').value;
+  const manualTable=method==='manual'&&manualInputMode==='table'?parseManualImpedanceTable():{rows:Object.create(null),errors:[]};
+  const ampacityText=$('ampacityTable').value.trim();
+  const ampacityTable=ampacityText?parseAmpacityTable():{rows:Object.create(null),errors:[]};
+  const targetUnit=$('targetUnit').value,temp=method==='paige'?53:num('temperature');
+  const material=materials[$('material').value],construction=method==='zemtools'?constructionFactors[$('construction').value]:1;
+  const needsPowerFactor=circuit!=='dc'&&(loadMode==='watts'||method==='zemtools'||method==='manual');
+  const pfValue=needsPowerFactor?num('pf'):1;
+  const parallelSets=num('parallelSets');
+  const manualImpedanceUnits=$('manualImpedanceUnits').value;
+  const manualToPer1000Ft=manualImpedanceUnits==='perKm'?0.3048:1;
+  const manualResistance=num('manualResistance')*manualToPer1000Ft,manualReactance=num('manualReactance')*manualToPer1000Ft,manualFrequency=num('manualFrequency');
+  const manualTableRows=Object.create(null);
+  Object.keys(manualTable.rows).forEach(function(size){
+    manualTableRows[size]={resistance:manualTable.rows[size].resistance*manualToPer1000Ft,reactance:manualTable.rows[size].reactance*manualToPer1000Ft};
+  });
+  if(method==='manual'&&manualInputMode==='single'&&task==='find')return {error:'A single manufacturer R/X pair checks one selected conductor or its maximum distance. Use the per-size R/X table to search the listed conductor sizes.'};
+  if(method==='manual'&&manualInputMode==='table'&&manualTable.errors.length)return {error:manualTable.errors[0]};
+  if(method==='manual'&&manualInputMode==='table'&&!Object.keys(manualTable.rows).length)return {error:'Enter at least one valid manufacturer R/X table row for the selected size standard.'};
+  if(method==='manual'&&manualInputMode==='table'&&task!=='find'&&!Object.prototype.hasOwnProperty.call(manualTable.rows,$('selectedSize').value)){
+    return {error:'The manufacturer R/X table does not include the selected conductor size '+$('selectedSize').value+'. Add its matching R/X row or choose a conductor listed in the table; the selected conductor has not been changed.'};
+  }
+  if(ampacityText&&ampacityTable.errors.length)return {error:ampacityTable.errors[0]};
+  if(ampacityText&&!Object.keys(ampacityTable.rows).length)return {error:'Enter at least one valid size and final allowable ampacity row.'};
+  if(ampacityText&&task!=='find'&&!Object.prototype.hasOwnProperty.call(ampacityTable.rows,$('selectedSize').value)){
+    return {error:'The supplied ampacity table does not include the selected conductor size '+$('selectedSize').value+'. Add its final allowable ampacity or choose a size that is listed; the selected conductor has not been changed.'};
+  }
+  if(ampacityText&&$('ampacitySource').value.trim().length<3)return {error:'Enter a traceable ampacity source or document reference before applying the external comparison.'};
+  if(ampacityText&&!$('ampacityFinalConfirmed').checked)return {error:'Confirm that the ampacity values are final allowable A-per-conductor ratings after applicable installation and terminal corrections.'};
+  if(ampacityText&&method!=='manual'&&$('ampacityMaterial').value!==$('material').value)return {error:'The external ampacity table material does not match the selected conductor material.'};
+  if(method==='omni'&&$('material').value!=='cu')return {error:'The published Omni numerical reference is copper-only. Select copper or another calculation basis.'};
+  if(method==='manual'&&manualInputMode==='single'&&(!finitePositive(manualResistance)||!Number.isFinite(manualReactance)||manualReactance<0))return {error:'Enter a positive manufacturer resistance and a zero-or-positive reactance in the selected R/X units.'};
+  if(method==='manual'&&circuit!=='dc'&&manualFrequency!==50&&manualFrequency!==60)return {error:'Choose the actual frequency for the supplied manufacturer R/X values (50 or 60 Hz).'};
+  if(!finitePositive(V))return {error:'Enter a system voltage greater than zero.'};
+  if(loadMode==='amps'&&!finitePositive(num('amps')))return {error:'Enter total design current greater than zero.'};
+  if(loadMode==='watts'&&!finitePositive(num('watts')))return {error:'Enter real load power greater than zero.'};
+  if(needsPowerFactor&&(!Number.isFinite(pfValue)||pfValue<=0||pfValue>1))return {error:'For AC, enter a valid power factor greater than 0 and no greater than 1.'};
+  if(task!=='distance'&&!finitePositive(L))return {error:'Enter a one-way cable length greater than zero.'};
+  if(!finitePositive(rawTarget))return {error:'Enter a voltage-drop target greater than zero.'};
+  const targetDropV=targetUnit==='volts'?rawTarget:V*rawTarget/100;
+  const targetPct=targetDropV/V*100;
+  if(!Number.isFinite(targetPct)||targetPct<0.1||targetPct>10)return {error:'The equivalent voltage-drop target must be between 0.1% and 10% of source voltage.'};
+  if(method!=='paige'&&method!=='manual'&&(!Number.isFinite(temp)||temp<20||temp>90))return {error:'Conductor temperature must be between 20°C and 90°C.'};
+  if(!Number.isInteger(parallelSets)||parallelSets<1||parallelSets>16)return {error:'Parallel conductor sets must be a whole number from 1 to 16.'};
+  if(!material||!Number.isFinite(construction))return {error:'Choose a supported material and construction assumption.'};
+  let I;
+  if(loadMode==='amps')I=num('amps');
+  else if(circuit==='dc')I=num('watts')/V;
+  else if(circuit==='single')I=num('watts')/(V*pfValue);
+  else I=num('watts')/(Math.sqrt(3)*V*pfValue);
+  if(!finitePositive(I))return {error:'The calculated current is not a valid positive finite value.'};
+  const useReactance=method==='zemtools'&&$('useReactance').checked&&circuit!=='dc';
+  let spacingIn=null,frequency=null,pfDirection=method==='manual'?$('manualPfDirection').value:$('pfDirection').value;
+  if(useReactance){
+    frequency=num('frequency');
+    if(frequency!==50&&frequency!==60)return {error:'Choose the actual AC frequency (50 or 60 Hz) before using reactance.'};
+    pfDirection=$('pfDirection').value;
+    if(pfDirection!=='lagging'&&pfDirection!=='leading')return {error:'Choose whether the AC load PF is leading or lagging.'};
+    if(circuit==='single'){
+      spacingIn=num('singleSpacing');
+      if(!finitePositive(spacingIn))return {error:'Enter the actual single-phase conductor centre spacing in inches.'};
+    }else{
+      const a=num('spacingAB'),b=num('spacingBC'),c=num('spacingCA');
+      if(!finitePositive(a)||!finitePositive(b)||!finitePositive(c))return {error:'Enter all three positive phase-to-phase spacings in inches.'};
+      spacingIn=Math.cbrt(a*b*c);
+    }
+  }
+  const ampacityRows=Object.create(null);
+  Object.keys(ampacityTable.rows).forEach(function(size){ampacityRows[size]=ampacityTable.rows[size].allowableAmpacity;});
+  return {V,I,L,target:targetPct,targetDropV,targetUnit,rawTarget,temp,pf:pfValue,pfDirection,materialKey:$('material').value,material,constructionKey:$('construction').value,construction,standard:$('sizeStandard').value,parallelSets,useReactance,spacingIn,frequency,method,manualInputMode,manualTableRows:manualTableRows,manualResistance,manualReactance,manualFrequency,manualImpedanceUnits,hasAmpacityTable:Boolean(ampacityText),ampacityRows:ampacityRows,ampacityMaterial:$('ampacityMaterial').value,ampacitySource:$('ampacitySource').value.trim()};
+}
+function runCandidate(input,candidate,runLength){
+  const L=runLength===undefined?input.L:runLength;
+  let temperatureFactor=1+input.material.alpha20*(input.temp-20);
+  let rhoAtTemp=input.material.rho20*temperatureFactor;
+  if(input.method==='paige'){
+    const K=input.materialKey==='cu'?11.2:17.4;
+    rhoAtTemp=K*0.000506707479/0.3048;
+    temperatureFactor=1;
+  }else if(input.method==='omni'){
+    rhoAtTemp=0.0168*(1+0.00404*(input.temp-20));
+    temperatureFactor=1+0.00404*(input.temp-20);
+  }
+  const manualRecord=input.method==='manual'&&input.manualInputMode==='table'?input.manualTableRows[candidate.name]:null;
+  const manualResistanceUsed=manualRecord?manualRecord.resistance:input.manualResistance;
+  const manualReactanceUsed=manualRecord?manualRecord.reactance:input.manualReactance;
+  const resistancePerMetre=input.method==='manual'
+    ? manualResistanceUsed/304.8
+    : (input.method==='zemtools'?input.construction:1)*rhoAtTemp/candidate.area;
+  const runResistance=resistancePerMetre*L;
+  const diameterMm=2*Math.sqrt(candidate.area/Math.PI);
+  const radiusIn=diameterMm/2/25.4;
+  let reactancePerMetre=input.method==='manual'?manualReactanceUsed/304.8:0;
+  let reactanceOhmPer1000Ft=input.method==='manual'?manualReactanceUsed:0;
+  if(input.useReactance){
+    if(input.spacingIn<=radiusIn)throw new Error('Conductor spacing must exceed the equivalent conductor radius. Check the spacing input.');
+    reactanceOhmPer1000Ft=2*Math.PI*input.frequency*(0.1404*Math.log10(input.spacingIn/radiusIn)+0.0153)*0.001;
+    if(!Number.isFinite(reactanceOhmPer1000Ft)||reactanceOhmPer1000Ft<0)throw new Error('The reactance estimate is outside the supported geometry range.');
+    reactancePerMetre=reactanceOhmPer1000Ft/304.8;
+  }
+  const pathFactor=circuit==='three'?Math.sqrt(3):2;
+  const cosPhi=circuit==='dc'||input.method==='paige'||input.method==='omni'?1:input.pf;
+  const sinMagnitude=circuit==='dc'?0:Math.sqrt(Math.max(0,1-input.pf*input.pf));
+  const sinPhi=input.method==='paige'||input.method==='omni'?0:input.pfDirection==='leading'?-sinMagnitude:sinMagnitude;
+  const impedanceDropPerMetre=resistancePerMetre*cosPhi+reactancePerMetre*sinPhi;
+  const dropV=input.I*L*pathFactor*impedanceDropPerMetre/input.parallelSets;
+  const resistanceDropV=input.I*L*pathFactor*resistancePerMetre*cosPhi/input.parallelSets;
+  const reactanceDropV=input.I*L*pathFactor*reactancePerMetre*sinPhi/input.parallelSets;
+  const dropPct=dropV/input.V*100;
+  const loadVoltage=input.V-dropV;
+  const lossW=input.I*input.I*runResistance*(circuit==='three'?3:2)/input.parallelSets;
+  const voltageDropPass=dropV>=-1e-9&&dropV<=input.targetDropV+1e-10&&loadVoltage>0;
+  const allowableAmpacityA=input.hasAmpacityTable?input.ampacityRows[candidate.name]:null;
+  const ampacityPass=Number.isFinite(allowableAmpacityA)?(input.I/input.parallelSets)<=allowableAmpacityA+1e-10:null;
+  return {
+    conductor:candidate,area:candidate.area,diameterMm,resistancePerMetre,runResistance,
+    reactancePerMetre,reactanceOhmPer1000Ft,dropPerMetre:input.I*pathFactor*impedanceDropPerMetre/input.parallelSets,
+    dropV,dropPct,loadVoltage,lossW,currentPerSet:input.I/input.parallelSets,
+    pathFactor,cosPhi,sinPhi,resistanceDropV,reactanceDropV,impedanceDropPerMetre,
+    totalArea:candidate.area*input.parallelSets,
+    pass:voltageDropPass,voltageDropPass:voltageDropPass,ampacityPass:ampacityPass,
+    selectionPass:voltageDropPass,allowableAmpacityA:allowableAmpacityA,
+    temperatureFactor,rhoAtTemp,runLength:L,
+    manualResistanceOhmPer1000Ft:input.method==='manual'?manualResistanceUsed:null,
+    manualReactanceOhmPer1000Ft:input.method==='manual'?manualReactanceUsed:null
+  };
+}
+function clearOutputs(){
+  ['recommended','recommendedSub','dropPct','dropV','loadV','lossW','resultCurrent','currentPerSet','areaPerConductor','totalArea','equivDiameter','maxDistance','reactanceValue','whyText','resultAssumptions','comparisonRows','calculationBreakdown'].forEach(function(id){$(id).textContent='—';});
+  $('dropPctLabel').textContent='Voltage Drop';$('dropVLabel').textContent='Voltage Lost';
+  $('maxDistanceRow').classList.add('hidden');$('reactanceRow').classList.add('hidden');$('ampacityRow').classList.add('hidden');
+  $('ampacityValue').textContent='—';
+  $('materialComparison').classList.add('hidden');$('materialComparisonRows').textContent='';
+}
+function showError(message){clearOutputs();$('status').className='status warn';$('status').textContent=message;}
+function renderComparison(input,selected,list){
+  let shown=[];
+  if(task!=='find')shown=[selected];
+  else{
+    const index=list.findIndex(function(c){return c.name===selected.conductor.name;});
+    if(index>0)shown.push(runCandidate(input,list[index-1]));
+    shown.push(selected);
+    if(index>=0&&index<list.length-1)shown.push(runCandidate(input,list[index+1]));
+  }
+  $('comparisonRows').innerHTML='<div class="comparison-row"><strong>Conductor</strong><strong>Drop</strong><span>'+(input.hasAmpacityTable?'Supplied ampacity cross-check':'Voltage-drop target')+'</span></div>'+
+    shown.map(function(r){
+      let state;
+      if(input.hasAmpacityTable)state=r.ampacityPass===true?'Supplied ampacity: Meets entered value':r.ampacityPass===false?'Supplied ampacity: Below entered value':'No supplied value';
+      else state=r.pass?'Meets drop target':'Does not meet target';
+      return '<div class="comparison-row"><strong>'+r.conductor.name+'</strong><strong>'+fmt(r.dropPct,3)+'%</strong><span>'+state+'</span></div>';
+    }).join('');
+}
+function minimumForMaterial(input,materialKey,list){
+  const alt=Object.assign({},input,{material:materials[materialKey],materialKey:materialKey});
+  for(let i=0;i<list.length;i++){
+    const result=runCandidate(alt,list[i]);
+    if(result.pass)return result;
+  }
+  return runCandidate(alt,list[list.length-1]);
+}
+function renderMaterialComparison(input,list){
+  const materialsToCompare=[{key:'cu',label:'Copper'},{key:'al1350',label:'Aluminium EC 1350'}];
+  const rows=materialsToCompare.map(function(m){
+    const result=minimumForMaterial(input,m.key,list);
+    return '<div class="comparison-row"><strong>'+m.label+'</strong><strong>'+result.conductor.name+'</strong><span>'+fmt(result.dropPct,3)+'% · '+(result.pass?'Meets drop target':'Does not meet target')+'</span></div>';
+  });
+  $('materialComparisonRows').innerHTML='<div class="comparison-row"><strong>Material</strong><strong>Minimum size</strong><span>Drop / target</span></div>'+rows.join('');
+  $('materialComparison').classList.remove('hidden');
+}
+function renderCalculationBreakdown(input,result,isNoPass,maxDistanceM){
+  const lines=[];
+  const method=input.method;
+  const pathLabel=circuit==='three'?'√3 (balanced three-phase)':'2 (DC / single-phase return path)';
+  const loadFormula=circuit==='dc'?'P ÷ V':circuit==='single'?'P ÷ (V × PF)':'P ÷ (√3 × V × PF)';
+  lines.push('1. Load current');
+  if(loadMode==='amps'){
+    lines.push('Entered design current = '+fmt(input.I,3)+' A.');
+  }else{
+    lines.push('I = '+loadFormula+' = '+fmt(input.I,3)+' A from '+fmt(num('watts'),2)+' W real power.');
+    if(circuit!=='dc')lines.push('Power factor used for current conversion = '+fmt(input.pf,3)+'.');
+  }
+  lines.push('2. Conductor and current sharing');
+  lines.push('Selected conductor = '+result.conductor.name+'; nominal area = '+fmt(result.area,4)+' mm².');
+  lines.push('Current per set = total current ÷ parallel sets = '+fmt(input.I,3)+' ÷ '+input.parallelSets+' = '+fmt(result.currentPerSet,3)+' A.');
+  lines.push('One-way run used = '+fmt(result.runLength,4)+' m; parallel sets = '+input.parallelSets+'.');
+  lines.push('3. Resistance / impedance basis');
+  if(method==='manual'){
+    lines.push('Manufacturer R input = '+fmt(result.manualResistanceOhmPer1000Ft,6)+' Ω / 1000 ft = '+fmt(result.resistancePerMetre,9)+' Ω/m per conductor.');
+    lines.push('Manufacturer X input = '+fmt(result.manualReactanceOhmPer1000Ft,6)+' Ω / 1000 ft = '+fmt(result.reactancePerMetre,9)+' Ω/m per conductor.');
+    lines.push('These supplied values are used as entered after unit normalization; ZemTools does not verify the cable, source, frequency or operating-condition applicability.');
+  }else if(method==='paige'){
+    lines.push('Paige published K factor = '+(input.materialKey==='cu'?'11.2 (copper)':'17.4 (aluminium)')+' at fixed 53°C; equivalent model resistance = '+fmt(result.resistancePerMetre,9)+' Ω/m per conductor.');
+    lines.push('This published profile does not add a separate power-factor or reactance correction.');
+  }else if(method==='omni'){
+    lines.push('Omni published copper model: ρ(T) = 0.0168 × [1 + 0.00404 × (T − 20)] = '+fmt(result.rhoAtTemp,9)+' Ω·mm²/m at '+fmt(input.temp,1)+'°C.');
+    lines.push('R per conductor = ρ(T) ÷ area = '+fmt(result.rhoAtTemp,9)+' ÷ '+fmt(result.area,4)+' = '+fmt(result.resistancePerMetre,9)+' Ω/m.');
+  }else{
+    lines.push('Temperature-adjusted resistivity = ρ20 × [1 + α20 × (T − 20)] = '+fmt(input.material.rho20,8)+' × [1 + '+fmt(input.material.alpha20,5)+' × ('+fmt(input.temp,1)+' − 20)] = '+fmt(result.rhoAtTemp,9)+' Ω·mm²/m.');
+    lines.push('R per conductor = ρ(T) × construction factor ÷ area = '+fmt(result.rhoAtTemp,9)+' × '+fmt(input.construction,3)+' ÷ '+fmt(result.area,4)+' = '+fmt(result.resistancePerMetre,9)+' Ω/m.');
+  }
+  lines.push('4. Voltage-change calculation');
+  lines.push('Path factor = '+pathLabel+'; PF angle terms: cosφ = '+fmt(result.cosPhi,5)+', signed sinφ = '+fmt(result.sinPhi,5)+'.');
+  lines.push('ΔV = I × L × path factor × (R cosφ + X sinφ) ÷ parallel sets.');
+  lines.push('Resistance contribution = '+fmt(result.resistanceDropV,5)+' V; reactance contribution = '+fmt(result.reactanceDropV,5)+' V.');
+  lines.push('Signed voltage change ΔV = '+fmt(result.dropV,4)+' V ('+fmt(result.dropPct,4)+'%). A negative value means estimated voltage rise, not a passing voltage drop.');
+  lines.push('Load-end voltage = source voltage − ΔV = '+fmt(input.V,3)+' − ('+fmt(result.dropV,4)+') = '+fmt(result.loadVoltage,4)+' V.');
+  lines.push('Voltage-drop target = '+fmt(input.targetDropV,4)+' V ('+fmt(input.target,4)+'%). Result '+(result.voltageDropPass?'meets':'does not meet')+' the voltage-drop target.');
+  if(task==='distance'){
+    lines.push('Maximum one-way distance = allowed voltage drop ÷ voltage change per metre = '+fmt(input.targetDropV,4)+' ÷ '+fmt(result.dropPerMetre,9)+' = '+fmt(maxDistanceM,4)+' m.');
+  }else if(task==='find'){
+    lines.push('Selection rule: candidates are checked from smallest to largest; '+(isNoPass?'no listed candidate meets the target, so the largest supported/listed size is shown without a pass claim.':'the first supported/listed candidate meeting the voltage-drop target is selected.')+(method==='manual'&&input.manualInputMode==='table'?' Only sizes present in the user-supplied manufacturer R/X table were evaluated.':''));
+  }else{
+    lines.push('Existing-conductor check: only '+result.conductor.name+' is evaluated. The chosen size is not silently substituted.');
+  }
+  const pathCount=circuit==='three'?3:2;
+  lines.push('Estimated conductor I²R loss = I² × one-way R × '+pathCount+' ÷ parallel sets = '+fmt(input.I,3)+'² × '+fmt(result.runResistance,8)+' × '+pathCount+' ÷ '+input.parallelSets+' = '+fmt(result.lossW,4)+' W.');
+  if(input.hasAmpacityTable){
+    lines.push('Separate user-supplied ampacity comparison: '+(Number.isFinite(result.allowableAmpacityA)?fmt(result.allowableAmpacityA,3)+' A per conductor vs '+fmt(result.currentPerSet,3)+' A per set — '+(result.ampacityPass?'passes':'fails')+'.':'no value is supplied for this conductor.'));
+    lines.push('This manual comparison is not generated or verified by ZemTools, does not filter candidates and does not automatically upsize the conductor.');
+  }
+  lines.push('Planning estimate only. This breakdown does not calculate code ampacity, installation derating, protective-device sizing, grounding or code compliance.');
+  $('calculationBreakdown').textContent=lines.join('\n');
+}
+function render(input,result,list,isNoPass,maxDistanceM){
+  const isVoltageRise=result.dropV < -1e-9;
+  $('dropPctLabel').textContent=isVoltageRise?'Voltage Rise (%)':'Voltage Drop';
+  $('dropVLabel').textContent=isVoltageRise?'Voltage Rise (V)':'Voltage Lost';
+  $('recommended').textContent=result.conductor.name;
+  $('resultLabel').textContent=isVoltageRise?'Voltage-rise estimate only':isNoPass?'Largest supported conductor (does not pass)':task==='find'?'Minimum voltage-drop candidate':'Conductor being evaluated';
+  $('recommendedSub').textContent=isVoltageRise?'The approximate model predicts voltage rise; this is not a minimum-size recommendation.':'Nominal size area: '+fmt(result.area,3)+' mm² · '+currentStandard();
+  const manualTableSearch=input.method==='manual'&&input.manualInputMode==='table'&&task==='find';
+  if(manualTableSearch&&!isVoltageRise){
+    $('resultLabel').textContent=isNoPass?'Largest listed conductor (does not pass)':'Smallest passing size in supplied manufacturer table';
+    $('recommendedSub').textContent='Manufacturer impedance applied to this listed size; omitted sizes are not evaluated.';
+  }
+  if(input.hasAmpacityTable&&!isVoltageRise){
+    $('resultLabel').textContent=task==='find'?(isNoPass?'Largest voltage-drop candidate (does not pass)':'Minimum voltage-drop size'):'Conductor being evaluated';
+    if(Number.isFinite(result.allowableAmpacityA)){
+      $('recommendedSub').textContent='Supplied final allowable ampacity: '+fmt(result.allowableAmpacityA,2)+' A per conductor · modeled current: '+fmt(result.currentPerSet,2)+' A per set.';
+      $('ampacityValue').textContent=fmt(result.allowableAmpacityA,2)+' A / conductor · '+fmt(result.currentPerSet,2)+' A / set · '+(result.ampacityPass?'Pass':'Fail');
+    }else{
+      $('recommendedSub').textContent='No ampacity value was supplied for '+result.conductor.name+'; voltage-drop result only.';
+      $('ampacityValue').textContent='No supplied value for '+result.conductor.name+' · comparison unavailable';
+    }
+    $('ampacityRow').classList.remove('hidden');
+  }
+  if(task==='distance'){
+    const m=maxDistanceM,ft=m/0.3048;
+    $('resultLabel').textContent='Selected conductor';
+    $('recommendedSub').textContent='Maximum one-way run: '+fmt(m,2)+' m ('+fmt(ft,2)+' ft)';
+    $('maxDistance').textContent=fmt(m,2)+' m / '+fmt(ft,2)+' ft';
+    $('maxDistanceRow').classList.remove('hidden');
+  }
+  $('dropPct').textContent=fmt(result.dropPct,3)+'%';
+  $('dropV').textContent=fmt(result.dropV,3)+' V';
+  $('loadV').textContent=fmt(result.loadVoltage,3)+' V';
+  $('lossW').textContent=fmt(result.lossW,2)+' W';
+  $('resultCurrent').textContent=fmt(input.I,3)+' A';
+  $('currentPerSet').textContent=fmt(result.currentPerSet,3)+' A';
+  $('areaPerConductor').textContent=fmt(result.area,3)+' mm²';
+  $('totalArea').textContent=fmt(result.totalArea,3)+' mm²';
+  $('equivDiameter').textContent=fmt(result.diameterMm,3)+' mm';
+  if(input.useReactance){
+    $('reactanceValue').textContent=fmt(result.reactanceOhmPer1000Ft,4)+' Ω / 1000 ft';
+    $('reactanceRow').classList.remove('hidden');
+  }
+  if(isVoltageRise){
+    $('status').className='status warn';
+    $('status').textContent='The approximate model predicts voltage rise, not a positive voltage drop. It cannot issue a voltage-drop pass or minimum-size recommendation for this condition.';
+    $('whyText').textContent='The leading-PF reactance estimate gives a negative voltage change (load-end voltage above source). Verify with manufacturer R/X data and an independent AC voltage-regulation analysis.';
+  }else if(task==='find'&&!isNoPass&&input.hasAmpacityTable){
+    if(result.ampacityPass===false){
+      $('status').className='status warn';
+      $('status').textContent='Minimum voltage-drop size passes the drop target, but fails the user-supplied ampacity cross-check. ZemTools has not automatically upsized the conductor.';
+    }else if(result.ampacityPass===true){
+      $('status').className='status ok';
+      $('status').textContent='Minimum voltage-drop size also passes the supplied ampacity comparison. The source and its installation applicability are not verified by ZemTools.';
+    }else{
+      $('status').className='status warn';
+      $('status').textContent='Minimum voltage-drop size calculated, but no ampacity value was supplied for this conductor. Ampacity comparison is unavailable.';
+    }
+    $('whyText').textContent='The minimum candidate is selected from the voltage-drop model only. The user-supplied ampacity table is compared against that single selected size; it does not filter candidates or automatically choose a larger conductor. Values, licence, adopted code, installation conditions and terminal corrections are not independently verified by ZemTools.';
+  }else if(task==='check'){ 
+    const ampacityFailure=input.hasAmpacityTable&&result.ampacityPass===false;
+    const ampacityMissing=input.hasAmpacityTable&&!Number.isFinite(result.allowableAmpacityA);
+    $('status').className='status '+(result.pass&&!ampacityFailure&&!ampacityMissing?'ok':'warn');
+    $('status').textContent=ampacityFailure
+      ?'Selected conductor exceeds the user-supplied final allowable ampacity for this per-set current.'
+      :ampacityMissing
+        ?'No user-supplied ampacity value is available for this selected conductor.'
+        :result.pass
+          ?(input.hasAmpacityTable?'Selected conductor meets the voltage-drop target and passes the supplied ampacity comparison.':'Selected conductor meets your voltage-drop target.')
+          :'Selected conductor does not meet your voltage-drop target.';
+    $('whyText').textContent='Voltage drop is calculated for '+result.conductor.name+' only. The selected conductor has not been substituted.'+(input.hasAmpacityTable?' The supplied ampacity value is compared with current per set; it is not verified by ZemTools.':'');
+  }else if(task==='distance'){
+    const ampacityFailure=input.hasAmpacityTable&&result.ampacityPass===false;
+    $('status').className='status '+(ampacityFailure?'warn':'ok');
+    $('status').textContent=ampacityFailure
+      ?'Maximum distance is calculated from voltage drop, but the selected conductor fails the supplied ampacity comparison at the entered load.'
+      :'Maximum one-way distance under the selected voltage-drop target.'+(input.hasAmpacityTable?' The supplied ampacity comparison also passes for the entered load.':'');
+    $('whyText').textContent='Distance is inverted from the voltage-drop model only. The supplied ampacity value is a separate user-entered comparison and does not set the maximum distance.';
+  }else if(isNoPass){
+    $('status').className='status warn';
+    $('status').textContent=input.hasAmpacityTable
+      ?'No supported conductor meets the voltage-drop target. The supplied ampacity table was not used to select or upsize a conductor.'
+      :manualTableSearch?'No conductor listed in the manufacturer table meets this voltage-drop target.':'No supported size meets this voltage-drop target.';
+    $('recommendedSub').textContent='Largest listed/supported conductor shown for information only; it does not pass the voltage-drop target.';
+    $('whyText').textContent=input.hasAmpacityTable
+      ?'Candidate selection uses voltage drop only. The ampacity row, when present, is a separate comparison for the displayed conductor and is not independently verified.'
+      :manualTableSearch?'Only the sizes listed in the supplied manufacturer table were evaluated. Add verified larger sizes or review the run and target; no listed conductor passes.'
+      :'The largest supported candidate remains above your target. Increase conductor size beyond this list, shorten the run, reduce load or review the target. No passing size is recommended.';
+  }else{
+    $('status').className='status ok';
+    $('status').textContent=manualTableSearch?'Smallest listed manufacturer-table conductor that meets your voltage-drop target.':'Smallest supported conductor that meets your voltage-drop target.';
+    $('whyText').textContent=manualTableSearch
+      ?'Only entries in the supplied manufacturer table were evaluated, in nominal conductor-size order. Sizes not listed in the table are not inferred or checked.'
+      :'Candidates are evaluated from smallest to largest. This is the first supported conductor whose calculated drop is within the target.';
+  }
+  const pfText=circuit==='dc'?'PF: not applicable (DC).':(input.method==='paige'||input.method==='omni'?(loadMode==='watts'?'PF '+fmt(input.pf,2)+' is used only to derive line current from real power; no additional PF multiplier is applied.':'PF is not used; current is entered directly and the published reference equation has no PF term.'):'Power factor: '+fmt(input.pf,2)+'.');
+  const xText=input.method==='manual'?'Entered units: '+(input.manualImpedanceUnits==='perKm'?'Ω / km':'Ω / 1000 ft')+'; normalized manufacturer R: '+fmt(result.manualResistanceOhmPer1000Ft,5)+' Ω / 1000 ft; X: '+fmt(result.manualReactanceOhmPer1000Ft,5)+' Ω / 1000 ft; '+(circuit==='dc'?'DC mode; X not applied.':'reference frequency '+input.manualFrequency+' Hz; PF direction '+input.pfDirection+'.'):input.useReactance?('Advanced approximate reactance enabled at '+input.frequency+' Hz; spacing/GMD '+fmt(input.spacingIn,3)+' inches; PF direction '+input.pfDirection+'.'): (circuit==='dc'?'Reactance: not applicable (DC).':'AC reactance: X = 0 (resistance-only mode).');
+  const methodText=input.method==='paige'?'Paige published K-factor model (Cu 11.2 / Al 17.4, fixed 127°F / 53°C; no PF or X correction)':input.method==='omni'?'Omni published copper model (ρ20 0.0168 Ω·mm²/m, α 0.00404/°C; no PF or X correction)':input.method==='manual'?(input.manualInputMode==='table'?'Manufacturer-entered per-size R/X table (source values normalized to Ω / 1000 ft; only listed conductor sizes evaluated)':'Manufacturer-entered single-conductor R/X model (Ω / 1000 ft at user-specified operating conditions)'):'ZemTools 100% IACS / EC 1350 resistance model';
+  $('resultAssumptions').textContent=
+    'Calculation basis: '+methodText+
+    '. Circuit: '+(circuit==='dc'?'DC':circuit==='single'?'single-phase AC':'balanced three-phase AC, line-to-line voltage')+
+    '. Load input: '+(loadMode==='amps'?'current':'real power')+
+    '. Material: '+(input.method==='manual'?'not used separately; conductor impedance is supplied directly':input.material.label)+
+    '. Size standard: '+currentStandard()+
+    '. One-way length: '+(task==='distance'?'calculated maximum':fmt(result.runLength,3)+' m')+
+    (input.method==='manual'?'. Temperature correction: not applied separately; enter R/X at actual conductor operating conditions':'. Conductor temperature: '+fmt(input.temp,1)+'°C')+
+    (input.method==='zemtools'?'. Construction factor: '+fmt(input.construction,2):'. Construction factor: not applied by selected reference')+
+    '. Parallel sets: '+input.parallelSets+
+    '. '+pfText+' '+xText+
+    (input.hasAmpacityTable?'. External ampacity screen: '+(input.ampacityMaterial==='cu'?'copper':'aluminium')+' table from '+input.ampacitySource+'; '+(Number.isFinite(result.allowableAmpacityA)?'user-supplied final allowable ampacity '+fmt(result.allowableAmpacityA,2)+' A per conductor, compared with '+fmt(result.currentPerSet,2)+' A per set ('+(result.ampacityPass?'passes':'fails')+')':'no value supplied for selected size '+result.conductor.name+'; no comparison possible')+'. This table is only compared against the displayed conductor; it never selects or upsizes a candidate and is not verified by ZemTools. Code tables, derating, installation and terminal corrections are not calculated.':'');
+  renderComparison(input,result,list);
+  if(task==='find'&&input.method!=='omni'&&input.method!=='manual'&&!input.hasAmpacityTable)renderMaterialComparison(input,list);
+  renderCalculationBreakdown(input,result,isNoPass,maxDistanceM);
+}
+function calculate(){
+  clearOutputs();
+  const input=readInputs();if(input.error){showError(input.error);return;}
+  const list=candidates();if(!list.length){
+    showError(input.hasAmpacityTable
+      ?'No conductor size overlaps the selected reference profile and the sizes in the supplied ampacity table. Check that the table uses exact supported size names.'
+      :'No usable conductor sizes are available. Check the selected size standard and manufacturer impedance table entries.');
+    return;
+  }
+  let result=null,isNoPass=false,maxDistanceM=null;
+  try{
+    if(task==='distance'){
+      const candidate=list.find(function(c){return c.name===$('selectedSize').value;});
+      if(!candidate){showError('Choose a supported conductor size for the maximum-distance calculation.');return;}
+      const base=runCandidate(input,candidate,1);
+      if(!finitePositive(base.dropPerMetre)){showError('The selected conductor cannot produce a valid maximum-distance estimate.');return;}
+      maxDistanceM=input.targetDropV/base.dropPerMetre;
+      if(!finitePositive(maxDistanceM)){showError('Maximum distance is not a positive finite value for these inputs.');return;}
+      result=runCandidate(input,candidate,maxDistanceM);
+    }else if(task==='check'){
+      const candidate=list.find(function(c){return c.name===$('selectedSize').value;});
+      if(!candidate){showError('Choose a supported conductor size to check.');return;}
+      result=runCandidate(input,candidate);
+    }else{
+      for(let i=0;i<list.length;i++){
+        const trial=runCandidate(input,list[i]);
+        if(trial.selectionPass){result=trial;break;}
+      }
+      if(!result){result=runCandidate(input,list[list.length-1]);isNoPass=true;}
+    }
+  }catch(e){showError(e.message||'Unable to calculate this conductor configuration.');return;}
+  if(!result||!Number.isFinite(result.dropV)||!Number.isFinite(result.dropPct)||!Number.isFinite(result.lossW)||!Number.isFinite(result.diameterMm)||result.loadVoltage<=0){
+    showError('Load-end voltage is at or below zero, or a calculated result is not finite. Review the inputs.');return;
+  }
+  render(input,result,list,isNoPass,maxDistanceM);
+}
+document.querySelectorAll('[data-task]').forEach(function(b){b.addEventListener('click',function(){setTask(b.dataset.task);});});
+document.querySelectorAll('[data-circuit]').forEach(function(b){b.addEventListener('click',function(){setCircuit(b.dataset.circuit);});});
+document.querySelectorAll('[data-load]').forEach(function(b){b.addEventListener('click',function(){setLoad(b.dataset.load);});});
+document.querySelectorAll('[data-preset]').forEach(function(b){
+  b.addEventListener('click',function(){
+    const presets={
+      low12:{c:'dc',l:'amps',v:12,a:15,w:'',len:20,unit:'ft',mat:'cu',target:3,temp:75},
+      low24:{c:'dc',l:'amps',v:24,a:30,w:'',len:5,unit:'m',mat:'cu',target:3,temp:75},
+      solar:{c:'dc',l:'amps',v:400,a:12,w:'',len:30,unit:'m',mat:'cu',target:2,temp:75},
+      battery:{c:'dc',l:'watts',v:48,a:'',w:3000,len:2,unit:'m',mat:'cu',target:2,temp:75},
+      home:{c:'single',l:'amps',v:230,a:16,w:'',len:25,unit:'m',mat:'cu',target:3,temp:75,pf:1},
+      three:{c:'three',l:'amps',v:400,a:25,w:'',len:40,unit:'m',mat:'cu',target:3,temp:75,pf:1}
+    };
+    const p=presets[b.dataset.preset];if(!p)return;
+    setCircuit(p.c);setLoad(p.l);
+    $('voltage').value=p.v;$('amps').value=p.a;$('watts').value=p.w;
+    $('length').value=p.len;$('lengthUnit').value=p.unit;
+    $('material').value=p.mat;$('target').value=p.target;$('targetUnit').value='percent';$('temperature').value=p.temp;
+    $('parallelSets').value=1;$('useReactance').checked=false;updateReactanceVisibility();
+    if(p.pf!==undefined){$('pf').value=String(p.pf);$('pf').dataset.userEdited='true';}
+    calculate();
+  });
+});
+document.querySelectorAll('[data-target-preset]').forEach(function(b){
+  b.addEventListener('click',function(){
+    $('targetUnit').value='percent';
+    $('target').value=String(b.dataset.targetPreset);
+    calculate();
+  });
+});
+$('pf').addEventListener('input',function(){$('pf').dataset.userEdited='true';calculate();});
+$('sizeStandard').addEventListener('change',function(){updateSelectedOptions();calculate();});
+$('calculationMethod').addEventListener('change',function(){updateCalculationMethod();updateSelectedOptions();calculate();});
+$('manualInputMode').addEventListener('change',function(){updateManualInputVisibility();updateSelectedOptions();calculate();});
+function updateManualImpedanceUnitLabels(){
+  const unit=$('manualImpedanceUnits').value==='perKm'?'Ω / km':'Ω / 1000 ft';
+  $('manualResistanceLabel').textContent='Manufacturer conductor resistance ('+unit+')';
+  $('manualReactanceLabel').textContent='Manufacturer AC reactance ('+unit+')';
+}
+$('manualImpedanceUnits').addEventListener('change',function(){updateManualImpedanceUnitLabels();calculate();});
+
+$('manualTable').addEventListener('input',function(){updateSelectedOptions();calculate();});
+$('ampacityTable').addEventListener('input',function(){
+  const hasData=$('ampacityTable').value.trim().length>0;
+  $('ampacityTableImportStatus').textContent=hasData?'Ampacity table entered. Calculate to compare the displayed conductor only; it will not select or upsize a wire.':'No external ampacity table loaded; results are voltage-drop only.';
+  updateSelectedOptions();calculate();
+});
+$('ampacityTableFile').addEventListener('change',async function(){
+  const file=this.files&&this.files[0];if(!file)return;
+  const status=$('ampacityTableImportStatus');
+  if(file.size>256*1024){status.textContent='File is too large. Choose a CSV or TSV file no larger than 256 KB.';this.value='';return;}
+  const lower=file.name.toLowerCase();
+  if(!lower.endsWith('.csv')&&!lower.endsWith('.tsv')){status.textContent='Unsupported file type. Export the table as .csv or .tsv first.';this.value='';return;}
+  try{
+    const contents=await file.text();
+    if(!contents.trim())throw new Error('The selected file is empty.');
+    $('ampacityTable').value=contents;
+    $('ampacityTable').dispatchEvent(new Event('input',{bubbles:true}));
+    const parsed=parseAmpacityTable(),count=Object.keys(parsed.rows).length;
+    status.textContent=parsed.errors.length
+      ?'File loaded with '+parsed.errors.length+' row issue(s). Review and correct the table before calculating.'
+      :'Loaded '+count+' valid ampacity row(s) from '+file.name+'. Confirm the material, cable and installation basis.';
+  }catch(error){status.textContent=error.message||'Could not read this file.';}
+});
+$('downloadAmpacityTableTemplate').addEventListener('click',function(){
+  const blob=new Blob(['Size,AllowableAmpacityA\r\n'],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='zemtools-allowable-ampacity-template.csv';
+  document.body.appendChild(link);link.click();link.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+});
+$('manualTableFile').addEventListener('change',async function(){
+  const file=this.files&&this.files[0];if(!file)return;
+  const status=$('manualTableImportStatus');
+  if(file.size>256*1024){status.textContent='File is too large. Choose a CSV or TSV file no larger than 256 KB.';this.value='';return;}
+  const lowerFileName=file.name.toLowerCase();
+  if(!lowerFileName.endsWith('.csv')&&!lowerFileName.endsWith('.tsv')){status.textContent='Unsupported file type. Export the manufacturer data as .csv or .tsv first.';this.value='';return;}
+  try{
+    const contents=await file.text();
+    if(!contents.trim())throw new Error('The selected file is empty.');
+    $('manualTable').value=contents;
+    $('manualTable').dispatchEvent(new Event('input',{bubbles:true}));
+    const parsed=parseManualImpedanceTable(),count=Object.keys(parsed.rows).length;
+    status.textContent=parsed.errors.length
+      ?'File loaded with '+parsed.errors.length+' row issue(s). Review the calculator status and correct the table before using the result.'
+      :'Loaded '+count+' valid conductor row(s) from '+file.name+'. Confirm the size standard and cable conditions, then calculate.';
+  }catch(error){
+    status.textContent=error.message||'Could not read this file.';
+  }
+});
+$('downloadManualTableTemplate').addEventListener('click',function(){
+  const blob=new Blob(['Size,Resistance,Reactance\r\n'],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='zemtools-manufacturer-rx-template.csv';
+  document.body.appendChild(link);link.click();link.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+});
+['manualResistance','manualReactance'].forEach(function(id){$(id).addEventListener('input',calculate);});
+['manualPfDirection','manualFrequency'].forEach(function(id){$(id).addEventListener('change',calculate);});
+['voltage','amps','watts','length','temperature','target','parallelSets','singleSpacing','spacingAB','spacingBC','spacingCA'].forEach(function(id){$(id).addEventListener('input',calculate);});
+['lengthUnit','targetUnit','material','construction','frequency'].forEach(function(id){$(id).addEventListener('change',calculate);});
+$('selectedSize').addEventListener('change',calculate);
+$('useReactance').addEventListener('change',function(){updateReactanceVisibility();calculate();});
+$('calculateBtn').addEventListener('click',calculate);
+function buildResultSummary(){
+  const rows=[
+    'ZemTools Wire Size Calculator — Calculation Summary',
+    'Task: '+(task==='find'?'Find minimum size':task==='check'?'Calculate voltage drop':'Maximum cable distance'),
+    'Circuit: '+(circuit==='dc'?'DC':circuit==='single'?'AC single-phase':'Balanced AC three-phase'),
+    'System voltage: '+$('voltage').value+' V',
+    'Load input: '+(loadMode==='amps'?$('amps').value+' A':$('watts').value+' W real power'),
+    'One-way length: '+(task==='distance'?'calculated maximum':$('length').value+' '+$('lengthUnit').value),
+    'Voltage-drop target: '+$('target').value+' '+($('targetUnit').value==='percent'?'%':'V'),
+    'Conductor material: '+($('calculationMethod').value==='manual'?'not used separately; manufacturer R/X supplied directly':$('material').selectedOptions[0].textContent),
+    'Parallel sets: '+$('parallelSets').value,
+    'Manufacturer R/X entered units: '+($('manualImpedanceUnits').value==='perKm'?'Ω / km':'Ω / 1000 ft'),
+    'External ampacity table: '+($('ampacityTable').value.trim()?'user-supplied final allowable ampacity values; not verified by ZemTools':'not supplied'),
+    'Ampacity material: '+$('ampacityMaterial').selectedOptions[0].textContent,
+    'Ampacity source: '+($('ampacitySource').value.trim()||'not supplied'),
+    'Final allowable basis confirmed: '+($('ampacityFinalConfirmed').checked?'yes':'no'),
+    'Ampacity result: '+$('ampacityValue').textContent,
+    'Selection rule: the minimum-size task selects by voltage drop only; the user-supplied ampacity table is a separate manual comparison and never automatically selects or upsizes a conductor.',
+    'Result: '+$('recommended').textContent,
+    'Voltage change (a negative value means estimated voltage rise): '+$('dropV').textContent+' ('+$('dropPct').textContent+')',
+    'Load-end voltage: '+$('loadV').textContent,
+    'Estimated conductor I²R loss: '+$('lossW').textContent,
+    'Equivalent solid-round diameter: '+$('equivDiameter').textContent,
+    'Current per parallel set: '+$('currentPerSet').textContent,
+    'Maximum distance: '+$('maxDistance').textContent,
+    'Status: '+$('status').textContent,
+    'Assumptions: '+$('resultAssumptions').textContent,
+    'Calculation breakdown:\n'+$('calculationBreakdown').textContent,
+    'Note: Voltage-drop planning estimate only. AC uses a simplified steady-load approximation, not full phasor/load-flow/transient analysis. Not an ampacity, code-compliance or installation-safety determination.'
+  ];
+  return rows.join('\n');
+}
+function fallbackCopySummary(summary){
+  const area=document.createElement('textarea');
+  area.value=summary;area.setAttribute('readonly','');
+  area.style.position='fixed';area.style.opacity='0';area.style.pointerEvents='none';
+  document.body.appendChild(area);area.select();
+  const copied=document.execCommand('copy');area.remove();
+  if(!copied)throw new Error('Clipboard access is not available in this browser.');
+}
+async function copyResultSummary(){
+  const status=$('resultActionStatus');
+  try{
+    const summary=buildResultSummary();
+    if(!$('recommended').textContent||$('recommended').textContent==='—')throw new Error('Calculate a result first.');
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      try{await navigator.clipboard.writeText(summary);}
+      catch(_){fallbackCopySummary(summary);}
+    }else{fallbackCopySummary(summary);}
+    status.textContent='Result summary copied.';
+  }catch(error){status.textContent=error.message||'Could not copy the result summary.';}
+}
+$('copySummaryBtn').addEventListener('click',copyResultSummary);
+$('printResultBtn').addEventListener('click',function(){$('calculationDetails').open=true;window.print();});
+$('clearBtn').addEventListener('click',function(){location.reload();});
+document.querySelectorAll('.faq button').forEach(function(b){
+  b.addEventListener('click',function(){
+    const f=b.parentElement;f.classList.toggle('open');
+    const icon=b.querySelector('.faq-icon');if(icon)icon.textContent=f.classList.contains('open')?'−':'+';
+  });
+});
+window.WireSizeCalculator={
+  candidates:function(standard){return (standards[standard]||standards.us).map(function(c){return {name:c.name,area:c.area};});},
+  calculateCandidate:function(options,candidate){
+    const material=materials[options.material||'cu'];if(!material)throw new Error('Unsupported material');
+    const input={V:options.voltage,I:options.current,L:options.lengthMetres,target:options.target,targetDropV:options.targetDropV===undefined?options.voltage*options.target/100:options.targetDropV,
+      temp:options.temperature,method:options.method||'zemtools',materialKey:options.material||'cu',pf:options.pf===undefined?1:options.pf,pfDirection:options.pfDirection||'lagging',material,construction:options.constructionFactor===undefined?1.02:options.constructionFactor,
+      parallelSets:options.parallelSets===undefined?1:options.parallelSets,useReactance:!!options.useReactance,frequency:options.frequency||60,spacingIn:options.spacingIn||1,
+      manualResistance:options.manualResistance||0,manualReactance:options.manualReactance||0,manualFrequency:options.manualFrequency||60};
+    return runCandidate(input,candidate);
+  },
+  awgArea:awgArea
+};
+updateSelectedOptions();
+updateCalculationMethod();
+updateReactanceVisibility();
+setTask('find');
+setLoad('amps');
 calculate();
 })();
 </script>
 <style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
-<script src="/master-ui.js?v=20261114-shell-final"></script></body>
+<script defer src="/master-ui.js?v=20261114-shell-final"></script></body>
 </html>

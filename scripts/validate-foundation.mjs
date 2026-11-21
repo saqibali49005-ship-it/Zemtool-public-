@@ -12,6 +12,10 @@ const entries = [...catalog.matchAll(/\{slug:"([^"]+)",(?:access:"public",execut
 if (!entries.length) throw new Error('No catalog entries parsed.');
 
 const fail = [];
+const adsenseLoaderStart = catalog.indexOf('/* Load the AdSense publisher script');
+const adsenseLoader = adsenseLoaderStart >= 0 ? catalog.slice(adsenseLoaderStart) : '';
+const canonicalAdSenseHostGuard = /var hostname = window\.location\.hostname\.toLowerCase\(\);\s*if \(hostname !== "zemtools\.com" && hostname !== "www\.zemtools\.com"\) return;/;
+if (!canonicalAdSenseHostGuard.test(adsenseLoader)) fail.push('AdSense publisher loader must be restricted to canonical ZemTools hosts.');
 const unique = values => new Set(values).size === values.length;
 if (!unique(entries.map(x => x.slug))) fail.push('Duplicate catalog slug');
 if (!unique(entries.map(x => x.href))) fail.push('Duplicate catalog href');

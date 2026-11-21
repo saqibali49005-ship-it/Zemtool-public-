@@ -151,7 +151,7 @@
 <span class="tag">Energy & Electrical</span>
 <h2>Wire Size & Voltage Drop Calculator</h2>
 <p>Plan cable size from load, voltage, distance, material and voltage-drop target.</p>
-<a href="/wire-size-calculator/">Open tool</a>
+<a href="/wire-size-calculator/">Open Wire Size Calculator</a>
 </article>
 <article class="dir-card" data-category="home-construction">
 <span class="tag">Home & Construction</span>
@@ -205,7 +205,7 @@
  input.value=query;
  function matches(t,q){return [t.title,t.description,t.category,...(t.keywords||[])].join(' ').toLowerCase().includes(q.toLowerCase());}
  function renderFilters(){filters.innerHTML='<button class="filter '+(!active?'active':'')+'" data-cat="">All tools</button>'+cats.map(c=>'<button class="filter '+(active===c.id?'active':'')+'" data-cat="'+c.id+'"><span class="filter-icon" aria-hidden="true">'+c.icon+'</span><span>'+c.title+'</span></button>').join('');}
- function render(){const q=input.value.trim().toLowerCase(); let list=tools.slice().sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0)); if(active)list=list.filter(t=>t.category===active); if(q)list=list.filter(t=>matches(t,q)); count.textContent=list.length+' '+(list.length===1?'tool':'tools')+' shown'; grid.innerHTML=list.map(t=>{const c=map[t.category];return '<article class="dir-card"><span class="tag">'+(c?c.title:'Tools')+'</span><h2>'+t.title+'</h2><p>'+t.description+'</p><a href="'+t.href+'">Open tool</a></article>';}).join(''); empty.hidden=list.length!==0; renderFilters();}
+ function render(){const q=input.value.trim().toLowerCase(); let list=tools.slice().sort((a,b)=>(b.addedOrder||0)-(a.addedOrder||0)); if(active)list=list.filter(t=>t.category===active); if(q)list=list.filter(t=>matches(t,q)); count.textContent=list.length+' '+(list.length===1?'tool':'tools')+' shown'; grid.innerHTML=list.map(t=>{const c=map[t.category];return '<article class="dir-card"><span class="tag">'+(c?c.title:'Tools')+'</span><h2>'+t.title+'</h2><p>'+t.description+'</p><a href="'+t.href+'">'+(t.slug==='wire-size'?'Open Wire Size Calculator':'Open tool')+'</a></article>';}).join(''); empty.hidden=list.length!==0; renderFilters();}
  document.getElementById('dir-search').addEventListener('submit',e=>{e.preventDefault();query=input.value;history.replaceState(null,'','tools/?'+new URLSearchParams({q:query,...(active?{category:active}:{})}).toString());render();});
  filters.addEventListener('click',e=>{const btn=e.target.closest('[data-cat]');if(!btn)return;active=btn.dataset.cat;const p=new URLSearchParams();if(input.value.trim())p.set('q',input.value.trim());if(active)p.set('category',active);history.replaceState(null,'','tools/'+(p.toString()?'?'+p.toString():''));render();});
  input.addEventListener('input',render);
