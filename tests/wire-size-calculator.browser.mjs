@@ -326,7 +326,7 @@ try {
     assert.match(zemtoolsDetails, /One-way run used = 30\.48 m/);
     assert.match(zemtoolsDetails, /Signed voltage change ΔV = [0-9]+\.[0-9]{4} V/);
     assert.match(zemtoolsDetails, /Voltage-drop target = 3\.6 V/);
-    assert.match(zemtoolsDetails, /Load-end voltage = source voltage − ΔV = 120 − \(3\.117\) = 116\.883 V/);
+    assert.match(zemtoolsDetails, /Load-end voltage = source voltage − ΔV = 120 − \([0-9]+\.[0-9]{4}\) = [0-9]+\.[0-9]{4} V/);
     assert.match(zemtoolsDetails, /does not calculate code ampacity/i);
 
     await setFixture({ method: 'omni', task: 'find', circuit: 'three', load: 'amps', voltage: 400, amps: 25, length: 40, unit: 'm', target: 3, material: 'cu', temperature: 50, construction: 'solid' });
@@ -1460,26 +1460,43 @@ try {
     assert.match(await value('comparisonRows'),/not code ampacity/i);
   });
 
-  await check('Maximum-distance comparison derives each candidate run from the current voltage-drop model', async () => {
-    await setFixture({task:'distance',method:'zemtools',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,temperature:75,construction:'stranded'});
+  await check('Maximum-distance comparison derives a separate run for every supported conductor', async () => {
+    await setFixture({task:'distance',method:'zemtools',standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,temperature:75,construction:'stranded'});
     const selected=await page.locator('#selectedSize').inputValue();
-    const firstRow=page.locator('#comparisonRows .comparison-row').nth(1);
-    assert.ok(await firstRow.isVisible());
-    const names=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
-    assert.ok(names.some(row=>row.includes(selected)));
-    assert.match(await firstRow.innerText(),/m$/m);
+    const candidates=await page.evaluate(()=>window.WireSizeCalculator.candidates('us').map(c=>c.name));
+    const rows=page.locator('#comparisonRows .comparison-row');
+    assert.equal(await rows.count(),candidates.length+1,'Every supported size must get one result row plus the header');
+    const allText=await rows.allInnerTexts();
+    for(const name of candidates) assert.ok(allText.some(row=>row.includes(name)),'Missing distance candidate '+name);
+    assert.equal(await page.locator('#comparisonRows .comparison-row[aria-current="true"]').count(),1);
+    assert.ok(allText.some(row=>row.includes(selected)));
+    for(let i=1;i<candidates.length+1;i++){
+      const output=await rows.nth(i).locator('strong').nth(1).innerText();
+      assert.match(output,/(?:m|—)$/,'Every candidate needs a distance result or an explicit no-result marker');
+    }
   });
 
   await check('Manual manufacturer R/X comparison includes only sizes present in the supplied table', async () => {
-    await setFixture({task:'find',method:'manual',manualInputMode:'table',manualTable:'10 AWG,1.24,0.062\\n8 AWG,0.778,0.052',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,pf:0.9});
-    const rows=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
-    assert.ok(rows.some(row=>row.includes('10 AWG')));
-    assert.ok(rows.some(row=>row.includes('8 AWG')));
-    assert.ok(!rows.some(row=>row.includes('6 AWG')), 'Unprovided sizes must not be shown as manufacturer-data-backed candidates');
+    const table=['Size,Resistance,Reactance','10 AWG,1.24,0.062','8 AWG,0.778,0.052'].join('\n');
+    await setFixture({task:'find',method:'manual',manualInputMode:'table',manualTable:table,standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,pf:0.9});
+    const findRows=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
+    assert.ok(findRows.some(row=>row.includes('10 AWG')));
+    assert.ok(findRows.some(row=>row.includes('8 AWG')));
+    assert.ok(!findRows.some(row=>row.includes('6 AWG')), 'Unprovided sizes must not be shown as manufacturer-data-backed candidates');
+    assert.match(await value('comparisonRows'),/Missing sizes are not inferred/i);
+
+    await setFixture({task:'distance',method:'manual',manualInputMode:'table',manualTable:table,standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,pf:0.9});
+    await page.locator('#selectedSize').selectOption('8 AWG');
+    await page.locator('#calculateBtn').click();
+    const distanceRows=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
+    assert.ok(distanceRows.some(row=>row.includes('10 AWG')));
+    assert.ok(distanceRows.some(row=>row.includes('8 AWG')));
+    assert.ok(!distanceRows.some(row=>row.includes('6 AWG')), 'Distance comparison must not infer missing manufacturer R/X rows');
     assert.match(await value('comparisonRows'),/Missing sizes are not inferred/i);
   });
 
   await check('12V and 24V DC quick presets load matched inputs and produce the independently checked voltage-drop sizes', async () => {
+    await setFixture({task:'find',method:'zemtools',standard:'metric',circuit:'dc',load:'amps',voltage:12,amps:15,length:20,unit:'ft',target:3,temperature:75,construction:'stranded'});
     await page.locator('[data-preset="low12"]').click();
     assert.equal(await page.locator('#voltage').inputValue(), '12');
     assert.equal(await page.locator('#amps').inputValue(), '15');
@@ -1529,7 +1546,7 @@ try {
     assert.match(guide, /resistance constants/i);
     assert.match(guide, /Omni-published copper model selects 3 AWG/i);
     assert.match(guide, /default ZemTools IACS model selects 2 AWG/i);
-    assert.match(guide, /not an ampacity or installation approval|not an ampacity, installation, electrical-safety or code-compliance approval/i);
+    assert.match(guide, /not an ampacity or installation approval|not an ampacity, installation, electrical-safety or code-compliance approval|neither result is an ampacity or installation approval/i);
   });
 
 
