@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="master-related-tools.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Wire Size & Voltage Drop Calculator","url":"https://zemtools.com/wire-size-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level wire size and voltage drop calculator for DC, single-phase AC and three-phase circuits."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Energy & Electrical","item":"https://zemtools.com/energy-electrical/"},{"@type":"ListItem","position":3,"name":"Wire Size & Voltage Drop Calculator","item":"https://zemtools.com/wire-size-calculator/"}]}</script>
-<style>.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
+<style>.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .comparison-row.selected-candidate{background:#eef6ff;border-radius:8px;padding-left:8px;padding-right:8px}.wire-tool .comparison-row.selected-candidate strong:first-child{color:#1557b5}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
 @media(max-width:700px){.wire-tool .choice-grid{grid-template-columns:1fr}.wire-tool .input-row{grid-template-columns:1fr}.wire-tool .result-grid{grid-template-columns:1fr}.wire-tool .comparison-row{grid-template-columns:1fr 1fr}.wire-tool .comparison-row span:last-child{grid-column:1/-1}.wire-page{overflow-x:clip}}
 
 .wire-tool .choice-grid.is-two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -637,22 +637,48 @@ function clearOutputs(){
   $('materialComparison').classList.add('hidden');$('materialComparisonRows').textContent='';
 }
 function showError(message){clearOutputs();$('status').className='status warn';$('status').textContent=message;}
-function renderComparison(input,selected,list){
-  let shown=[];
-  if(task!=='find')shown=[selected];
-  else{
-    const index=list.findIndex(function(c){return c.name===selected.conductor.name;});
-    if(index>0)shown.push(runCandidate(input,list[index-1]));
-    shown.push(selected);
-    if(index>=0&&index<list.length-1)shown.push(runCandidate(input,list[index+1]));
-  }
-  $('comparisonRows').innerHTML='<div class="comparison-row"><strong>Conductor</strong><strong>Drop</strong><span>'+(input.hasAmpacityTable?'Supplied ampacity cross-check':'Voltage-drop target')+'</span></div>'+
-    shown.map(function(r){
-      let state;
-      if(input.hasAmpacityTable)state=r.ampacityPass===true?'Supplied ampacity: Meets entered value':r.ampacityPass===false?'Supplied ampacity: Below entered value':'No supplied value';
-      else state=r.pass?'Meets drop target':'Does not meet target';
-      return '<div class="comparison-row"><strong>'+r.conductor.name+'</strong><strong>'+fmt(r.dropPct,3)+'%</strong><span>'+state+'</span></div>';
-    }).join('');
+function renderComparison(input,selected,list,maxDistanceM){
+  const selectedName=selected.conductor.name;
+  const isManualTable=input.method==='manual'&&input.manualInputMode==='table';
+  const allCandidates=(task==='find'?list:[selected.conductor]).filter(function(candidate){
+    return !isManualTable||Object.prototype.hasOwnProperty.call(input.manualTableRows,candidate.name);
+  });
+  const rows=allCandidates.map(function(candidate){
+    const isSelected=candidate.name===selectedName;
+    let candidateResult;
+    let output;
+    let note;
+    if(task==='distance'){
+      candidateResult=runCandidate(input,candidate);
+      const candidateDistance=Number.isFinite(candidateResult.dropPerMetre)&&candidateResult.dropPerMetre>0
+        ? input.targetDropV/candidateResult.dropPerMetre : NaN;
+      output=Number.isFinite(candidateDistance)?fmt(candidateDistance,2)+' m':'—';
+      note=isSelected?'Selected conductor':'Candidate only';
+      if(!Number.isFinite(candidateDistance))note='No positive voltage-drop distance';
+    }else{
+      candidateResult=isSelected?selected:runCandidate(input,candidate);
+      output=fmt(candidateResult.dropPct,3)+'%';
+      if(input.hasAmpacityTable){
+        note=Number.isFinite(candidateResult.allowableAmpacityA)
+          ?'User ampacity: '+(candidateResult.ampacityPass?'meets':'below')+' entered value'
+          :'No user ampacity value';
+      }else{
+        note=candidateResult.pass?'Meets voltage-drop target':'Exceeds voltage-drop target';
+      }
+      if(isSelected)note='Selected · '+note;
+    }
+    return '<div class="comparison-row'+(isSelected?' selected-candidate':'')+'"'+(isSelected?' aria-current="true"':'')+'>'+
+      '<strong>'+candidate.name+(isSelected?' · Selected':'')+'</strong>'+
+      '<strong>'+output+'</strong><span>'+note+'</span></div>';
+  }).join('');
+  $('comparisonTitle').textContent=task==='find'
+    ?'All supported conductor candidates'
+    :task==='distance'?'Maximum-distance comparison':'Selected-conductor result';
+  const caption=isManualTable
+    ?'Only sizes with a matching manufacturer R/X table row are included. Missing sizes are not inferred.'
+    :'All values use the selected calculation reference and current inputs. This is a voltage-drop estimate, not code ampacity.';
+  $('comparisonRows').innerHTML='<p class="hint">'+caption+'</p>'+
+    '<div class="comparison-row"><strong>Conductor</strong><strong>'+(task==='distance'?'Maximum distance':'Voltage drop')+'</strong><span>Result</span></div>'+rows;
 }
 function minimumForMaterial(input,materialKey,list){
   const alt=Object.assign({},input,{material:materials[materialKey],materialKey:materialKey});
@@ -835,7 +861,7 @@ function render(input,result,list,isNoPass,maxDistanceM){
     '. Parallel sets: '+input.parallelSets+
     '. '+pfText+' '+xText+
     (input.hasAmpacityTable?'. External ampacity screen: '+(input.ampacityMaterial==='cu'?'copper':'aluminium')+' table from '+input.ampacitySource+'; '+(Number.isFinite(result.allowableAmpacityA)?'user-supplied final allowable ampacity '+fmt(result.allowableAmpacityA,2)+' A per conductor, compared with '+fmt(result.currentPerSet,2)+' A per set ('+(result.ampacityPass?'passes':'fails')+')':'no value supplied for selected size '+result.conductor.name+'; no comparison possible')+'. This table is only compared against the displayed conductor; it never selects or upsizes a candidate and is not verified by ZemTools. Code tables, derating, installation and terminal corrections are not calculated.':'');
-  renderComparison(input,result,list);
+  renderComparison(input,result,list,maxDistanceM);
   if(task==='find'&&input.method!=='omni'&&input.method!=='manual'&&!input.hasAmpacityTable)renderMaterialComparison(input,list);
   renderCalculationBreakdown(input,result,isNoPass,maxDistanceM);
 }
