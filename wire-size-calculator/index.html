@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="master-related-tools.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Wire Size & Voltage Drop Calculator","url":"https://zemtools.com/wire-size-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Planning-level wire size and voltage drop calculator for DC, single-phase AC and three-phase circuits."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Energy & Electrical","item":"https://zemtools.com/energy-electrical/"},{"@type":"ListItem","position":3,"name":"Wire Size & Voltage Drop Calculator","item":"https://zemtools.com/wire-size-calculator/"}]}</script>
-<style>.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .comparison-row.selected-candidate{background:#eef6ff;border-radius:8px;padding-left:8px;padding-right:8px}.wire-tool .comparison-row.selected-candidate strong:first-child{color:#1557b5}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
+<style>.wire-tool .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}.wire-tool .choice{min-height:46px;border:1px solid #d3e0ed;border-radius:12px;background:#fff;color:#36506d;font-weight:800;cursor:pointer}.wire-tool .choice.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.wire-tool .section-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#6a7d94;font-weight:900;margin:18px 0 9px}.wire-tool .input-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.wire-tool select{width:100%;min-height:52px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:#0b2347;padding:12px 14px;font:inherit;font-size:16px}.wire-tool select:focus{outline:none;border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.wire-tool .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wire-tool .result-grid .stat-wide{grid-column:1/-1}.wire-tool .status{padding:12px 14px;border-radius:12px;margin-bottom:12px;font-weight:800;border:1px solid #bcd2ea;background:#f7fbff;color:#315879}.wire-tool .status.ok{border-color:#9be2b7;background:#effff5;color:#176b3a}.wire-tool .status.warn{border-color:#f1d18b;background:#fffaf0;color:#79550a}.wire-tool .comparison{margin-top:14px;border-top:1px solid #d8e5f3;padding-top:14px}.wire-tool .comparison details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;min-height:34px}.wire-tool .comparison details>summary::-webkit-details-marker{display:none}.wire-tool .comparison details[open]>summary{margin-bottom:8px}.wire-tool .comparison-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #e6eef6;font-size:13px}.wire-tool .comparison-row strong{font-size:13px}.wire-tool .comparison-row.selected-candidate{background:#eef6ff;border-radius:8px;padding-left:8px;padding-right:8px}.wire-tool .comparison-row.selected-candidate strong:first-child{color:#1557b5}.wire-tool .note{font-size:12.5px;color:#687b92;margin-top:12px}.wire-tool .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.wire-tool .preset{border:1px solid #c6d9ec;background:#f7fbff;color:#2b587f;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;font-size:12px}.wire-tool .preset:hover{background:#edf6ff}.wire-tool .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f7fbff;border:1px solid #d7e5f2;border-radius:11px;padding:12px;overflow:auto}.wire-tool .danger-note{margin-top:12px;padding:13px 14px;border:1px solid #ead9b4;border-radius:12px;background:#fffaf0;color:#66501d;font-size:13px}.wire-tool .faq-card{margin-top:22px}
 @media(max-width:700px){.wire-tool .choice-grid{grid-template-columns:1fr}.wire-tool .input-row{grid-template-columns:1fr}.wire-tool .result-grid{grid-template-columns:1fr}.wire-tool .comparison-row{grid-template-columns:1fr 1fr}.wire-tool .comparison-row span:last-child{grid-column:1/-1}.wire-page{overflow-x:clip}}
 
 .wire-tool .choice-grid.is-two{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -160,6 +160,7 @@
 <div class="danger-note" id="resultSafetyNote" role="note">A result that meets the selected voltage-drop target is <strong>not</strong> an ampacity, installation, electrical-safety or code-compliance approval.</div>
 <div class="result-actions" aria-label="Result actions">
 <button id="copySummaryBtn" class="result-action" type="button">Copy result summary</button>
+<button id="copyShareLinkBtn" class="result-action" type="button">Copy shareable setup link</button>
 <button id="printResultBtn" class="result-action" type="button">Print / Save PDF</button>
 <span id="resultActionStatus" class="hint" role="status" aria-live="polite"></span>
 </div>
@@ -179,7 +180,7 @@
 <div class="stat stat-wide hidden" id="maxDistanceRow"><div class="stat-icon">↔</div><strong>Maximum One-way Distance</strong><span id="maxDistance">—</span></div>
 <div class="stat stat-wide hidden" id="reactanceRow"><div class="stat-icon">X</div><strong>Estimated Reactance</strong><span id="reactanceValue">—</span></div>
 </div>
-<div class="comparison"><strong id="comparisonTitle">Candidate comparison</strong><div id="whyText" class="hint">The calculator will compare supported conductor sizes against your voltage-drop target.</div><div id="comparisonRows"></div></div>
+<div class="comparison"><details id="candidateComparisonDetails" open><summary><strong id="comparisonTitle">Candidate comparison</strong></summary><div id="whyText" class="hint">The calculator will compare supported conductor sizes against your voltage-drop target.</div><div id="comparisonRows"></div></details></div>
 <div class="comparison hidden" id="materialComparison"><strong>Copper and aluminium comparison</strong><div class="hint">Both material results use the same circuit, target, temperature, construction, spacing and parallel-set assumptions. Voltage-drop sizing only.</div><div id="materialComparisonRows"></div></div>
 <div class="assumptions"><strong>Calculation assumptions</strong><p id="resultAssumptions" class="hint">Assumptions will appear with the result.</p></div>
 <details class="comparison" id="calculationDetails"><summary><strong>Calculation breakdown</strong><span class="hint">See the actual values and equation used for this result.</span></summary><pre id="calculationBreakdown" class="calculation-breakdown">Calculate to see the values substituted into the selected model.</pre></details>
@@ -1062,6 +1063,142 @@ async function copyResultSummary(){
   }catch(error){status.textContent=error.message||'Could not copy the result summary.';}
 }
 $('copySummaryBtn').addEventListener('click',copyResultSummary);
+function buildShareableSetupUrl(){
+  const method=$('calculationMethod').value;
+  if(method==='manual')throw new Error('Share links do not include manufacturer R/X values or tables. Use a published reference model or copy the result summary.');
+  if($('ampacityTable').value.trim())throw new Error('Share links do not include user-supplied ampacity tables. Clear that table or copy the result summary.');
+  const input=readInputs();
+  if(input.error)throw new Error(input.error);
+  const available=candidates();
+  if(task!=='find'&&!available.some(function(candidate){return candidate.name===$('selectedSize').value;})){
+    throw new Error('Choose a supported conductor size before copying a share link.');
+  }
+  const params=new URLSearchParams();
+  const set=function(key,value){
+    if(value!==undefined&&value!==null&&String(value).length)params.set(key,String(value));
+  };
+  set('ztshare','1');
+  set('task',task);
+  set('standard',$('sizeStandard').value);
+  set('method',method);
+  set('circuit',circuit);
+  set('load',loadMode);
+  set('voltage',$('voltage').value);
+  set('amps',loadMode==='amps'?$('amps').value:null);
+  set('watts',loadMode==='watts'?$('watts').value:null);
+  if(task!=='distance'){
+    set('length',$('length').value);
+    set('unit',$('lengthUnit').value);
+  }
+  set('target',$('target').value);
+  set('targetUnit',$('targetUnit').value);
+  set('material',$('material').value);
+  set('construction',$('construction').value);
+  set('temperature',$('temperature').value);
+  set('parallelSets',$('parallelSets').value);
+  if(task!=='find')set('selectedSize',$('selectedSize').value);
+  if(circuit!=='dc'){
+    set('pf',$('pf').value);
+    set('pfDirection',$('pfDirection').value);
+  }
+  if(input.useReactance){
+    set('reactance','1');
+    set('frequency',$('frequency').value);
+    if(circuit==='single')set('singleSpacing',$('singleSpacing').value);
+    else if(circuit==='three'){
+      set('spacingAB',$('spacingAB').value);
+      set('spacingBC',$('spacingBC').value);
+      set('spacingCA',$('spacingCA').value);
+    }
+  }
+  const url=new URL(window.location.href);
+  url.search=params.toString();
+  url.hash='';
+  if(url.href.length>1800)throw new Error('This setup is too long to share as a link. Copy the result summary instead.');
+  return url.href;
+}
+function sharedNumber(params,key,min,max){
+  const raw=params.get(key);
+  if(!raw||raw.length>24||! /^(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(raw))return null;
+  const value=Number(raw);
+  return Number.isFinite(value)&&value>=min&&value<=max?value:null;
+}
+function sharedChoice(params,key,allowed,fallback){
+  const value=params.get(key);
+  return allowed.includes(value)?value:fallback;
+}
+function applyShareableSetupFromUrl(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('ztshare')!=='1')return false;
+  if(window.location.search.length>2048){
+    showError('This share link is too long. Open the calculator without the query string and enter the inputs again.');
+    return true;
+  }
+  const sharedTask=sharedChoice(params,'task',['find','check','distance'],'find');
+  const sharedCircuit=sharedChoice(params,'circuit',['dc','single','three'],'dc');
+  const sharedLoad=sharedChoice(params,'load',['amps','watts'],'amps');
+  const sharedStandard=sharedChoice(params,'standard',['us','metric'],'us');
+  const sharedMethod=sharedChoice(params,'method',['zemtools','paige','omni'],'zemtools');
+  setTask(sharedTask);
+  setCircuit(sharedCircuit);
+  setLoad(sharedLoad);
+  $('sizeStandard').value=sharedStandard;
+  $('calculationMethod').value=sharedMethod;
+  updateCalculationMethod();
+  const setNumber=function(key,id,min,max){
+    const value=sharedNumber(params,key,min,max);
+    if(value!==null)$(id).value=String(value);
+  };
+  setNumber('voltage','voltage',0.000001,1000000);
+  if(sharedLoad==='amps')setNumber('amps','amps',0.000001,1000000000);
+  else setNumber('watts','watts',0.000001,1000000000);
+  if(sharedTask!=='distance'){
+    setNumber('length','length',0.000001,1000000000);
+    $('lengthUnit').value=sharedChoice(params,'unit',['ft','m'],'ft');
+  }
+  setNumber('target','target',0.000001,1000000000);
+  $('targetUnit').value=sharedChoice(params,'targetUnit',['percent','volts'],'percent');
+  $('material').value=sharedChoice(params,'material',['cu','al1350'],'cu');
+  $('construction').value=sharedChoice(params,'construction',['solid','stranded'],'stranded');
+  setNumber('temperature','temperature',20,90);
+  const parallel=sharedNumber(params,'parallelSets',1,16);
+  if(parallel!==null&&Number.isInteger(parallel))$('parallelSets').value=String(parallel);
+  const pf=sharedNumber(params,'pf',0.000001,1);
+  if(pf!==null){$('pf').value=String(pf);$('pf').dataset.userEdited='true';}
+  $('pfDirection').value=sharedChoice(params,'pfDirection',['lagging','leading'],'lagging');
+  $('useReactance').checked=params.get('reactance')==='1'&&sharedMethod==='zemtools'&&sharedCircuit!=='dc';
+  if($('useReactance').checked){
+    $('frequency').value=sharedChoice(params,'frequency',['50','60'],'60');
+    if(sharedCircuit==='single')setNumber('singleSpacing','singleSpacing',0.0001,10000);
+    if(sharedCircuit==='three'){
+      setNumber('spacingAB','spacingAB',0.0001,10000);
+      setNumber('spacingBC','spacingBC',0.0001,10000);
+      setNumber('spacingCA','spacingCA',0.0001,10000);
+    }
+  }
+  updateSelectedOptions();
+  const selected=params.get('selectedSize');
+  if(sharedTask!=='find'&&selected&&selected.length<=32&&Array.from($('selectedSize').options).some(function(option){return option.value===selected;})){
+    $('selectedSize').value=selected;
+  }
+  updateReactanceVisibility();
+  updatePowerFactorVisibility();
+  calculate();
+  $('resultActionStatus').textContent='Shared setup loaded and recalculated. Custom manufacturer and ampacity tables are not part of share links.';
+  return true;
+}
+async function copyShareableSetupLink(){
+  const status=$('resultActionStatus');
+  try{
+    const url=buildShareableSetupUrl();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      try{await navigator.clipboard.writeText(url);}
+      catch(_){fallbackCopySummary(url);}
+    }else{fallbackCopySummary(url);}
+    status.textContent='Shareable setup link copied. Custom manufacturer R/X and ampacity tables are not included.';
+  }catch(error){status.textContent=error.message||'Could not create a shareable setup link.';}
+}
+$('copyShareLinkBtn').addEventListener('click',copyShareableSetupLink);
 $('printResultBtn').addEventListener('click',function(){$('calculationDetails').open=true;window.print();});
 $('clearBtn').addEventListener('click',function(){location.reload();});
 document.querySelectorAll('.faq button').forEach(function(b){
@@ -1085,9 +1222,11 @@ window.WireSizeCalculator={
 updateSelectedOptions();
 updateCalculationMethod();
 updateReactanceVisibility();
-setTask('find');
-setLoad('amps');
-calculate();
+if(!applyShareableSetupFromUrl()){
+  setTask('find');
+  setLoad('amps');
+  calculate();
+}
 })();
 </script>
 <style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
