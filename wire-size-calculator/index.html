@@ -640,7 +640,9 @@ function showError(message){clearOutputs();$('status').className='status warn';$
 function renderComparison(input,selected,list,maxDistanceM){
   const selectedName=selected.conductor.name;
   const isManualTable=input.method==='manual'&&input.manualInputMode==='table';
-  const allCandidates=(task==='find'?list:[selected.conductor]).filter(function(candidate){
+  const isManualSingle=input.method==='manual'&&input.manualInputMode==='single';
+  const compareAll=task==='find'||(task==='distance'&&!isManualSingle);
+  const allCandidates=(compareAll?list:[selected.conductor]).filter(function(candidate){
     return !isManualTable||Object.prototype.hasOwnProperty.call(input.manualTableRows,candidate.name);
   });
   const rows=allCandidates.map(function(candidate){
@@ -653,7 +655,7 @@ function renderComparison(input,selected,list,maxDistanceM){
       const candidateDistance=Number.isFinite(candidateResult.dropPerMetre)&&candidateResult.dropPerMetre>0
         ? input.targetDropV/candidateResult.dropPerMetre : NaN;
       output=Number.isFinite(candidateDistance)?fmt(candidateDistance,2)+' m':'—';
-      note=isSelected?'Selected conductor':'Candidate only';
+      note=isSelected?'Selected conductor':'Candidate comparison';
       if(!Number.isFinite(candidateDistance))note='No positive voltage-drop distance';
     }else{
       candidateResult=isSelected?selected:runCandidate(input,candidate);
@@ -676,7 +678,9 @@ function renderComparison(input,selected,list,maxDistanceM){
     :task==='distance'?'Maximum-distance comparison':'Selected-conductor result';
   const caption=isManualTable
     ?'Only sizes with a matching manufacturer R/X table row are included. Missing sizes are not inferred.'
-    :'All values use the selected calculation reference and current inputs. This is a voltage-drop estimate, not code ampacity.';
+    :isManualSingle&&task==='distance'
+      ?'A single manufacturer R/X pair applies to the selected conductor only. Other conductor sizes are not inferred.'
+      :'All values use the selected calculation reference and current inputs. This is a voltage-drop estimate, not code ampacity.';
   $('comparisonRows').innerHTML='<p class="hint">'+caption+'</p>'+
     '<div class="comparison-row"><strong>Conductor</strong><strong>'+(task==='distance'?'Maximum distance':'Voltage drop')+'</strong><span>Result</span></div>'+rows;
 }
