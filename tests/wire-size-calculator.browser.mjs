@@ -1503,7 +1503,11 @@ try {
     assert.equal(await page.locator('#length').inputValue(), '20');
     assert.equal(await page.locator('#lengthUnit').inputValue(), 'ft');
     assert.equal(await value('recommended'), '16 mm²');
-    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - 2.45) < 0.02);
+    // Metric 16 mm² result is independently recomputed from the disclosed IACS constants.
+    const copperRho75Low12 = 0.017241 * (1 + 0.00393 * (75 - 20)) * 1.02;
+    const expectedLow12MetricDropPct = 15 * 2 * (20 * 0.3048) * copperRho75Low12 / 16 / 12 * 100;
+    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - expectedLow12MetricDropPct) < 0.01,
+      '12 V metric preset must match the independent 16 mm² IACS voltage-drop calculation');
 
     await page.locator('[data-preset="low24"]').click();
     assert.equal(await page.locator('#voltage').inputValue(), '24');
