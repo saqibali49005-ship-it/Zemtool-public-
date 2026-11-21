@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#111827" name="theme-color"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<title>Time Calculator – Time Difference, Add &amp; Subtract | ZemTools</title>
+
+<meta content="Find the time between two clock times, add or subtract time, or total multiple durations. Get h:mm:ss and decimal-hour results. Free, no sign-up." name="description"/>
+<link href="https://zemtools.com/time-calculator/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Time Calculator – Time Difference, Add &amp; Subtract | ZemTools" property="og:title"/>
+<meta content="Find the time between two clock times, add or subtract time, or total multiple durations. Get h:mm:ss and decimal-hour results. Free, no sign-up." property="og:description"/>
+<meta content="https://zemtools.com/time-calculator/" property="og:url"/>
+<meta content="https://zemtools.com/social-preview.png" property="og:image"/>
+<meta content="ZemTools — Practical Online Tools" property="og:image:alt"/>
+<meta content="https://zemtools.com/social-preview.png" name="twitter:image"/>
+<meta content="ZemTools — Practical Online Tools" name="twitter:image:alt"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="index,follow" name="robots"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Time Calculator","url":"https://zemtools.com/time-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Calculate time between clock times, add or subtract time, and total multiple durations with decimal-hour results.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Math & Science","item":"https://zemtools.com/math-science/"},{"@type":"ListItem","position":3,"name":"Time Calculator","item":"https://zemtools.com/time-calculator/"}]}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean">
+<link rel="stylesheet" href="master-related-tools.css">
+<style>body.time-tool{ }.time-tool .mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px;padding:4px;background:#f7fafe;border:1px solid #e0e9f3;border-radius:14px}.time-tool .mode-tabs button{width:100%;min-height:44px;padding:9px 14px;background:transparent;color:#4e6178;border:1px solid transparent;border-radius:10px;font-weight:850;cursor:pointer}.time-tool .mode-tabs button.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.time-tool .check-row{display:flex;align-items:flex-start;gap:9px;margin:14px 0 0;color:var(--muted)}.time-tool .check-row input{width:auto;min-width:16px;min-height:0;margin:3px 0 0;padding:0}.time-tool #durationPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool #addPanel>.grid{grid-template-columns:repeat(5,minmax(0,1fr))}.time-tool .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}.time-tool .result-grid>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.time-tool .result-grid strong{display:block;font-size:20px;margin-top:4px}.time-tool .duration-row{display:grid;grid-template-columns:1.15fr repeat(3,minmax(0,1fr)) auto;gap:10px;align-items:end;padding:12px;margin:0 0 10px;background:#fff;border:1px solid var(--line);border-radius:12px}.time-tool .duration-row label{display:block;min-width:0;font-size:13px;font-weight:750;color:var(--muted)}.time-tool .duration-row input,.time-tool .duration-row select{width:100%;min-width:0;margin-top:5px}.time-tool .duration-row .row-remove{min-height:42px;padding:8px 10px}.time-tool .big{font-size:28px;font-weight:900;color:#116735}@media(max-width:820px){.time-tool #addPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .duration-row{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .duration-row .row-remove{grid-column:1/-1;justify-self:start}}@media(max-width:650px){.time-tool .mode-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .mode-tabs button{font-size:12px;line-height:1.25;padding:8px 5px;min-height:52px}.time-tool #durationPanel>.grid,.time-tool #addPanel>.grid{grid-template-columns:1fr}.time-tool .duration-row{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
+</head>
+<body class="tool-page time-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header"><div class="header-inner"><a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+</div></header>
+<main id="main-content">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="math-science/">Math &amp; Science</a><span class="crumb-sep">›</span><span>Time Calculator</span></nav><section class="hero"><div class="tool-icon" aria-hidden="true">⏱</div><div><h1>Time Calculator</h1><p>Calculate the duration between two clock times, add or subtract time, or total multiple durations. Results include practical time units and decimal hours.</p></div></section>
+<section class="card">
+<div aria-label="Calculator mode" class="mode-tabs" role="tablist"><button aria-selected="true" class="active" id="durationTab" role="tab" type="button">Time Duration</button><button aria-selected="false" id="addTab" role="tab" type="button">Add / Subtract Time</button><button aria-selected="false" id="durationListTab" role="tab" type="button">Add / Subtract Durations</button></div>
+<div id="durationPanel" role="tabpanel">
+<h2>Calculate time between two clock times</h2>
+<div class="grid">
+<div><label for="startTime">Start time</label><input aria-label="Start time" id="startTime" type="time" step="1" value="09:30:00"/></div>
+<div><label for="endTime">End time</label><input aria-label="End time" id="endTime" type="time" step="1" value="17:15:00"/></div>
+</div>
+<label class="check-row"><input id="nextDay" type="checkbox"/> Treat the end time as the next day when it is earlier than the start time.</label>
+<div class="actions"><button id="calcDuration" type="button">Calculate duration</button><button class="secondary" id="resetDuration" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="durationResult" role="status"></div>
+</div>
+<div class="hidden" id="addPanel" role="tabpanel">
+<h2>Add or subtract time</h2>
+<div class="grid">
+<div><label for="baseTime">Base time</label><input id="baseTime" type="time" step="1" value="10:30:00"/></div>
+<div><label for="operation">Operation</label><select id="operation"><option value="add">Add</option><option value="subtract">Subtract</option></select></div>
+<div><label for="addHours">Hours</label><input id="addHours" inputmode="numeric" min="0" placeholder="e.g. 2" step="1" type="number" value="2"/></div>
+<div><label for="addMinutes">Minutes</label><input id="addMinutes" inputmode="numeric" min="0" placeholder="e.g. 30" step="1" type="number" value="30"/></div>
+<div><label for="addSeconds">Seconds</label><input id="addSeconds" inputmode="numeric" min="0" placeholder="e.g. 45" step="1" type="number" value="0"/></div>
+</div>
+<div class="actions"><button id="calcAdd" type="button">Calculate</button><button class="secondary" id="resetAdd" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="addResult" role="status"></div>
+</div>
+<div class="hidden" id="durationListPanel" role="tabpanel" aria-labelledby="durationListTab">
+<h2>Add or subtract multiple durations</h2>
+<p>Enter one duration per row. Choose whether to add or subtract each row, then calculate the combined total. Hours can exceed 24.</p>
+<div aria-label="Time duration entries" id="durationRows">
+<div class="duration-row">
+<label>Operation<select aria-label="Duration row operation" class="row-operation"><option value="add">Add (+)</option><option value="subtract">Subtract (−)</option></select></label>
+<label>Hours<input aria-label="Duration row hours" class="row-hours" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label>
+<label>Minutes<input aria-label="Duration row minutes" class="row-minutes" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label>
+<label>Seconds<input aria-label="Duration row seconds" class="row-seconds" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label>
+<button aria-label="Remove this duration row" class="secondary row-remove" type="button">Remove</button>
+</div>
+</div>
+<div class="actions"><button class="secondary" id="addDurationRow" type="button">+ Add duration</button><button id="calcDurationList" type="button">Calculate total</button><button class="secondary" id="resetDurationList" type="button">Reset</button><button class="secondary" hidden id="copyDurationList" type="button">Copy result</button></div>
+<p aria-live="polite" class="small" id="copyDurationStatus"></p>
+<div aria-live="polite" class="result" id="durationListResult" role="status"></div>
+</div>
+</section>
+<section class="card"><h2>What the results mean</h2><p>The duration result shows days, hours, minutes and seconds, plus total minutes, total seconds and decimal hours. The Add / Subtract Durations mode combines multiple entries into one running total, including totals longer than 24 hours. Decimal hours are useful for timesheets and billing: 1 hour 30 minutes is 1.5 hours.</p><div class="example"><strong>Example:</strong> 9:30 AM to 5:15 PM = <strong>7 hours 45 minutes</strong> = <strong>7.75 hours</strong>.</div></section>
+<section class="card"><h2>How time calculations work</h2><p>Clock time is based on 60 seconds per minute and 60 minutes per hour. The duration calculator subtracts the start timestamp from the end timestamp. When an interval crosses midnight, the next-day option adds 24 hours before calculating.</p><p>For clock add/subtract calculations, the entered duration is converted to seconds and applied to the base clock time. In Add / Subtract Durations mode, every row is converted to seconds, added or subtracted from the running total, then shown as a duration. This also supports totals longer than one day and negative totals.</p></section>
+<section class="card">
+<h2>Examples: elapsed time, adding and subtracting time</h2>
+<p>Use the Time Duration mode as an elapsed time calculator when you know a start and end clock time. Choose Add / Subtract Time when you want to move a base clock time forward or backward by a duration.</p>
+<div class="example"><strong>Overnight elapsed-time example:</strong> Start at 10:45 PM and finish at 6:15 AM the next morning. Select the next-day option to calculate <strong>7 hours 30 minutes</strong>, or <strong>7.5 decimal hours</strong>.</div>
+<div class="example"><strong>Time addition example:</strong> Add 2 hours 30 minutes to a base time of 10:30 AM. The result is <strong>1:00 PM</strong> (13:00).</div>
+<div class="example"><strong>Time subtraction example:</strong> Subtract 1 hour 45 minutes from 1:15 AM. The result is <strong>11:30 PM on the previous day</strong>.</div>
+<p>These examples use clock-time arithmetic. They do not add calendar dates, time zones or daylight-saving adjustments.</p>
+</section>
+<section class="card"><h2>Common uses</h2><ul><li>Find elapsed time for work shifts, study sessions, travel, workouts or appointments.</li><li>Convert a duration to decimal hours for timesheets or invoices.</li><li>Add a planned duration to a start time to estimate an end time.</li><li>Subtract a duration from a deadline or scheduled time.</li><li>Total several work, study, travel, audio or video sessions and subtract breaks.</li></ul></section>
+<section class="card"><h2>Frequently asked questions</h2><details><summary>How do I calculate the time between two times?</summary><p>Enter the start and end clock times and calculate. When the interval crosses midnight, use the next-day option if the end clock time is earlier than the start time.</p></details><details><summary>What is the duration from 9:30 AM to 5:15 PM?</summary><p>It is 7 hours 45 minutes, which is 7.75 decimal hours.</p></details><details><summary>Why do minutes not work like decimal numbers?</summary><p>An hour contains 60 minutes, not 100. Therefore 2 hours 30 minutes equals 2.5 hours, while 2 hours 45 minutes equals 2.75 hours.</p></details><details><summary>Can the calculator handle times across midnight?</summary><p>Yes. Enable the next-day option in the duration calculator when the end time belongs to the following day.</p></details><details><summary>Does this calculate dates and time zones?</summary><p>No. This tool focuses on clock-time arithmetic and elapsed time within a 24-hour cycle. Use a dedicated date or time-zone calculator when calendar dates or time-zone changes are part of the problem.</p></details>
+<details><summary>Can I use this as a time addition calculator?</summary><p>Yes. Select Add / Subtract Time, enter a base clock time, choose Add or Subtract, and enter the hours, minutes and seconds. The result shows the new clock time and whether it falls on the previous or next day.</p></details>
+<details><summary>Does the calculator automatically subtract lunch or rest breaks?</summary><p>The Time Duration mode does not automatically deduct breaks. In Add / Subtract Durations mode, add each work interval and enter unpaid breaks as rows set to Subtract (−).</p></details>
+<details><summary>Can I add or subtract multiple time durations?</summary><p>Yes. Open Add / Subtract Durations, enter hours, minutes and seconds in each row, choose Add (+) or Subtract (−), then calculate the total. You can add or remove rows as needed.</p></details>
+<details><summary>Can the total be longer than 24 hours?</summary><p>Yes. Multiple durations can total more than one day. The result shows the full hours:minutes:seconds duration, the day/hour breakdown, total minutes and seconds, and decimal hours.</p></details>
+<details><summary>Can I calculate a duration across several days?</summary><p>No. The inputs are clock times, not calendar dates. The next-day option handles one midnight crossing; it does not calculate multi-day date ranges. Use a date-aware calculator for durations spanning several calendar days.</p></details></section>
+
+
+<section class="card"><h2>Related tools</h2><p>Need calendar-aware working time rather than simple clock arithmetic? Use the <a href="/business-hours-calculator/">Business Hours Calculator</a> to count business hours across dates, holidays and custom work schedules.</p></section>
+
+<section class="card"><h2>Method &amp; reference notes</h2><p class="small">The calculator uses straightforward elapsed-time arithmetic rather than assumptions about time zones, daylight-saving changes, leap seconds or calendar dates. For calendar-aware calculations, business days, holidays, or custom work schedules, use the Business Hours Calculator.</p><p class="small">Related reference material: <a href="https://www.timeanddate.com/date/timeduration.html" rel="noopener noreferrer" target="_blank">Timeanddate time-duration calculator</a> and <a href="https://www.calculator.net/time-calculator/" rel="noopener noreferrer" target="_blank">Calculator.net time calculator</a>.</p></section>
+
+
+<section class="card related-tools" aria-labelledby="related-title">
+<h2 id="related-title">Related Tools</h2>
+<div class="related-grid">
+<a class="related-item" href="/business-hours-calculator/"><div><strong>Business Hours Calculator</strong><span>Calculate working time across dates, schedules and business-hour intervals.</span></div><span aria-hidden="true">›</span></a>
+</div>
+</section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+
+<script src="/time-calculator-engine.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const engine=window.ZemToolsTimeEngine;
+if(!engine) throw new Error('Time calculation engine failed to load.');
+function setMessage(el,msg){el.innerHTML=msg;}
+$('calcDuration').addEventListener('click',()=>{
+  const result=engine.calculateDuration($('startTime').value,$('endTime').value,$('nextDay').checked);
+  if(!result.ok){
+    if(result.error==='invalid-times') setMessage($('durationResult'),'<strong>Enter valid start and end times.</strong>');
+    else setMessage($('durationResult'),'<strong>End time is earlier than start time.</strong><div class="small">Enable “next day” when the interval crosses midnight.</div>');
+    return;
+  }
+  const p=result.parts;
+  setMessage($('durationResult'),'<div class="big">'+result.pretty+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Total: '+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+result.seconds.toLocaleString()+' seconds · '+result.decimalHours+' decimal hours</div>');
+});
+$('calcAdd').addEventListener('click',()=>{
+  const result=engine.calculateClockOperation($('baseTime').value,$('addHours').value,$('addMinutes').value,$('addSeconds').value,$('operation').value);
+  if(!result.ok){setMessage($('addResult'),'<strong>Enter a valid base time and whole-number duration values.</strong>');return;}
+  setMessage($('addResult'),'<div class="big">'+result.clockTime+'</div><div class="small" style="margin-top:8px">'+result.action+' '+result.prettyAmount+' '+(result.action==='add'?'to':'from')+' '+$('baseTime').value+'.</div>');
+});
+function resetDuration(){$('startTime').value='09:30:00';$('endTime').value='17:15:00';$('nextDay').checked=false;setMessage($('durationResult'),'');}
+function resetAdd(){$('baseTime').value='10:30:00';$('operation').value='add';$('addHours').value='2';$('addMinutes').value='30';$('addSeconds').value='0';setMessage($('addResult'),'');}
+$('resetDuration').addEventListener('click',resetDuration);$('resetAdd').addEventListener('click',resetAdd);
+
+let latestDurationListResult=null;
+function clearDurationListResult(){
+  latestDurationListResult=null;
+  setMessage($('durationListResult'),'');
+  $('copyDurationList').hidden=true;
+  $('copyDurationStatus').textContent='';
+}
+function updateRemoveButtons(){
+  const rows=$('durationRows').querySelectorAll('.duration-row');
+  rows.forEach(row=>{row.querySelector('.row-remove').disabled=rows.length===1;});
+}
+function addDurationRow(){
+  const row=document.createElement('div');
+  row.className='duration-row';
+  row.innerHTML='<label>Operation<select aria-label="Duration row operation" class="row-operation"><option value="add">Add (+)</option><option value="subtract">Subtract (−)</option></select></label><label>Hours<input aria-label="Duration row hours" class="row-hours" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label><label>Minutes<input aria-label="Duration row minutes" class="row-minutes" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label><label>Seconds<input aria-label="Duration row seconds" class="row-seconds" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/></label><button aria-label="Remove this duration row" class="secondary row-remove" type="button">Remove</button>';
+  $('durationRows').appendChild(row);
+  updateRemoveButtons();
+  clearDurationListResult();
+}
+function resetDurationList(){
+  $('durationRows').innerHTML='';
+  addDurationRow();
+  clearDurationListResult();
+}
+$('addDurationRow').addEventListener('click',addDurationRow);
+$('resetDurationList').addEventListener('click',resetDurationList);
+$('durationRows').addEventListener('click',event=>{
+  const removeButton=event.target.closest('.row-remove');
+  if(!removeButton) return;
+  if($('durationRows').querySelectorAll('.duration-row').length<=1) return;
+  removeButton.closest('.duration-row').remove();
+  updateRemoveButtons();
+  clearDurationListResult();
+});
+$('durationRows').addEventListener('input',clearDurationListResult);
+$('durationRows').addEventListener('change',clearDurationListResult);
+$('calcDurationList').addEventListener('click',()=>{
+  const entries=Array.from($('durationRows').querySelectorAll('.duration-row')).map(row=>({
+    operation:row.querySelector('.row-operation').value,
+    hours:row.querySelector('.row-hours').value,
+    minutes:row.querySelector('.row-minutes').value,
+    seconds:row.querySelector('.row-seconds').value
+  }));
+  const result=engine.calculateDurationList(entries);
+  if(!result.ok){
+    latestDurationListResult=null;
+    $('copyDurationList').hidden=true;
+    setMessage($('durationListResult'),'<strong>Enter at least one duration using whole, non-negative numbers.</strong>');
+    return;
+  }
+  latestDurationListResult=result;
+  const p=result.parts;
+  setMessage($('durationListResult'),'<div class="big">'+result.durationClock+'</div><div class="small">'+result.pretty+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Total: '+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+result.totalSeconds.toLocaleString()+' seconds · '+result.decimalHours+' decimal hours</div>');
+  $('copyDurationList').hidden=false;
+  $('copyDurationStatus').textContent='';
+});
+$('copyDurationList').addEventListener('click',async()=>{
+  if(!latestDurationListResult) return;
+  const result=latestDurationListResult;
+  const value=result.durationClock+' ('+result.pretty+') | '+result.decimalHours+' decimal hours | '+result.totalMinutes+' minutes | '+result.totalSeconds+' seconds';
+  try{
+    if(!navigator.clipboard||!navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(value);
+    $('copyDurationStatus').textContent='Result copied.';
+  }catch(error){
+    $('copyDurationStatus').textContent='Copy is not available in this browser. Select the result text to copy it.';
+  }
+});
+
+function activateMode(activeTab,activePanel){
+  const modes=[['durationTab','durationPanel'],['addTab','addPanel'],['durationListTab','durationListPanel']];
+  modes.forEach(([tabId,panelId])=>{
+    const selected=tabId===activeTab;
+    $(tabId).classList.toggle('active',selected);
+    $(tabId).setAttribute('aria-selected',String(selected));
+    $(panelId).classList.toggle('hidden',!selected);
+  });
+}
+$('durationTab').addEventListener('click',()=>activateMode('durationTab','durationPanel'));
+$('addTab').addEventListener('click',()=>activateMode('addTab','addPanel'));
+$('durationListTab').addEventListener('click',()=>activateMode('durationListTab','durationListPanel'));
+updateRemoveButtons();
+$('calcDuration').click();
+</script>
+<style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
+<script src="/master-ui.js?v=20261114-shell-final"></script></body>
+</html>

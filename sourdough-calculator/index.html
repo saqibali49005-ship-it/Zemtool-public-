@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  <style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b2f66">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Sourdough Calculator: Recipe, Hydration &amp; Starter | ZemTools</title>
+  <meta name="description" content="Build or check sourdough recipes in grams. Calculate true hydration, starter flour and water, salt, loaf scaling and feeding ratios. Copy or print your recipe, free.">
+  <link rel="canonical" href="https://zemtools.com/sourdough-calculator/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ZemTools">
+  <meta property="og:title" content="Sourdough Calculator: Recipe, Hydration &amp; Starter | ZemTools">
+  <meta property="og:description" content="Build or check sourdough recipes in grams. Calculate true hydration, starter flour and water, salt, loaf scaling and feeding ratios. Copy or print your recipe, free.">
+  <meta property="og:url" content="https://zemtools.com/sourdough-calculator/">
+  <meta property="og:image" content="https://zemtools.com/social-preview.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sourdough Calculator: Recipe, Hydration &amp; Starter | ZemTools">
+  <meta name="twitter:description" content="Build or check sourdough recipes in grams. Calculate true hydration, starter flour and water, salt, loaf scaling and feeding ratios. Copy or print your recipe, free.">
+  <meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "@id":"https://zemtools.com/sourdough-calculator/#app",
+    "name":"Sourdough Calculator",
+    "url":"https://zemtools.com/sourdough-calculator/",
+    "applicationCategory":"FoodApplication",
+    "operatingSystem":"Any",
+    "description":"Build and check sourdough recipes, calculate true hydration including starter flour and water, scale dough, and calculate starter feeding ratios.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "publisher":{"@type":"Organization","name":"ZemTools","url":"https://zemtools.com/"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},
+      {"@type":"ListItem","position":2,"name":"Math & Science","item":"https://zemtools.com/math-science/"},
+      {"@type":"ListItem","position":3,"name":"Sourdough Calculator","item":"https://zemtools.com/sourdough-calculator/"}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/master-tool-design.css?v=20261114-shell-clean">
+  <link rel="stylesheet" href="/master-header.css?v=20261115-tap-highlight-1">
+  <script defer src="/tools-data.js"></script>
+  <script defer src="/sourdough-calculator-engine.js"></script>
+  <script defer src="/master-ui.js?v=20261114-shell-final"></script>
+  <script defer src="/sourdough-calculator.js"></script>
+
+  <style>
+    /* Match the proven Tea Outturn tool breadcrumb position and spacing. */
+    .sourdough-page main{padding-top:22px;padding-left:30px;padding-right:30px}
+    @media(max-width:980px){.sourdough-page main{padding-left:20px;padding-right:20px}}
+    @media(max-width:700px){.sourdough-page main{padding-left:16px;padding-right:16px}}
+    .sourdough-page .crumbs{gap:8px;font-size:13px;margin:0 0 14px;color:#61758d}
+    .sourdough-page .crumbs a{color:#315b87}
+    .sourdough-page .crumbs .crumb-sep{color:inherit}
+    .sourdough-page .hero-shell{margin-bottom:18px}
+    .sourdough-page .hero{display:flex;align-items:center;gap:16px;padding:24px;border:1px solid #dce6f1;border-radius:18px;background:linear-gradient(135deg,#f4f9ff,#fff)}
+    .sourdough-page .tool-icon{font-size:38px;flex:0 0 auto}
+    .sourdough-page .hero h1{font-size:clamp(29px,5vw,43px);line-height:1.12;margin:0 0 8px;color:#102744}
+    .sourdough-page .hero p{margin:0;color:#53677f;max-width:760px}
+    .sourdough-page .unit-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:0 0 14px;color:var(--muted);font-size:14px}
+    .sourdough-page .unit-bar select,.sourdough-page .field select{min-height:44px;border:1px solid #c6d7e8;border-radius:11px;background:#fff;color:var(--text);padding:8px 11px;font:inherit}
+    .sourdough-page .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 14px}.sourdough-page .preset-row button{min-height:38px;padding:7px 12px;font-size:13px}
+    .sourdough-page .sourdough-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 20px}
+    .sourdough-page .sourdough-modes button{min-height:48px;padding:9px;border:1px solid #cbdced;border-radius:12px;background:#fff;color:#36506d;font-weight:850;cursor:pointer}
+    .sourdough-page .sourdough-modes button[aria-selected="true"]{background:linear-gradient(135deg,#1767e7,#19a9e8);border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(23,104,231,.16)}
+    .sourdough-page .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .sourdough-page .field{min-width:0;margin-bottom:14px}
+    .sourdough-page .field input{min-width:0}
+    .sourdough-page .field label{margin-bottom:6px}
+    .sourdough-page .field .hint{line-height:1.4}
+    .sourdough-page .row-list{display:grid;gap:9px;margin:8px 0 12px}
+    .sourdough-page .ingredient-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(90px,.8fr) minmax(90px,.8fr) auto;gap:8px;align-items:end;padding:11px;border:1px solid #dbe7f3;border-radius:13px;background:#fbfdff}
+    .sourdough-page .ingredient-row.liquid-row{grid-template-columns:minmax(0,1.2fr) minmax(90px,.8fr) minmax(100px,.9fr) auto}
+    .sourdough-page .ingredient-row label{font-size:12px;color:#536981;margin-bottom:5px}
+    .sourdough-page .ingredient-row input{min-height:42px;padding:8px 10px;font-size:15px}
+    .sourdough-page .remove-row{min-height:40px;padding:7px 10px;font-size:13px}
+    .sourdough-page .section-subhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 0 8px}
+    .sourdough-page .section-subhead h3{margin:0;font-size:16px}
+    .sourdough-page .form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px}
+    .sourdough-page .form-actions .primary{flex:1 1 210px}
+    .sourdough-page .form-actions .secondary{flex:0 0 auto}
+    .sourdough-page .result-card{display:none;margin-top:18px}
+    .sourdough-page .result-card.visible{display:block}
+    .sourdough-page .result-topline{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+    .sourdough-page .result-topline h2{margin:0}
+    .sourdough-page .result-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+    .sourdough-page .result-stat{border:1px solid #d3e6f8;border-radius:12px;background:#f6fbff;padding:12px;min-width:0}
+    .sourdough-page .result-stat small{display:block;color:#5f7188;font-weight:750}
+    .sourdough-page .result-stat strong{display:block;font-size:21px;color:#1d4972;overflow-wrap:anywhere}
+    .sourdough-page .recipe-lines{display:grid;gap:0;margin:12px 0;border-top:1px solid #d8e5f3}
+    .sourdough-page .recipe-line{display:flex;justify-content:space-between;gap:16px;padding:9px 2px;border-bottom:1px solid #e3edf6}
+    .sourdough-page .recipe-line strong{text-align:right;white-space:nowrap}
+    .sourdough-page .formula-note{font-size:13px;color:#52677f;background:#f6f9fd;border:1px solid #dce8f4;border-radius:12px;padding:12px;margin-top:12px}
+    .sourdough-page .status{min-height:22px;margin:8px 0 0;color:#25623e;font-size:14px}
+    .sourdough-page .error{color:#a32626}
+    .sourdough-page .scale-panel{border-top:1px solid #d7e4f2;margin-top:16px;padding-top:14px}
+    .sourdough-page .scale-panel h3{margin:0 0 10px;font-size:16px}
+    .sourdough-page .scale-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:end}
+    .sourdough-page .scale-grid label{font-size:13px}
+    .sourdough-page .shared-recipe{display:none;margin:12px 0;padding:14px;border:1px solid #b7d7f6;border-radius:12px;background:#eff7ff}
+    .sourdough-page .shared-recipe.visible{display:block}
+    .sourdough-page .support-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .sourdough-page .method-list{padding-left:20px;color:var(--muted)}
+    .sourdough-page .method-list li{margin:6px 0}
+    .sourdough-page .note-box{padding:14px 16px;border:1px solid #d5e4f3;border-radius:13px;background:#f8fbff;color:#3c5570}
+    .sourdough-page button:disabled{opacity:.55;cursor:not-allowed}
+    @media(max-width:480px){
+      .sourdough-page .hero{align-items:flex-start;padding:17px;gap:12px}
+      .sourdough-page .tool-icon{font-size:30px}
+    }
+    @media(max-width:650px){
+      .sourdough-page .sourdough-modes{grid-template-columns:1fr}
+      .sourdough-page .form-grid{grid-template-columns:1fr;gap:0}
+      .sourdough-page .ingredient-row,.sourdough-page .ingredient-row.liquid-row{grid-template-columns:1fr 1fr}
+      .sourdough-page .ingredient-row .row-name{grid-column:1/-1}
+      .sourdough-page .ingredient-row .remove-row{grid-column:1/-1;justify-self:start}
+      .sourdough-page .scale-grid{grid-template-columns:1fr 1fr}
+      .sourdough-page .scale-grid button{grid-column:1/-1}
+      .sourdough-page .support-grid{grid-template-columns:1fr}
+      .sourdough-page .result-stat-grid{grid-template-columns:1fr 1fr}
+      .sourdough-page .recipe-line{font-size:14px}
+    }
+    @media print{
+      body.sourdough-page{background:#fff}
+      .sourdough-page header,.sourdough-page footer,.sourdough-page .skip-link,.sourdough-page .sourdough-modes,.sourdough-page .preset-row,.sourdough-page .form-actions,.sourdough-page .unit-bar,.sourdough-page .scale-panel,.sourdough-page .support-grid,.sourdough-page .faq-card,.sourdough-page .hide-print{display:none!important}
+      .sourdough-page main{max-width:100%;padding:0}
+      .sourdough-page .result-card{display:block!important;box-shadow:none;border:1px solid #bbb}
+      .sourdough-page .card{box-shadow:none;break-inside:avoid}
+    }
+  </style>
+</head>
+<body class="tool-page sourdough-page">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="ZemTools home"><span class="brand-mark" aria-hidden="true">Z</span><span class="brand-copy"><strong>ZemTools</strong><small>Practical online tools</small></span></a>
+    <nav class="top-nav" aria-label="Primary navigation">
+      <a href="/">Home</a><a href="/tools/">All Tools</a>
+      <button class="nav-categories-toggle" id="zemCategoriesToggle" type="button" aria-expanded="false" aria-controls="zemCategoriesPanel">Categories <span aria-hidden="true">⌄</span></button>
+    </nav>
+    <div class="header-actions" aria-label="Header actions">
+      <button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Search tools" aria-expanded="false" aria-controls="toolHeaderSearchPanel" title="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"></circle><path d="M15.4 15.4L20 20"></path></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="toolHeaderMenuPanel" title="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+    </div>
+    <div class="search-panel" id="toolHeaderSearchPanel">
+      <form id="toolHeaderSearchForm" role="search"><label class="sr-only" for="toolHeaderSearchInput">Search tools</label><input id="toolHeaderSearchInput" type="search" placeholder="Search calculators and tools…" autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form>
+      <div id="toolHeaderSearchResults" class="zem-search-results" aria-live="polite"></div>
+    </div>
+    <section class="zem-categories-panel" id="zemCategoriesPanel" aria-label="Browse tool categories">
+      <div class="zem-panel-heading"><div><strong>Explore categories</strong><span>Find the right tool for the job</span></div><a href="/tools/">Browse all tools →</a></div>
+      <div class="zem-category-grid">
+        <a href="/math-science/"><span class="zem-category-icon" aria-hidden="true">∑</span><span class="zem-category-copy"><strong>Math &amp; Science</strong><small>5 tools</small></span><span class="zem-category-arrow" aria-hidden="true">→</span></a>
+        <a href="/home-construction/"><span class="zem-category-icon" aria-hidden="true">⌂</span><span class="zem-category-copy"><strong>Home &amp; Construction</strong><small>10 tools</small></span><span class="zem-category-arrow" aria-hidden="true">→</span></a>
+        <a href="/energy-electrical/"><span class="zem-category-icon" aria-hidden="true">ϟ</span><span class="zem-category-copy"><strong>Energy &amp; Electrical</strong><small>2 tools</small></span><span class="zem-category-arrow" aria-hidden="true">→</span></a>
+        <a href="/digital-developer/"><span class="zem-category-icon" aria-hidden="true">&lt;&gt;</span><span class="zem-category-copy"><strong>Digital &amp; Developer</strong><small>8 tools</small></span><span class="zem-category-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation">
+      <a href="/">Home</a><a href="/tools/">All Tools</a><div class="mobile-nav-label">Categories</div>
+      <a href="/math-science/">Math &amp; Science <span>5</span></a>
+      <a href="/home-construction/">Home &amp; Construction <span>10</span></a>
+      <a href="/energy-electrical/">Energy &amp; Electrical <span>2</span></a>
+      <a href="/digital-developer/">Digital &amp; Developer <span>8</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <section class="hero-shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="/math-science/">Math &amp; Science</a><span class="crumb-sep">›</span><span>Sourdough Calculator</span></nav>
+    <div class="hero">
+      <div class="tool-icon" aria-hidden="true">🍞</div>
+      <div><h1>Sourdough Calculator</h1><p>Build a sourdough recipe or check the true hydration of an existing formula. Starter flour and water count toward the totals, so your baker's percentages reflect the whole dough—not only what you add to the bowl.</p></div>
+    </div>
+  </section>
+  <div class="note-box hide-print"><strong>Accurate baker's math, with your starter included.</strong> Choose a recipe workflow, enter weights and percentages, and see the ingredient amounts plus the calculation behind them. All calculations run in your browser; no account is needed.</div>
+
+  <section class="card tool-card" aria-labelledby="calculator-title">
+    <div class="card-head"><h2 id="calculator-title">Recipe calculator</h2><button class="secondary" id="reset-current" type="button">Reset current mode</button></div>
+    <div class="unit-bar"><label for="weight-unit">Weight unit</label><select id="weight-unit" aria-label="Weight unit"><option value="g">Grams (g)</option><option value="kg">Kilograms (kg)</option><option value="oz">Ounces (oz)</option><option value="lb">Pounds (lb)</option></select></div>
+    <div class="sourdough-modes" role="tablist" aria-label="Sourdough calculation mode">
+      <button type="button" id="mode-build" role="tab" aria-controls="panel-build" aria-selected="true">Build a recipe</button>
+      <button type="button" id="mode-check" role="tab" aria-controls="panel-check" aria-selected="false">Check a recipe</button>
+      <button type="button" id="mode-feed" role="tab" aria-controls="panel-feed" aria-selected="false">Starter feeding ratio</button>
+    </div>
+
+    <section id="panel-build" role="tabpanel" aria-labelledby="mode-build">
+      <h2>Build a sourdough recipe</h2>
+      <p class="hint">Start from the flour you add, total flour including the starter, or your target finished dough weight.</p>
+      <div class="preset-row" aria-label="Quick recipe presets"><button class="secondary" type="button" data-preset="everyday">Everyday · 70%</button><button class="secondary" type="button" data-preset="country">Country loaf · 75%</button><button class="secondary" type="button" data-preset="open">Higher hydration · 82%</button></div>
+      <div class="form-grid">
+        <div class="field"><label for="build-basis">Build recipe from</label><select id="build-basis"><option value="total-flour">Total flour (incl. starter)</option><option value="added-flour">Flour I add</option><option value="total-dough">Target total dough weight</option></select></div>
+        <div class="field"><label for="build-target">Target weight (<span class="unit-label">g</span>)</label><input class="weight-input" id="build-target" type="number" min="0.01" step="any" value="500"><div class="hint" id="build-target-hint">Total flour, including flour inside the starter.</div></div>
+        <div class="field"><label for="build-hydration">True hydration (%)</label><input id="build-hydration" type="number" min="0" max="300" step="0.1" value="75"><div class="hint">Total water ÷ total flour, including the starter.</div></div>
+        <div class="field"><label for="build-starter-pct">Starter (% of total flour)</label><input id="build-starter-pct" type="number" min="0" max="100" step="0.1" value="20"><div class="hint">Starter mass divided by total flour weight.</div></div>
+        <div class="field"><label for="build-starter-hydration">Starter hydration (%)</label><input id="build-starter-hydration" type="number" min="0" max="500" step="any" value="100"><div class="hint">A 100% starter contains equal flour and water by weight.</div></div>
+        <div class="field"><label for="build-salt">Salt (% of total flour)</label><input id="build-salt" type="number" min="0" max="20" step="0.1" value="2"></div>
+      </div>
+
+      <div class="section-subhead"><h3>Flour blend</h3><button class="secondary" id="add-build-flour" type="button">+ Add flour</button></div>
+      <p class="hint">Shares apply to the flour you add. The starter's flour is calculated separately.</p>
+      <div class="row-list" id="build-flours">
+        <div class="ingredient-row flour-row">
+          <div class="row-name"><label>Flour name</label><input class="flour-name" type="text" value="Bread flour" maxlength="48" aria-label="Flour name"></div>
+          <div><label>Share (%)</label><input class="flour-share" type="number" min="0" max="100" step="0.1" value="100" aria-label="Flour share percent"></div>
+          <button class="secondary remove-row" type="button" disabled>Remove</button>
+        </div>
+      </div>
+
+      <div class="section-subhead"><h3>Optional liquids and additions</h3><button class="secondary" id="add-build-liquid" type="button">+ Add liquid</button></div>
+      <p class="hint">For milk, juice or another liquid, enter the total weight and its water fraction. This prevents all of the ingredient from being counted as water.</p>
+      <div class="row-list" id="build-liquids"></div>
+      <div class="form-actions"><button class="primary" id="calculate-build" type="button">Calculate recipe</button><button class="secondary" id="reset-build" type="button">Reset</button></div>
+    </section>
+
+    <section id="panel-check" role="tabpanel" aria-labelledby="mode-check" hidden>
+      <h2>Check an existing sourdough recipe</h2>
+      <p class="hint">Enter what goes into the dough. The result includes the flour and water contributed by your starter, so it reports true total hydration.</p>
+      <div class="form-grid">
+        <div class="field"><label for="check-water">Added water (<span class="unit-label">g</span>)</label><input class="weight-input" id="check-water" type="number" min="0" step="any" value="325"></div>
+        <div class="field"><label for="check-starter">Starter / levain weight (<span class="unit-label">g</span>)</label><input class="weight-input" id="check-starter" type="number" min="0" step="any" value="100"></div>
+        <div class="field"><label for="check-starter-hydration">Starter hydration (%)</label><input id="check-starter-hydration" type="number" min="0" max="500" step="any" value="100"></div>
+        <div class="field"><label for="check-salt">Salt weight (<span class="unit-label">g</span>)</label><input class="weight-input" id="check-salt" type="number" min="0" step="any" value="10"></div>
+      </div>
+      <div class="section-subhead"><h3>Flours in your recipe</h3><button class="secondary" id="add-check-flour" type="button">+ Add flour</button></div>
+      <div class="row-list" id="check-flours">
+        <div class="ingredient-row check-flour-row">
+          <div class="row-name"><label>Flour name</label><input class="check-flour-name" type="text" value="Bread flour" maxlength="48" aria-label="Flour name"></div>
+          <div><label>Weight (<span class="unit-label">g</span>)</label><input class="check-flour-weight weight-input" type="number" min="0" step="any" value="450" aria-label="Flour weight"></div>
+          <button class="secondary remove-row" type="button" disabled>Remove</button>
+        </div>
+      </div>
+      <div class="section-subhead"><h3>Optional liquids and additions</h3><button class="secondary" id="add-check-liquid" type="button">+ Add liquid</button></div>
+      <div class="row-list" id="check-liquids"></div>
+      <div class="form-actions"><button class="primary" id="calculate-check" type="button">Check recipe</button><button class="secondary" id="reset-check" type="button">Reset</button></div>
+    </section>
+
+    <section id="panel-feed" role="tabpanel" aria-labelledby="mode-feed" hidden>
+      <h2>Calculate a starter feeding ratio</h2>
+      <p class="hint">Enter a target amount and your seed:flour:water ratio. The calculator divides the total into exact ingredient weights.</p>
+      <div class="form-grid">
+        <div class="field"><label for="feed-target">Target starter weight (<span class="unit-label">g</span>)</label><input class="weight-input" id="feed-target" type="number" min="0.01" step="any" value="200"></div>
+        <div class="field"><label for="feed-seed">Seed ratio</label><input id="feed-seed" type="number" min="0.0001" step="any" value="1"></div>
+        <div class="field"><label for="feed-flour">Flour ratio</label><input id="feed-flour" type="number" min="0.0001" step="any" value="2"></div>
+        <div class="field"><label for="feed-water">Water ratio</label><input id="feed-water" type="number" min="0.0001" step="any" value="2"></div>
+        <div class="field"><label for="feed-seed-hydration">Seed starter hydration (%)</label><input id="feed-seed-hydration" type="number" min="0" max="500" step="any" value="100"><div class="hint">Used to include the seed’s own flour and water in final hydration.</div></div>
+      </div>
+      <div class="form-actions"><button class="primary" id="calculate-feed" type="button">Calculate feeding</button><button class="secondary" id="reset-feed" type="button">Reset</button></div>
+      <p class="hint">A feeding ratio alone cannot reliably predict when a starter will peak. Temperature, flour, inoculation and starter activity all matter.</p>
+    </section>
+
+    <div class="shared-recipe" id="shared-recipe" role="status"></div>
+    <section class="card result-card" id="result-card" aria-live="polite" aria-labelledby="result-title">
+      <div class="result-topline"><h2 id="result-title">Your recipe results</h2><span class="badge">Calculated locally</span></div>
+      <div class="result-stat-grid" id="result-stats"></div>
+      <div id="result-lines" class="recipe-lines"></div>
+      <div id="result-explanation" class="formula-note"></div>
+      <div class="scale-panel" id="scale-panel" hidden>
+        <h3>Scale this recipe</h3>
+        <div class="scale-grid">
+          <div><label for="scale-mode">Scale by</label><select id="scale-mode"><option value="multiplier">Multiplier</option><option value="target">Target dough weight</option></select></div>
+          <div><label for="scale-value" id="scale-value-label">Multiplier (×)</label><input id="scale-value" type="number" min="0.01" step="any" value="2"></div>
+          <button class="secondary" id="scale-recipe" type="button">Scale recipe</button>
+        </div>
+        <div class="status" id="scale-status" aria-live="polite"></div>
+      </div>
+      <div class="form-actions hide-print">
+        <button class="secondary" id="copy-recipe" type="button">Copy recipe</button><button class="secondary" id="download-csv" type="button">Download CSV</button>
+        <button class="secondary" id="share-recipe" type="button">Create share link</button>
+        <button class="secondary" id="print-recipe" type="button">Print recipe</button>
+      </div>
+      <p class="status" id="action-status" aria-live="polite"></p>
+    </section>
+    <p class="status error" id="error-status" role="alert"></p>
+  </section>
+
+  <section class="support-grid">
+    <article class="card"><h2>True hydration vs. added-water hydration</h2><p>True hydration includes water contributed by the starter or levain. Added-water hydration looks only at the water poured into the mix, so it can understate the dough's total hydration when the starter is included.</p></article>
+    <article class="card"><h2>How starter hydration is counted</h2><p>A 100% hydration starter contains equal weights of flour and water. A 150% hydration starter contains 1.5 times as much water as flour. The calculator separates those parts before it totals the recipe.</p></article>
+    <article class="card"><h2>Baker's percentages</h2><p>Flour is the 100% reference. Hydration, starter and salt percentages are compared with total flour, including flour inside the starter. Flour blend shares describe the added flour only.</p></article>
+    <article class="card"><h2>Custom liquids</h2><p>Milk, juice and similar ingredients are not pure water. Enter the ingredient's water fraction as a decimal percentage (for example, 87% water). Only that declared fraction counts toward true hydration.</p></article>
+  </section>
+
+  <section class="card faq-card">
+    <h2>How to use the sourdough calculator</h2>
+    <div class="faq open"><button type="button" aria-expanded="true">How do I calculate true sourdough hydration? <span class="faq-icon">−</span></button><div class="faq-answer">Add the water in your recipe to the water contained in your starter, then divide by all flour in the recipe, including the starter's flour. Multiply by 100 for the percentage.</div></div>
+    <div class="faq"><button type="button" aria-expanded="false">Does starter count as flour and water? <span class="faq-icon">+</span></button><div class="faq-answer">Yes. Starter is a mixture of flour and water. Its exact split depends on its hydration. The calculator separates that mass using the starter hydration you enter.</div></div>
+    <div class="faq"><button type="button" aria-expanded="false">What does a 1:2:2 starter feeding ratio mean? <span class="faq-icon">+</span></button><div class="faq-answer">It means one part existing starter, two parts flour and two parts water by weight. For 200 g total, that is 40 g starter, 80 g flour and 80 g water.</div></div>
+    <div class="faq"><button type="button" aria-expanded="false">Can I use more than one flour? <span class="faq-icon">+</span></button><div class="faq-answer">Yes. In Build mode, split the added flour between as many flours as you need. The percentages must total 100%. In Check mode, enter each flour weight separately.</div></div>
+    <div class="faq"><button type="button" aria-expanded="false">Can I scale a sourdough recipe for multiple loaves? <span class="faq-icon">+</span></button><div class="faq-answer">Yes. Calculate the recipe first, then scale the ingredient list by a multiplier or to a target finished dough weight. The same scale factor is applied to every ingredient.</div></div>
+    <div class="faq"><button type="button" aria-expanded="false">Does hydration predict fermentation or dough handling? <span class="faq-icon">+</span></button><div class="faq-answer">No. Hydration is a ratio, not a fermentation clock or a guarantee of dough strength. Flour type, temperature, starter activity, mixing and fermentation conditions affect the result.</div></div>
+  </section>
+  <section class="card">
+    <h2>Calculation method and assumptions</h2>
+    <ul class="method-list">
+      <li>Starter flour = starter weight ÷ (1 + starter hydration as a decimal).</li>
+      <li>Starter water = starter weight − starter flour.</li>
+      <li>True hydration = 100 × total water ÷ total flour.</li>
+      <li>Salt percentage = 100 × salt weight ÷ total flour.</li>
+      <li>Starter percentage in this calculator = starter mass ÷ total flour, not prefermented-flour percentage. Both are shown separately where relevant.</li>
+    </ul>
+    <p class="hint">Weights are converted to grams for calculation. Display values are rounded for readability; the calculation uses the unrounded values. Custom-liquid water fractions are user-provided assumptions. Volume-to-weight conversions and fermentation-time predictions are intentionally not included.</p>
+  </section>
+  <footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+</main>
+
+</body>
+</html>

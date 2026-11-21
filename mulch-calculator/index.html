@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/tools-data.js"></script>
+<style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Mulch Calculator | Bags, Cubic Yards, Coverage & Cost</title>
+<meta name="description" content="Calculate mulch for multiple garden beds. Subtract existing depth, measure rings and shapes, compare bag and bulk supplier offers, and estimate coverage.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zemtools.com/mulch-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZemTools">
+<meta property="og:title" content="Mulch Calculator | Bags, Cubic Yards, Coverage & Cost">
+<meta property="og:description" content="Plan mulch for multiple beds, account for existing depth, compare package and bulk quotes, and calculate coverage from the product label.">
+<meta property="og:url" content="https://zemtools.com/mulch-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta property="og:image:alt" content="ZemTools practical online calculators">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mulch Calculator | Bags, Cubic Yards, Coverage & Cost">
+<meta name="twitter:description" content="Plan mulch for multiple beds, account for existing depth, compare package and bulk quotes, and calculate coverage from the product label.">
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Mulch Calculator","url":"https://zemtools.com/mulch-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A browser-based mulch project planner for multi-zone bed measurements, existing-depth top-ups, product-specific package quantities, supplier-offer comparison and reverse coverage."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},{"@type":"ListItem","position":3,"name":"Mulch Calculator","item":"https://zemtools.com/mulch-calculator/"}]}
+</script>
+<link rel="stylesheet" href="/master-tool-design.css?v=20261114-shell-clean">
+<link rel="stylesheet" href="/master-related-tools.css">
+<style>
+.mulch-page{max-width:1120px;margin:auto;padding:22px 16px 64px;color:#17243a}
+.mulch-page *{box-sizing:border-box}
+.mulch-page .hero-shell{margin-bottom:18px}
+.mulch-page .hero{display:flex;align-items:center;gap:16px;padding:24px;border:1px solid #dce6f1;border-radius:18px;background:linear-gradient(135deg,#f4f9ff,#fff)}
+.mulch-page .tool-icon{font-size:38px;flex:0 0 auto}
+.mulch-page h1{font-size:clamp(29px,5vw,43px);line-height:1.12;margin:0 0 8px;color:#102744}
+.mulch-page .hero p{margin:0;color:#53677f;max-width:760px}
+.mulch-page .crumbs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;color:#61758d;font-size:13px}
+.mulch-page .crumbs a{color:#315b87;text-decoration:none}
+.mulch-page .intro-callout{margin-top:14px;padding:14px 16px;border:1px solid #cfe1f3;border-radius:13px;background:#f6fbff;color:#31516f}
+.mulch-page .panel{background:#fff;border:1px solid #dbe4ee;border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 6px 24px rgba(15,35,60,.045)}
+.mulch-page .panel h2{margin:0 0 8px;font-size:21px;color:#163555}
+.mulch-page .panel-intro,.mulch-page .hint{color:#5d7086;font-size:14px}
+.mulch-page .panel-intro{margin:0 0 15px}
+.mulch-page .toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mulch-page .field{display:grid;gap:6px;min-width:0}
+.mulch-page label{font-size:13px;font-weight:800;color:#344d68}
+.mulch-page .field>strong{font-size:13px;font-weight:800;color:#344d68}
+.mulch-page input,.mulch-page select{width:100%;min-width:0;min-height:44px;border:1px solid #c8d6e5;border-radius:10px;background:#fff;color:#172b45;padding:10px 11px;font:inherit;font-size:15px}
+.mulch-page input:focus,.mulch-page select:focus,.mulch-page button:focus-visible{outline:3px solid rgba(37,99,235,.18);outline-offset:2px;border-color:#528cce}
+.mulch-page .unit-input{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:8px}
+.mulch-page .zone-list,.mulch-page .product-list,.mulch-page .offer-list{display:grid;gap:12px}
+.mulch-page .zone-card,.mulch-page .product-card{border:1px solid #d8e3ef;border-radius:14px;padding:14px;background:#f8fbff}
+.mulch-page .zone-head,.mulch-page .product-head,.mulch-page .offer-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.mulch-page .zone-head strong,.mulch-page .product-head strong{color:#193d61}
+.mulch-page .shape-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mulch-page .shape-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.mulch-page .depth-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.mulch-page .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mulch-page .offer-card{border:1px solid #dae5f0;background:#fff;border-radius:12px;padding:12px}
+.mulch-page .offer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.mulch-page .button-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.mulch-page button{border:1px solid #c7d6e6;border-radius:10px;background:#fff;color:#284c70;min-height:42px;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer}
+.mulch-page button.primary{background:#1767e7;color:#fff;border-color:#1767e7}
+.mulch-page button.danger{color:#9b3030;border-color:#e6c8c8}
+.mulch-page button:disabled{opacity:.55;cursor:not-allowed}
+.mulch-page .muted{color:#64778d}
+.mulch-page .error{display:none;margin-top:13px;padding:12px;border:1px solid #e6b6b6;border-radius:10px;background:#fff5f5;color:#8b2525}
+.mulch-page .error.show{display:block}
+.mulch-page .success{display:none;margin-top:13px;padding:12px;border:1px solid #b9dfc7;border-radius:10px;background:#f2fff6;color:#17633a}
+.mulch-page .success.show{display:block}
+.mulch-page .result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mulch-page .result-stat{border:1px solid #dce6f0;border-radius:12px;padding:13px;background:#f8fbff}
+.mulch-page .result-stat span{display:block;color:#5b6d82;font-size:12px;font-weight:800}
+.mulch-page .result-stat strong{display:block;margin-top:5px;font-size:22px;color:#183a5c}
+.mulch-page .result-zone,.mulch-page .result-product{border-top:1px solid #e0e8f0;padding:13px 0}
+.mulch-page .result-zone:first-child,.mulch-page .result-product:first-child{border-top:0}
+.mulch-page .result-detail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.mulch-page .result-detail div{padding:9px;border-radius:9px;background:#f7f9fc}
+.mulch-page .result-detail span{display:block;color:#65788d;font-size:11px}
+.mulch-page .result-detail strong{display:block;font-size:14px;color:#243d58;margin-top:3px}
+.mulch-page .quote-table{width:100%;border-collapse:collapse;margin-top:9px;font-size:13px}
+.mulch-page .quote-table th,.mulch-page .quote-table td{text-align:left;padding:8px;border-bottom:1px solid #e4ebf2}
+.mulch-page .quote-table th{color:#51677e}
+.mulch-page .best-offer{display:inline-block;padding:3px 7px;border-radius:6px;background:#e8f7ed;color:#17633a;font-size:11px;font-weight:800}
+.mulch-page .coverage-result{margin-top:12px;padding:13px;background:#f5faff;border:1px solid #d5e6f5;border-radius:12px}
+.mulch-page .formula{background:#f5f8fc;border:1px solid #dce5ef;border-radius:10px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;color:#213f60}
+.mulch-page .faq details{padding:12px 0;border-bottom:1px solid #e2eaf2}
+.mulch-page .faq summary{font-weight:800;color:#254764;cursor:pointer}
+.mulch-page .faq p{margin:8px 0 0;color:#566b80}
+.mulch-page .source-list li{margin:7px 0}
+.mulch-page .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){.mulch-page .toolbar,.mulch-page .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mulch-page .shape-grid,.mulch-page .depth-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mulch-page .shape-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.mulch-page .offer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mulch-page .result-detail{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.mulch-page{padding:15px 12px 48px}.mulch-page .hero{padding:17px;align-items:flex-start}.mulch-page .tool-icon{font-size:30px}.mulch-page .panel{padding:14px}.mulch-page .toolbar,.mulch-page .shape-fields,.mulch-page .product-grid,.mulch-page .offer-grid{grid-template-columns:1fr}.mulch-page .result-grid{grid-template-columns:1fr}.mulch-page .result-detail{grid-template-columns:1fr 1fr}.mulch-page .unit-input{grid-template-columns:minmax(0,1fr) 100px}.mulch-page .button-row button{flex:1 1 100%}.mulch-page .quote-table{font-size:12px}.mulch-page .quote-table th,.mulch-page .quote-table td{padding:7px 5px}}
+@media print{header.site-header,.mulch-page .button-row,.mulch-page .no-print,footer{display:none!important}.mulch-page{max-width:none;padding:0}.mulch-page .panel{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body class="tool-page">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/" aria-current="page">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults"></div></div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content" class="mulch-page">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/home-construction/">Home &amp; Construction</a><span>›</span><span aria-current="page">Mulch Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🌱</div><div><h1>Mulch Calculator</h1><p>Plan mulch for several garden beds in one project. Measure different shapes, subtract the usable mulch already there, assign products by bed, and compare supplier package or bulk offers.</p></div></div>
+<div class="intro-callout"><strong>Product-label first:</strong> Mulch quantity is calculated by volume. Enter the package volume or the coverage and depth printed on the actual bag. The calculator does not guess product weight, density, bag fill or a universal application depth.</div>
+</section>
+
+<section class="panel" aria-labelledby="setup-heading">
+<h2 id="setup-heading">1. Set your project units</h2>
+<p class="panel-intro">Choose the units you want to enter. Individual areas and product labels can use their own supported units where shown.</p>
+<div class="toolbar">
+<div class="field"><label for="lengthUnit">Dimension units</label><select id="lengthUnit"><option value="ft">Feet</option><option value="in">Inches</option><option value="m">Metres</option><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="yd">Yards</option></select></div>
+<div class="field"><label for="depthUnit">Mulch depth units</label><select id="depthUnit"><option value="in">Inches</option><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="ft">Feet</option></select></div>
+<div class="field"><label for="projectName">Project name <span class="muted">(optional)</span></label><input id="projectName" maxlength="80" placeholder="e.g. Front garden refresh"></div>
+</div>
+</section>
+
+<section class="panel" aria-labelledby="areas-heading">
+<h2 id="areas-heading">2. Add garden beds and areas</h2>
+<p class="panel-intro">Give each area a name, shape, target total depth and measured usable existing depth. Use a ring for a tree bed so the trunk area is excluded. For irregular borders, split them into non-overlapping simple shapes or use a measured custom area.</p>
+<div class="zone-list" id="zoneList"></div>
+<div class="button-row no-print"><button type="button" id="addZone">+ Add another area</button></div>
+</section>
+
+<section class="panel" aria-labelledby="products-heading">
+<h2 id="products-heading">3. Define mulch products and supplier offers</h2>
+<p class="panel-intro">A different product can be assigned to each bed. Use the package label for volume or stated coverage. Supplier prices, currency, delivery, tax and order rules are entered by you; no live prices are assumed.</p>
+<div class="product-list" id="productList"></div>
+<div class="button-row no-print"><button type="button" id="addProduct">+ Add another product</button></div>
+</section>
+
+<section class="panel no-print" aria-labelledby="actions-heading">
+<h2 id="actions-heading">4. Calculate your project</h2>
+<p class="panel-intro">The calculator keeps each bed separate, then groups quantities only for beds assigned to the same named product.</p>
+<div class="button-row"><button class="primary" type="button" id="calculateProject">Calculate mulch quantities</button><button type="button" id="resetProject">Reset project</button><button type="button" id="copyResult" disabled>Copy summary</button><button type="button" id="downloadJson" disabled>Export project JSON</button><button type="button" id="downloadCsv" disabled>Export area CSV</button><button type="button" id="printResult" disabled>Print results</button></div>
+<div class="error" id="projectError" role="alert"></div><div class="success" id="projectStatus" role="status"></div>
+</section>
+
+<section class="panel" aria-labelledby="results-heading" aria-live="polite">
+<h2 id="results-heading">Your mulch estimate</h2>
+<p class="panel-intro" id="resultIntro">Enter your measured areas and product details, then calculate to see quantities and supplier comparisons.</p>
+<div id="projectResults"><div class="muted">Your project results will appear here. No measurements are saved or sent to a server.</div></div>
+</section>
+
+<section class="panel" aria-labelledby="coverage-heading">
+<h2 id="coverage-heading">Reverse coverage calculator</h2>
+<p class="panel-intro">Already have mulch on hand? Use the package label or an available bulk volume to estimate the theoretical area that quantity covers at your chosen depth.</p>
+<div class="toolbar">
+<div class="field"><label for="coverageMode">Quantity type</label><select id="coverageMode"><option value="bags">Labelled bags</option><option value="bulk">Bulk volume</option></select></div>
+<div class="field"><label for="coverageProduct">Product label</label><select id="coverageProduct"></select></div>
+<div class="field"><label for="coverageQuantity">Available quantity</label><input id="coverageQuantity" type="number" min="0" step="any" value="5"></div>
+<div class="field" id="coverageVolumeField" hidden><label for="coverageVolumeUnit">Bulk volume unit</label><select id="coverageVolumeUnit"><option value="yd3">Cubic yards</option><option value="ft3">Cubic feet</option><option value="m3">Cubic metres</option><option value="L">Litres</option></select></div>
+<div class="field"><label for="coverageDepth">Planned depth</label><div class="unit-input"><input id="coverageDepth" type="number" min="0" step="any" value="2"><label class="visually-hidden" for="coverageDepthUnit">Coverage depth unit</label><select id="coverageDepthUnit"><option value="in">Inches</option><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="ft">Feet</option></select></div></div>
+</div>
+<div class="button-row no-print"><button type="button" id="calculateCoverage">Calculate coverage</button></div>
+<div class="error" id="coverageError" role="alert"></div>
+<div id="coverageResult" class="coverage-result" hidden></div>
+</section>
+
+<section class="panel">
+<h2>How the mulch calculator works</h2>
+<p>For each bed, the calculator measures its net surface area and works out the extra depth needed to reach your target. It then calculates volume for that bed and adds any allowance you explicitly enter. Beds assigned to the same product are grouped; unlike products are kept separate.</p>
+<div class="formula">Added volume = net area × max(0, target depth − usable existing depth)</div>
+<p>For a rectangular bed, area is length × width. A circular bed uses π × radius². A tree ring uses the outer circle minus the inner circle. A triangle uses base × height ÷ 2. Custom-area mode uses an area you have already measured.</p>
+<div class="formula">Bag quantity = round up(required product volume ÷ labelled package volume)</div>
+<p>When a bag gives coverage instead of volume, package volume is derived from the stated coverage area multiplied by its stated coverage depth. A supplier bulk offer is rounded according to the minimum and increment you enter. The full quote comparison includes material price, delivery and the entered tax percentage.</p>
+</section>
+
+<section class="panel">
+<h2>Worked example: topping up more than one bed</h2>
+<p>Suppose a rectangular border is 10 ft by 4 ft, its measured usable existing mulch depth is 1 in, and the target total depth you choose is 3 in. The added depth is 2 in, so the geometric requirement is approximately 6.67 cubic feet (0.247 cubic yards) before any optional allowance. If a second tree ring uses a different product, it is calculated separately and never merged into the first product's bag count.</p>
+<p>This is a demonstration of the arithmetic, not a recommendation that every garden bed should receive a 3-inch layer. Choose depth based on your plant, existing mulch, local conditions and reliable horticultural guidance.</p>
+</section>
+
+<section class="panel">
+<h2>Measure beds accurately before ordering</h2>
+<p>Measure each bed separately and avoid counting overlapping sections twice. For an irregular shape, divide it into rectangles, circles and triangles that do not overlap, or enter a carefully measured net area. For a tree ring, measure the outer diameter and the inner diameter of the exclusion area. A ring calculation subtracts the middle circle from the outer circle.</p>
+<p>Use the existing depth only where the current material is usable and appropriate to retain. The calculator subtracts the entered existing depth mathematically; it cannot inspect mulch condition, compaction, decomposition, soil level or plant needs.</p>
+</section>
+
+<section class="panel">
+<h2>Compare bag and bulk mulch purchases responsibly</h2>
+<p>Bag sizes and coverage statements differ between products. Check whether the label gives volume, such as cubic feet or litres, or coverage at a stated depth. Do not compare two products solely by their volume if their material, particle size, moisture, quality or intended use differs.</p>
+<p>For bulk offers, enter the supplier's price unit, minimum order, increment, delivery charge and tax. Currency comparisons are only ranked when all offers for that product use the same currency. A quote missing a price is not treated as free or cheaper.</p>
+</section>
+
+<section class="panel faq">
+<h2>Frequently asked questions</h2>
+<details><summary>How do I calculate how much mulch I need?</summary><p>Measure each bed's net area, decide the target depth for that bed, subtract only the usable existing depth, then multiply the area by the additional depth. Convert the resulting volume into bags or bulk units using the actual product or supplier specification.</p></details>
+<details><summary>Does the calculator account for mulch already in the bed?</summary><p>Yes. Enter the measured existing depth for each bed. The calculator subtracts that value from the bed's target total depth. A bed already at or above the entered target produces zero additional volume; this is a calculation result, not advice about whether the existing material should remain.</p></details>
+<details><summary>Can I calculate a tree ring?</summary><p>Yes. Choose Ring and enter the outer diameter and inner diameter. The inner circle is excluded from the ring area. Measure the trunk or exclusion boundary rather than assuming a standard size.</p></details>
+<details><summary>Can different beds use different mulch products?</summary><p>Yes. Add each product and assign it to the relevant beds. Quantities are grouped only for beds that use the same named product, so unlike products are not mixed into a single purchase total.</p></details>
+<details><summary>How are bag counts calculated?</summary><p>The calculator divides required product volume by the volume derived from the actual package label, then rounds up to a whole package. If the label gives area coverage, its stated coverage depth is required to derive volume.</p></details>
+<details><summary>Does mulch have a universal weight per cubic yard?</summary><p>No universal weight is assumed. Weight can vary with material, particle size, moisture and supplier. This calculator focuses on volume and only reports weight if a future, separately sourced product-specific input is implemented; the present version does not estimate weight.</p></details>
+<details><summary>Should I always apply a fixed mulch depth?</summary><p>No. Depth depends on the material, plants, site and local guidance. Enter the depth appropriate to your project and consult local horticultural extension or product guidance. Avoid piling mulch against tree trunks and plant stems. Extension advice illustrates why one depth should not be hard-coded: Colorado State University Extension describes 3–4 inches for many mulches, while its tree guidance advises keeping mulch at least 6 inches from the trunk. Mississippi State University's landscape table gives 2–3 inches for examples such as pine or hardwood bark and compost, and its tree guidance discusses pulling mulch 2–3 inches back from trunks. These are context-specific examples, not universal settings; use guidance suitable for your plants and site.</p></details>
+<details><summary>Are supplier prices and product sizes updated automatically?</summary><p>No. Enter the current package label and supplier quote. The calculator runs locally in your browser and does not fetch or verify live availability, prices, taxes or delivery terms.</p></details>
+</section>
+
+<section class="panel">
+<h2>Sources and practical guidance</h2>
+<p>Depth, material choice and placement should be based on the intended use and plant/site conditions. These extension references explain mulch selection and application considerations; follow local advice and product instructions where they differ.</p>
+<ul class="source-list">
+<li><a href="https://extension.colostate.edu/resource/mulches-for-home-gardens/" rel="noopener noreferrer">Colorado State University Extension — Mulches for Home Gardens</a></li>
+<li><a href="https://extension.colostate.edu/resource/mulching-trees-and-shrubs/" rel="noopener noreferrer">Colorado State University Extension — Mulching Trees and Shrubs</a></li>
+<li><a href="https://extension.msstate.edu/publications/mulches-for-the-landscape" rel="noopener noreferrer">Mississippi State University Extension — Mulches for the Landscape</a></li>
+</ul>
+<p class="muted">This is a quantity and purchasing-planning tool, not an agronomic recommendation, site inspection or guarantee of product coverage. Always verify measurements, label details and supplier order terms before purchasing.</p>
+</section>
+<section class="panel related-tools" aria-labelledby="related-garden-tools-title">
+<h2 id="related-garden-tools-title">Related garden tools</h2>
+<p>Planning a raised garden bed? Use the <a href="/raised-bed-soil-calculator/">Raised Bed Soil Calculator</a> to combine several beds and work out the volume, bag count and optional cost for each ingredient in your own soil mix. For other loose aggregate and base projects, see the <a href="/gravel-calculator/">Gravel Calculator</a>.</p>
+</section>
+</main>
+<footer><div>© 2026 ZemTools</div><nav class="footer-links"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></footer>
+<script src="/mulch-calculator-engine.js"></script>
+<script>
+(function(){
+'use strict';
+const engine=window.ZemToolsMulchEngine;
+if(!engine){document.getElementById('projectError').textContent='The calculator engine could not load. Refresh the page or use the formula guide below.';document.getElementById('projectError').classList.add('show');return;}
+const $=id=>document.getElementById(id);
+let zoneCount=0,productCount=0,offerCount=0,lastResult=null,lastSummary='';
+const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const fmt=(value,places=2)=>Number(value).toLocaleString(undefined,{maximumFractionDigits:places});
+const areaFmt=m2=>fmt(m2/0.09290304,2)+' sq ft / '+fmt(m2,2)+' m²';
+const volumeFmt=m3=>fmt(m3/0.764554857984,3)+' yd³ / '+fmt(m3/0.028316846592,2)+' ft³ / '+fmt(m3,3)+' m³';
+const unitOptions=(units,selected)=>units.map(([v,t])=>'<option value="'+v+'" '+(v===selected?'selected':'')+'>'+t+'</option>').join('');
+function bindDynamicLabels(container,prefix){
+ container.querySelectorAll('.field').forEach((field,index)=>{const label=field.querySelector('label');const control=field.querySelector('input,select,textarea');if(!label||!control)return;const id=prefix+'-field-'+index;control.id=id;label.htmlFor=id;});
+}
+function addZone(data){
+ if(zoneCount>=50)return;
+ const id='zone-'+(++zoneCount);
+ const d=data||{};
+ const card=document.createElement('article');card.className='zone-card';card.dataset.id=id;
+ card.innerHTML='<div class="zone-head"><strong>Garden area '+zoneCount+'</strong><button type="button" class="danger remove-zone">Remove area</button></div>'+
+ '<div class="toolbar"><div class="field"><label>Area name</label><input data-zone="name" maxlength="60" value="'+esc(d.name||('Bed '+zoneCount))+'"></div><div class="field"><label>Bed shape</label><select data-zone="shape"><option value="rectangle">Rectangle</option><option value="circle">Circle</option><option value="ring">Tree ring / annulus</option><option value="triangle">Triangle</option><option value="custom">Measured custom area</option></select></div><div class="field"><label>Mulch product</label><select data-zone="productId" class="zone-product"></select></div></div>'+
+ '<div class="shape-fields"><div class="field shape-field rectangle"><label>Length</label><input data-zone="length" type="number" min="0" step="any" value="'+esc(d.length??10)+'"></div><div class="field shape-field rectangle"><label>Width</label><input data-zone="width" type="number" min="0" step="any" value="'+esc(d.width??4)+'"></div><div class="field shape-field circle"><label>Diameter</label><input data-zone="diameter" type="number" min="0" step="any" value="6"></div><div class="field shape-field ring"><label>Outer diameter</label><input data-zone="outerDiameter" type="number" min="0" step="any" value="6"></div><div class="field shape-field ring"><label>Inner diameter to exclude</label><input data-zone="innerDiameter" type="number" min="0" step="any" value="1"></div><div class="field shape-field triangle"><label>Base</label><input data-zone="base" type="number" min="0" step="any" value="10"></div><div class="field shape-field triangle"><label>Height</label><input data-zone="height" type="number" min="0" step="any" value="5"></div><div class="field shape-field custom"><label>Measured area before optional exclusion</label><input data-zone="customArea" type="number" min="0" step="any" value="50"></div><div class="field shape-field custom"><label>Area unit</label><select data-zone="areaUnit">'+unitOptions([['ft2','sq ft'],['m2','sq m'],['yd2','sq yd'],['acre','acres']], 'ft2')+'</select></div><div class="field shape-field extra-exclusion"><label>Additional excluded area (optional)</label><input data-zone="excludedArea" type="number" min="0" step="any" placeholder="0"></div><div class="field shape-field extra-exclusion"><label>Excluded area unit</label><select data-zone="excludedAreaUnit">'+unitOptions([['ft2','sq ft'],['m2','sq m'],['yd2','sq yd'],['acre','acres']], 'ft2')+'</select></div></div>'+
+ '<div class="depth-grid"><div class="field"><label>Target total depth</label><input data-zone="targetDepth" type="number" min="0" step="any" value="'+esc(d.targetDepth??3)+'"></div><div class="field"><label>Usable existing depth</label><input data-zone="existingDepth" type="number" min="0" step="any" value="'+esc(d.existingDepth??0)+'"></div><div class="field"><label>Optional allowance (%)</label><input data-zone="allowancePercent" type="number" min="0" max="100" step="any" value="'+esc(d.allowancePercent??0)+'"></div><div class="field"><strong>What is included?</strong><span class="hint">Only the entered extra depth and allowance are counted.</span></div></div>';
+ card.querySelector('[data-zone="shape"]').value=d.shape||'rectangle';
+ bindDynamicLabels(card,id);$('zoneList').appendChild(card);syncShape(card);refreshProductOptions();
+}
+function syncShape(card){
+ const shape=card.querySelector('[data-zone="shape"]').value;
+ card.querySelectorAll('.shape-field').forEach(el=>{el.hidden=!el.classList.contains(shape)&&!el.classList.contains('extra-exclusion');});
+}
+function refreshProductOptions(){
+ const products=[...$('productList').querySelectorAll('.product-card')];
+ document.querySelectorAll('.zone-product').forEach(select=>{
+  const old=select.value;
+  select.innerHTML=products.map((card,i)=>'<option value="'+esc(card.dataset.id)+'">'+esc(card.querySelector('[data-product="name"]').value||('Product '+(i+1)))+'</option>').join('');
+  if(products.some(p=>p.dataset.id===old))select.value=old;
+ });
+ $('coverageProduct').innerHTML=products.map((card,i)=>'<option value="'+esc(card.dataset.id)+'">'+esc(card.querySelector('[data-product="name"]').value||('Product '+(i+1)))+'</option>').join('');
+}
+function addOffer(card,data){
+ const id='offer-'+(++offerCount);
+ const offer=document.createElement('div');offer.className='offer-card';offer.dataset.id=id;
+ const d=data||{};
+ offer.innerHTML='<div class="offer-head"><strong>Supplier offer</strong><button type="button" class="danger remove-offer">Remove</button></div><div class="offer-grid">'+
+ '<div class="field"><label>Supplier / store</label><input data-offer="supplier" maxlength="70" placeholder="Supplier name" value="'+esc(d.supplier||'')+'"></div>'+
+ '<div class="field"><label>Purchase type</label><select data-offer="mode"><option value="bag">Bagged</option><option value="bulk">Bulk</option></select></div>'+
+ '<div class="field"><label>Currency</label><input data-offer="currency" maxlength="6" value="'+esc(d.currency||'USD')+'" aria-label="Currency code"></div>'+
+ '<div class="field"><label data-price-label>Price per bag</label><input data-offer="price" type="number" min="0" step="any" placeholder="Enter quote"></div>'+
+ '<div class="field bulk-only" hidden><label>Price volume unit</label><select data-offer="priceVolumeUnit">'+unitOptions([['yd3','per yd³'],['ft3','per ft³'],['m3','per m³'],['L','per litre']],'yd3')+'</select></div>'+
+ '<div class="field"><label>Delivery / shipping</label><input data-offer="deliveryFee" type="number" min="0" step="any" value="'+esc(d.deliveryFee??0)+'"></div>'+
+ '<div class="field"><label>Tax (%)</label><input data-offer="taxPercent" type="number" min="0" max="100" step="any" value="'+esc(d.taxPercent??0)+'"></div>'+
+ '<div class="field bag-only"><label>Minimum bags</label><input data-offer="minimumQuantity" type="number" min="0" step="any" value="'+esc(d.minimumQuantity??0)+'"></div>'+
+ '<div class="field bag-only"><label>Bag order increment</label><input data-offer="orderIncrementBag" type="number" min="1" step="any" value="'+esc(d.orderIncrement??1)+'"></div>'+
+ '<div class="field bulk-only" hidden><label>Minimum bulk volume</label><input data-offer="minimumVolume" type="number" min="0" step="any" value="'+esc(d.minimumVolume??0)+'"></div>'+
+ '<div class="field bulk-only" hidden><label>Bulk order increment</label><input data-offer="orderIncrementBulk" type="number" min="0" step="any" value="'+esc(d.orderIncrementBulk??0)+'"></div>'+
+ '</div><p class="hint">Leave the price blank until you have a current supplier quote. Taxes are applied to the entered material subtotal plus delivery.</p>';
+ if(d.mode)offer.querySelector('[data-offer="mode"]').value=d.mode;
+ bindDynamicLabels(offer,id);card.querySelector('.offer-list').appendChild(offer);syncOffer(offer);
+}
+function syncOffer(offer){
+ const mode=offer.querySelector('[data-offer="mode"]').value;
+ offer.querySelector('[data-price-label]').textContent=mode==='bag'?'Price per bag':'Price per selected volume unit';
+ offer.querySelectorAll('.bag-only').forEach(el=>el.hidden=mode!=='bag');
+ offer.querySelectorAll('.bulk-only').forEach(el=>el.hidden=mode!=='bulk');
+}
+function addProduct(data){
+ if($('productList').children.length>=20)return;
+ const id='product-'+(++productCount),d=data||{};
+ const card=document.createElement('article');card.className='product-card';card.dataset.id=id;
+ card.innerHTML='<div class="product-head"><strong>Mulch product '+productCount+'</strong><button type="button" class="danger remove-product">Remove product</button></div>'+
+ '<div class="product-grid"><div class="field"><label>Product name / label</label><input data-product="name" maxlength="70" value="'+esc(d.name||('Mulch product '+productCount))+'"></div>'+
+ '<div class="field"><label>Product type (optional)</label><select data-product="type"><option value="bark">Bark</option><option value="wood">Wood / shredded</option><option value="rubber">Rubber</option><option value="compost">Compost / organic</option><option value="other">Other / mixed</option></select></div>'+
+ '<div class="field"><label>What does the bag label state?</label><select data-product="basis"><option value="volume">Net package volume</option><option value="coverage">Coverage at a stated depth</option></select></div>'+
+ '</div><div class="product-grid bag-volume-fields"><div class="field"><label>Package volume</label><input data-product="volume" type="number" min="0" step="any" placeholder="Read the actual label"></div><div class="field"><label>Volume unit</label><select data-product="volumeUnit">'+unitOptions([['ft3','cubic feet'],['L','litres'],['m3','cubic metres'],['yd3','cubic yards']], 'ft3')+'</select></div></div>'+
+ '<div class="product-grid bag-coverage-fields" hidden><div class="field"><label>Label coverage area</label><input data-product="coverageArea" type="number" min="0" step="any" placeholder="Label area"></div><div class="field"><label>Coverage area unit</label><select data-product="coverageAreaUnit">'+unitOptions([['ft2','sq ft'],['m2','sq m'],['yd2','sq yd']], 'ft2')+'</select></div><div class="field"><label>Label coverage depth</label><input data-product="coverageDepth" type="number" min="0" step="any" placeholder="Label depth"></div><div class="field"><label>Coverage depth unit</label><select data-product="coverageDepthUnit">'+unitOptions([['in','inches'],['cm','cm'],['mm','mm'],['ft','feet']], 'in')+'</select></div></div>'+
+ '<p class="hint">Use the net volume or coverage printed on this exact package. Do not enter package weight in place of volume.</p>'+
+ '<div class="offer-list"></div><div class="button-row no-print"><button type="button" class="add-offer">+ Add supplier offer</button></div>';
+ if(d.type)card.querySelector('[data-product="type"]').value=d.type;
+ if(d.basis)card.querySelector('[data-product="basis"]').value=d.basis;
+ if(d.volume)card.querySelector('[data-product="volume"]').value=d.volume;
+ if(d.volumeUnit)card.querySelector('[data-product="volumeUnit"]').value=d.volumeUnit;
+ if(d.coverageArea)card.querySelector('[data-product="coverageArea"]').value=d.coverageArea;
+ if(d.coverageDepth)card.querySelector('[data-product="coverageDepth"]').value=d.coverageDepth;
+ bindDynamicLabels(card,id);$('productList').appendChild(card);
+ addOffer(card);
+ syncProduct(card);refreshProductOptions();
+}
+function syncProduct(card){
+ const basis=card.querySelector('[data-product="basis"]').value;
+ card.querySelector('.bag-volume-fields').hidden=basis!=='volume';
+ card.querySelector('.bag-coverage-fields').hidden=basis!=='coverage';
+}
+function collectProducts(){
+ return [...$('productList').querySelectorAll('.product-card')].map(card=>{
+  const val=name=>card.querySelector('[data-product="'+name+'"]')?.value??'';
+  const offers=[...card.querySelectorAll('.offer-card')].map(offer=>{
+   const get=name=>offer.querySelector('[data-offer="'+name+'"]')?.value??'';
+   const mode=get('mode');
+   return {id:offer.dataset.id,supplier:get('supplier'),mode,currency:get('currency'),pricePerPackage:mode==='bag'?get('price'):undefined,pricePerVolume:mode==='bulk'?get('price'):undefined,priceVolumeUnit:get('priceVolumeUnit'),deliveryFee:get('deliveryFee'),taxPercent:get('taxPercent'),minimumQuantity:get('minimumQuantity'),minimumVolume:get('minimumVolume'),orderIncrement:mode==='bag'?get('orderIncrementBag'):get('orderIncrementBulk')};
+  });
+  const basis=val('basis');
+  return {id:card.dataset.id,name:val('name'),type:val('type'),bag:basis==='coverage'?{basis:'coverage',coverageArea:val('coverageArea'),coverageAreaUnit:val('coverageAreaUnit'),coverageDepth:val('coverageDepth'),coverageDepthUnit:val('coverageDepthUnit')}:{basis:'volume',volume:val('volume'),volumeUnit:val('volumeUnit')},offers};
+ });
+}
+function collectZones(){
+ return [...$('zoneList').querySelectorAll('.zone-card')].map(card=>{
+  const get=name=>card.querySelector('[data-zone="'+name+'"]')?.value??'';
+  return {id:card.dataset.id,name:get('name'),shape:get('shape'),productId:get('productId'),length:get('length'),width:get('width'),diameter:get('diameter'),outerDiameter:get('outerDiameter'),innerDiameter:get('innerDiameter'),base:get('base'),height:get('height'),customArea:get('customArea'),areaUnit:get('areaUnit'),excludedArea:get('excludedArea'),excludedAreaUnit:get('excludedAreaUnit'),targetDepth:get('targetDepth'),existingDepth:get('existingDepth'),allowancePercent:get('allowancePercent')};
+ });
+}
+function showError(box,message){box.textContent=message;box.classList.add('show');}
+function clearErrors(){['projectError','coverageError'].forEach(id=>{$(id).textContent='';$(id).classList.remove('show');});}
+function money(value,currency){return esc(currency)+' '+fmt(value,2);}
+function renderResults(data){
+ const total=data.totalRequiredM3;
+ const depthUnit=$('depthUnit').value;
+ const depthScale={in:0.0254,cm:0.01,mm:0.001,ft:0.3048,m:1}[depthUnit]||0.0254;
+ const depthFmt=value=>fmt(value/depthScale,2)+' '+depthUnit;
+ let html='<div class="result-grid"><div class="result-stat"><span>Net project area</span><strong>'+areaFmt(data.totalAreaM2)+'</strong></div><div class="result-stat"><span>Required mulch volume</span><strong>'+volumeFmt(total)+'</strong></div><div class="result-stat"><span>Separate product lines</span><strong>'+data.products.length+'</strong></div></div>';
+ html+='<h3>Area-by-area calculation</h3>';
+ html+='<div>'+data.zones.map(z=>'<article class="result-zone"><strong>'+esc(z.name)+'</strong> <span class="muted">· '+esc(z.shape)+'</span><div class="result-detail"><div><span>Net area</span><strong>'+areaFmt(z.areaM2)+'</strong></div><div><span>Target depth</span><strong>'+depthFmt(z.targetDepthM)+'</strong></div><div><span>Usable existing depth</span><strong>'+depthFmt(z.existingDepthM)+'</strong></div><div><span>Added depth</span><strong>'+depthFmt(z.addedDepthM)+'</strong></div><div><span>Required volume</span><strong>'+volumeFmt(z.requiredVolumeM3)+'</strong></div><div><span>Status</span><strong>'+(z.alreadyAtTarget?'Already at / above target':'Top-up needed')+'</strong></div></div></article>').join('')+'</div>';
+ html+='<h3>Product quantities and supplier offers</h3>';
+ html+='<div>'+data.products.map(p=>{
+  const quotes=p.noPurchaseNeeded?'<p class="muted">No additional mulch is required at the entered target depths. Supplier minimums are not applied to a zero-volume project.</p>':p.quotes.length?'<div style="max-width:100%;overflow-x:auto"><table class="quote-table"><thead><tr><th>Supplier</th><th>Material</th><th>Order</th><th>Surplus volume</th><th>Delivery</th><th>Tax</th><th>Total</th></tr></thead><tbody>'+p.quotes.map(q=>'<tr><td>'+esc(q.supplier)+(q.id===p.bestOfferId?' <span class="best-offer">Lowest total</span>':'')+'</td><td>'+money(q.materialCost,q.currency)+'</td><td>'+fmt(q.orderQuantity,2)+' '+esc(q.unitLabel)+'</td><td>'+volumeFmt(q.surplusVolumeM3)+'</td><td>'+money(q.deliveryFee,q.currency)+'</td><td>'+money(q.taxAmount,q.currency)+'</td><td><strong>'+money(q.totalCost,q.currency)+'</strong></td></tr>').join('')+'</tbody></table></div>': '<p class="muted">No complete priced supplier offer entered for this product. Your label-based bag count and required volume are still available above.</p>';
+  const warning=!p.comparable&&p.quotes.length?'<p class="muted">Offers use different currencies and are not ranked against each other.</p>':'';
+  const bag=p.bagVolumeM3?'Label package volume: '+volumeFmt(p.bagVolumeM3):'Bag package volume not entered or not derivable from a complete label specification.';
+  const bagCount=p.packagesRequired===null?'Enter a complete package label to calculate bags':fmt(p.packagesRequired,0)+' whole bags';
+  const bagSurplus=p.bagSurplusVolumeM3===null?'Not available':volumeFmt(p.bagSurplusVolumeM3);
+  return '<article class="result-product"><h4>'+esc(p.productName)+'</h4><div class="result-detail"><div><span>Assigned area</span><strong>'+areaFmt(p.areaM2)+'</strong></div><div><span>Required volume</span><strong>'+volumeFmt(p.requiredVolumeM3)+'</strong></div><div><span>Allowance volume</span><strong>'+volumeFmt(p.allowanceVolumeM3)+'</strong></div><div><span>Bag quantity from label</span><strong>'+esc(bagCount)+'</strong></div><div><span>Bag surplus</span><strong>'+esc(bagSurplus)+'</strong></div><div><span>Package specification</span><strong>'+esc(bag)+'</strong></div></div>'+quotes+warning+(p.quoteErrors.length?'<p class="muted">Some offers need correction: '+p.quoteErrors.map(e=>esc(e.supplier)+': '+esc(e.message)).join('; ')+'</p>':'')+'</article>';
+ }).join('')+'</div>';
+ html+='<p class="hint">Volumes are calculated before display rounding. Bag counts use the package volume derived from the label and round up to whole bags. Supplier purchase totals use the prices and terms you entered. No weight or density is assumed. The lowest offer is only the lowest computed total for that named product and currency; it does not judge product quality or suitability.</p>';
+ $('projectResults').innerHTML=html;
+}
+function calculate(){
+ clearErrors();$('projectStatus').classList.remove('show');
+ const result=engine.calculateProject({lengthUnit:$('lengthUnit').value,depthUnit:$('depthUnit').value,zones:collectZones(),products:collectProducts()});
+ if(!result.ok){showError($('projectError'),result.error.message);lastResult=null;['copyResult','downloadJson','downloadCsv','printResult'].forEach(id=>$(id).disabled=true);return;}
+ lastResult={projectName:$('projectName').value.trim(),input:{lengthUnit:$('lengthUnit').value,depthUnit:$('depthUnit').value,zones:collectZones(),products:collectProducts()},result:result.data};
+ renderResults(result.data);
+ lastSummary='Mulch project: '+(lastResult.projectName||'Untitled')+'\nTotal area: '+areaFmt(result.data.totalAreaM2)+'\nTotal volume: '+volumeFmt(result.data.totalRequiredM3)+'\n'+result.data.products.map(p=>p.productName+': '+volumeFmt(p.requiredVolumeM3)+(p.bestOffer?' | lowest entered quote '+money(p.bestOffer.totalCost,p.bestOffer.currency):'')).join('\n');
+ ['copyResult','downloadJson','downloadCsv','printResult'].forEach(id=>$(id).disabled=false);
+ $('resultIntro').textContent='Calculation complete. Review the per-area figures and product-specific purchase offers below.';
+ $('projectStatus').textContent='Project calculated locally in this browser. Your measurements and price inputs are not uploaded.';
+ $('projectStatus').classList.add('show');
+}
+function download(name,type,text){
+ const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function reset(){
+ $('zoneList').innerHTML='';$('productList').innerHTML='';zoneCount=0;productCount=0;offerCount=0;lastResult=null;lastSummary='';
+ addProduct();addZone();
+ $('projectResults').innerHTML='<div class="muted">Your project results will appear here. No measurements are saved or sent to a server.</div>';
+ $('resultIntro').textContent='Enter your measured areas and product details, then calculate to see quantities and supplier comparisons.';
+ clearErrors();$('projectStatus').classList.remove('show');['copyResult','downloadJson','downloadCsv','printResult'].forEach(id=>$(id).disabled=true);
+}
+$('addZone').addEventListener('click',()=>{addZone();});
+$('addProduct').addEventListener('click',()=>addProduct());
+$('zoneList').addEventListener('change',e=>{const card=e.target.closest('.zone-card');if(!card)return;if(e.target.matches('[data-zone="shape"]'))syncShape(card);if(e.target.matches('[data-zone="productId"]')){}});
+$('zoneList').addEventListener('click',e=>{const b=e.target.closest('.remove-zone');if(!b)return;const cards=$('zoneList').querySelectorAll('.zone-card');if(cards.length<=1){showError($('projectError'),'Keep at least one project area.');return;}b.closest('.zone-card').remove();});
+$('productList').addEventListener('input',e=>{const card=e.target.closest('.product-card');if(card&&e.target.matches('[data-product="name"]'))refreshProductOptions();});
+$('productList').addEventListener('change',e=>{const card=e.target.closest('.product-card'),offer=e.target.closest('.offer-card');if(card&&e.target.matches('[data-product="basis"]'))syncProduct(card);if(offer&&e.target.matches('[data-offer="mode"]'))syncOffer(offer);});
+$('productList').addEventListener('click',e=>{
+ const card=e.target.closest('.product-card');if(!card)return;
+ if(e.target.closest('.add-offer')){if(card.querySelectorAll('.offer-card').length>=12)return;addOffer(card);}
+ if(e.target.closest('.remove-offer')){const offers=card.querySelectorAll('.offer-card');if(offers.length<=1)return; e.target.closest('.offer-card').remove();}
+ if(e.target.closest('.remove-product')){if($('productList').children.length<=1){showError($('projectError'),'Keep at least one mulch product.');return;}card.remove();refreshProductOptions();}
+});
+$('calculateProject').addEventListener('click',calculate);
+$('resetProject').addEventListener('click',reset);
+$('copyResult').addEventListener('click',()=>navigator.clipboard?.writeText(lastSummary).then(()=>{$('projectStatus').textContent='Summary copied.';}).catch(()=>showError($('projectError'),'Copy is not available in this browser.')));
+$('downloadJson').addEventListener('click',()=>{if(lastResult)download('zemtools-mulch-project.json','application/json',JSON.stringify(lastResult,null,2));});
+$('downloadCsv').addEventListener('click',()=>{if(!lastResult)return;const rows=[['Area','Shape','Product','Area m2','Target depth m','Existing depth m','Added depth m','Required volume m3'],...lastResult.result.zones.map(z=>[z.name,z.shape,z.productName,z.areaM2,z.targetDepthM,z.existingDepthM,z.addedDepthM,z.requiredVolumeM3])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');download('zemtools-mulch-areas.csv','text/csv;charset=utf-8',csv);});
+$('printResult').addEventListener('click',()=>window.print());
+$('coverageMode').addEventListener('change',()=>{$('coverageVolumeField').hidden=$('coverageMode').value!=='bulk';$('coverageProduct').disabled=$('coverageMode').value==='bulk';});
+$('calculateCoverage').addEventListener('click',()=>{
+ $('coverageError').classList.remove('show');$('coverageResult').hidden=true;
+ const mode=$('coverageMode').value,products=collectProducts(),product=products.find(p=>p.id===$('coverageProduct').value);
+ const result=engine.calculateCoverage({quantityMode:mode==='bags'?'bags':'bulk',quantity:$('coverageQuantity').value,depth:$('coverageDepth').value,depthUnit:$('coverageDepthUnit').value,volumeUnit:$('coverageVolumeUnit').value,product});
+ if(!result.ok){showError($('coverageError'),result.error.message);return;}
+ $('coverageResult').innerHTML='<strong>Estimated theoretical coverage</strong><div class="result-grid"><div class="result-stat"><span>Area</span><strong>'+fmt(result.data.areaFt2,1)+' sq ft</strong></div><div class="result-stat"><span>Metric area</span><strong>'+fmt(result.data.areaM2,2)+' m²</strong></div><div class="result-stat"><span>Material volume</span><strong>'+volumeFmt(result.data.availableVolumeM3)+'</strong></div></div><p class="hint">This geometric estimate assumes the entered quantity is usable and is applied at a uniform entered depth. Actual coverage can differ with product, surface and installation.</p>';
+ $('coverageResult').hidden=false;
+});
+addProduct();addZone();
+refreshProductOptions();
+})();
+</script>
+<script src="/master-ui.js?v=20261114-shell-final"></script>
+</body>
+</html>

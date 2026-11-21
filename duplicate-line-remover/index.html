@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Duplicate Line Remover | Remove Duplicate Lines Online</title>
+<meta name="description" content="Remove duplicate lines online while preserving order. Ignore case, trim spaces, remove blank lines, sort A–Z, or keep the first or last match."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://zemtools.com/duplicate-line-remover/"/>
+<meta name="theme-color" content="#0f172a"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Duplicate Line Remover | Remove Duplicate Lines Online"/>
+<meta property="og:description" content="Deduplicate line-based text in your browser with options for case, whitespace, blank lines and which occurrence to keep."/>
+<meta property="og:url" content="https://zemtools.com/duplicate-line-remover/"/>
+<meta property="og:image" content="https://zemtools.com/social-preview.png"/>
+<meta property="og:image:alt" content="ZemTools — Practical Online Tools"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Duplicate Line Remover | Remove Duplicate Lines Online"/>
+<meta name="twitter:description" content="Deduplicate line-based text in your browser with options for case, whitespace, blank lines and which occurrence to keep."/>
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Duplicate Line Remover","url":"https://zemtools.com/duplicate-line-remover/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Browser-based duplicate line remover for lists, URLs, keywords, logs and other line-separated text."}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},
+{"@type":"ListItem","position":2,"name":"Digital & Developer","item":"https://zemtools.com/digital-developer/"},
+{"@type":"ListItem","position":3,"name":"Duplicate Line Remover","item":"https://zemtools.com/duplicate-line-remover/"}
+]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean"/>
+<link rel="stylesheet" href="master-related-tools.css"/>
+<style>.dup-tool .editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dup-tool textarea{width:100%;min-height:320px;resize:vertical;border:1px solid #c6d7e8;border-radius:12px;padding:13px 14px;background:#fff;color:var(--text);font:15px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;outline:none}.dup-tool textarea:focus{border-color:#2778ea;box-shadow:0 0 0 3px rgba(39,120,234,.13)}.dup-tool .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}.dup-tool .option{display:flex;gap:10px;padding:12px 13px;border:1px solid #d8e5f3;border-radius:12px;background:#f8fbff}.dup-tool .option input{width:19px;min-height:19px;margin:2px 0 0;flex:0 0 auto;accent-color:#1767e7}.dup-tool .option label{margin:0;font-weight:800;cursor:pointer}.dup-tool .option small{display:block;color:var(--muted);font-weight:400}.dup-tool .toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.dup-tool .toolbar .secondary{width:auto}.dup-tool .stats{margin-top:12px}.dup-tool .status{margin-top:9px;color:var(--muted);font-size:13px}.dup-tool .mode{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}.dup-tool .mode button{border:1px solid #d8e5f3;background:#fff;color:#2c557e;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}.dup-tool .mode button.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent}
+.dup-tool .result-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.dup-tool .result-modes button{min-height:44px;border-radius:10px;line-height:1.25}.dup-tool #occurrenceControl[hidden]{display:none}@media(max-width:700px){.dup-tool .result-modes{grid-template-columns:1fr}}@media(max-width:800px){.dup-tool .editor-grid{grid-template-columns:1fr}.dup-tool .options{grid-template-columns:1fr}}@media(max-width:700px){.dup-tool textarea{min-height:250px}}
+</style>
+</head>
+<body class="tool-page dup-tool">
+<a class="skip-link" href="#main-content">Skip to duplicate line remover</a>
+<header class="site-header zem-header"><div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+</div></header>
+
+<main id="main-content">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="digital-developer/">Digital &amp; Developer</a><span class="crumb-sep">›</span><span>Duplicate Line Remover</span></nav>
+<section class="hero"><div class="tool-icon" aria-hidden="true">⧉</div><div><h1>Remove Duplicate Lines Online</h1><p>Deduplicate a pasted list, URL set, keyword list or text file while keeping the first or last occurrence of each matching line.</p></div></section>
+<div class="info-callout"><div class="info-icon" aria-hidden="true">✓</div><div><strong>Browser-based deduplication.</strong> Your text is processed locally. Choose how duplicates should be compared, then copy the cleaned list.</div></div>
+<section class="card" aria-labelledby="tool-title">
+<div class="card-head"><h2 id="tool-title">Remove duplicate lines</h2><button class="secondary" id="sampleBtn" type="button">Load sample</button></div>
+<div class="editor-grid">
+<div><label for="inputText">Input list</label><textarea id="inputText" spellcheck="false" placeholder="Paste one item per line…"></textarea></div>
+<div><label id="outputLabel" for="outputText">Unique result</label><textarea id="outputText" spellcheck="false" readonly placeholder="Your deduplicated text will appear here…"></textarea></div>
+</div>
+<div class="options">
+<div class="option"><input id="ignoreCase" type="checkbox"/><div><label for="ignoreCase">Ignore case</label><small>Apple and apple count as the same line.</small></div></div>
+<div class="option"><input id="trimWhitespace" type="checkbox" checked/><div><label for="trimWhitespace">Trim whitespace before comparison</label><small>Ignore leading and trailing spaces when matching.</small></div></div>
+<div class="option"><input id="removeBlanks" type="checkbox" checked/><div><label for="removeBlanks">Remove blank lines</label><small>Exclude empty lines from the result.</small></div></div>
+<div class="option"><input id="sortOutput" type="checkbox"/><div><label for="sortOutput">Sort result A–Z</label><small>Sort unique lines after deduplication.</small></div></div>
+</div>
+<div class="result-mode-wrap"><label>Result mode</label><div class="mode result-modes" role="group" aria-label="Result mode"><button class="active" data-result-mode="remove" type="button" aria-pressed="true">Remove duplicates</button><button data-result-mode="duplicates" type="button" aria-pressed="false">Find duplicates</button><button data-result-mode="unique" type="button" aria-pressed="false">Keep unique only</button></div></div>
+<div id="occurrenceControl"><label>Which occurrence to keep?</label><div class="mode" role="group" aria-label="Occurrence mode"><button class="active" data-mode="first" type="button" aria-pressed="true">Keep first</button><button data-mode="last" type="button" aria-pressed="false">Keep last</button></div></div>
+<div class="toolbar"><button class="primary" id="dedupeBtn" type="button">Remove duplicates</button><button class="secondary" id="copyBtn" type="button" disabled>Copy Result</button><button class="secondary" id="clearBtn" type="button">Clear</button></div>
+<div class="status" id="status" aria-live="polite">Paste your list above, then choose a result mode.</div>
+<div class="stats"><div class="stat"><b>Input</b><span id="inputStats">0 lines</span></div><div class="stat"><b id="outputStatsLabel">Unique</b><span id="outputStats">0 lines</span></div><div class="stat"><b id="removedStatsLabel">Duplicates removed</b><span id="removedStats">0 duplicates</span></div></div>
+</section>
+<section class="card"><h2>Common uses</h2><ul><li>Deduplicate keyword, URL or email lists.</li><li>Clean repeated log lines or exported values.</li><li>Remove duplicate entries before importing a list into another tool.</li><li>Combine copied lists while preserving the original order.</li></ul></section>
+<section class="card">
+<h2>Remove duplicate lines online from text and lists</h2>
+<p>Use this duplicate line remover online to clean a pasted list without changing the order of its first occurrences. It is useful for keyword research, URL lists, product or inventory exports, email lists, copied notes and text logs where the same entry appears more than once.</p>
+<p>Paste one item per line, choose how matching should work, and select whether to keep the first or last occurrence. Turn on <strong>Ignore case</strong> to treat values such as <code>Apple</code> and <code>apple</code> as a match. Turn on <strong>Trim whitespace</strong> to compare lines after removing leading and trailing spaces, or remove blank lines before copying the cleaned result.</p>
+<ul>
+<li><strong>Preserve the original order:</strong> Keep first retains the earliest matching line and its position.</li>
+<li><strong>Keep the latest version:</strong> Keep last retains the final occurrence of each matching line.</li>
+<li><strong>Find duplicates:</strong> Show every line that belongs to a repeated group without removing the original occurrences.</li>
+<li><strong>Keep only unique entries:</strong> Show lines that appear exactly once and exclude all repeated values.</li>
+<li><strong>Sort when needed:</strong> A–Z sorting is optional and happens after the selected result is prepared.</li>
+<li><strong>Review before reuse:</strong> Check the output before importing or publishing a cleaned list.</li>
+</ul>
+<p>The tool processes text in your browser; it does not need to upload your pasted list to a server. Matching options affect how lines are compared, while the selected source line is kept in its original form.</p>
+</section>
+
+<section class="card"><h2>How it works</h2><p>Each newline-separated entry is compared using your selected rules. Remove duplicates keeps the first or last copy of each matching line; Find duplicates shows every occurrence that belongs to a repeated group; Keep unique only shows entries that appear exactly once. The original source text is not rewritten just because whitespace or case-insensitive comparison is enabled. Matching compares whole lines; it does not remove a line just because it contains another line as a substring.</p></section>
+
+<section class="card" aria-labelledby="duplicate-example-title">
+<h2 id="duplicate-example-title">Example: remove duplicate lines from a list</h2>
+<p>With <strong>Ignore case</strong> and <strong>Trim whitespace</strong> enabled, these entries are treated as duplicates even though their capitalization or outside spaces differ:</p>
+<pre><code>Apple
+banana
+ Apple
+BANANA
+Cherry</code></pre>
+<p><strong>Keep first</strong> produces:</p>
+<pre><code>Apple
+banana
+Cherry</code></pre>
+<p>Choose <strong>Keep last</strong> to retain the final source occurrence instead. Turn on <strong>Sort result A–Z</strong> only when you want the unique output sorted rather than kept in source order.</p>
+</section>
+<section class="card" aria-labelledby="faq-title"><h2 id="faq-title">FAQ</h2>
+<div class="faq"><button type="button"><span>How do I remove duplicate lines from a text file?</span><span class="faq-icon">+</span></button><div class="faq-answer">Paste the text with one entry per line, choose your comparison options, and select Remove Duplicates. Copy the unique result when you are satisfied with it.</div></div>
+<div class="faq"><button type="button"><span>Can I remove duplicate lines online without changing the original order?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Leave Sort result A–Z turned off and choose Keep first to preserve the order of each entry's first appearance.</div></div>
+<div class="faq"><button type="button"><span>Does it preserve order?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Keep first preserves first-appearance order. Keep last retains the last occurrence of each value; sorting can then be applied if selected.</div></div>
+<div class="faq"><button type="button"><span>Can Apple and apple be treated as duplicates?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Turn on Ignore case.</div></div>
+<div class="faq"><button type="button"><span>Does trimming change my output?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. Trimming is used for comparison. The selected source line is kept as written unless sorting changes its position.</div></div>
+<div class="faq"><button type="button"><span>Does it remove partial or similar lines?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. It compares whole lines. A line is considered a duplicate only when its full value matches another line under your selected case and whitespace options; differences inside the text are not treated as approximate matches.</div></div>
+<div class="faq"><button type="button"><span>Can I remove duplicate rows from a spreadsheet?</span><span class="faq-icon">+</span></button><div class="faq-answer">This tool compares each pasted line as one complete entry. It does not compare individual spreadsheet columns or remove rows based on selected columns. For best results, copy the one-column list you want to deduplicate, with one item per line.</div></div>
+<div class="faq"><button type="button"><span>Can I find duplicate lines without removing them?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Choose <strong>Find duplicates</strong> to display every line that belongs to a repeated group. Your original input stays unchanged.</div></div>
+<div class="faq"><button type="button"><span>How do I keep only lines that appear once?</span><span class="faq-icon">+</span></button><div class="faq-answer">Choose <strong>Keep unique only</strong>. The result includes lines whose matching value occurs exactly once and excludes every repeated value under your selected comparison rules.</div></div>
+<div class="faq"><button type="button"><span>Is my text uploaded?</span><span class="faq-icon">+</span></button><div class="faq-answer">No server upload is required. The deduplication runs in your browser.</div></div>
+</section>
+
+<section class="card related-tools" aria-labelledby="related-title"><h2 id="related-title">Related Tools</h2><div class="related-grid">
+<a class="related-item" href="text-cleaner/"><div><strong>Text Cleaner</strong><span>Clean and normalize text before removing duplicates.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="remove-line-breaks/"><div><strong>Remove Line Breaks</strong><span>Join broken lines before deduplicating text.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="find-replace/"><div><strong>Find & Replace</strong><span>Replace repeated values or text patterns.</span></div><span aria-hidden="true">›</span></a>
+<a class="related-item" href="case-converter/"><div><strong>Case Converter</strong><span>Normalize text capitalization and naming styles.</span></div><span aria-hidden="true">›</span></a>
+</div></section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+
+
+<script>
+(()=>{'use strict';const $=id=>document.getElementById(id);let keepMode='first',resultMode='remove';
+function normalize(s){return String(s||'').replace(/\r\n/g,'\n').replace(/\r/g,'\n')}
+function keyFor(line){let x=line;if($('trimWhitespace').checked)x=x.trim();if($('ignoreCase').checked)x=x.toLocaleLowerCase();return x}
+function updateModeUI(){
+ const settings={
+  remove:{button:'Remove duplicates',output:'Unique result',placeholder:'Your deduplicated text will appear here…',outputStat:'Unique',otherStat:'Duplicates removed'},
+  duplicates:{button:'Find duplicate lines',output:'Repeated lines',placeholder:'Repeated lines will appear here…',outputStat:'Repeated',otherStat:'Duplicate groups'},
+  unique:{button:'Show unique lines',output:'Only unique lines',placeholder:'Lines that appear once will appear here…',outputStat:'Unique only',otherStat:'Repeated entries excluded'}
+ }[resultMode];
+ document.querySelectorAll('[data-result-mode]').forEach(button=>{
+  const active=button.dataset.resultMode===resultMode;
+  button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+ });
+ document.querySelectorAll('.mode button[data-mode]').forEach(button=>{
+  const active=button.dataset.mode===keepMode;
+  button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+ });
+ $('occurrenceControl').hidden=resultMode!=='remove';
+ $('dedupeBtn').textContent=settings.button;
+ $('outputLabel').textContent=settings.output;
+ $('outputText').placeholder=settings.placeholder;
+ $('outputStatsLabel').textContent=settings.outputStat;
+ $('removedStatsLabel').textContent=settings.otherStat;
+}
+function run(){
+ const source=normalize($('inputText').value),lines=source?source.split('\n'):[];
+ const entries=lines.map((line,index)=>({line,index,key:keyFor(line)}))
+  .filter(entry=>!($('removeBlanks').checked&&entry.line.trim()===''));
+ const counts=new Map();
+ entries.forEach(entry=>counts.set(entry.key,(counts.get(entry.key)||0)+1));
+ const uniqueValueCount=[...counts.values()].filter(count=>count===1).length;
+ const duplicateGroupCount=[...counts.values()].filter(count=>count>1).length;
+ const repeatedEntryCount=entries.filter(entry=>counts.get(entry.key)>1).length;
+ let selected=[];
+ if(resultMode==='duplicates'){
+  selected=entries.filter(entry=>counts.get(entry.key)>1);
+ }else if(resultMode==='unique'){
+  selected=entries.filter(entry=>counts.get(entry.key)===1);
+ }else if(keepMode==='last'){
+  const seen=new Set();
+  for(let i=entries.length-1;i>=0;i--){
+   const entry=entries[i];if(seen.has(entry.key))continue;seen.add(entry.key);selected.push(entry);
+  }
+  selected.reverse();
+ }else{
+  const seen=new Set();
+  for(const entry of entries){if(seen.has(entry.key))continue;seen.add(entry.key);selected.push(entry);}
+ }
+ const result=selected.map(entry=>entry.line);
+ if($('sortOutput').checked)result.sort((a,b)=>a.localeCompare(b,undefined,{numeric:true,sensitivity:$('ignoreCase').checked?'base':'variant'}));
+ $('outputText').value=result.join('\n');
+ $('copyBtn').disabled=!$('outputText').value;
+ $('inputStats').textContent=lines.length.toLocaleString()+' lines';
+ $('outputStats').textContent=result.length.toLocaleString()+' lines';
+ if(resultMode==='remove'){
+  const removed=Math.max(0,entries.length-counts.size);
+  $('removedStats').textContent=removed.toLocaleString()+' duplicates';
+  $('status').textContent=removed?'Removed '+removed.toLocaleString()+' duplicate line'+(removed===1?'':'s')+'. Review the result before using it.':'No duplicate lines were found. All eligible lines are in the result.';
+ }else if(resultMode==='duplicates'){
+  $('removedStats').textContent=duplicateGroupCount.toLocaleString()+' groups';
+  $('status').textContent=duplicateGroupCount?'Showing '+repeatedEntryCount.toLocaleString()+' lines across '+duplicateGroupCount.toLocaleString()+' repeated group'+(duplicateGroupCount===1?'':'s')+'. Your input is unchanged.':'No repeated lines were found with the selected comparison rules.';
+ }else{
+  const excluded=Math.max(0,entries.length-uniqueValueCount);
+  $('removedStats').textContent=excluded.toLocaleString()+' lines';
+  $('status').textContent=excluded?'Showing '+uniqueValueCount.toLocaleString()+' lines that appear exactly once. Excluded '+excluded.toLocaleString()+' repeated entries.':'No repeated lines were found. Every eligible line appears once.';
+ }
+}
+async function copyResult(){
+ const text=$('outputText').value;if(!text)return;
+ try{
+  if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);
+  else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
+  const b=$('copyBtn'),old=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=old,1000);
+ }catch{$('status').textContent='Copy was not available. Select the result and copy it manually.'}
+}
+function clearAll(){
+ $('inputText').value='';$('outputText').value='';$('copyBtn').disabled=true;
+ $('inputStats').textContent='0 lines';$('outputStats').textContent='0 lines';
+ $('removedStats').textContent=resultMode==='duplicates'?'0 groups':resultMode==='unique'?'0 lines':'0 duplicates';
+ $('status').textContent='Cleared. Paste your list above.';$('inputText').focus();
+}
+$('dedupeBtn').addEventListener('click',run);$('copyBtn').addEventListener('click',copyResult);$('clearBtn').addEventListener('click',clearAll);
+$('sampleBtn').addEventListener('click',()=>{
+ $('inputText').value='Apple\napple\nBanana\nApple\nCherry\nbanana';
+ $('ignoreCase').checked=true;$('trimWhitespace').checked=true;$('removeBlanks').checked=true;$('sortOutput').checked=false;
+ keepMode='first';resultMode='remove';updateModeUI();run();
+});
+document.querySelectorAll('[data-result-mode]').forEach(button=>button.addEventListener('click',()=>{
+ resultMode=button.dataset.resultMode;updateModeUI();if($('inputText').value)run();else $('status').textContent='Paste your list above to '+button.textContent.toLowerCase()+'.';
+}));
+document.querySelectorAll('.mode button[data-mode]').forEach(button=>button.addEventListener('click',()=>{
+ keepMode=button.dataset.mode;updateModeUI();if($('inputText').value)run();
+}));
+['ignoreCase','trimWhitespace','removeBlanks','sortOutput'].forEach(id=>$(id).addEventListener('change',()=>{if($('inputText').value)run()}));
+$('inputText').addEventListener('input',()=>{if($('inputText').value)run();else clearAll()});
+document.querySelectorAll('.faq button').forEach(button=>button.addEventListener('click',()=>{
+ const item=button.parentElement,open=item.classList.toggle('open');button.querySelector('.faq-icon').textContent=open?'−':'+';
+}));
+updateModeUI();
+})();
+</script>
+<style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
+<script src="/master-ui.js?v=20261114-shell-final"></script></body>
+</html>

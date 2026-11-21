@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Spreader Calibration Calculator | Drop &amp; Rotary | ZemTools</title>
+<meta name="description" content="Calibrate a drop or rotary spreader using measured test weights and area. Compare actual output with your product-label rate and estimate lawn quantity.">
+<link rel="canonical" href="https://zemtools.com/spreader-calibration-calculator/">
+<meta property="og:title" content="Spreader Calibration Calculator | Drop &amp; Rotary | ZemTools">
+<meta property="og:description" content="Calibrate a drop or rotary spreader using measured test weights and area. Compare actual output with your product-label rate and estimate lawn quantity.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zemtools.com/spreader-calibration-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta property="og:image:alt" content="ZemTools — Practical Online Tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Spreader Calibration Calculator | Drop &amp; Rotary | ZemTools">
+<meta name="twitter:description" content="Calibrate a drop or rotary spreader using measured test weights and area. Compare actual output with your product-label rate and estimate lawn quantity.">
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Spreader Calibration Calculator","url":"https://zemtools.com/spreader-calibration-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Calculate the measured granular application rate from a drop or rotary spreader test, compare it with a user-supplied product target and estimate material quantity.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},{"@type":"ListItem","position":3,"name":"Spreader Calibration Calculator","item":"https://zemtools.com/spreader-calibration-calculator/"}]}
+</script>
+<link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean">
+<style>
+.spreader-tool{width:100%;max-width:none;min-width:0;overflow-x:hidden}
+.spreader-tool main,.spreader-tool section,.spreader-tool article,.spreader-tool .hero-shell,.spreader-tool .hero,.spreader-tool .layout,.spreader-tool .card{width:100%;max-width:100%;min-width:0}
+.spreader-tool .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.spreader-tool .field{min-width:0}.spreader-tool .field.full{grid-column:1/-1}
+.spreader-tool input,.spreader-tool select,.spreader-tool button{max-width:100%;box-sizing:border-box}
+.spreader-tool input,.spreader-tool select{width:100%;min-width:0;min-height:50px;border:1px solid #c6d7e8;border-radius:12px;background:#fff;color:var(--text);padding:11px 13px;font:inherit;font-size:16px}
+.spreader-tool input:focus,.spreader-tool select:focus{outline:3px solid rgba(39,120,234,.14);border-color:#2778ea}
+.spreader-tool .field-help{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.45}
+.spreader-tool .section-heading{grid-column:1/-1;margin:8px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:15px;font-weight:850;color:var(--text)}
+.spreader-tool .method-fields{display:none;grid-column:1/-1;padding:14px;border:1px solid #dce7f2;border-radius:14px;background:#f8fbff}
+.spreader-tool .method-fields.active{display:block}
+.spreader-tool .method-fields h3{margin:0 0 8px;font-size:15px}
+.spreader-tool .method-fields p{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.5}
+.spreader-tool .method-fields .tool-grid{gap:12px}
+.spreader-tool .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.spreader-tool .actions button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;font-weight:850;cursor:pointer}
+.spreader-tool .actions .secondary{border:1px solid #bcd2ea;background:#fff;color:#2c557e}
+.spreader-tool .result{background:linear-gradient(180deg,#fbfdff,#f2f7ff)}
+.spreader-tool .result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.spreader-tool .metric{min-width:0;background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.spreader-tool .metric strong{display:block;color:#526174;font-size:11px;text-transform:uppercase;letter-spacing:.045em}
+.spreader-tool .metric span{display:block;margin-top:4px;font-size:clamp(17px,2.5vw,21px);font-weight:900;color:#102f54;overflow-wrap:anywhere}
+.spreader-tool .status{padding:12px 14px;border:1px solid #cfe2f8;border-radius:12px;background:#eff7ff;color:#244c73;margin-top:12px}
+.spreader-tool .status.within{border-color:#c9ecd8;background:#f2fff7;color:#1e6240}
+.spreader-tool .status.over,.spreader-tool .status.under{border-color:#efd59a;background:#fff9e9;color:#745000}
+.spreader-tool .error{color:#a12d2d;font-size:13px;margin-top:9px;min-height:18px}
+.spreader-tool .formula{padding:14px;border:1px dashed #c5d8eb;border-radius:13px;background:#fbfdff;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;color:#34516f;overflow-x:auto;white-space:normal}
+.spreader-tool .note,.spreader-tool .warn{padding:13px 14px;border-radius:12px;margin-top:12px}
+.spreader-tool .note{border:1px solid #cfe2f8;background:#eff7ff;color:#244c73}
+.spreader-tool .warn{border:1px solid #efd59a;background:#fff9e9;color:#745000}
+.spreader-tool .hidden{display:none!important}
+.spreader-tool .small-list{padding-left:20px}.spreader-tool .small-list li{margin:8px 0}
+.spreader-tool details{padding:12px 0;border-bottom:1px solid var(--line)}
+.spreader-tool details:last-child{border-bottom:0}
+.spreader-tool summary{cursor:pointer;font-weight:800}
+.spreader-tool details p{margin-bottom:0;color:var(--muted)}
+.spreader-tool .source-links a{overflow-wrap:anywhere}
+@media(max-width:700px){.spreader-tool .layout{grid-template-columns:minmax(0,1fr)}.spreader-tool .tool-grid,.spreader-tool .result-grid{grid-template-columns:1fr}.spreader-tool .actions{flex-direction:column;align-items:stretch}.spreader-tool .actions button{width:100%}.spreader-tool .card{width:100%}}
+@media(max-width:430px){.spreader-tool .hero h1{font-size:27px;line-height:1.08}.spreader-tool .hero p{font-size:14px;line-height:1.5}.spreader-tool .card{padding:18px 16px}}
+@media print{.site-header,footer,.skip-link,.actions,.hero-shell,.no-print{display:none!important}.spreader-tool{background:#fff}.spreader-tool .card{box-shadow:none;break-inside:avoid}.spreader-tool main{padding-top:0}}
+</style>
+</head>
+<body class="tool-page spreader-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+  <div class="header-inner">
+    <a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+    <nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+    <div class="header-actions" aria-label="Header tools">
+      <button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+      <button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+    </div>
+    <div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px"></div></div>
+    <nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero-shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="home-construction/">Home &amp; Construction</a><span class="crumb-sep">›</span><span>Spreader Calibration Calculator</span></nav>
+    <div class="hero"><div class="tool-icon" aria-hidden="true">🌱</div><div><h1>Spreader Calibration Calculator</h1><p>Measure how much granular fertilizer or grass seed your spreader actually applies. Compare a real test run with the product rate you enter, calculate the next test target, and estimate material for your lawn.</p></div></div>
+    <div class="info-callout"><div class="info-icon">i</div><div><strong>Use measured output, not a guessed dial number</strong>Spreader settings vary by model, product, walking speed and conditions. This calculator works from measured weights and areas; it does not invent a universal dial setting or prescribe a fertilizer rate.</div></div>
+  </section>
+
+  <section class="layout" aria-label="Spreader calibration calculator">
+    <article class="card tool-card">
+      <h2>Calibrate Your Spreader</h2>
+      <p class="hint">Choose your spreader and test method, then enter the rate from your product label or trusted local guidance and the measurements from your calibration run.</p>
+      <form id="spreaderForm" novalidate>
+        <div class="tool-grid">
+          <div class="field"><label for="spreaderType">Spreader type</label><select id="spreaderType"><option value="drop" selected>Drop spreader</option><option value="rotary">Rotary / broadcast spreader</option></select><span class="field-help">The calibration method and pass strategy depend on the spreader type.</span></div>
+          <div class="field"><label for="calibrationMethod">Calibration method</label><select id="calibrationMethod"><option value="before-after">Weigh before and after</option><option value="drop-catch">Full-width catch pan</option><option value="sweep-weigh">Sweep and weigh</option></select><span class="field-help" id="methodHelp">Measure the lane area, then weigh the hopper before and after the test run.</span></div>
+
+          <div class="section-heading">Product target</div>
+          <div class="field"><label for="targetBasis">Target basis</label><select id="targetBasis"><option value="product" selected>Product application rate</option><option value="nitrogen">Nitrogen (N) rate from fertilizer label</option></select><span class="field-help">Use the product rate on the label, or enter a nitrogen target supplied by your agronomic guidance.</span></div>
+          <div class="field"><label for="rateValue" id="rateValueLabel">Product target rate</label><input id="rateValue" type="number" min="0.000001" step="any" placeholder="e.g. 4" inputmode="decimal"><span class="field-help" id="rateValueHelp">Enter the product rate shown on the fertilizer or seed label.</span></div>
+          <div class="field"><label for="rateUnit">Rate units</label><select id="rateUnit"><option value="lb-1000ft2">lb per 1,000 sq ft</option><option value="lb-acre">lb per acre</option><option value="kg-100m2">kg per 100 m²</option><option value="kg-ha">kg per hectare</option></select><span class="field-help">The target and measured rate will use the same unit.</span></div>
+          <div class="field hidden" id="nitrogenField"><label for="nitrogenPercent">First number on fertilizer label (% N)</label><input id="nitrogenPercent" type="number" min="0.01" max="100" step="any" placeholder="e.g. 27" inputmode="decimal"><span class="field-help">For a 27-3-4 label, enter 27. The tool converts your entered N target into a product rate; it does not choose the N target.</span></div>
+          <div class="field" id="passesField"><label for="applicationPasses">Planned application passes</label><select id="applicationPasses"><option value="1">1 pass — full target rate</option><option value="2" selected>2 passes — half target per pass</option></select><span class="field-help">For the common rotary two-pass approach, calibrate each pass to half the full label rate.</span></div>
+          <div class="field"><label for="tolerancePercent">Comparison tolerance (%)</label><input id="tolerancePercent" type="number" min="0" max="50" step="0.5" value="10" inputmode="decimal"><span class="field-help">A 10% band is a common calibration check in extension examples. Adjust only if your product or guidance specifies another limit.</span></div>
+
+          <div class="section-heading">Measurement units</div>
+          <div class="field"><label for="dimensionUnit">Test distance units</label><select id="dimensionUnit"><option value="ft" selected>Feet (ft)</option><option value="m">Metres (m)</option></select></div>
+          <div class="field"><label for="weightUnit">Measured material weight</label><select id="weightUnit"><option value="lb" selected>Pounds (lb)</option><option value="oz">Ounces (oz)</option><option value="g">Grams (g)</option><option value="kg">Kilograms (kg)</option></select></div>
+
+          <div class="method-fields active" id="beforeAfterFields">
+            <h3>Weigh before and after</h3>
+            <p>Measure one test lane. Use the full drop-spreader width or the rotary effective swath width established from a distribution-pattern check. The test area is width × distance.</p>
+            <div class="tool-grid">
+              <div class="field"><label for="beforeWidth">Test lane / effective swath width</label><input id="beforeWidth" type="number" min="0.000001" step="any" placeholder="e.g. 3" inputmode="decimal"></div>
+              <div class="field"><label for="beforeLength">Test distance</label><input id="beforeLength" type="number" min="0.000001" step="any" placeholder="e.g. 33.3" inputmode="decimal"></div>
+              <div class="field"><label for="startingWeight">Material weight before test</label><input id="startingWeight" type="number" min="0.000001" step="any" placeholder="e.g. 2" inputmode="decimal"></div>
+              <div class="field"><label for="remainingWeight">Material weight left after test</label><input id="remainingWeight" type="number" min="0" step="any" placeholder="e.g. 1.63" inputmode="decimal"></div>
+            </div>
+          </div>
+
+          <div class="method-fields" id="dropCatchFields">
+            <h3>Full-width drop-spreader catch pan</h3>
+            <p>Attach a pan that captures all product leaving the drop-spreader hopper. Measure the full hopper width and the test distance; the collected weight represents the product applied over that lane.</p>
+            <div class="tool-grid">
+              <div class="field"><label for="catchWidth">Full drop-spreader width</label><input id="catchWidth" type="number" min="0.000001" step="any" placeholder="e.g. 3" inputmode="decimal"></div>
+              <div class="field"><label for="catchLength">Test course distance</label><input id="catchLength" type="number" min="0.000001" step="any" placeholder="e.g. 33.3" inputmode="decimal"></div>
+              <div class="field"><label for="catchWeight">Material collected in catch pan</label><input id="catchWeight" type="number" min="0.000001" step="any" placeholder="e.g. 0.37" inputmode="decimal"></div>
+            </div>
+          </div>
+
+          <div class="method-fields" id="sweepFields">
+            <h3>Sweep and weigh</h3>
+            <p>Apply the product to a clean, smooth test surface or tarp, then sweep and weigh only the material collected. Enter the actual tarp width × length, especially when the tarp is narrower than the spreader swath.</p>
+            <div class="tool-grid">
+              <div class="field"><label for="sweepWidth">Collection surface width</label><input id="sweepWidth" type="number" min="0.000001" step="any" placeholder="e.g. 2" inputmode="decimal"></div>
+              <div class="field"><label for="sweepLength">Collection surface length</label><input id="sweepLength" type="number" min="0.000001" step="any" placeholder="e.g. 50" inputmode="decimal"></div>
+              <div class="field"><label for="sweepWeight">Material swept and collected</label><input id="sweepWeight" type="number" min="0.000001" step="any" placeholder="e.g. 0.20" inputmode="decimal"></div>
+            </div>
+          </div>
+
+          <div class="method-fields" id="rotaryPanFields">
+            <h3>Rotary center-pan test</h3>
+            <p>Use the center collection box from a rotary distribution-pattern test. Weigh the material collected after the stated number of identical passes; the calculator reports the average application rate per pass.</p>
+            <div class="tool-grid">
+              <div class="field"><label for="panArea">Center-pan area</label><input id="panArea" type="number" min="0.000001" step="any" placeholder="e.g. 1" inputmode="decimal"></div>
+              <div class="field"><label for="panAreaUnit">Pan area units</label><select id="panAreaUnit"><option value="ft2">Square feet (ft²)</option><option value="m2">Square metres (m²)</option></select></div>
+              <div class="field"><label for="panPasses">Collection passes over the pan</label><input id="panPasses" type="number" min="1" max="20" step="1" value="4" inputmode="numeric"></div>
+              <div class="field"><label for="panWeight">Material collected in center pan</label><input id="panWeight" type="number" min="0.000001" step="any" placeholder="e.g. 100" inputmode="decimal"></div>
+            </div>
+          </div>
+
+          <div class="section-heading">Optional lawn and package estimate</div>
+          <div class="field"><label for="lawnArea">Total lawn area</label><input id="lawnArea" type="number" min="0.000001" step="any" placeholder="Enter area to estimate product quantity" inputmode="decimal"><span class="field-help">Optional. The material estimate uses the full product rate for the whole job, not the half-rate per rotary pass.</span></div>
+          <div class="field"><label for="lawnAreaUnit">Lawn area units</label><select id="lawnAreaUnit"><option value="ft2">Square feet (ft²)</option><option value="acre">Acres</option><option value="m2">Square metres (m²)</option><option value="ha">Hectares</option></select></div>
+          <div class="field"><label for="bagSize">Bag / package size (optional)</label><input id="bagSize" type="number" min="0.000001" step="any" placeholder="e.g. 20" inputmode="decimal"></div>
+          <div class="field"><label for="bagUnit">Bag size unit</label><select id="bagUnit"><option value="lb" selected>Pounds (lb)</option><option value="kg">Kilograms (kg)</option><option value="oz">Ounces (oz)</option><option value="g">Grams (g)</option></select></div>
+
+          <div class="field full">
+            <div class="actions"><button type="submit">Calculate calibration</button><button type="button" class="secondary" id="reset">Reset</button><span id="error" class="error" role="alert"></span></div>
+          </div>
+        </div>
+      </form>
+    </article>
+
+    <article class="card result" id="result" aria-live="polite">
+      <h2>Your calibration result</h2>
+      <p class="hint">Enter the target rate and one measured test run, then calculate to see your actual application rate and next test target.</p>
+      <div class="note">Your result will use the units selected above. No dial setting is guessed or stored.</div>
+    </article>
+  </section>
+
+  <section class="card">
+    <h2>How to Calibrate a Lawn Spreader</h2>
+    <ol class="small-list">
+      <li>Use the same granular product, spreader, operator and walking pace you plan to use for the job. Recheck calibration when you change products or conditions.</li>
+      <li>Set up a measured test lane or collection method. For a rotary spreader, establish the effective swath from its distribution pattern before measuring the test area.</li>
+      <li>Follow the product label or spreader manual for an initial setting only. Weigh what goes into and remains in the hopper, or collect and weigh material using the selected method.</li>
+      <li>Enter the measured dimensions and weights. Compare the actual rate per pass with the target rate per pass shown by the calculator.</li>
+      <li>If the measured rate is too high or too low, make a small adjustment according to the spreader manual and repeat the test. Do not assume dial settings change linearly.</li>
+      <li>Check the distribution pattern separately. A correct total rate does not prove that the product is spread evenly across the full swath.</li>
+    </ol>
+    <div class="warn"><strong>Important:</strong> Calibration is a measurement aid, not an application prescription or proof of uniform coverage. Follow the product label, spreader manual and local lawn-care guidance. Do not use this tool to select a fertilizer or pesticide application rate.</div>
+  </section>
+
+  <section class="card">
+    <h2>Spreader Calibration Formulas</h2>
+    <div class="formula">
+      Test-lane area = measured width × test distance<br>
+      Material applied (weigh-before/after) = starting hopper weight − remaining hopper weight<br>
+      Actual product rate = material applied ÷ measured test area × selected rate-area factor<br>
+      Rotary center-pan rate per pass = collected weight ÷ (pan area × collection passes) × selected rate-area factor<br>
+      Target per pass = full product target rate ÷ planned application passes<br>
+      Difference (%) = (actual rate − target per pass) ÷ target per pass × 100<br>
+      Total product for lawn = full product target rate × lawn area
+    </div>
+    <p class="small">All weight and area inputs are converted to common units before calculation. The selected output rate unit is applied only after the measured rate is calculated. In nitrogen mode, product rate = entered nitrogen target ÷ the first nutrient percentage on the label expressed as a decimal.</p>
+  </section>
+
+  <section class="card">
+    <h2>Drop vs Rotary Spreader Calibration</h2>
+    <p>Drop spreaders release granules across the width of the hopper. Their test lane uses the full hopper width. Rotary or broadcast spreaders distribute granules in a wider pattern; establish the effective swath and check the distribution pattern rather than assuming the visible maximum throw is the working width.</p>
+    <p>For a common rotary two-pass approach described by NC State Extension, calibrate each pass to one-half of the full labeled rate, then apply in two passes. The calculator divides the full target by the number of planned passes you select. Follow your product label and spreader guidance if they specify a different method.</p>
+    <div class="note">The calculator treats the measured test as a per-pass calibration. For a rotary center-pan test, it divides the collected weight by the pan area and the number of collection passes.</div>
+  </section>
+
+  <section class="card">
+    <h2>How to Measure Rotary Spreader Effective Swath Width</h2>
+    <p>A rotary spreader does not deposit the same amount of material across its full throw width. Measure the effective swath before using a test-lane width or setting the spacing between passes. The visible outer edge of the spread is not necessarily the working swath.</p>
+    <ol class="small-list">
+      <li><strong>Set out matching collection trays.</strong> Place an odd number in a straight line perpendicular to the travel direction, with one tray at the centre and enough room for the spreader wheels. NC State Extension describes identical trays about 1–2 inches deep, with at least 1 sq ft of collection area, placed on roughly 2 ft centres and spanning about 1.5–2 times the expected swath. A cloth in each tray helps reduce granule bounce.</li>
+      <li><strong>Repeat the same pass.</strong> Use the product and operating pace intended for the job. Make at least three passes in the same direction and along the same path over the collection line, following the equipment and product instructions.</li>
+      <li><strong>Weigh each tray separately.</strong> Compare the amount in each tray with the centre tray. Identify the left and right positions containing approximately half the centre amount; the distance between those positions is the estimated effective swath width. Interpolate between trays when the half amount falls between two positions.</li>
+      <li><strong>Check left-to-right balance.</strong> If the matching half-centre amounts are not similar on both sides, the pattern may be asymmetric. Correct it only as directed by the spreader manufacturer, then repeat the pattern test. Use the measured effective swath for the rotary test-lane method and for planning pass spacing.</li>
+    </ol>
+    <div class="warn"><strong>Keep pattern and rate separate:</strong> a measured total application rate does not prove even distribution. Check the pattern as well. Avoid repeatedly applying test material to the same lawn area; use a suitable collection surface and follow product handling instructions.</div>
+    <p class="small">Method reference: NC State Extension, <a href="https://content.ces.ncsu.edu/the-calibration-of-turfgrass-and-boom-sprayers-and-spreaders" target="_blank" rel="noopener">The Calibration of Turfgrass Boom Sprayers and Spreaders</a>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Spreader Calibration Examples</h2>
+    <p>A drop spreader covers a 2 ft wide test lane over 50 ft, or 100 sq ft. If the hopper weight drops from 2 lb to 1.75 lb, the test run used 0.25 lb. That equals 2.5 lb per 1,000 sq ft.</p>
+    <p>For a rotary spreader with a full product target of 4 lb per 1,000 sq ft and a two-pass plan, the target is 2 lb per 1,000 sq ft on each pass. The total material for the lawn is still estimated from the full 4 lb target.</p>
+  </section>
+
+  <section class="card">
+    <h2>Frequently Asked Questions</h2>
+    <details><summary>How often should I calibrate a spreader?</summary><p>Calibrate when you first use the spreader and whenever the product, spreader condition, operator, pace or application conditions change enough to affect output. Follow the equipment and product instructions.</p></details>
+    <details><summary>Can I use this for both drop and rotary spreaders?</summary><p>Yes. Drop spreaders offer full-width catch-pan and sweep-and-weigh options. Rotary spreaders use a measured effective-swath lane or the center-pan method. Choose the method that matches the equipment and test setup.</p></details>
+    <details><summary>How do I measure a rotary spreader’s effective swath width?</summary><p>Place matching collection trays across the travel path, make repeated passes at the same pace and direction, then weigh each tray. The distance between the left and right trays holding about half the centre-tray amount estimates the effective swath. See the step-by-step guide above and follow your spreader manual.</p></details>
+    <details><summary>Why does a rotary spreader use half the label rate per pass?</summary><p>NC State Extension describes a two-pass approach for rotary spreaders: apply half the labeled rate in each pass to help improve uniformity. Your product label or spreader manual takes precedence if it specifies another procedure.</p></details>
+    <details><summary>Does the calculator tell me the correct spreader dial setting?</summary><p>No. Dial settings differ between spreader models, products and operating conditions, and they do not necessarily change linearly with application rate. The calculator reports measured output and the target material weight for another test.</p></details>
+    <details><summary>Can I enter a nitrogen rate instead of a fertilizer product rate?</summary><p>Yes. Select Nitrogen (N) rate and enter the N target provided by your label or trusted local agronomic guidance, plus the first percentage printed on the fertilizer label. The calculator converts that target to an estimated product rate; it does not recommend an N target.</p></details>
+    <details><summary>Does a correct application rate guarantee even coverage?</summary><p>No. Application rate and distribution pattern are separate checks. Especially with rotary spreaders, inspect the spread pattern and effective swath using the manufacturer's or extension guidance.</p></details>
+  </section>
+
+  <section class="card source-links">
+    <h2>Calibration References</h2>
+    <p>Calculation methods and operating cautions are based on university extension guidance:</p>
+    <ul class="small-list">
+      <li><a href="https://content.ces.ncsu.edu/the-calibration-of-turfgrass-and-boom-sprayers-and-spreaders" target="_blank" rel="noopener">NC State Extension — The Calibration of Turfgrass Boom Sprayers and Spreaders</a></li>
+      <li><a href="https://turf.unl.edu/news/calibration-fertilization-home-lawns/" target="_blank" rel="noopener">University of Nebraska Extension — Calibration of Fertilization for Home Lawns</a></li>
+      <li><a href="https://turf.unl.edu/turf-advice/turf-fact-sheets-nebguides/calibration-fertilization-home-lawns/" target="_blank" rel="noopener">University of Nebraska Extension — Home Lawn Spreader Calibration Worksheet</a></li>
+      <li><a href="https://agrilifeextension.tamu.edu/wp-content/uploads/2026/03/spreadercalibration.pdf" target="_blank" rel="noopener">Texas A&amp;M AgriLife Extension — Spreader Calibration for Turfgrass (PDF)</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark" aria-hidden="true">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="about/">About</a><a href="contact/">Contact</a><a href="privacy/">Privacy</a><a href="terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+
+<script src="/spreader-calibration-engine.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var moneyFormat = function(value, places){
+    if (!Number.isFinite(Number(value))) return '—';
+    return Number(value).toLocaleString('en-US',{maximumFractionDigits:places === undefined ? 2 : places});
+  };
+  var weightLabels = {lb:'lb',oz:'oz',g:'g',kg:'kg'};
+  var areaLabels = {'ft2':'ft²',m2:'m²',acre:'acres',ha:'hectares'};
+  var rateEngine = window.ZemToolsSpreaderEngine;
+
+  function configureMethods(){
+    var type = $('spreaderType').value;
+    var select = $('calibrationMethod');
+    var previous = select.value;
+    var choices = type === 'drop'
+      ? [['before-after','Weigh before and after'],['drop-catch','Full-width catch pan'],['sweep-weigh','Sweep and weigh']]
+      : [['before-after','Weigh before and after'],['rotary-center-pan','Rotary center-pan test']];
+    select.innerHTML = '';
+    choices.forEach(function(choice){
+      var option = document.createElement('option');
+      option.value = choice[0];
+      option.textContent = choice[1];
+      select.appendChild(option);
+    });
+    select.value = choices.some(function(choice){return choice[0] === previous;}) ? previous : 'before-after';
+    $('applicationPasses').disabled = type === 'drop';
+    $('passesField').classList.toggle('hidden', type === 'drop');
+    if (type === 'drop') $('applicationPasses').value = '1';
+    else $('applicationPasses').value = '2';
+    showMethod();
+  }
+
+  function showMethod(){
+    var method = $('calibrationMethod').value;
+    var groups = {
+      'before-after':'beforeAfterFields',
+      'drop-catch':'dropCatchFields',
+      'sweep-weigh':'sweepFields',
+      'rotary-center-pan':'rotaryPanFields'
+    };
+    Object.keys(groups).forEach(function(key){
+      $(groups[key]).classList.toggle('active', key === method);
+    });
+    var help = {
+      'before-after':'Measure the lane area, then weigh the hopper before and after the test run.',
+      'drop-catch':'Capture all granules leaving the full drop-spreader width over a measured course.',
+      'sweep-weigh':'Collect and weigh the material from the actual clean surface or tarp area.',
+      'rotary-center-pan':'Use the center box from a rotary pattern test and enter the number of repeated passes.'
+    };
+    $('methodHelp').textContent = help[method];
+  }
+
+  function updateTargetMode(){
+    var nitrogen = $('targetBasis').value === 'nitrogen';
+    $('nitrogenField').classList.toggle('hidden', !nitrogen);
+    $('rateValueLabel').textContent = nitrogen ? 'Target nitrogen (N) rate' : 'Product target rate';
+    $('rateValueHelp').textContent = nitrogen
+      ? 'Enter the nitrogen rate supplied by your fertilizer label or trusted local agronomic guidance.'
+      : 'Enter the product rate shown on the fertilizer or seed label.';
+  }
+
+  function requestData(){
+    var method = $('calibrationMethod').value;
+    var data = {
+      spreaderType:$('spreaderType').value,
+      method:method,
+      targetBasis:$('targetBasis').value,
+      targetRate:$('rateValue').value,
+      nitrogenPercent:$('nitrogenPercent').value,
+      rateUnit:$('rateUnit').value,
+      tolerancePercent:$('tolerancePercent').value,
+      applicationPasses:$('applicationPasses').value,
+      dimensionUnit:$('dimensionUnit').value,
+      weightUnit:$('weightUnit').value,
+      lawnArea:$('lawnArea').value,
+      lawnAreaUnit:$('lawnAreaUnit').value,
+      bagSize:$('bagSize').value,
+      bagUnit:$('bagUnit').value
+    };
+    if (method === 'before-after') {
+      data.testWidth = $('beforeWidth').value;
+      data.testLength = $('beforeLength').value;
+      data.startingWeight = $('startingWeight').value;
+      data.remainingWeight = $('remainingWeight').value;
+    } else if (method === 'drop-catch') {
+      data.testWidth = $('catchWidth').value;
+      data.testLength = $('catchLength').value;
+      data.collectedWeight = $('catchWeight').value;
+    } else if (method === 'sweep-weigh') {
+      data.testWidth = $('sweepWidth').value;
+      data.testLength = $('sweepLength').value;
+      data.collectedWeight = $('sweepWeight').value;
+    } else if (method === 'rotary-center-pan') {
+      data.panArea = $('panArea').value;
+      data.panAreaUnit = $('panAreaUnit').value;
+      data.collectionPasses = $('panPasses').value;
+      data.collectedWeight = $('panWeight').value;
+    }
+    return data;
+  }
+
+  function renderResult(data){
+    var result = $('result');
+    var statusText = data.status === 'within'
+      ? 'Within your selected tolerance band.'
+      : data.status === 'over'
+        ? 'Measured output is above the target. Reduce the flow slightly according to the spreader manual, then test again.'
+        : 'Measured output is below the target. Increase the flow slightly according to the spreader manual, then test again.';
+    var targetDescription = data.targetBasis === 'nitrogen'
+      ? 'Product target derived from ' + moneyFormat(data.nitrogenPercent,2) + '% N on the label'
+      : 'Product target supplied by you';
+    var total = data.totalProduct === null
+      ? '<div class="note">Add a lawn area to estimate the total product needed for the full job.</div>'
+      : '<div class="result-grid"><div class="metric"><strong>Total product for lawn</strong><span>' + moneyFormat(data.totalProduct,3) + ' ' + weightLabels[data.totalProductWeightUnit] + '</span></div>' +
+        (data.bagCount === null ? '' : '<div class="metric"><strong>Whole packages to buy</strong><span>' + moneyFormat(data.bagCount,0) + (data.bagCount === 1 ? ' bag' : ' bags') + '</span></div>') +
+        '</div>';
+    var passes = data.plannedApplicationPasses === 2 ? 'The full lawn target is split across two application passes.' : 'The full lawn target is applied in one planned pass.';
+    result.innerHTML =
+      '<h2>Your calibration result</h2>' +
+      '<div class="status ' + data.status + '"><strong>' + statusText + '</strong><br>Comparison tolerance: ±' + moneyFormat(data.tolerancePercent,1) + '%. ' + passes + '</div>' +
+      '<div class="result-grid">' +
+        '<div class="metric"><strong>Actual rate per pass</strong><span>' + moneyFormat(data.actualRate,3) + ' ' + data.rateLabel + '</span></div>' +
+        '<div class="metric"><strong>Target rate per pass</strong><span>' + moneyFormat(data.targetPerPassRate,3) + ' ' + data.rateLabel + '</span></div>' +
+        '<div class="metric"><strong>Difference from target</strong><span>' + (data.variancePercent > 0 ? '+' : '') + moneyFormat(data.variancePercent,2) + '%</span></div>' +
+        '<div class="metric"><strong>Target material for next test</strong><span>' + moneyFormat(data.targetTestWeight,4) + ' ' + weightLabels[data.materialWeightUnit] + '</span></div>' +
+      '</div>' +
+      '<p class="hint">' + targetDescription + '. Method: ' + data.testDescription + '.</p>' +
+      total +
+      '<div class="note"><strong>Next step:</strong> ' + (data.status === 'within' ? 'Repeat the test if conditions or product change, and inspect the distribution pattern separately.' : 'Make a small adjustment and repeat the same measured test. Spreader dial changes are not necessarily linear.') + '</div>' +
+      '<div class="actions no-print"><button type="button" class="secondary" id="copyResult">Copy result</button><button type="button" class="secondary" id="printResult">Print result</button><span id="copyStatus" class="field-help" role="status"></span></div>';
+    $('copyResult').addEventListener('click', function(){
+      var text = 'Spreader calibration\nActual rate per pass: ' + data.actualRate + ' ' + data.rateLabel +
+        '\nTarget per pass: ' + data.targetPerPassRate + ' ' + data.rateLabel +
+        '\nDifference: ' + data.variancePercent + '%' +
+        '\nTarget test weight: ' + data.targetTestWeight + ' ' + data.materialWeightUnit +
+        (data.totalProduct === null ? '' : '\nTotal lawn product: ' + data.totalProduct + ' ' + data.totalProductWeightUnit) +
+        (data.bagCount === null ? '' : '\nPackages: ' + data.bagCount);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function(){$('copyStatus').textContent='Result copied.';})
+          .catch(function(){$('copyStatus').textContent='Copy unavailable in this browser.';});
+      } else {
+        $('copyStatus').textContent='Copy unavailable in this browser.';
+      }
+    });
+    $('printResult').addEventListener('click', function(){window.print();});
+  }
+
+  $('spreaderType').addEventListener('change', configureMethods);
+  $('calibrationMethod').addEventListener('change', showMethod);
+  $('targetBasis').addEventListener('change', updateTargetMode);
+  $('spreaderForm').addEventListener('submit', function(event){
+    event.preventDefault();
+    $('error').textContent = '';
+    var result = rateEngine.calculate(requestData());
+    if (!result.ok) {
+      $('error').textContent = result.error.message;
+      return;
+    }
+    renderResult(result.data);
+  });
+  $('reset').addEventListener('click', function(){
+    $('spreaderForm').reset();
+    $('error').textContent = '';
+    configureMethods();
+    updateTargetMode();
+    $('result').innerHTML = '<h2>Your calibration result</h2><p class="hint">Enter the target rate and one measured test run, then calculate to see your actual application rate and next test target.</p><div class="note">Your result will use the units selected above. No dial setting is guessed or stored.</div>';
+  });
+
+  configureMethods();
+  updateTargetMode();
+})();
+</script>
+<script src="/master-ui.js?v=20261114-shell-final"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/tools-data.js"></script>
+<style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/master-header.css?v=20261115-tap-highlight-1">
+<title>Tea Outturn Calculator | Green Leaf to Made Tea | ZemTools</title>
+<meta name="description" content="Calculate net and gross tea outturn from green leaf, made tea and fired tea weights, or estimate green leaf needed for a target made-tea batch.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zemtools.com/tea-outturn-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZemTools">
+<meta property="og:title" content="Tea Outturn Calculator | Green Leaf to Made Tea | ZemTools">
+<meta property="og:description" content="Calculate net and gross tea outturn from green leaf, made tea and fired tea weights, or estimate green leaf needed for a target made-tea batch.">
+<meta property="og:url" content="https://zemtools.com/tea-outturn-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta property="og:image:alt" content="ZemTools practical online calculators">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tea Outturn Calculator | Green Leaf to Made Tea | ZemTools">
+<meta name="twitter:description" content="Calculate net and gross tea outturn from green leaf, made tea and fired tea weights, or estimate green leaf needed for a target made-tea batch.">
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Tea Outturn Calculator","url":"https://zemtools.com/tea-outturn-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A browser-based tea production calculator for actual net and gross outturn, green-leaf-to-made-tea ratio and batch planning."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Math & Science","item":"https://zemtools.com/math-science/"},{"@type":"ListItem","position":3,"name":"Tea Outturn Calculator","item":"https://zemtools.com/tea-outturn-calculator/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate net outturn?","acceptedAnswer":{"@type":"Answer","text":"Divide the made tea weight by the green leaf weight from the same batch, then multiply by 100. For example, 225 kg of made tea from 1,000 kg of green leaf is 22.5% net outturn."}},{"@type":"Question","name":"What is the difference between net and gross outturn?","acceptedAnswer":{"@type":"Answer","text":"This calculator reports net outturn from the made-tea weight and optional gross outturn from the fired-tea weight you enter. Production-stage names and refuse accounting can differ between factories, so use your own records' definitions."}},{"@type":"Question","name":"Can I estimate green leaf required for a planned production target?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the target made-tea weight and your expected net outturn percentage. The calculator divides the target weight by that outturn fraction."}}]}
+</script>
+<link rel="stylesheet" href="/master-tool-design.css?v=20261114-shell-clean">
+<style>
+.tea-page{max-width:1180px;margin:auto;padding:22px 30px 64px;color:#17243a}
+.tea-page footer.zem-footer>.footer-inner{padding-left:0!important;padding-right:0!important}
+.tea-page *{box-sizing:border-box}
+.tea-page .hero-shell{margin-bottom:18px}
+.tea-page .hero{display:flex;align-items:center;gap:16px;padding:24px;border:1px solid #dce6f1;border-radius:18px;background:linear-gradient(135deg,#f4f9ff,#fff)}
+.tea-page .tool-icon{font-size:38px;flex:0 0 auto}
+.tea-page h1{font-size:clamp(29px,5vw,43px);line-height:1.12;margin:0 0 8px;color:#102744}
+.tea-page .hero p{margin:0;color:#53677f;max-width:760px}
+.tea-page .crumbs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;color:#61758d;font-size:13px}
+.tea-page .crumbs a{color:#315b87;text-decoration:none}
+.tea-page .info-callout{margin-top:14px;padding:14px 16px;border:1px solid #cfe1f3;border-radius:13px;background:#f6fbff;color:#31516f;line-height:1.6}
+.tea-page .panel{background:#fff;border:1px solid #dbe4ee;border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 6px 24px rgba(15,35,60,.045)}
+.tea-page .panel h2{margin:0 0 8px;font-size:21px;color:#163555}
+.tea-page .panel-intro,.tea-page .hint{color:#5d7086;font-size:14px;line-height:1.6}
+.tea-page .panel-intro{margin:0 0 15px}
+.tea-page .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tea-page .field{display:grid;gap:6px;min-width:0}
+.tea-page label{font-size:13px;font-weight:800;color:#344d68}
+.tea-page input,.tea-page select{width:100%;min-width:0;min-height:46px;padding:10px 11px;border:1px solid #cbd7e3;border-radius:10px;background:#fff;color:#17243a;font:inherit}
+.tea-page input:focus,.tea-page select:focus{outline:3px solid rgba(39,120,234,.15);border-color:#4788c8}
+.tea-page .field-note{margin:4px 0 0;color:#60748b;font-size:12px;line-height:1.5}
+.tea-page .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.tea-page .btn{border:1px solid #c5d5e5;border-radius:10px;padding:10px 15px;min-height:44px;background:#fff;color:#274765;font:inherit;font-weight:800;cursor:pointer}
+.tea-page .btn-primary{background:#1769cf;border-color:#1769cf;color:#fff}
+.tea-page .btn:focus-visible{outline:3px solid rgba(39,120,234,.2);outline-offset:2px}
+.tea-page .error{display:none;margin-top:12px;padding:12px 14px;border-radius:10px;background:#fff1f0;border:1px solid #e7b7b2;color:#8b2720}
+.tea-page .error.show{display:block}
+.tea-page .result-area{margin-top:15px;padding:15px;border:1px solid #cfe1f3;border-radius:13px;background:#f7fbff}
+.tea-page .result-area[hidden]{display:none!important}
+.tea-page .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tea-page .metric{min-width:0;padding:12px;border:1px solid #dce7f2;border-radius:11px;background:#fff}
+.tea-page .metric span{display:block;color:#5c7088;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.tea-page .metric strong{display:block;margin-top:5px;color:#153b61;font-size:21px;line-height:1.25;overflow-wrap:anywhere}
+.tea-page .result-note{margin:12px 0 0;color:#53677f;font-size:13px;line-height:1.6}
+.tea-page .result-note.warning{padding:10px 12px;border:1px solid #ead8a8;border-radius:10px;background:#fffaf0;color:#69511b}
+.tea-page .formula{padding:13px 14px;border:1px dashed #bfd0e1;border-radius:12px;background:#f9fbfd;color:#355371;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.tea-page .content-section{margin-top:18px}
+.tea-page .content-section h2{color:#163555;font-size:21px}
+.tea-page .content-section p,.tea-page .content-section li{color:#40566e;line-height:1.7}
+.tea-page .content-section a{color:#1d5d9f}
+.tea-page .source-list{padding-left:20px}
+.tea-page .source-list li{margin:8px 0}
+.tea-page .small{font-size:13px;color:#61758d}
+.tea-page .faq details{padding:12px 0;border-bottom:1px solid #e4eaf1}
+.tea-page .faq details:last-child{border-bottom:0}
+.tea-page .faq summary{font-weight:800;color:#294766;cursor:pointer}
+.tea-page .faq details p{margin:8px 0 0;color:#53677f;line-height:1.65}
+@media(max-width:980px){.tea-page{padding-left:20px;padding-right:20px}}
+@media(max-width:760px){.tea-page .grid,.tea-page .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.tea-page{padding-left:16px;padding-right:16px}.tea-page footer.zem-footer>.footer-inner{width:100%!important;max-width:1120px!important;padding:20px 16px!important}}
+@media(max-width:480px){.tea-page .hero{align-items:flex-start;padding:17px;gap:12px}.tea-page .tool-icon{font-size:30px}.tea-page .grid,.tea-page .metrics{grid-template-columns:1fr}.tea-page .panel{padding:15px}.tea-page .actions{flex-direction:column}.tea-page .actions .btn{width:100%}}
+@media print{header,footer,.tea-page .no-print{display:none!important}.tea-page{max-width:none;padding:0}.tea-page .panel{box-shadow:none;break-inside:avoid}}
+</style>
+<script src="/tea-outturn-engine.js"></script>
+</head>
+<body class="tool-page tea-outturn-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/" aria-current="page">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults"></div></div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content" class="tea-page">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/math-science/">Math &amp; Science</a><span>›</span><span aria-current="page">Tea Outturn Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🍃</div><div><h1>Tea Outturn Calculator</h1><p>Measure net tea outturn from green leaf to made tea, optionally compare gross outturn from fired tea, or estimate the green leaf required for a target made-tea batch.</p></div></div>
+<div class="info-callout"><strong>Use your own factory figures:</strong> Outturn varies with the leaf, season, tea type and manufacturing process. This calculator does not apply one universal industry rate. Enter actual batch weights or the outturn rate your factory uses.</div>
+</section>
+
+<section class="panel" aria-labelledby="actual-heading">
+<h2 id="actual-heading">1. Calculate outturn from an actual batch</h2>
+<p class="panel-intro">Enter the green leaf received and the made tea produced from the same batch. Add fired tea only when you want a gross outturn calculation based on your factory's fired-tea definition.</p>
+<form id="actualForm" novalidate>
+<div class="grid">
+<div class="field"><label for="actualUnit">Weight unit</label><select id="actualUnit"><option value="kg">Kilograms (kg)</option><option value="t">Metric tonnes (t)</option><option value="lb">Pounds (lb)</option></select></div>
+<div class="field"><label for="greenLeafWeight">Green leaf received</label><input id="greenLeafWeight" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 1000" required><p class="field-note">Use the recorded weight before manufacturing.</p></div>
+<div class="field"><label for="madeTeaWeight">Made tea produced</label><input id="madeTeaWeight" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 225" required><p class="field-note">Use the made-tea weight from the same batch.</p></div>
+<div class="field"><label for="firedTeaWeight">Fired tea weight (optional)</label><input id="firedTeaWeight" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 240"><p class="field-note">Enter only when your factory tracks this stage separately.</p></div>
+</div>
+<div class="actions no-print"><button class="btn btn-primary" type="submit">Calculate batch outturn</button><button class="btn" id="resetActual" type="button">Reset actual batch</button></div>
+<div class="error" id="actualError" role="alert"></div>
+</form>
+<div class="result-area" id="actualResults" aria-live="polite" hidden><div class="metrics" id="actualMetrics"></div><p class="result-note" id="actualNote"></p></div>
+</section>
+
+<section class="panel" aria-labelledby="plan-heading">
+<h2 id="plan-heading">2. Plan green leaf for a target made-tea batch</h2>
+<p class="panel-intro">Enter the amount of made tea you want to produce and your own expected net outturn percentage. The calculator estimates the green leaf input required.</p>
+<form id="planForm" novalidate>
+<div class="grid">
+<div class="field"><label for="planUnit">Weight unit</label><select id="planUnit"><option value="kg">Kilograms (kg)</option><option value="t">Metric tonnes (t)</option><option value="lb">Pounds (lb)</option></select></div>
+<div class="field"><label for="targetMadeTea">Target made tea weight</label><input id="targetMadeTea" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 1000" required></div>
+<div class="field"><label for="expectedOutturn">Expected net outturn (%)</label><input id="expectedOutturn" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="Enter your factory's rate" required></div>
+</div>
+<div class="actions no-print"><button class="btn btn-primary" type="submit">Calculate green leaf required</button><button class="btn" id="resetPlan" type="button">Reset production plan</button></div>
+<div class="error" id="planError" role="alert"></div>
+</form>
+<div class="result-area" id="planResults" aria-live="polite" hidden><div class="metrics" id="planMetrics"></div><p class="result-note" id="planNote"></p></div>
+</section>
+
+<section class="panel content-section" aria-labelledby="formula-heading">
+<h2 id="formula-heading">How the tea outturn calculation works</h2>
+<p>Outturn expresses the weight of tea produced as a percentage of the green leaf weight received. Use weights from the same batch and keep the unit consistent.</p>
+<div class="formula">Net outturn (%) = Made tea weight ÷ Green leaf weight × 100<br>Gross outturn (%) = Fired tea weight ÷ Green leaf weight × 100<br>Green leaf needed = Target made tea weight ÷ (Expected outturn ÷ 100)<br>Green leaf : made tea ratio = Green leaf weight ÷ Made tea weight : 1</div>
+<p>The net and gross labels describe the stages selected above. Factories may record production stages and refuse differently, so confirm that each input matches your own production records before comparing results.</p>
+</section>
+
+<section class="panel content-section" aria-labelledby="reference-heading">
+<h2 id="reference-heading">Why there is no single default outturn rate</h2>
+<p>Published industry figures are useful context, not a universal setting. For example, the Tea Board of Kenya's green-leaf quality guideline describes a seasonal conversion range of 20% to 24% depending on weather. A Kenya tea cultivation manual gives 22.5% as an average example, while the Sri Lanka Tea Board's 2022 annual report describes using a 4.65:1 green-leaf-to-made-tea ratio for its reporting calculation.</p>
+<p>These figures come from different contexts and should not be treated as interchangeable factory targets. Use your own recent batch records or the rate supplied by your factory or tea authority.</p>
+<ul class="source-list">
+<li><a href="https://dl.nsf.gov.lk/server/api/core/bitstreams/c8413e7e-337e-408d-839e-6ce5c0073cf0/content" target="_blank" rel="noopener noreferrer">Tea Research Institute of Sri Lanka — Nett Out-turn of Made Tea to Green Leaf (gross and net outturn definitions)</a></li>
+<li><a href="https://kilimo.go.ke/wp-content/uploads/2024/11/GREENLEAF-QUALITY-REQUIREMENTS-FOR-THE-KENYA-TEA-INDUSTRY.pdf" target="_blank" rel="noopener noreferrer">Tea Board of Kenya — Green Leaf Quality Requirements</a></li>
+<li><a href="https://teaboard.or.ke/images/downloads/manuals-handbooks/tea-cultivation-manual-for-good-agricultural-practices.pdf" target="_blank" rel="noopener noreferrer">Tea Board of Kenya — Tea Cultivation Manual</a></li>
+<li><a href="https://srilankateaboard.lk/wp-content/uploads/2024/01/Annual-Report-2022.pdf" target="_blank" rel="noopener noreferrer">Sri Lanka Tea Board — Annual Report 2022</a></li>
+<li><a href="https://www.teaboard.gov.in/pdf/Tea_Marketing_Control_Order_2003_updated_upto_2024_pdf4701.pdf" target="_blank" rel="noopener noreferrer">Tea Board of India — Tea Marketing Control Order, updated through 2024</a></li>
+</ul>
+</section>
+
+<section class="panel faq content-section" aria-labelledby="faq-heading">
+<h2 id="faq-heading">Tea Outturn Calculator FAQs</h2>
+<details><summary>What does tea outturn mean?</summary><p>Tea outturn is the conversion of green leaf weight into made tea weight, commonly expressed as a percentage or as a green-leaf-to-made-tea ratio.</p></details>
+<details><summary>How do I calculate net outturn?</summary><p>Divide the made tea weight by the green leaf weight from the same batch, then multiply by 100. For example, 225 kg of made tea from 1,000 kg of green leaf is 22.5% net outturn.</p></details>
+<details><summary>What is the difference between net and gross outturn?</summary><p>This calculator reports net outturn from the made-tea weight and optional gross outturn from the fired-tea weight you enter. Production-stage names and refuse accounting can differ between factories, so use your own records' definitions.</p></details>
+<details><summary>Can I estimate green leaf required for a planned production target?</summary><p>Yes. Enter the target made-tea weight and your expected net outturn percentage. The calculator divides the target weight by that outturn fraction.</p></details>
+<details><summary>Does the calculator determine green leaf payment or official settlement?</summary><p>No. It only calculates weight conversion and production estimates. It does not calculate farmer payments, statutory price-sharing, tax, quality grades or regulatory settlements.</p></details>
+</section>
+
+<footer><a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></footer>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  const engine = window.ZemToolsTeaOutturnEngine;
+  if (!engine || typeof engine.execute !== 'function') return;
+
+  const numberFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3 });
+  const percentFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 });
+  function formatNumber(value) {
+    return numberFormat.format(value);
+  }
+  function metric(container, label, value) {
+    const item = document.createElement('div');
+    item.className = 'metric';
+    const caption = document.createElement('span');
+    caption.textContent = label;
+    const strong = document.createElement('strong');
+    strong.textContent = value;
+    item.append(caption, strong);
+    container.appendChild(item);
+  }
+  function showError(element, message) {
+    element.textContent = message;
+    element.classList.add('show');
+  }
+  function clearError(element) {
+    element.textContent = '';
+    element.classList.remove('show');
+  }
+  function showMetrics(container, rows, noteElement, note, warning) {
+    container.replaceChildren();
+    rows.forEach(row => metric(container, row.label, row.value));
+    noteElement.textContent = note || '';
+    noteElement.classList.toggle('warning', Boolean(warning));
+    if (warning) noteElement.textContent = warning;
+  }
+  function hideResult(area) {
+    area.hidden = true;
+  }
+
+  const actualForm = document.getElementById('actualForm');
+  const actualError = document.getElementById('actualError');
+  const actualResults = document.getElementById('actualResults');
+  const actualMetrics = document.getElementById('actualMetrics');
+  const actualNote = document.getElementById('actualNote');
+  actualForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearError(actualError);
+    hideResult(actualResults);
+    const result = engine.execute({
+      operation: 'actual',
+      unit: document.getElementById('actualUnit').value,
+      greenLeaf: document.getElementById('greenLeafWeight').value,
+      madeTea: document.getElementById('madeTeaWeight').value,
+      firedTea: document.getElementById('firedTeaWeight').value
+    });
+    if (!result.ok) {
+      showError(actualError, result.error.message);
+      return;
+    }
+    const data = result.data;
+    const rows = [
+      { label: 'Net outturn', value: percentFormat.format(data.netOutturnPercent) + '%' },
+      { label: 'Green leaf : made tea ratio', value: formatNumber(data.greenLeafPerMadeTea) + ' : 1' }
+    ];
+    if (data.grossOutturnPercent !== null) {
+      rows.push({ label: 'Gross outturn', value: percentFormat.format(data.grossOutturnPercent) + '%' });
+    }
+    showMetrics(actualMetrics, rows, actualNote,
+      'Calculated from the actual batch weights you entered. The ratio compares the same weight unit on both sides.',
+      data.warning);
+    actualResults.hidden = false;
+  });
+
+  const planForm = document.getElementById('planForm');
+  const planError = document.getElementById('planError');
+  const planResults = document.getElementById('planResults');
+  const planMetrics = document.getElementById('planMetrics');
+  const planNote = document.getElementById('planNote');
+  planForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearError(planError);
+    hideResult(planResults);
+    const result = engine.execute({
+      operation: 'plan',
+      unit: document.getElementById('planUnit').value,
+      targetMadeTea: document.getElementById('targetMadeTea').value,
+      outturnPercent: document.getElementById('expectedOutturn').value
+    });
+    if (!result.ok) {
+      showError(planError, result.error.message);
+      return;
+    }
+    const data = result.data;
+    showMetrics(planMetrics, [
+      { label: 'Green leaf required', value: formatNumber(data.requiredGreenLeaf) + ' ' + data.unit },
+      { label: 'Target made tea', value: formatNumber(data.targetMadeTea) + ' ' + data.unit },
+      { label: 'Expected net outturn', value: percentFormat.format(data.outturnPercent) + '%' },
+      { label: 'Green leaf : made tea ratio', value: formatNumber(data.greenLeafPerMadeTea) + ' : 1' }
+    ], planNote, 'Estimate based only on the outturn percentage you supplied; it is not a production guarantee.', null);
+    planResults.hidden = false;
+  });
+
+  document.getElementById('resetActual').addEventListener('click', function () {
+    actualForm.reset();
+    clearError(actualError);
+    hideResult(actualResults);
+  });
+  document.getElementById('resetPlan').addEventListener('click', function () {
+    planForm.reset();
+    clearError(planError);
+    hideResult(planResults);
+  });
+})();
+</script>
+<script src="/master-ui.js?v=20261114-shell-final"></script>
+</body>
+</html>

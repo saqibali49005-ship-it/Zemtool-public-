@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/tools-data.js"></script><style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Significant Figures Calculator | Count, Round &amp; Calculate</title>
+<meta name="description" content="Count significant figures, round numbers and apply precision rules for addition, subtraction, multiplication and division.">
+<link rel="canonical" href="https://zemtools.com/calculator/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Significant Figures Calculator | Count, Round &amp; Calculate"><meta property="og:description" content="Count significant figures, round numbers, and apply significant-figure rules to common operations."><meta property="og:url" content="https://zemtools.com/calculator/"><meta property="og:image" content="https://zemtools.com/social-preview.png"><meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Significant Figures Calculator","url":"https://zemtools.com/calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Calculate significant figures, round values, and apply significant-figure rules to addition, subtraction, multiplication and division."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Math & Science","item":"https://zemtools.com/math-science/"},{"@type":"ListItem","position":3,"name":"Significant Figures Calculator","item":"https://zemtools.com/calculator/"}]}</script>
+<link rel="stylesheet" href="master-related-tools.css">
+</head>
+<body class="tool-page sigfig-tool">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav aria-label="Primary navigation" class="top-nav"><a href="/">Home</a><a href="/tools/">All Tools</a><a aria-current="page" href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+
+<div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="/math-science/">Math &amp; Science</a><span class="crumb-sep">›</span><span>Significant Figures Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">▦</div><div><h1>Significant Figures Calculator</h1><p>Count significant figures, round numbers, and apply significant-figure rules to addition, subtraction, multiplication and division.</p></div></div>
+<div class="info-callout"><div class="info-icon">i</div><div><strong>About this calculator</strong>This calculator follows standard significant-figure rules for common arithmetic operations and supports scientific notation.</div></div>
+</section>
+<section class="layout" aria-label="Significant figures calculator">
+<article class="card tool-card"><div class="card-head"><h2>Enter Calculation</h2><button id="clearBtn" class="secondary" type="button">↻ Clear</button></div>
+<div class="mode-grid" role="tablist" aria-label="Calculator mode"><button class="mode-btn active" data-mode="count" role="tab" aria-selected="true" type="button">Count</button><button class="mode-btn" data-mode="round" role="tab" aria-selected="false" type="button">Round</button><button class="mode-btn" data-mode="add" role="tab" aria-selected="false" type="button">Add / Subtract</button><button class="mode-btn" data-mode="multiply" role="tab" aria-selected="false" type="button">Multiply / Divide</button></div>
+<div id="singleMode"><div class="field"><label for="numberInput">Number</label><input id="numberInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 0.004560 or 1.20e3"><div class="hint">Scientific notation is supported: 1.20e3, 6.02e23, -0.00500. Whole-number trailing zeros can be ambiguous; use notation such as 1e2 (1 s.f.), 1.0e2 (2 s.f.) or 1.00e2 (3 s.f.) to show the intended precision.</div></div><div id="targetField" class="field hidden"><label for="targetInput">Significant figures</label><input id="targetInput" type="number" min="1" max="100" step="1" inputmode="numeric" placeholder="e.g. 3"><div class="hint">Enter how many significant figures you want.</div></div></div>
+<div id="addMode" class="hidden"><div class="field"><label for="addInput">Expression</label><input id="addInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 12.11 + 18.0"><div class="hint">Example: 12.11 + 18.0 or 25.6 - 3.21</div></div></div>
+<div id="multiplyMode" class="hidden"><div class="field"><label for="multiplyInput">Expression</label><input id="multiplyInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. 2.50 × 4.0"><div class="hint">Use ×, *, ÷ or /. Scientific notation is supported.</div></div></div>
+<button id="calculateBtn" class="primary" type="button">▦ &nbsp; Calculate &nbsp; →</button></article>
+<aside class="card result-card" aria-live="polite"><h2>▥ &nbsp; Result</h2><div id="resultMain" class="result-main"><div class="result-label">Result</div><div id="resultValue" class="result-value">—</div><div id="resultSub" class="result-sub">Enter a value and calculate.</div></div><div class="stats"><div class="stat"><div class="stat-icon">▤</div><strong>Full Precision (Reference)</strong><span id="fullPrecision">—</span></div><div class="stat"><div class="stat-icon">◎</div><strong>Significant Figures in Result</strong><span id="sigCount">—</span></div></div></aside>
+</section>
+<section class="support-grid"><article class="card"><h2>What are Significant Figures?</h2><p>Significant figures are the digits in a number that communicate meaningful measurement precision. They help show how precisely a value is known.</p></article><article class="card"><h2>Rules Summary</h2><ul><li>For addition and subtraction, round to the least precise decimal place.</li><li>For multiplication and division, round to the fewest significant figures.</li><li>Non-zero digits and interior zeros are significant.</li><li>Leading zeros are not significant.</li><li>Trailing decimal zeros are significant; whole-number trailing zeros can be ambiguous without notation.</li></ul></article><article class="card"><h2>Examples</h2><div class="examples"><div class="example">12.3 + 4.56 = 16.9&nbsp; (3 s.f.)</div><div class="example">5.2 × 3.1 = 16&nbsp; (2 s.f.)</div><div class="example">100.0 ÷ 3.00 = 33.3&nbsp; (3 s.f.)</div><div class="example">0.00450 × 2.0 = 0.0090&nbsp; (2 s.f.)</div></div></article></section>
+
+
+<section class="card sigfig-guide">
+<h2>How to Use a Significant Figures Calculator</h2>
+<p>A significant figures calculator helps you count meaningful digits, round a number to a chosen precision, and apply measurement-precision rules to arithmetic. Enter the value as written, including its decimal point or scientific notation, so its intended precision is clear.</p>
+<h3>How to round to significant figures</h3>
+<ol>
+<li>Start at the first non-zero digit. This is the first significant digit.</li>
+<li>Count the required number of significant digits from left to right.</li>
+<li>Look at the next digit: if it is 5 or greater, increase the last kept digit by one; otherwise leave it unchanged.</li>
+<li>Use decimal places or scientific notation to make the final precision unambiguous.</li>
+</ol>
+<p>For example, 0.004567 rounded to 3 significant figures is 0.00457. The leading zeros locate the decimal point; they do not count as significant digits.</p>
+<h3>Significant figures in addition and subtraction</h3>
+<p>For addition and subtraction, the result is limited by the input with the fewest decimal places. For example, 12.11 + 18.0 = 30.11, which is reported as 30.1 because 18.0 is precise only to the tenths place.</p>
+<h3>Significant figures in multiplication and division</h3>
+<p>For multiplication and division, report the result with the same number of significant figures as the input with the fewest significant figures. For example, 2.50 × 4.0 = 10.0 before rounding, so the reported result is 1.0 × 10¹ (2 significant figures), which makes the precision clear.</p>
+<h3>Zeros and scientific notation</h3>
+<ul>
+<li>Leading zeros are not significant: 0.0032 has 2 significant figures.</li>
+<li>Zeros between non-zero digits are significant: 1002 has 4 significant figures.</li>
+<li>Trailing zeros after a decimal point are significant: 4.500 has 4 significant figures.</li>
+<li>Scientific notation makes precision explicit: 1.20 × 10³ has 3 significant figures.</li>
+</ul>
+<p>Exact counted quantities and defined conversion factors do not limit significant figures in the same way as measured values. Keep unrounded digits during intermediate steps and round the final answer once.</p>
+</section>
+
+<section class="card faq-card"><h2>Frequently Asked Questions</h2><div class="faq"><button type="button"><span>What are significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Significant figures indicate the meaningful precision communicated by a measured or calculated number.</div></div><div class="faq"><button type="button"><span>How do I count significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Count non-zero digits and interior zeros as significant, exclude leading zeros, and treat trailing decimal zeros as significant. Trailing zeros in whole numbers can be ambiguous without notation.</div></div><div class="faq"><button type="button"><span>What is the rule for multiplication and division?</span><span class="faq-icon">+</span></button><div class="faq-answer">Report the result with the same number of significant figures as the input with the fewest significant figures.</div></div><div class="faq"><button type="button"><span>How do I round a number to 3 significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Find the first non-zero digit, keep three significant digits, and use the next digit to decide whether to round the third digit up. For example, 0.004567 becomes 0.00457.</div></div><div class="faq"><button type="button"><span>How do I round 45.51 to 3 significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Keep the first three significant digits. The next digit is 1, so 45.51 rounds to 45.5.</div></div><div class="faq"><button type="button"><span>How many significant figures are in 0.004560?</span><span class="faq-icon">+</span></button><div class="faq-answer">There are 4 significant figures: the leading zeros are placeholders, while 4, 5, 6 and the final decimal zero are significant.</div></div><div class="faq"><button type="button"><span>How do I write 1,200 to 2 significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Write it as 1.2 × 10³ (1.2e3). Scientific notation makes the two significant digits clear.</div></div><div class="faq"><button type="button"><span>What is the difference between decimal places and significant figures?</span><span class="faq-icon">+</span></button><div class="faq-answer">Decimal places count digits to the right of the decimal point. Significant figures count meaningful digits starting with the first non-zero digit. Addition and subtraction use decimal-place precision; multiplication and division use significant-figure precision.</div></div>
+</section>
+
+</main>
+<footer><div class="footer-inner"><div class="footer-brand"><div class="footer-mark">Z</div><div><strong>ZemTools</strong><span>Practical online tools</span></div></div><nav class="footer-links" aria-label="Footer"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div><div class="copyright">© 2026 ZemTools</div></footer>
+<script src="/significant-figures-engine.js"></script>
+<script>
+(function(){
+'use strict';
+const engine=window.ZemToolsSignificantFiguresEngine;
+if(!engine) throw new Error('Significant-figures calculation engine failed to load.');
+const modeButtons=[...document.querySelectorAll('.mode-btn')];
+const singleMode=document.getElementById('singleMode'),addMode=document.getElementById('addMode'),multiplyMode=document.getElementById('multiplyMode'),targetField=document.getElementById('targetField');
+const numberInput=document.getElementById('numberInput'),targetInput=document.getElementById('targetInput'),addInput=document.getElementById('addInput'),multiplyInput=document.getElementById('multiplyInput');
+const calculateBtn=document.getElementById('calculateBtn'),clearBtn=document.getElementById('clearBtn'),resultValue=document.getElementById('resultValue'),resultSub=document.getElementById('resultSub'),fullPrecision=document.getElementById('fullPrecision'),sigCount=document.getElementById('sigCount');
+let mode='count';
+function resetResult(){resultValue.textContent='—';resultSub.textContent='Enter a value and calculate.';resultSub.style.color='';resultSub.style.fontWeight='';fullPrecision.textContent='—';sigCount.textContent='—';}
+function setMode(next){mode=next;modeButtons.forEach(button=>{const active=button.dataset.mode===next;button.classList.toggle('active',active);button.setAttribute('aria-selected',String(active));});singleMode.classList.toggle('hidden',!(next==='count'||next==='round'));targetField.classList.toggle('hidden',next!=='round');addMode.classList.toggle('hidden',next!=='add');multiplyMode.classList.toggle('hidden',next!=='multiply');resetResult();}
+function doCalc(){
+ const expression=mode==='add'?addInput.value:multiplyInput.value;
+ const result=engine.calculate(mode,{number:numberInput.value,target:targetInput.value,expression});
+ if(!result.ok){resultValue.textContent='—';resultSub.textContent=result.error;resultSub.style.color='#b42318';resultSub.style.fontWeight='800';fullPrecision.textContent='—';sigCount.textContent='—';return;}
+ resultValue.textContent=result.value;resultSub.textContent=result.subtitle;resultSub.style.color='';resultSub.style.fontWeight='';fullPrecision.textContent=result.fullPrecision;sigCount.textContent=result.count;
+}
+modeButtons.forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.mode)));
+calculateBtn.addEventListener('click',doCalc);
+clearBtn.addEventListener('click',()=>{[numberInput,targetInput,addInput,multiplyInput].forEach(input=>input.value='');resetResult();});
+[numberInput,targetInput,addInput,multiplyInput].forEach(input=>input.addEventListener('keydown',event=>{if(event.key==='Enter')doCalc();}));
+document.querySelectorAll('.faq button').forEach(button=>button.addEventListener('click',()=>{const faq=button.parentElement;faq.classList.toggle('open');button.querySelector('.faq-icon').textContent=faq.classList.contains('open')?'−':'+';}));
+})();
+</script>
+<script>
+(function(){
+'use strict';
+if(document.body.classList.contains('tool-page')&&!document.getElementById('reportProblemBtn')){
+ const st=document.createElement('style');
+ st.textContent='.report-problem-btn{position:fixed;right:16px;bottom:16px;z-index:9998;border:1px solid #c7d7ea;border-radius:999px;background:#fff;color:#0b2f66;padding:10px 14px;box-shadow:0 8px 24px rgba(15,23,42,.14);font:800 13px/1.1 system-ui,-apple-system,Segoe UI,sans-serif;cursor:pointer}.report-problem-btn:hover,.report-problem-btn:focus{background:#f5f9ff;border-color:#8eb5df;outline:none}.report-problem-btn:focus-visible{box-shadow:0 0 0 3px rgba(39,120,234,.2),0 8px 24px rgba(15,23,42,.14)}@media(max-width:650px){.report-problem-btn{right:12px;bottom:12px;padding:9px 12px;font-size:12px}}';
+ document.head.appendChild(st);
+ const btn=document.createElement('button');
+ btn.id='reportProblemBtn';btn.className='report-problem-btn';btn.type='button';btn.setAttribute('aria-label','Report a problem with this tool');btn.textContent='⚑ Report a problem';
+ btn.addEventListener('click',function(){
+  const title=(document.querySelector('h1')?.textContent||'ZemTools tool').trim();
+  const rows=[];let omittedTextarea=false;
+  document.querySelectorAll('main input, main select').forEach(function(el){
+   if(el.disabled||el.type==='hidden')return;
+   const label=el.id?document.querySelector('label[for="'+CSS.escape(el.id)+'"]'):null;
+   const name=(label?.textContent||el.getAttribute('aria-label')||el.name||el.id||el.type||'Field').trim().replace(/\s+/g,' ');
+   let value='';
+   if(el.tagName==='SELECT') value=el.options[el.selectedIndex]?.text||el.value;
+   else if(el.type==='checkbox'||el.type==='radio'){if(!el.checked)return;value='checked'}
+   else value=String(el.value||'').trim();
+   if(value)rows.push('- '+name+': ['+value.slice(0,160).replace(/\[/g,'\\[').replace(/\]/g,'\\]')+(value.length>160?'…':'')+']');
+  });
+  document.querySelectorAll('main textarea').forEach(function(el){if(String(el.value||'').trim())omittedTextarea=true});
+  const body=[
+   '## Problem report','',
+   'Tool: '+title,'Page: '+location.href,'',
+   '### Inputs captured',rows.length?rows.join('\n'):'- No non-textarea input values captured.',
+   omittedTextarea?'\n> Textarea content was not included automatically. Please paste only non-sensitive text needed to reproduce the issue.':'',
+   '','### What went wrong','Please describe what you expected and what actually happened.','',
+   '### Technical details','Browser: '+navigator.userAgent
+  ].join('\n');
+  if(!window.confirm('This opens a public GitHub issue. Do not include passwords, payment details, or other sensitive information. Continue?'))return;
+  const url='https://github.com/saqibali49005-ship-it/utility-platform/issues/new?title='+encodeURIComponent('[Tool Bug] '+title)+'&body='+encodeURIComponent(body);
+  window.open(url,'_blank','noopener,noreferrer');
+ });
+ document.body.appendChild(btn);
+}
+})();
+</script>
+
+<style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>
+<script src="/master-ui.js?v=20261114-shell-final"></script></body>
+</html>

@@ -1,0 +1,117 @@
+name: Foundation Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/validate-foundation.mjs
+      - name: Validate future-ready public tool catalog contract
+        run: node scripts/validate-platform-contract.mjs
+      - name: Run aspect ratio engine unit checks
+        run: node tests/aspect-ratio-engine.test.mjs
+      - name: Run time calculator engine unit checks
+        run: node tests/time-calculator-engine.test.mjs
+      - name: Run spreader calibration engine unit checks
+        run: node tests/spreader-calibration-engine.test.mjs
+      - name: Run significant-figures engine unit checks
+        run: node tests/significant-figures-engine.test.mjs
+      - name: Run mulch calculator engine unit checks
+        run: node tests/mulch-calculator-engine.test.mjs
+      - name: Run raised bed soil engine unit checks
+        run: node tests/raised-bed-soil-engine.test.mjs
+      - name: Run tea outturn engine unit checks
+        run: node tests/tea-outturn-engine.test.mjs
+      - name: Run sourdough calculator engine unit checks
+        run: node tests/sourdough-calculator-engine.test.mjs
+      - name: Validate homepage site-name SEO signals
+        run: node scripts/validate-site-name.mjs
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock playwright@1.56.1
+      - name: Install Chromium
+        run: npx playwright install chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory . > /tmp/zemtools-http.log 2>&1 &
+          echo $! > /tmp/zemtools-http.pid
+          for i in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:4173/fence-calculator/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/zemtools-http.log
+          exit 1
+      - name: Run Report a problem overlap regression tests
+        run: node tests/report-problem-layout.browser.mjs
+      - name: Run aspect ratio calculator browser regression tests
+        run: node tests/aspect-ratio-calculator.browser.mjs
+      - name: Run time calculator browser regression tests
+        run: node tests/time-calculator.browser.mjs
+      - name: Run Math & Science category browser regression tests
+        run: node tests/math-science-category.browser.mjs
+      - name: Run Home & Construction search-intent routing regression tests
+        run: node tests/home-construction-search-intent.browser.mjs
+      - name: Run sitewide responsive and Home navigation browser audit
+        run: node tests/sitewide-responsive.browser.mjs
+      - name: Run homepage search suggestions browser regression tests
+        run: node tests/home-search-suggestions.browser.mjs
+      - name: Run mobile tap-highlight browser regression tests
+        run: node tests/tap-highlight.browser.mjs
+      - name: Run GA4 tool-usage tracking browser tests
+        run: node tests/ga4-tool-tracking.browser.mjs
+      - name: Run SEO metadata and internal-link regression tests
+        run: node tests/seo-metadata-and-links.browser.mjs
+      - name: Run fence calculator browser regression tests
+        run: node tests/fence-calculator.browser.mjs
+      - name: Run wire-size calculator browser regression tests
+        run: node tests/wire-size-calculator.browser.mjs
+      - name: Run conduit-fill calculator browser regression tests
+        run: node tests/conduit-fill-calculator.browser.mjs
+      - name: Run gravel calculator browser regression tests
+        run: node tests/gravel-calculator.browser.mjs
+      - name: Run significant-figures browser regression tests
+        run: node tests/significant-figures.browser.mjs
+      - name: Run paver edge restraint browser regression tests
+        run: node tests/paver-edge-restraint.browser.mjs
+      - name: Run deck joist blocking browser regression tests
+        run: node tests/deck-joist-blocking.browser.mjs
+      - name: Run sod staple browser regression tests
+        run: node tests/sod-staple.browser.mjs
+      - name: Run spreader calibration browser regression tests
+        run: node tests/spreader-calibration.browser.mjs
+      - name: Run mulch calculator browser regression tests
+        run: node tests/mulch-calculator.browser.mjs
+      - name: Run raised bed soil calculator browser regression tests
+        run: node tests/raised-bed-soil-calculator.browser.mjs
+      - name: Run tea outturn calculator browser regression tests
+        run: node tests/tea-outturn-calculator.browser.mjs
+      - name: Run sourdough calculator browser regression tests
+        run: node tests/sourdough-calculator.browser.mjs
+      - name: Run paint calculator browser regression tests
+        run: node tests/paint-calculator.browser.mjs
+      - name: Run business-hours calculator browser regression tests
+        run: node tests/business-hours-calculator.browser.mjs
+      - name: Run case converter browser regression tests
+        run: node tests/case-converter.browser.mjs
+      - name: Run duplicate line remover browser regression tests
+        run: node tests/duplicate-line-remover.browser.mjs
+      - name: Run find and replace browser regression tests
+        run: node tests/find-replace.browser.mjs
+      - name: Run pilot hole calculator browser regression tests
+        run: node tests/pilot-hole-calculator.browser.mjs
+      - name: Run remove line breaks browser regression tests
+        run: node tests/remove-line-breaks.browser.mjs
+      - name: Run text cleaner browser regression tests
+        run: node tests/text-cleaner.browser.mjs
+      - name: Run UUID generator browser regression tests
+        run: node tests/uuid-generator.browser.mjs
+      - name: Run word counter browser regression tests
+        run: node tests/word-counter.browser.mjs

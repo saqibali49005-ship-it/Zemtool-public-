@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/tools-data.js"></script>
+<style id="zem-header-prepaint">header.site-header{visibility:hidden!important}</style>
+<base href="/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2f66">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/master-header.css?v=20261115-tap-highlight-1">
+<title>Raised Bed Soil Calculator | Mix, Bags &amp; Ingredient Volumes</title>
+<meta name="description" content="Calculate soil for multiple raised garden beds. Build a custom topsoil, compost and growing-medium mix, then estimate each ingredient's volume, bags and cost.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zemtools.com/raised-bed-soil-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZemTools">
+<meta property="og:title" content="Raised Bed Soil Calculator | Mix, Bags &amp; Ingredient Volumes">
+<meta property="og:description" content="Plan several raised beds at once and calculate the volume, bag count and cost for every ingredient in your own soil mix.">
+<meta property="og:url" content="https://zemtools.com/raised-bed-soil-calculator/">
+<meta property="og:image" content="https://zemtools.com/social-preview.png">
+<meta property="og:image:alt" content="ZemTools practical online calculators">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Raised Bed Soil Calculator">
+<meta name="twitter:description" content="Calculate raised-bed fill volume and the ingredients in your own editable soil-mix recipe.">
+<meta name="twitter:image" content="https://zemtools.com/social-preview.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Raised Bed Soil Calculator","url":"https://zemtools.com/raised-bed-soil-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A browser-based raised-bed soil planning calculator for multiple beds, user-defined mix percentages, labelled bag volumes and optional ingredient costs."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://zemtools.com/"},{"@type":"ListItem","position":2,"name":"Home & Construction","item":"https://zemtools.com/home-construction/"},{"@type":"ListItem","position":3,"name":"Raised Bed Soil Calculator","item":"https://zemtools.com/raised-bed-soil-calculator/"}]}
+</script>
+<link rel="stylesheet" href="/master-tool-design.css?v=20261114-shell-clean">
+<link rel="stylesheet" href="/master-related-tools.css">
+<style>
+.rb-page{max-width:1120px;margin:auto;padding:22px 16px 64px;color:#17243a}
+.rb-page *{box-sizing:border-box}
+.rb-page .hero-shell{margin-bottom:18px}
+.rb-page .hero{display:flex;align-items:center;gap:16px;padding:24px;border:1px solid #dce6f1;border-radius:18px;background:linear-gradient(135deg,#f4f9ff,#fff)}
+.rb-page .tool-icon{font-size:38px;flex:0 0 auto}
+.rb-page h1{font-size:clamp(29px,5vw,43px);line-height:1.12;margin:0 0 8px;color:#102744}
+.rb-page .hero p{margin:0;color:#53677f;max-width:760px}
+.rb-page .crumbs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;color:#61758d;font-size:13px}
+.rb-page .crumbs a{color:#315b87;text-decoration:none}
+body.tool-page .site-header .brand-copy small{color:#53677f!important}
+.rb-page .intro-callout{margin-top:14px;padding:14px 16px;border:1px solid #cfe1f3;border-radius:13px;background:#f6fbff;color:#31516f}
+.rb-page .panel{background:#fff;border:1px solid #dbe4ee;border-radius:16px;padding:18px;margin:16px 0;box-shadow:0 6px 24px rgba(15,35,60,.045)}
+.rb-page .panel h2{margin:0 0 8px;font-size:21px;color:#163555}
+.rb-page .panel-intro,.rb-page .hint{color:#5d7086;font-size:14px}
+.rb-page .panel-intro{margin:0 0 15px}
+.rb-page .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rb-page .field{display:grid;gap:6px;min-width:0}
+.rb-page label{font-size:13px;font-weight:800;color:#344d68}
+.rb-page input,.rb-page select{width:100%;min-width:0;min-height:44px;padding:10px 11px;border:1px solid #cbd7e3;border-radius:10px;background:#fff;color:#17243a;font:inherit}
+.rb-page input:focus,.rb-page select:focus{outline:3px solid rgba(39,120,234,.15);border-color:#4788c8}
+.rb-page .bed-list,.rb-page .ingredient-list{display:grid;gap:12px}
+.rb-page .bed-card,.rb-page .ingredient-card{border:1px solid #e0e8f0;border-radius:13px;padding:14px;background:#fbfdff}
+.rb-page .bed-head,.rb-page .ingredient-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.rb-page .bed-head strong,.rb-page .ingredient-head strong{color:#163555}
+.rb-page .shape-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.rb-page .field[hidden]{display:none!important}
+.rb-page .buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+.rb-page .btn{border:1px solid #c5d5e5;border-radius:10px;padding:10px 14px;min-height:42px;background:#fff;color:#274765;font:inherit;font-weight:800;cursor:pointer}
+.rb-page .btn-primary{background:#1769cf;border-color:#1769cf;color:#fff}
+.rb-page .btn-danger{border-color:#e6c5c5;color:#8b3030}
+.rb-page .btn:focus-visible{outline:3px solid rgba(39,120,234,.2);outline-offset:2px}
+.rb-page .example-note{padding:12px 14px;border:1px solid #ead8a8;background:#fffaf0;border-radius:11px;color:#69511b;font-size:13px;line-height:1.55}
+.rb-page .error{display:none;margin-top:12px;padding:12px 14px;border-radius:10px;background:#fff1f0;border:1px solid #e7b7b2;color:#8b2720}
+.rb-page .error.show{display:block}
+.rb-page .results{display:grid;gap:15px}
+.rb-page .result-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.rb-page .metric{border:1px solid #dce7f2;border-radius:12px;padding:12px;background:#f7fbff;min-width:0}
+.rb-page .metric span{display:block;color:#5c7088;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.rb-page .metric strong{display:block;margin-top:5px;color:#153b61;font-size:20px;line-height:1.2;overflow-wrap:anywhere}
+.rb-page .table-wrap{overflow-x:auto;max-width:100%}
+.rb-page table{width:100%;border-collapse:collapse;min-width:650px}
+.rb-page th,.rb-page td{padding:10px 9px;border-bottom:1px solid #e4eaf1;text-align:left;vertical-align:top;font-size:14px}
+.rb-page th{background:#f5f8fc;color:#304c6a;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.rb-page .formula{padding:14px;border:1px dashed #bfd0e1;border-radius:12px;background:#f9fbfd;color:#355371;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;overflow-x:auto}
+.rb-page .content-section{margin-top:18px}
+.rb-page .content-section h2{color:#163555;font-size:21px}
+.rb-page .content-section p,.rb-page .content-section li{color:#40566e;line-height:1.7}
+.rb-page .content-section a{color:#1d5d9f}
+.rb-page .small{font-size:13px;color:#61758d}
+.rb-page .hidden{display:none!important}
+@media(max-width:760px){.rb-page .grid,.rb-page .shape-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.rb-page .result-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.rb-page .hero{align-items:flex-start;padding:17px;gap:12px}.rb-page .tool-icon{font-size:30px}.rb-page .grid,.rb-page .shape-fields{grid-template-columns:1fr}.rb-page .panel{padding:15px}.rb-page .buttons{flex-direction:column}.rb-page .buttons .btn{width:100%}.rb-page .result-summary{grid-template-columns:1fr 1fr}}
+@media print{header,footer,.rb-page .no-print{display:none!important}.rb-page{max-width:none;padding:0}.rb-page .panel{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body class="tool-page">
+<a class="skip-link" href="#main-content">Skip to calculator</a>
+<header class="site-header zem-header">
+<div class="header-inner">
+<a class="brand" href="/"><div class="brand-mark" aria-hidden="true">Z</div><div class="brand-copy"><strong>ZemTools</strong><span>Practical online tools</span></div></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/" aria-current="page">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+<div class="header-actions" aria-label="Header tools">
+<button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+<button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults"></div></div>
+<nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="/tools/">All Tools</a><a href="/math-science/">Math &amp; Science</a><a href="/digital-developer/">Digital &amp; Developer</a><a href="/home-construction/">Home &amp; Construction</a><a href="/energy-electrical/">Energy &amp; Electrical</a></nav>
+</div>
+</header>
+<main id="main-content" class="rb-page">
+<section class="hero-shell">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/home-construction/">Home &amp; Construction</a><span>›</span><span aria-current="page">Raised Bed Soil Calculator</span></nav>
+<div class="hero"><div class="tool-icon" aria-hidden="true">🌱</div><div><h1>Raised Bed Soil Calculator</h1><p>Plan several raised beds in one project. Enter each bed's inside dimensions and target fill depth, then calculate the volume, bags and optional cost for every ingredient in your own soil-mix recipe.</p></div></div>
+<div class="intro-callout"><strong>Your recipe, your measurements:</strong> Enter mix percentages from a recipe or supplier you have chosen. This calculator works out quantities; it does not recommend a universal soil recipe, fertilizer rate or plant-specific growing treatment.</div>
+</section>
+
+<section class="panel">
+<h2>1. Choose measurement units</h2>
+<p class="panel-intro">Choose the units for bed dimensions. Ingredient package volumes are entered in litres using the volume printed on the actual bag.</p>
+<div class="grid">
+<div class="field"><label for="unitSystem">Measurement system</label><select id="unitSystem"><option value="imperial">Imperial (ft / in)</option><option value="metric">Metric (m / cm)</option></select></div>
+<div class="field"><label for="currency">Currency label (optional)</label><input id="currency" maxlength="10" value="USD" autocomplete="off"></div>
+<div class="field"><label for="projectLabel">Project name (optional)</label><input id="projectLabel" maxlength="80" placeholder="e.g. Spring raised beds"></div>
+</div>
+</section>
+
+<section class="panel" aria-labelledby="beds-heading">
+<h2 id="beds-heading">2. Add your raised beds</h2>
+<p class="panel-intro">Measure inside the bed, not the outside frame. For a round bed choose Circle. For an L-shaped or irregular bed, split it into separate rectangles and add each one.</p>
+<div id="bedList" class="bed-list">
+<article class="bed-card" data-bed-id="bed-1">
+<div class="bed-head"><strong>Backyard bed</strong><button class="btn btn-danger remove-bed no-print" type="button">Remove</button></div>
+<div class="grid">
+<div class="field"><label>Bed name</label><input data-field="name" maxlength="60" value="Backyard bed"></div>
+<div class="field"><label>Bed shape</label><select data-field="shape"><option value="rectangle" selected>Rectangle / square</option><option value="circle">Circle</option></select></div>
+<div class="field"><label>Number of matching beds</label><input data-field="count" type="number" min="1" max="100" step="1" value="1"></div>
+</div>
+<div class="shape-fields">
+<div class="field" data-shape="rectangle"><label>Inside length (ft)</label><input data-field="length" type="number" min="0" step="any" value="6"></div>
+<div class="field" data-shape="rectangle"><label>Inside width (ft)</label><input data-field="width" type="number" min="0" step="any" value="3"></div>
+<div class="field" data-shape="circle" hidden><label>Inside diameter (ft)</label><input data-field="diameter" type="number" min="0" step="any" value="4"></div>
+<div class="field"><label>Target fill depth (in)</label><input data-field="depth" type="number" min="0" step="any" value="10"></div>
+<div class="field"><label>Usable existing fill (in)</label><input data-field="existingDepth" type="number" min="0" step="any" value="0"></div>
+</div>
+</article>
+</div>
+<div class="buttons no-print"><button class="btn" id="addBed" type="button">+ Add another bed</button></div>
+</section>
+
+<section class="panel" aria-labelledby="mix-heading">
+<h2 id="mix-heading">3. Define your soil mix</h2>
+<p class="panel-intro">Enter the percentage of the total mix made up by each ingredient. All percentages must add up to exactly 100% (within normal rounding).</p>
+<div class="example-note"><strong>Editable example only:</strong> The starting 60% topsoil / 30% compost / 10% soilless mix split is an example published by Gardener's Supply. It is not a universal recommendation. Replace it with the proportions from the recipe or supplier you have chosen. <a href="https://www.gardeners.com/blogs/vegetable-gardening-articles/soil-calculator" target="_blank" rel="noopener noreferrer">Read the example source</a>.</div>
+<div id="ingredientList" class="ingredient-list" style="margin-top:13px">
+<article class="ingredient-card" data-ingredient-id="ingredient-1">
+<div class="ingredient-head"><strong>Mix ingredient 1</strong><button class="btn btn-danger remove-ingredient no-print" type="button">Remove</button></div>
+<div class="grid">
+<div class="field"><label>Ingredient name</label><input data-field="name" maxlength="50" value="Topsoil" placeholder="e.g. Compost"></div>
+<div class="field"><label>Mix percentage (%)</label><input data-field="percentage" type="number" min="0" max="100" step="any" value="60"></div>
+<div class="field"><label>Bag volume (litres)</label><input data-field="bagVolumeL" type="number" min="0" step="any" value="30"></div>
+<div class="field"><label>Price per bag (optional)</label><input data-field="pricePerBag" type="number" min="0" step="any" value="" placeholder="Enter your price"></div>
+</div><p class="small">Use the volume printed on the actual bag. The example 30 L value is editable and is not a standard bag size.</p>
+</article>
+<article class="ingredient-card" data-ingredient-id="ingredient-2">
+<div class="ingredient-head"><strong>Mix ingredient 2</strong><button class="btn btn-danger remove-ingredient no-print" type="button">Remove</button></div>
+<div class="grid">
+<div class="field"><label>Ingredient name</label><input data-field="name" maxlength="50" value="Compost" placeholder="e.g. Compost"></div>
+<div class="field"><label>Mix percentage (%)</label><input data-field="percentage" type="number" min="0" max="100" step="any" value="30"></div>
+<div class="field"><label>Bag volume (litres)</label><input data-field="bagVolumeL" type="number" min="0" step="any" value="30"></div>
+<div class="field"><label>Price per bag (optional)</label><input data-field="pricePerBag" type="number" min="0" step="any" value="" placeholder="Enter your price"></div>
+</div><p class="small">Use the volume printed on the actual bag. The example 30 L value is editable and is not a standard bag size.</p>
+</article>
+<article class="ingredient-card" data-ingredient-id="ingredient-3">
+<div class="ingredient-head"><strong>Mix ingredient 3</strong><button class="btn btn-danger remove-ingredient no-print" type="button">Remove</button></div>
+<div class="grid">
+<div class="field"><label>Ingredient name</label><input data-field="name" maxlength="50" value="Soilless growing mix" placeholder="e.g. Compost"></div>
+<div class="field"><label>Mix percentage (%)</label><input data-field="percentage" type="number" min="0" max="100" step="any" value="10"></div>
+<div class="field"><label>Bag volume (litres)</label><input data-field="bagVolumeL" type="number" min="0" step="any" value="30"></div>
+<div class="field"><label>Price per bag (optional)</label><input data-field="pricePerBag" type="number" min="0" step="any" value="" placeholder="Enter your price"></div>
+</div><p class="small">Use the volume printed on the actual bag. The example 30 L value is editable and is not a standard bag size.</p>
+</article>
+</div>
+<div class="buttons no-print"><button class="btn" id="addIngredient" type="button">+ Add ingredient</button></div>
+</section>
+
+<section class="panel no-print">
+<h2>4. Calculate your project</h2>
+<p class="panel-intro">Bag volumes and prices are optional. Enter the labelled bag volume in litres to calculate whole bags; enter a price per bag to compare an ingredient cost in the currency label above.</p>
+<div class="buttons"><button class="btn btn-primary" id="calculateProject" type="button">Calculate soil mix</button><button class="btn" id="resetProject" type="button">Reset example</button></div>
+<div class="error" id="projectError" role="alert"></div>
+</section>
+
+<section class="panel hidden" id="projectResults" aria-labelledby="results-heading" aria-live="polite">
+<div class="bed-head"><div><h2 id="results-heading">Your raised-bed soil plan</h2><p class="small" id="resultProjectLabel"></p></div><div class="buttons no-print" style="margin-top:0"><button class="btn" id="copyResult" type="button">Copy summary</button><button class="btn" id="printResult" type="button">Print</button></div></div>
+<div class="result-summary" id="resultSummary"></div>
+<div class="content-section"><h2>Bed-by-bed volume</h2><div class="table-wrap"><table><thead><tr><th>Bed</th><th>Matching beds</th><th>Target fill</th><th>Existing fill</th><th>New mix needed</th></tr></thead><tbody id="bedResultRows"></tbody></table></div></div>
+<div class="content-section"><h2>Ingredient shopping list</h2><p class="small">Volumes are calculated from your mix percentages. Bag counts round up using each ingredient's labelled package volume. The tool does not infer bag weight or density.</p><div class="table-wrap"><table><thead><tr><th>Ingredient</th><th>Mix share</th><th>Volume needed</th><th>Labelled bag</th><th>Whole bags</th><th>Estimated cost</th></tr></thead><tbody id="ingredientResultRows"></tbody></table></div><p id="costNote" class="small"></p></div>
+</section>
+
+<section class="panel content-section">
+<h2>How the raised-bed soil calculator works</h2>
+<p>For each bed, the calculator finds the inside area and multiplies it by the new fill depth. Any existing fill depth you enter is subtracted from the target depth. Matching beds are multiplied by their quantity, then the volumes are combined.</p>
+<div class="formula">New mix volume = bed area × (target fill depth − existing fill depth) × number of matching beds<br>Ingredient volume = total new mix volume × ingredient percentage ÷ 100<br>Whole bags = ingredient volume ÷ labelled bag volume, rounded up</div>
+<p>Rectangular beds use length × width. Circular beds use π × radius². For L-shaped or irregular beds, divide the floor area into non-overlapping rectangles and add them as separate beds. All dimensions are converted to a common unit before totals are calculated.</p>
+<h2>Use your own recipe and product labels</h2>
+<p>Soil blends vary by project, growing method, local materials and supplier. Use a mix ratio supplied by your chosen recipe, extension resource or supplier. This tool does not decide which soil ingredients are appropriate for a crop, prescribe fertilizer or calculate soil chemistry.</p>
+<p>Package volumes vary. Read the actual label and enter the stated volume in litres; the calculator uses that volume to estimate whole packages. Optional prices are user-entered and are not currency conversions or live supplier quotes.</p>
+<h2>Frequently asked questions</h2>
+<h3>Can I calculate more than one raised bed?</h3>
+<p>Yes. Add each bed separately, including its shape, inside dimensions, fill depth and number of matching beds. The summary combines the volumes and ingredient amounts for the full project.</p>
+<h3>Can I use a different soil-mix ratio?</h3>
+<p>Yes. Change the ingredient names and percentages to match the recipe you have chosen. The percentages must total 100%. The example values are only a starting example from the cited source, not a universal recommendation.</p>
+<h3>Does the calculator include soil already in the bed?</h3>
+<p>Enter the usable existing fill depth for each bed. The calculator subtracts that depth from your target fill depth and estimates only the additional mix you need.</p>
+<h3>Does it recommend fertilizer or the best soil for my plants?</h3>
+<p>No. It is a volume and purchasing calculator. Follow suitable local growing guidance, a soil test and the instructions for the exact products you intend to use.</p>
+</section>
+
+<section class="panel content-section">
+<h2>Sources and related tools</h2>
+<ul>
+<li><a href="https://www.gardeners.com/blogs/vegetable-gardening-articles/soil-calculator" target="_blank" rel="noopener noreferrer">Gardener's Supply — Garden Soil Calculator and published mix example</a></li>
+<li><a href="https://squarefootgardening.org/sfg-soil-calculator/" target="_blank" rel="noopener noreferrer">Square Foot Gardening Foundation — Soil Calculator</a></li>
+</ul>
+<p>For other garden-material projects, use the <a href="/mulch-calculator/">Mulch Calculator</a>. For general loose aggregate and base quantities, see the <a href="/gravel-calculator/">Gravel Calculator</a>.</p>
+<p class="small">This tool calculates volume from the measurements and percentages you enter. It is not a horticultural recommendation, soil test, structural assessment of a raised bed, or guarantee of product coverage.</p>
+</section>
+</main>
+<footer><div>© 2026 ZemTools</div><nav class="footer-links"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></footer>
+
+<script src="/raised-bed-soil-engine.js"></script>
+<script>
+(function(){
+'use strict';
+const engine=window.ZemToolsRaisedBedSoilEngine;
+const $=id=>document.getElementById(id);
+if(!engine){$('projectError').textContent='The calculation engine could not load. Refresh the page and try again.';$('projectError').classList.add('show');return;}
+let bedId=0,ingredientId=0,currentSystem=$('unitSystem').value,lastSummary='';
+const esc=value=>String(value===null||value===undefined?'':value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const fmt=(value,places=2)=>Number(value).toLocaleString(undefined,{maximumFractionDigits:places});
+const volumeText=m3=>fmt(m3*1000,1)+' L · '+fmt(m3/0.028316846592,2)+' ft³ · '+fmt(m3/0.764554857984,3)+' yd³ · '+fmt(m3,3)+' m³';
+const factor={ft:0.3048,m:1,in:0.0254,cm:0.01};
+function wireLabels(card,prefix){
+ card.querySelectorAll('.field').forEach((field,index)=>{
+  const label=field.querySelector('label');const input=field.querySelector('input,select');
+  if(label&&input){const id=prefix+'-'+index;label.htmlFor=id;input.id=id;}
+ });
+}
+function unitText(){return currentSystem==='imperial'?{length:'ft',depth:'in'}:{length:'m',depth:'cm'};}
+function showShapeFields(card){
+ const shape=card.querySelector('[data-field="shape"]').value;
+ card.querySelectorAll('[data-shape]').forEach(field=>{field.hidden=field.dataset.shape!==shape;});
+}
+function bindBedCard(card,id){
+ wireLabels(card,id);showShapeFields(card);
+ card.querySelector('[data-field="shape"]').addEventListener('change',()=>showShapeFields(card));
+ card.querySelector('.remove-bed').addEventListener('click',()=>{if($('bedList').children.length>1)card.remove();});
+ card.querySelector('[data-field="name"]').addEventListener('input',e=>{card.querySelector('.bed-head strong').textContent=e.target.value||'Unnamed bed';});
+}
+function addBed(data){
+ if($('bedList').children.length>=engine.MAX_BEDS)return;
+ const d=data||{};const id='bed-'+(++bedId);const units=unitText();
+ const card=document.createElement('article');card.className='bed-card';card.dataset.bedId=id;
+ card.innerHTML='<div class="bed-head"><strong>'+esc(d.name||('Bed '+bedId))+'</strong><button class="btn btn-danger remove-bed no-print" type="button">Remove</button></div>'+
+ '<div class="grid">'+
+ '<div class="field"><label>Bed name</label><input data-field="name" maxlength="60" value="'+esc(d.name||('Bed '+bedId))+'"></div>'+
+ '<div class="field"><label>Bed shape</label><select data-field="shape"><option value="rectangle">Rectangle / square</option><option value="circle">Circle</option></select></div>'+
+ '<div class="field"><label>Number of matching beds</label><input data-field="count" type="number" min="1" max="100" step="1" value="'+esc(d.count||1)+'"></div></div>'+
+ '<div class="shape-fields">'+
+ '<div class="field" data-shape="rectangle"><label>Inside length ('+units.length+')</label><input data-field="length" type="number" min="0" step="any" value="'+esc(d.length===undefined?(currentSystem==='imperial'?6:1.8288):d.length)+'"></div>'+
+ '<div class="field" data-shape="rectangle"><label>Inside width ('+units.length+')</label><input data-field="width" type="number" min="0" step="any" value="'+esc(d.width===undefined?(currentSystem==='imperial'?3:0.9144):d.width)+'"></div>'+
+ '<div class="field" data-shape="circle" hidden><label>Inside diameter ('+units.length+')</label><input data-field="diameter" type="number" min="0" step="any" value="'+esc(d.diameter===undefined?(currentSystem==='imperial'?4:1.2192):d.diameter)+'"></div>'+
+ '<div class="field"><label>Target fill depth ('+units.depth+')</label><input data-field="depth" type="number" min="0" step="any" value="'+esc(d.depth===undefined?(currentSystem==='imperial'?10:25.4):d.depth)+'"></div>'+
+ '<div class="field"><label>Usable existing fill ('+units.depth+')</label><input data-field="existingDepth" type="number" min="0" step="any" value="'+esc(d.existingDepth===undefined?0:d.existingDepth)+'"></div></div>';
+ $('bedList').appendChild(card);bindBedCard(card,id);
+}
+function bindIngredientCard(card,id){
+ wireLabels(card,id);
+ card.querySelector('.remove-ingredient').addEventListener('click',()=>{if($('ingredientList').children.length>1)card.remove();});
+}
+function addIngredient(data){
+ if($('ingredientList').children.length>=engine.MAX_INGREDIENTS)return;
+ const d=data||{};const id='ingredient-'+(++ingredientId);
+ const card=document.createElement('article');card.className='ingredient-card';card.dataset.ingredientId=id;
+ card.innerHTML='<div class="ingredient-head"><strong>Mix ingredient '+ingredientId+'</strong><button class="btn btn-danger remove-ingredient no-print" type="button">Remove</button></div>'+
+ '<div class="grid">'+
+ '<div class="field"><label>Ingredient name</label><input data-field="name" maxlength="50" value="'+esc(d.name||'')+'" placeholder="e.g. Compost"></div>'+
+ '<div class="field"><label>Mix percentage (%)</label><input data-field="percentage" type="number" min="0" max="100" step="any" value="'+esc(d.percentage===undefined?0:d.percentage)+'"></div>'+
+ '<div class="field"><label>Bag volume (litres)</label><input data-field="bagVolumeL" type="number" min="0" step="any" value="'+esc(d.bagVolumeL===undefined?30:d.bagVolumeL)+'"></div>'+
+ '<div class="field"><label>Price per bag (optional)</label><input data-field="pricePerBag" type="number" min="0" step="any" value="'+esc(d.pricePerBag===undefined?'':d.pricePerBag)+'" placeholder="Enter your price"></div></div>'+
+ '<p class="small">Use the volume printed on the actual bag. The example 30 L value is editable and is not a standard bag size.</p>';
+ $('ingredientList').appendChild(card);bindIngredientCard(card,id);
+}
+function hydrateInitialCards(){
+ const existingBeds=[...$('bedList').querySelectorAll('.bed-card')];
+ bedId=existingBeds.length;
+ existingBeds.forEach((card,index)=>bindBedCard(card,card.dataset.bedId||('bed-'+(index+1))));
+ const existingIngredients=[...$('ingredientList').querySelectorAll('.ingredient-card')];
+ ingredientId=existingIngredients.length;
+ existingIngredients.forEach((card,index)=>bindIngredientCard(card,card.dataset.ingredientId||('ingredient-'+(index+1))));
+}
+function readBeds(){
+ return [...$('bedList').querySelectorAll('.bed-card')].map(card=>{
+  const val=name=>card.querySelector('[data-field="'+name+'"]').value;
+  return {name:val('name'),shape:val('shape'),length:val('length'),width:val('width'),diameter:val('diameter'),depth:val('depth'),existingDepth:val('existingDepth'),count:val('count')};
+ });
+}
+function readIngredients(){
+ return [...$('ingredientList').querySelectorAll('.ingredient-card')].map(card=>{
+  const val=name=>card.querySelector('[data-field="'+name+'"]').value;
+  return {name:val('name'),percentage:val('percentage'),bagVolumeL:val('bagVolumeL'),pricePerBag:val('pricePerBag')};
+ });
+}
+function showError(message){$('projectError').textContent=message;$('projectError').classList.add('show');}
+function clearError(){$('projectError').textContent='';$('projectError').classList.remove('show');}
+function renderResult(result){
+ const d=result.data;
+ $('resultProjectLabel').textContent=$('projectLabel').value.trim();
+ $('resultSummary').innerHTML=[
+  ['Raised beds',d.bedCount+' total'],
+  ['Combined bed area',fmt(d.totalAreaM2,2)+' m²'],
+  ['New soil mix needed',volumeText(d.newMixVolumeM3)],
+  ['Target total fill',volumeText(d.targetVolumeM3)]
+ ].map(item=>'<div class="metric"><span>'+esc(item[0])+'</span><strong>'+esc(item[1])+'</strong></div>').join('');
+ $('bedResultRows').innerHTML=d.beds.map(b=>'<tr><td>'+esc(b.name)+'</td><td>'+b.count+'</td><td>'+volumeText(b.targetVolumeM3)+'</td><td>'+volumeText(b.existingVolumeM3)+'</td><td><strong>'+volumeText(b.newMixVolumeM3)+'</strong></td></tr>').join('');
+ $('ingredientResultRows').innerHTML=d.ingredients.map(x=>{
+  const bag=x.bags===null?'Enter bag volume':x.bags+' × '+fmt(x.bagVolumeL,1)+' L';
+  const cost=x.cost===null?'—':esc(d.currency)+' '+fmt(x.cost,2);
+  return '<tr><td><strong>'+esc(x.name)+'</strong></td><td>'+fmt(x.percentage,2)+'%</td><td>'+volumeText(x.volumeM3)+'</td><td>'+bag+'</td><td>'+(x.bags===null?'—':x.bags)+'</td><td>'+cost+'</td></tr>';
+ }).join('');
+ $('costNote').textContent=d.allPriced?'Estimated combined bag cost: '+d.currency+' '+fmt(d.totalCost,2)+'. Prices are the values you entered and are not live supplier quotes.':'Add a price for each ingredient with a non-zero percentage to see a complete bag-cost total.';
+ $('projectResults').classList.remove('hidden');
+ lastSummary='Raised Bed Soil Calculator\nBeds: '+d.bedCount+'\nNew mix: '+volumeText(d.newMixVolumeM3)+'\n'+d.ingredients.map(x=>x.name+': '+fmt(x.percentage,2)+'% — '+volumeText(x.volumeM3)+' — '+(x.bags===null?'bag size not entered':x.bags+' bags')).join('\n')+'\n'+$('costNote').textContent;
+}
+function calculate(){
+ clearError();
+ const result=engine.calculateProject({system:currentSystem,currency:$('currency').value,beds:readBeds(),ingredients:readIngredients()});
+ if(!result.ok){$('projectResults').classList.add('hidden');showError(result.error.message);return;}
+ renderResult(result);
+}
+function convertUnitValues(from,to,fields,fromFactor,toFactor){
+ const ratio=fromFactor/toFactor;
+ document.querySelectorAll('.bed-card').forEach(card=>{
+  fields.forEach(field=>{
+   const input=card.querySelector('[data-field="'+field+'"]');
+   if(input&&input.value!=='')input.value=String(Math.round(Number(input.value)*ratio*10000)/10000);
+  });
+ });
+}
+$('unitSystem').addEventListener('change',e=>{
+ const next=e.target.value;if(next===currentSystem)return;
+ const old=currentSystem;
+ if(old==='imperial'&&next==='metric'){
+  convertUnitValues(old,next,['length','width','diameter'],0.3048,1);
+  convertUnitValues(old,next,['depth','existingDepth'],0.0254,0.01);
+ }else{
+  convertUnitValues(old,next,['length','width','diameter'],1,0.3048);
+  convertUnitValues(old,next,['depth','existingDepth'],0.01,0.0254);
+ }
+ currentSystem=next;
+ document.querySelectorAll('.bed-card').forEach(card=>{
+  const units=unitText();
+  card.querySelector('[data-shape="rectangle"] label').textContent='Inside length ('+units.length+')';
+  card.querySelectorAll('[data-shape="rectangle"]')[1].querySelector('label').textContent='Inside width ('+units.length+')';
+  card.querySelector('[data-shape="circle"] label').textContent='Inside diameter ('+units.length+')';
+  const labels=card.querySelectorAll('.shape-fields .field label');
+  labels[3].textContent='Target fill depth ('+units.depth+')';
+  labels[4].textContent='Usable existing fill ('+units.depth+')';
+ });
+});
+$('addBed').addEventListener('click',()=>{addBed();});
+$('addIngredient').addEventListener('click',()=>{addIngredient({name:'New ingredient',percentage:0,bagVolumeL:30});});
+$('calculateProject').addEventListener('click',calculate);
+$('resetProject').addEventListener('click',()=>{
+ $('bedList').innerHTML='';$('ingredientList').innerHTML='';bedId=0;ingredientId=0;currentSystem='imperial';$('unitSystem').value='imperial';$('currency').value='USD';$('projectLabel').value='';$('projectResults').classList.add('hidden');clearError();
+ addBed({name:'Backyard bed',length:6,width:3,depth:10,existingDepth:0,count:1});
+ addIngredient({name:'Topsoil',percentage:60,bagVolumeL:30});
+ addIngredient({name:'Compost',percentage:30,bagVolumeL:30});
+ addIngredient({name:'Soilless growing mix',percentage:10,bagVolumeL:30});
+});
+$('copyResult').addEventListener('click',async()=>{
+ if(!lastSummary)return;
+ try{await navigator.clipboard.writeText(lastSummary);$('copyResult').textContent='Copied';}
+ catch(error){showError('Copy is unavailable in this browser. You can select the result text and copy it manually.');}
+});
+$('printResult').addEventListener('click',()=>window.print());
+hydrateInitialCards();
+if(!$('bedList').children.length)addBed({name:'Backyard bed',length:6,width:3,depth:10,existingDepth:0,count:1});
+if(!$('ingredientList').children.length){
+ addIngredient({name:'Topsoil',percentage:60,bagVolumeL:30,pricePerBag:8});
+ addIngredient({name:'Compost',percentage:30,bagVolumeL:30,pricePerBag:6});
+ addIngredient({name:'Soilless growing mix',percentage:10,bagVolumeL:30,pricePerBag:10});
+}
+})();
+</script>
+<script src="/master-ui.js?v=20261114-shell-final"></script>
+<script>
+(function(){
+  function fixHeaderBrandName(){
+    const brand=document.querySelector('header.site-header .brand');
+    if(brand)brand.removeAttribute('aria-label');
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fixHeaderBrandName,{once:true});
+  else fixHeaderBrandName();
+})();
+</script>
+</body>
+</html>
