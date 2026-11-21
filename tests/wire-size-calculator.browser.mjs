@@ -1495,6 +1495,67 @@ try {
     assert.match(await value('comparisonRows'),/Missing sizes are not inferred/i);
   });
 
+  await check('Candidate comparison can be collapsed and expanded without losing the calculated results', async () => {
+    await setFixture({task:'find',method:'zemtools',standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3});
+    const comparison=page.locator('#candidateComparisonDetails');
+    assert.equal(await comparison.getAttribute('open')!==null,true);
+    assert.ok(await page.locator('#comparisonRows .comparison-row').count()>2);
+    await comparison.locator('summary').click();
+    assert.equal(await comparison.getAttribute('open'),null);
+    await comparison.locator('summary').click();
+    assert.ok(await comparison.getAttribute('open')!==null);
+    assert.ok(await page.locator('#comparisonRows .comparison-row').count()>2);
+  });
+
+  await check('Shareable setup links round-trip supported calculation inputs without exporting custom data', async () => {
+    await setFixture({task:'check',method:'zemtools',standard:'metric',circuit:'dc',load:'amps',voltage:24,amps:30,length:5,unit:'m',target:3,temperature:75,construction:'stranded'});
+    await page.locator('#selectedSize').selectOption('16 mm²');
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: { writeText: async text => { window.__wireShareLinkCopied = text; } }
+      });
+    });
+    await page.locator('#copyShareLinkBtn').click();
+    await page.waitForFunction(() => /shareable setup link copied/i.test(document.querySelector('#resultActionStatus')?.textContent || ''));
+    const copied=await page.evaluate(()=>window.__wireShareLinkCopied||'');
+    const sharedUrl=new URL(copied);
+    assert.equal(sharedUrl.searchParams.get('ztshare'),'1');
+    assert.equal(sharedUrl.searchParams.get('task'),'check');
+    assert.equal(sharedUrl.searchParams.get('standard'),'metric');
+    assert.equal(sharedUrl.searchParams.get('method'),'zemtools');
+    assert.equal(sharedUrl.searchParams.get('voltage'),'24');
+    assert.equal(sharedUrl.searchParams.get('amps'),'30');
+    assert.equal(sharedUrl.searchParams.get('length'),'5');
+    assert.equal(sharedUrl.searchParams.get('unit'),'m');
+    assert.equal(sharedUrl.searchParams.get('selectedSize'),'16 mm²');
+    assert.equal(sharedUrl.searchParams.has('ampacityTable'),false);
+    assert.equal(sharedUrl.searchParams.has('manualTable'),false);
+
+    await page.goto(copied,{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('#calculationMethod').inputValue(),'zemtools');
+    assert.equal(await page.locator('#sizeStandard').inputValue(),'metric');
+    assert.equal(await page.locator('[data-task="check"]').getAttribute('aria-pressed'),'true');
+    assert.equal(await page.locator('#voltage').inputValue(),'24');
+    assert.equal(await page.locator('#amps').inputValue(),'30');
+    assert.equal(await page.locator('#length').inputValue(),'5');
+    assert.equal(await page.locator('#lengthUnit').inputValue(),'m');
+    assert.equal(await page.locator('#selectedSize').inputValue(),'16 mm²');
+    assert.notEqual(await value('recommended'),'—');
+    assert.match(await value('resultActionStatus'),/shared setup loaded and recalculated/i);
+  });
+
+  await check('Shareable setup links refuse manual R/X and user-supplied ampacity tables', async () => {
+    await setFixture({task:'check',method:'manual',manualInputMode:'single',standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,pf:0.9});
+    await page.locator('#copyShareLinkBtn').click();
+    assert.match(await value('resultActionStatus'),/do not include manufacturer R\/X values or tables/i);
+
+    await setFixture({task:'find',method:'zemtools',standard:'us',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3});
+    await fill('ampacityTable','8 AWG,15');
+    await page.locator('#copyShareLinkBtn').click();
+    assert.match(await value('resultActionStatus'),/do not include user-supplied ampacity tables/i);
+  });
+
   await check('12V and 24V DC quick presets load matched inputs and produce the independently checked voltage-drop sizes', async () => {
     await setFixture({task:'find',method:'zemtools',standard:'metric',circuit:'dc',load:'amps',voltage:12,amps:15,length:20,unit:'ft',target:3,temperature:75,construction:'stranded'});
     await page.locator('[data-preset="low12"]').click();
