@@ -1450,6 +1450,35 @@ try {
     });
   }
 
+  await check('Find mode compares every supported candidate and highlights the selected size', async () => {
+    await setFixture({task:'find',method:'zemtools',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,temperature:75,construction:'stranded'});
+    const names=await page.evaluate(()=>window.WireSizeCalculator.candidates('us').map(c=>c.name));
+    const rows=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
+    for(const name of names) assert.ok(rows.some(row=>row.includes(name)), 'Missing candidate row: '+name);
+    assert.equal(await page.locator('#comparisonRows .comparison-row[aria-current="true"]').count(),1);
+    assert.match(await value('comparisonTitle'),/All supported conductor candidates/i);
+    assert.match(await value('comparisonRows'),/not code ampacity/i);
+  });
+
+  await check('Maximum-distance comparison derives each candidate run from the current voltage-drop model', async () => {
+    await setFixture({task:'distance',method:'zemtools',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,temperature:75,construction:'stranded'});
+    const selected=await page.locator('#selectedSize').inputValue();
+    const firstRow=page.locator('#comparisonRows .comparison-row').nth(1);
+    assert.ok(await firstRow.isVisible());
+    const names=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
+    assert.ok(names.some(row=>row.includes(selected)));
+    assert.match(await firstRow.innerText(),/m$/m);
+  });
+
+  await check('Manual manufacturer R/X comparison includes only sizes present in the supplied table', async () => {
+    await setFixture({task:'find',method:'manual',manualInputMode:'table',manualTable:'10 AWG,1.24,0.062\\n8 AWG,0.778,0.052',circuit:'single',load:'amps',voltage:120,amps:20,length:100,unit:'ft',target:3,pf:0.9});
+    const rows=await page.locator('#comparisonRows .comparison-row').allInnerTexts();
+    assert.ok(rows.some(row=>row.includes('10 AWG')));
+    assert.ok(rows.some(row=>row.includes('8 AWG')));
+    assert.ok(!rows.some(row=>row.includes('6 AWG')), 'Unprovided sizes must not be shown as manufacturer-data-backed candidates');
+    assert.match(await value('comparisonRows'),/Missing sizes are not inferred/i);
+  });
+
   await check('12V and 24V DC quick presets load matched inputs and produce the independently checked voltage-drop sizes', async () => {
     await page.locator('[data-preset="low12"]').click();
     assert.equal(await page.locator('#voltage').inputValue(), '12');
