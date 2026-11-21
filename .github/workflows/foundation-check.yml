@@ -3,8 +3,23 @@ name: Foundation Check
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+# This workflow contains validation only (no deployment or release side effects).
+# Cancel outdated checks when a newer commit supersedes the same PR or main revision.
+concurrency:
+  group: foundation-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
