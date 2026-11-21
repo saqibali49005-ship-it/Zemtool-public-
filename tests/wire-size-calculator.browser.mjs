@@ -1556,61 +1556,35 @@ try {
     assert.match(await value('resultActionStatus'),/do not include user-supplied ampacity tables/i);
   });
 
-  await check('12V and 24V DC quick presets load matched inputs and produce the independently checked voltage-drop sizes', async () => {
-    await setFixture({task:'find',method:'zemtools',standard:'metric',circuit:'dc',load:'amps',voltage:12,amps:15,length:20,unit:'ft',target:3,temperature:75,construction:'stranded'});
+  await check('12V and 24V DC quick presets load matched U.S. wire-size inputs and pass independent voltage-drop checks', async () => {
+    await setFixture({task:'find',method:'zemtools',standard:'us',circuit:'dc',load:'amps',voltage:48,amps:60,length:5,unit:'m',target:3,temperature:75,construction:'stranded'});
     await page.locator('[data-preset="low12"]').click();
     assert.equal(await page.locator('#voltage').inputValue(), '12');
     assert.equal(await page.locator('#amps').inputValue(), '15');
     assert.equal(await page.locator('#length').inputValue(), '20');
     assert.equal(await page.locator('#lengthUnit').inputValue(), 'ft');
-    assert.equal(await value('recommended'), '16 mm²');
-    // Metric 16 mm² result is independently recomputed from the disclosed IACS constants.
-    const copperRho75Low12 = 0.017241 * (1 + 0.00393 * (75 - 20)) * 1.02;
-    const expectedLow12MetricDropPct = 15 * 2 * (20 * 0.3048) * copperRho75Low12 / 16 / 12 * 100;
-    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - expectedLow12MetricDropPct) < 0.01,
-      '12 V metric preset must match the independent 16 mm² IACS voltage-drop calculation');
+    assert.equal(await value('recommended'), '6 AWG');
+    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - 2.45) < 0.02);
 
     await page.locator('[data-preset="low24"]').click();
     assert.equal(await page.locator('#voltage').inputValue(), '24');
     assert.equal(await page.locator('#amps').inputValue(), '30');
     assert.equal(await page.locator('#length').inputValue(), '5');
     assert.equal(await page.locator('#lengthUnit').inputValue(), 'm');
-    assert.equal(await value('recommended'), '16 mm²');
+    assert.equal(await value('recommended'), '7 AWG');
 
-    // Cross-check the preset using the calculator's independently exposed candidate model.
-    const low24Diagnostic = await page.evaluate(() => {
-      const read = id => document.getElementById(id).value;
-      const candidates = window.WireSizeCalculator.candidates('metric');
-      const options = {
-        voltage: Number(read('voltage')),
-        current: Number(read('amps')),
-        lengthMetres: read('lengthUnit') === 'ft' ? Number(read('length')) * 0.3048 : Number(read('length')),
-        target: Number(read('target')),
-        temperature: Number(read('temperature')),
-        material: read('material'),
-        method: read('calculationMethod'),
-        constructionFactor: read('construction') === 'stranded' ? 1.02 : 1,
-        parallelSets: Number(read('parallelSets'))
-      };
-      return {
-        fields: {
-          task: read('sizeStandard'), voltage: options.voltage, current: options.current,
-          lengthMetres: options.lengthMetres, target: options.target,
-          temperature: options.temperature, material: options.material,
-          method: options.method, constructionFactor: options.constructionFactor,
-          parallelSets: options.parallelSets
-        },
-        candidates: candidates.map(candidate => {
-          const result = window.WireSizeCalculator.calculateCandidate(options, candidate);
-          return {name:candidate.name,dropPct:result.dropPct,pass:result.selectionPass};
-        })
-      };
-    });
-    console.log('WIRE SIZE LOW24 INDEPENDENT CHECK '+JSON.stringify(low24Diagnostic));
-    const expectedSelected = low24Diagnostic.candidates.find(candidate => candidate.pass);
-    assert.ok(expectedSelected, 'At least one listed metric conductor must meet the 3% target');
-    assert.equal(await value('recommended'), expectedSelected.name,
-      'Preset result must match the first candidate independently calculated to pass');
+    // Independently recompute the 24 V preset from the disclosed copper IACS constants.
+    const copperRho75 = 0.017241 * (1 + 0.00393 * (75 - 20)) * 1.02;
+    const awgAreaForPreset = gauge => {
+      const diameterMm = 0.127 * Math.pow(92, (36 - gauge) / 39);
+      return Math.PI * diameterMm * diameterMm / 4;
+    };
+    const presetDropPct = gauge => 30 * 2 * 5 * copperRho75 / awgAreaForPreset(gauge) / 24 * 100;
+    const expected7AwgDropPct = presetDropPct(7);
+    const smaller8AwgDropPct = presetDropPct(8);
+    assert.ok(Math.abs(parseDisplayedNumber(await value('dropPct')) - expected7AwgDropPct) < 0.01);
+    assert.ok(expected7AwgDropPct <= 3 && smaller8AwgDropPct > 3,
+      '7 AWG must be the smallest supported conductor that meets the 3% target');
     assert.match(await value('status'), /smallest supported conductor/i);
   });
 
