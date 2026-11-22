@@ -185,21 +185,21 @@ try {
 
   await check('Spring-forward non-existent local clock time is rejected', async () => {
     await fresh();
-    await page.locator('#timezoneId').fill('America/New_York');
+    await page.locator('#timezoneId').selectOption('America/New_York');
     await between('2026-03-08T02:30','2026-03-08T03:30');
     assert.match(await resultValue(), /does not exist/i);
   });
 
   await check('Fall-back repeated local clock time is rejected instead of guessed', async () => {
     await fresh();
-    await page.locator('#timezoneId').fill('America/New_York');
+    await page.locator('#timezoneId').selectOption('America/New_York');
     await between('2026-11-01T01:30','2026-11-01T02:30');
     assert.match(await resultValue(), /occurs twice/i);
   });
 
   await check('Normal weekday shifts retain their duration across the DST weekend', async () => {
     await fresh();
-    await page.locator('#timezoneId').fill('America/New_York');
+    await page.locator('#timezoneId').selectOption('America/New_York');
     await between('2026-03-06T09:00','2026-03-09T17:00');
     assert.equal(await resultValue(), '16 hours');
     assert.match(await page.locator('#resultArea').innerText(), /Non-working time\s+2 days 15 hours/i);
