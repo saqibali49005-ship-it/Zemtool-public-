@@ -35,8 +35,11 @@ try {
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/business-hours-calculator/');
     assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'index,follow');
     const pageSource = readFileSync('business-hours-calculator/index.html', 'utf8');
-    const guardScript = pageSource.match(/<script>\\s*([\\s\\S]*?zemtools-review\\.pages\\.dev[\\s\\S]*?)<\\/script>/);
-    assert.ok(guardScript, 'Review-host noindex safeguard should be present in the calculator source.');
+    const marker = pageSource.indexOf('zemtools-review.pages.dev');
+    const scriptStart = pageSource.lastIndexOf('<script>', marker);
+    const scriptEnd = pageSource.indexOf('</script>', marker);
+    assert.ok(marker >= 0 && scriptStart >= 0 && scriptEnd > scriptStart, 'Review-host noindex safeguard should be present in the calculator source.');
+    const guardScript = pageSource.slice(scriptStart + '<script>'.length, scriptEnd);
     const robotsValue = hostname => {
       let content = 'index,follow';
       const robots = { setAttribute(name, value) { if (name === 'content') content = value; } };
