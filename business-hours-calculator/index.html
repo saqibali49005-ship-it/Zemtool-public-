@@ -346,9 +346,9 @@
   function minutesPretty(total){if(total===0)return '0 minutes';const h=Math.floor(total/60),m=total%60;return h+' hour'+(h===1?'':'s')+(m?' '+m+' minute'+(m===1?'':'s'):'');}
   function elapsedText(total){const mins=Math.max(0,Math.round(total)),days=Math.floor(mins/1440),rem=mins%1440,h=Math.floor(rem/60),m=rem%60,bits=[];if(days)bits.push(days+' day'+(days===1?'':'s'));if(h)bits.push(h+' hour'+(h===1?'':'s'));if(m||!bits.length)bits.push(m+' minute'+(m===1?'':'s'));return bits.join(' ');}
   function scheduleData(){return DAYS.map((name,i)=>{const enabled=$('day-'+i+'-enabled').checked,fields=[[$('day-'+i+'-start1').value,$('day-'+i+'-end1').value],[$('day-'+i+'-start2').value,$('day-'+i+'-end2').value]],incomplete=fields.some(pair=>Boolean(pair[0])!==Boolean(pair[1])),intervals=fields.map(pair=>[timeMinutes(pair[0]),timeMinutes(pair[1])]).filter(pair=>pair[0]!==null&&pair[1]!==null);return {name,enabled,incomplete,intervals};});}
-  function updateWeeklySummary(){
+  function weeklyScheduleStats(schedule){
     let total=0,openDays=0;
-    scheduleData().forEach(day=>{
+    schedule.forEach(day=>{
       if(!day.enabled)return;
       let minutes=0;
       day.intervals.forEach(([start,end])=>{
@@ -359,8 +359,12 @@
       if(minutes>0)openDays++;
       total+=minutes;
     });
-    $('weeklyTotalHours').textContent=minutesPretty(total);
-    $('weeklyOpenDays').textContent=openDays+' of 7';
+    return {totalMinutes:total,openDays,averageMinutesPerOpenDay:openDays?total/openDays:0};
+  }
+  function updateWeeklySummary(){
+    const stats=weeklyScheduleStats(scheduleData());
+    $('weeklyTotalHours').textContent=minutesPretty(stats.totalMinutes);
+    $('weeklyOpenDays').textContent=stats.openDays+' of 7';
   }
   function holidayData(){const tokens=$('holidayDates').value.split(/[\s,;]+/).map(s=>s.trim()).filter(Boolean),manual=new Set(),invalid=[];tokens.forEach(s=>{const p=parseDateOnly(s);if(p)manual.add(isoDate(p.y,p.m,p.d));else invalid.push(s);});return {set:new Set([...manual,...state.autoHolidays.keys()]),manual,invalid,names:state.holidayNames};}
   function intervalSegments(pair){const s=pair[0],e=pair[1];if(s===0&&e===0)return [[0,1440]];if(e>s)return [[s,e]];if(e<s)return [[s,1440],[0,e]];return [];}
@@ -397,6 +401,7 @@
       const zone=timezone(),a=parseDateTime($('betweenStart').value),b=parseDateTime($('betweenEnd').value);if(!a||!b){showError('Enter valid start and end date-time values.');return;}
       const startEpoch=localToEpoch(a,zone,'Start date and time'),endEpoch=localToEpoch(b,zone,'End date and time');if(endEpoch<startEpoch){showError('End date and time must be on or after the start.');return;}
       const schedule=scheduleData(),hv=holidayData(),errors=validateSchedule(schedule);if(errors.length){showError(errors.join(' '));return;}
+      const averageWorkdayMinutes=weeklyScheduleStats(schedule).averageMinutesPerOpenDay;
       const startN=dayNumber(a),endN=dayNumber(b);if(endN-startN>3650){showError('Choose a date range of ten years or less so the daily breakdown remains useful.');return;}
       let business=0,businessDays=0,holidayCount=0;const rows=[];
       for(let n=startN;n<=endN;n++){
@@ -407,9 +412,10 @@
         const note=isHoliday?(hv.names.get(iso)||'Holiday excluded'):(dayBusiness>0?'Scheduled work time counted':(intervals.length?'No work-period overlap in this range':(schedule[weekdayIndex(p)].enabled?'No enabled interval overlaps':'Non-working day')));
         rows.push({date:iso,day:DAYS[weekdayIndex(p)],minutes:dayBusiness,hours:minutesPretty(dayBusiness),note});
       }
-      const elapsed=Math.round((endEpoch-startEpoch)/60000),nonWorking=Math.max(0,elapsed-business),pct=elapsed?business/elapsed*100:0;
-      $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business time</div><div class="result-value">'+minutesPretty(business)+'</div><div class="result-sub">'+(business/60).toFixed(2).replace(/0+$/,'').replace(/\.$/,'')+' decimal hours · '+escapeHtml(zone)+'</div></div><div class="result-grid"><div class="result-stat"><span>Actual elapsed time</span><strong>'+elapsedText(elapsed)+'</strong></div><div class="result-stat"><span>Non-working time</span><strong>'+elapsedText(nonWorking)+'</strong></div><div class="result-stat"><span>Business days touched</span><strong>'+businessDays+'</strong></div><div class="result-stat"><span>Holiday dates excluded</span><strong>'+holidayCount+'</strong></div></div><p class="add-summary">'+(pct===0?'No configured business minutes overlap the selected range.':business+' business minutes counted across the selected range.')+'</p>';
-      renderBreakdown(rows);state.lastExport={mode:'between',start:$('betweenStart').value,end:$('betweenEnd').value,timezone:zone,business,decimal:(business/60).toFixed(2),elapsed,nonWorking,businessDays,holidayCount,rows};$('downloadGrid').hidden=false;
+      const elapsed=Math.round((endEpoch-startEpoch)/60000),nonWorking=Math.max(0,elapsed-business),pct=elapsed?business/elapsed*100:0,equivalentWorkdays=averageWorkdayMinutes>0?business/averageWorkdayMinutes:null;
+      const equivalentText=equivalentWorkdays===null?'—':equivalentWorkdays.toFixed(2)+' days';
+      $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business time</div><div class="result-value">'+minutesPretty(business)+'</div><div class="result-sub">'+(business/60).toFixed(2).replace(/0+$/,'').replace(/\.$/,'')+' decimal hours · '+escapeHtml(zone)+'</div></div><div class="result-grid"><div class="result-stat"><span>Actual elapsed time</span><strong>'+elapsedText(elapsed)+'</strong></div><div class="result-stat"><span>Non-working time</span><strong>'+elapsedText(nonWorking)+'</strong></div><div class="result-stat"><span>Equivalent workdays</span><strong>'+equivalentText+'</strong></div><div class="result-stat"><span>Holiday dates excluded</span><strong>'+holidayCount+'</strong></div></div><p class="add-summary">'+(pct===0?'No configured business minutes overlap the selected range.':business+' business minutes counted across the selected range.')+' '+(averageWorkdayMinutes>0?'Equivalent workdays use an average of '+minutesPretty(Math.round(averageWorkdayMinutes))+' per open workday. ':'Enable at least one scheduled workday to calculate equivalents. ')+businessDays+' business dates touched.</p>';
+      renderBreakdown(rows);state.lastExport={mode:'between',start:$('betweenStart').value,end:$('betweenEnd').value,timezone:zone,business,decimal:(business/60).toFixed(2),elapsed,nonWorking,businessDays,equivalentWorkdays,averageWorkdayMinutes,holidayCount,rows};$('downloadGrid').hidden=false;
     }catch(e){showError(e.message||'Unable to complete that business-hours calculation.');}
   }
   function findForward(p,cursor,remaining,schedule,holidaySet,zone){
@@ -435,13 +441,13 @@
   function csvCell(value){return '"'+String(value??'').replace(/"/g,'""')+'"';}
   function exportText(){
     const x=state.lastExport;if(!x)return;let textOut='ZemTools — Business Hours Calculator\n\nMode: '+(x.mode==='between'?'Business hours between dates':'SLA / add or subtract business time')+'\nTime zone: '+x.timezone+'\n';
-    if(x.mode==='between'){textOut+='Start: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nElapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHoliday dates excluded: '+x.holidayCount+'\n\nDaily breakdown:\nDate,Day,Business minutes,Note\n';x.rows.forEach(r=>{textOut+=[r.date,r.day,r.minutes,r.note].map(csvCell).join(',')+'\n';});}
+    if(x.mode==='between'){textOut+='Start: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nEquivalent workdays: '+(x.equivalentWorkdays===null?'Not available':x.equivalentWorkdays.toFixed(2))+'\nAverage scheduled minutes per open day: '+Math.round(x.averageWorkdayMinutes||0)+'\nElapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHoliday dates excluded: '+x.holidayCount+'\n\nDaily breakdown:\nDate,Day,Business minutes,Note\n';x.rows.forEach(r=>{textOut+=[r.date,r.day,r.minutes,r.note].map(csvCell).join(',')+'\n';});}
     else{textOut+='Start: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.resultText+'\nHoliday dates loaded: '+x.holidayCount+'\n';}
     const blob=new Blob([textOut],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
   function exportCsv(){
     const x=state.lastExport;if(!x)return;let rows;
-    if(x.mode==='between'){rows=[['Field','Value'],['Mode','Business hours between dates'],['Time zone',x.timezone],['Start',x.start],['End',x.end],['Business minutes',x.business],['Business hours',x.decimal],['Actual elapsed minutes',x.elapsed],['Non-working minutes',x.nonWorking],['Business days touched',x.businessDays],['Holiday dates excluded',x.holidayCount],[],['Date','Day','Business minutes','Calculation note']];x.rows.forEach(r=>rows.push([r.date,r.day,r.minutes,r.note]));}
+    if(x.mode==='between'){rows=[['Field','Value'],['Mode','Business hours between dates'],['Time zone',x.timezone],['Start',x.start],['End',x.end],['Business minutes',x.business],['Business hours',x.decimal],['Actual elapsed minutes',x.elapsed],['Non-working minutes',x.nonWorking],['Equivalent workdays',x.equivalentWorkdays===null?'Not available':x.equivalentWorkdays.toFixed(2)],['Average scheduled minutes per open day',Math.round(x.averageWorkdayMinutes||0)],['Business days touched',x.businessDays],['Holiday dates excluded',x.holidayCount],[],['Date','Day','Business minutes','Calculation note']];x.rows.forEach(r=>rows.push([r.date,r.day,r.minutes,r.note]));}
     else rows=[['Field','Value'],['Mode','SLA / add or subtract business time'],['Time zone',x.timezone],['Start',x.base],['Operation',x.operation],['Business hours',x.hours],['Business minutes',x.minutes],['Result',x.resultText],['Holiday dates loaded',x.holidayCount]];
     const csv=rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
