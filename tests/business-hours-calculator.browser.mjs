@@ -1,6 +1,5 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
@@ -333,13 +332,22 @@ try {
     await page.locator('.pause-end').fill('2026-11-23T13:00');
     await page.locator('.pause-reason').fill('Waiting for customer');
     await between('2026-11-23T09:00','2026-11-23T17:00');
-    const downloadPromise = page.waitForEvent('download');
-    await page.locator('#downloadCsv').click();
-    const download = await downloadPromise;
-    const filePath = await download.path();
-    assert.ok(filePath);
-    const csv = await readFile(filePath, 'utf8');
-    assert.match(csv, /Pause time excluded \(minutes\),120/);
+    const csv = await page.evaluate(async () => {
+      const original = URL.createObjectURL;
+      let contents;
+      URL.createObjectURL = function(blob) {
+        contents = blob.text();
+        return original.call(URL, blob);
+      };
+      try {
+        document.getElementById('downloadCsv').click();
+        if (!contents) throw new Error('CSV export did not create a Blob.');
+        return await contents;
+      } finally {
+        URL.createObjectURL = original;
+      }
+    });
+    assert.match(csv, /"Pause time excluded \(minutes\)","120"/);
     assert.match(csv, /Waiting for customer/);
     assert.match(csv, /Pause minutes/);
   });
