@@ -217,23 +217,24 @@ try {
       },
       {
         path: '/tools/',
-        heading: 'Wire Size & Voltage Drop Calculator',
-        titleSelector: '.dir-card h2 a.dir-card-title-link[href="/wire-size-calculator/"]',
-        actionSelector: '.dir-card > a[href="/wire-size-calculator/"]'
+        heading: 'Wire Size & Voltage Drop Calculator'
       }
     ];
     for (const source of sources) {
       const sourcePage = await browser.newPage({ viewport: { width: 1365, height: 900 } });
       try {
         await sourcePage.goto(baseUrl + source.path, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        let card = null;
         if (source.heading) {
-          const card = sourcePage.locator('article.dir-card').filter({ has: sourcePage.getByRole('heading', { name: source.heading, exact: true }) });
+          card = sourcePage.locator('article.dir-card').filter({ has: sourcePage.getByRole('heading', { name: source.heading, exact: true }) });
           assert.equal(await card.count(), 1, source.path + ': expected exactly one Wire Size directory card');
           assert.equal(await card.getAttribute('data-category'), null, 'the test must exercise the live registry-rendered card, not the static fallback');
         }
 
-        if (source.titleSelector) {
-          const titleLink = sourcePage.locator(source.titleSelector);
+        if (source.titleSelector || card) {
+          const titleLink = card
+            ? card.locator('h2 a.dir-card-title-link')
+            : sourcePage.locator(source.titleSelector);
           assert.equal(await titleLink.count(), 1, source.path + ': descriptive Wire Size heading link should appear exactly once');
           assert.ok((await titleLink.innerText()).includes('Wire Size & Voltage Drop Calculator'),
             source.path + ': heading link must identify the Wire Size Calculator');
@@ -241,7 +242,9 @@ try {
           assert.equal(titleUrl.pathname, '/wire-size-calculator/',
             source.path + ': descriptive title must resolve to the canonical Wire Size URL');
 
-          const action = sourcePage.locator(source.actionSelector);
+          const action = card
+            ? card.locator(':scope > a[aria-label="Open Wire Size Calculator"]')
+            : sourcePage.locator(source.actionSelector);
           assert.equal(await action.count(), 1, source.path + ': generic Wire Size card CTA should appear exactly once');
           assert.equal((await action.innerText()).trim(), 'Open tool',
             source.path + ': visible card CTA must use the shared Open tool label');
