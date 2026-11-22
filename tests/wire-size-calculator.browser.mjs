@@ -131,14 +131,14 @@ try {
   });
 
   await check('Wire gauge metadata and query-specific FAQs stay accurate about DC and motor scope', async () => {
-    assert.equal(await page.title(), 'Wire Size & Wire Gauge Calculator | Voltage Drop');
+    assert.equal(await page.title(), 'Wire Size Calculator | Voltage Drop & Wire Gauge');
     const description = await page.locator('meta[name="description"]').getAttribute('content');
     const socialTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
     const socialDescription = await page.locator('meta[property="og:description"]').getAttribute('content');
     const twitterTitle = await page.locator('meta[name="twitter:title"]').getAttribute('content');
     const twitterDescription = await page.locator('meta[name="twitter:description"]').getAttribute('content');
-    assert.match(description, /wire size or wire gauge/i);
-    assert.ok(description.length <= 160, 'meta description should remain a concise search snippet');
+    assert.match(description, /wire size calculator/i);
+    assert.ok(description.length >= 100 && description.length <= 160, 'meta description should remain a concise search snippet');
     assert.equal(socialTitle, await page.title(), 'Open Graph title must match the page title');
     assert.equal(socialDescription, description, 'Open Graph description must match the meta description');
     assert.equal(twitterTitle, await page.title(), 'Twitter title must match the page title');
@@ -205,29 +205,58 @@ try {
     assert.deepEqual(unresolved, [], 'Wire Size page must not contain nested-path relative internal links');
 
     const sources = [
-      { path: '/energy-electrical/', selector: 'article.card a.button[href="/wire-size-calculator/"]', expectedText: 'Open Wire Size Calculator' },
-      { path: '/conduit-fill-calculator/', selector: 'a.related-item[href="/wire-size-calculator/"]', expectedText: 'Wire Size & Voltage Drop Calculator' },
-      { path: '/tools/', heading: 'Wire Size & Voltage Drop Calculator', selector: 'article.dir-card a[href]', expectedText: 'Open Wire Size Calculator' }
+      {
+        path: '/energy-electrical/',
+        titleSelector: 'article.card h2 a[href="/wire-size-calculator/"]',
+        actionSelector: 'article.card a.button[href="/wire-size-calculator/"]'
+      },
+      {
+        path: '/conduit-fill-calculator/',
+        selector: 'a.related-item[href="/wire-size-calculator/"]',
+        expectedText: 'Wire Size & Voltage Drop Calculator'
+      },
+      {
+        path: '/tools/',
+        heading: 'Wire Size & Voltage Drop Calculator',
+        titleSelector: '.dir-card h2 a.dir-card-title-link[href="/wire-size-calculator/"]',
+        actionSelector: '.dir-card > a[href="/wire-size-calculator/"]'
+      }
     ];
     for (const source of sources) {
       const sourcePage = await browser.newPage({ viewport: { width: 1365, height: 900 } });
       try {
         await sourcePage.goto(baseUrl + source.path, { waitUntil: 'domcontentloaded', timeout: 20000 });
-        let target;
         if (source.heading) {
           const card = sourcePage.locator('article.dir-card').filter({ has: sourcePage.getByRole('heading', { name: source.heading, exact: true }) });
           assert.equal(await card.count(), 1, source.path + ': expected exactly one Wire Size directory card');
           assert.equal(await card.getAttribute('data-category'), null, 'the test must exercise the live registry-rendered card, not the static fallback');
-          target = card.locator('a[href]');
-        } else {
-          target = sourcePage.locator(source.selector);
         }
-        assert.equal(await target.count(), 1, source.path + ': expected exactly one canonical Wire Size link');
-        const href = await target.evaluate(anchor => anchor.href);
-        assert.equal(new URL(href).pathname, '/wire-size-calculator/',
-          source.path + ': link must resolve to the canonical Wire Size URL');
-        assert.ok((await target.innerText()).includes(source.expectedText),
-          source.path + ': link text must clearly identify the Wire Size Calculator');
+
+        if (source.titleSelector) {
+          const titleLink = sourcePage.locator(source.titleSelector);
+          assert.equal(await titleLink.count(), 1, source.path + ': descriptive Wire Size heading link should appear exactly once');
+          assert.ok((await titleLink.innerText()).includes('Wire Size & Voltage Drop Calculator'),
+            source.path + ': heading link must identify the Wire Size Calculator');
+          const titleUrl = new URL(await titleLink.evaluate(anchor => anchor.href));
+          assert.equal(titleUrl.pathname, '/wire-size-calculator/',
+            source.path + ': descriptive title must resolve to the canonical Wire Size URL');
+
+          const action = sourcePage.locator(source.actionSelector);
+          assert.equal(await action.count(), 1, source.path + ': generic Wire Size card CTA should appear exactly once');
+          assert.equal((await action.innerText()).trim(), 'Open tool',
+            source.path + ': visible card CTA must use the shared Open tool label');
+          assert.equal(new URL(await action.evaluate(anchor => anchor.href)).pathname, '/wire-size-calculator/',
+            source.path + ': generic CTA must resolve to the canonical Wire Size URL');
+          assert.equal(await action.getAttribute('aria-label'), 'Open Wire Size Calculator',
+            source.path + ': generic CTA must retain its descriptive accessible name');
+        } else {
+          const relatedLink = sourcePage.locator(source.selector);
+          assert.equal(await relatedLink.count(), 1, source.path + ': expected exactly one canonical Wire Size related-tool link');
+          assert.ok((await relatedLink.innerText()).includes(source.expectedText),
+            source.path + ': related-tool text must clearly identify the Wire Size Calculator');
+          assert.equal(new URL(await relatedLink.evaluate(anchor => anchor.href)).pathname, '/wire-size-calculator/',
+            source.path + ': related-tool link must resolve to the canonical Wire Size URL');
+        }
       } finally {
         await sourcePage.close().catch(() => {});
       }
@@ -242,7 +271,7 @@ try {
       .map(entry => entry.split('</url>')[0])
       .filter(entry => entry.includes('<loc>https://zemtools.com/wire-size-calculator/</loc>'));
     assert.equal(entries.length, 1, 'canonical Wire Size URL must appear exactly once in sitemap');
-    assert.ok(entries[0].includes('<lastmod>2026-11-21</lastmod>'),
+    assert.ok(entries[0].includes('<lastmod>2026-11-22</lastmod>'),
       'Wire Size lastmod must match the significant page/link update date');
   });
 
