@@ -43,7 +43,7 @@ try {
     const robotsValue = hostname => {
       let content = 'index,follow';
       const robots = { setAttribute(name, value) { if (name === 'content') content = value; } };
-      runInNewContext(guardScript[1], {
+      runInNewContext(guardScript, {
         window: { location: { hostname } },
         document: { querySelector: selector => selector === 'meta[name="robots"]' ? robots : null }
       });
