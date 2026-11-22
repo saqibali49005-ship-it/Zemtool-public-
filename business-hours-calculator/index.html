@@ -6,19 +6,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b2f66">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Business Hours Calculator | Between Dates &amp; SLA Deadlines</title>
-<meta name="description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
+<title>Business Hours Calculator | Workday &amp; SLA Deadlines</title>
+<meta name="description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. See equivalent workdays, choose a time zone and find SLA deadlines.">
 <link rel="canonical" href="https://zemtools.com/business-hours-calculator/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Business Hours Calculator | Between Dates &amp; SLA Deadlines">
-<meta property="og:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
+<meta property="og:title" content="Business Hours Calculator | Workday &amp; SLA Deadlines">
+<meta property="og:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. See equivalent workdays, choose a time zone and find SLA deadlines.">
 <meta property="og:url" content="https://zemtools.com/business-hours-calculator/">
 <meta property="og:image" content="https://zemtools.com/social-preview.png">
 <meta property="og:image:alt" content="ZemTools — Practical Online Tools">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Business Hours Calculator | Between Dates &amp; SLA Deadlines">
-<meta name="twitter:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
+<meta name="twitter:title" content="Business Hours Calculator | Workday &amp; SLA Deadlines">
+<meta name="twitter:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. See equivalent workdays, choose a time zone and find SLA deadlines.">
 <meta name="twitter:image" content="https://zemtools.com/social-preview.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Business Hours Calculator","url":"https://zemtools.com/business-hours-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Workday and business-hours calculator for scheduled hours between dates, configurable weekly schedules, holiday exclusions, and work-time deadlines.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -85,7 +85,7 @@
 
 <section class="hero">
   <div class="tool-icon" aria-hidden="true">◷</div>
-  <div><h1>Business Hours Calculator</h1><p>Calculate working hours between two dates, exclude holidays, customize your work week, or find a deadline by adding or subtracting business hours.</p></div>
+  <div><h1>Business Hours Calculator</h1><p>Calculate business hours between two dates, customize your workday, exclude public holidays, or calculate an SLA deadline using your own work schedule.</p></div>
 </section>
 
 <section class="info-callout">
@@ -216,10 +216,10 @@
 
 <section class="card" aria-labelledby="workday-calculator-guide-title">
   <h2 id="workday-calculator-guide-title">Workday Calculator: Business Hours vs. Full Workdays</h2>
-  <p>Use this workday calculator to measure scheduled working time across a date range. The result shows total business hours and the number of business days touched. A day is counted as touched when at least one configured work period overlaps your selected range; even a partial day counts as one touched day.</p>
+  <p>Use this workday calculator to measure scheduled working time across a date range. The result shows total business time, equivalent workdays and business days touched. A touched day is any local date with at least one minute of configured work time inside the selected range; it is not necessarily a full workday.</p>
   <h3>Convert business hours into equivalent workdays</h3>
-  <div class="formula">Equivalent workdays = total business hours ÷ your standard hours in one full workday</div>
-  <p>With the default Monday–Friday schedule of 09:00–17:00 and no lunch break configured, one full workday contains 8 scheduled hours. In that schedule, 40 business hours equals 5 equivalent workdays. If you use split shifts such as 09:00–13:00 and 14:00–17:00, the scheduled day is 7 hours, so use 7 as the divisor instead.</p>
+  <div class="formula">Equivalent workdays = total business hours ÷ average scheduled hours per open day</div>
+  <p>With the default Monday–Friday schedule of 09:00–17:00, the average open day contains 8 scheduled hours, so 40 business hours equals 5 equivalent workdays. When weekdays have different shift lengths, the calculator uses the average scheduled duration across enabled open days. This is distinct from business days touched, which counts each local date with any overlapping work time.</p>
   <h3>Example: a range that starts and ends partway through a workday</h3>
   <p>With a Monday–Friday 09:00–17:00 schedule, a Tuesday 13:00 start and Wednesday 12:00 end includes 4 hours on Tuesday (13:00–17:00) and 3 hours on Wednesday (09:00–12:00). The result is 7 business hours across 2 business days touched — not 2 full workdays.</p>
   <ul>
@@ -235,6 +235,7 @@
   <div class="faq"><button type="button"><span>Can I exclude holidays?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Enter as many holiday dates as needed in the holiday box. A holiday removes all scheduled work periods for that date.</div></div>
   <div class="faq"><button type="button"><span>Can different weekdays have different working hours?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Every weekday has its own enabled state and up to two work periods, so the calendar can model part-time days, split shifts and shorter Fridays.</div></div>
   <div class="faq"><button type="button"><span>Can I add business hours to a deadline?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Use Add / subtract mode to move forward or backward through only the working minutes in your configured calendar.</div></div>
+  <div class="faq"><button type="button"><span>What is the difference between equivalent workdays and days touched?</span><span class="faq-icon">+</span></button><div class="faq-answer">Equivalent workdays divide the counted business hours by the average scheduled hours in an enabled workday. Days touched count each local date with any working-time overlap, including partial days. For example, 7 business hours across two partial days can equal less than one full workday while touching two dates.</div></div>
   <div class="faq"><button type="button"><span>Does this account for time zones or daylight saving time?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Choose an IANA time zone such as America/New_York or Europe/London. The calculator converts schedule boundaries to real instants. If a local clock time does not exist during a spring-forward gap or occurs twice during a fall-back hour, it asks you to choose a different time instead of guessing.</div></div>
   <div class="faq"><button type="button"><span>Can I load public holidays automatically?</span><span class="faq-icon">+</span></button><div class="faq-answer">Choose a supported country and, where available, enter a first-level state or province code such as US-CA or CA-ON. National and matching regional dates are loaded from Nager.Date. Municipal, employer-specific and last-minute closures should be added manually and verified with the relevant authority.</div></div>
   <div class="faq"><button type="button"><span>Can I calculate an SLA response or resolution deadline?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Use the SLA / Add / subtract mode, enter the ticket start date and time, choose the business-hour target, and calculate the due time using the same working calendar, time zone and holiday rules.</div></div>
