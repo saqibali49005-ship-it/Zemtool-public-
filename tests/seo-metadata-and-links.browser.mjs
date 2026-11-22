@@ -64,7 +64,7 @@ try {
 
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'domcontentloaded' });
   await check('Homepage keeps broad search intent and links directly to the Wire Size Calculator', async () => {
-    assert.equal(page.title(), 'ZemTools | Practical Online Tools & Calculators');
+    assert.equal(await page.title(), 'ZemTools | Practical Online Tools & Calculators');
     assert.equal((await page.locator('main h1').innerText()).trim(), 'Useful answers for everyday problems.');
     const toolLink = page.locator('a.home-tool-quick-link[href="/wire-size-calculator/"]');
     assert.equal(await toolLink.count(), 1);
@@ -78,14 +78,14 @@ try {
   const directoryWireCard = page.locator('.dir-card').filter({ hasText: 'Wire Size & Voltage Drop Calculator' });
   await directoryWireCard.waitFor();
   await check('All Tools card has a descriptive title link and the generic Open tool CTA', async () => {
-    assert.equal(page.title(), 'All Tools | ZEMTOOLS');
+    assert.equal(await page.title(), 'All Tools | ZEMTOOLS');
     assert.equal((await page.locator('main h1').innerText()).trim(), 'All Tools');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/tools/');
     assert.equal(await directoryWireCard.count(), 1);
-    assert.equal(await directoryWireCard.locator('h2 a.dir-card-title-link').getAttribute('href'), '/wire-size-calculator/');
+    assert.equal(new URL(await directoryWireCard.locator('h2 a.dir-card-title-link').evaluate(anchor => anchor.href)).pathname, '/wire-size-calculator/');
     const action = directoryWireCard.locator(':scope > a');
     assert.equal((await action.innerText()).trim(), 'Open tool');
-    assert.equal(await action.getAttribute('href'), '/wire-size-calculator/');
+    assert.equal(new URL(await action.evaluate(anchor => anchor.href)).pathname, '/wire-size-calculator/');
     assert.equal(await action.getAttribute('aria-label'), 'Open Wire Size Calculator');
   });
 
@@ -93,13 +93,13 @@ try {
   const categoryWireCard = page.locator('article.card').filter({ hasText: 'Wire Size & Voltage Drop Calculator' });
   await categoryWireCard.waitFor();
   await check('Energy category retains its broad intent and links the Wire Size title and CTA to the calculator', async () => {
-    assert.equal(page.title(), 'Energy & Electrical Tools | ZemTools');
+    assert.equal(await page.title(), 'Energy & Electrical Tools | ZemTools');
     assert.equal((await page.locator('main h1').innerText()).trim(), 'Energy & Electrical Tools');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/energy-electrical/');
     assert.equal(await categoryWireCard.locator('h2 a').getAttribute('href'), '/wire-size-calculator/');
     const action = categoryWireCard.locator('a.button');
     assert.equal((await action.innerText()).trim(), 'Open tool');
-    assert.equal(await action.getAttribute('href'), '/wire-size-calculator/');
+    assert.equal(new URL(await action.evaluate(anchor => anchor.href)).pathname, '/wire-size-calculator/');
     assert.equal(await action.getAttribute('aria-label'), 'Open Wire Size Calculator');
     assert.equal((await page.locator('a.button').allTextContents()).every(label => label.trim() === 'Open tool'), true);
   });
