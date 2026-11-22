@@ -352,6 +352,78 @@ try {
     assert.match(csv, /Pause minutes/);
   });
 
+
+  await check('A full-day date exception closes an otherwise open weekday', async () => {
+    await fresh();
+    await page.locator('#exceptionDetails summary').click();
+    await page.locator('#addException').click();
+    await page.locator('.exception-date').fill('2026-11-23');
+    await page.locator('.exception-reason').fill('Company shutdown');
+    await between('2026-11-23T09:00','2026-11-23T17:00');
+    assert.equal(await resultValue(), '0 minutes');
+    assert.match(await page.locator('#resultArea').innerText(), /Special dates applied\s+1/i);
+    await page.locator('#breakdownDetails').evaluate(el => { el.open = true; });
+    assert.match(await page.locator('#breakdownArea').innerText(), /Special date closed/);
+  });
+
+  await check('Special opening hours override a public or manual holiday closure', async () => {
+    await fresh();
+    await page.locator('#holidayDates').fill('2026-11-23');
+    await page.locator('#exceptionDetails summary').click();
+    await page.locator('#addException').click();
+    const row=page.locator('.exception-row');
+    await row.locator('.exception-date').fill('2026-11-23');
+    await row.locator('.exception-type').selectOption('special');
+    await row.locator('.exception-start').fill('10:00');
+    await row.locator('.exception-end').fill('12:00');
+    await between('2026-11-23T09:00','2026-11-23T17:00');
+    assert.equal(await resultValue(), '2 hours');
+    assert.match(await page.locator('#resultArea').innerText(), /Special dates applied\s+1/i);
+    assert.match(await page.locator('#resultArea').innerText(), /Holiday dates excluded\s+0/i);
+  });
+
+  await check('A special opening can enable a normally closed weekend date', async () => {
+    await fresh();
+    await page.locator('#exceptionDetails summary').click();
+    await page.locator('#addException').click();
+    const row=page.locator('.exception-row');
+    await row.locator('.exception-date').fill('2026-11-29');
+    await row.locator('.exception-type').selectOption('special');
+    await row.locator('.exception-start').fill('10:00');
+    await row.locator('.exception-end').fill('14:00');
+    await between('2026-11-29T09:00','2026-11-29T17:00');
+    assert.equal(await resultValue(), '4 hours');
+  });
+
+  await check('SLA deadline follows a special opening on a normally closed Sunday', async () => {
+    await fresh();
+    await page.locator('#exceptionDetails summary').click();
+    await page.locator('#addException').click();
+    const row=page.locator('.exception-row');
+    await row.locator('.exception-date').fill('2026-11-29');
+    await row.locator('.exception-type').selectOption('special');
+    await row.locator('.exception-start').fill('10:00');
+    await row.locator('.exception-end').fill('12:00');
+    await page.locator('#deadlineTab').click();
+    await page.locator('#deadlineBase').fill('2026-11-29T09:00');
+    await page.locator('#deadlineHours').fill('2');
+    await page.locator('#deadlineMinutes').fill('0');
+    await page.locator('#calculateDeadline').click();
+    assert.match(await resultValue(), /Nov 29, 2026/i);
+    assert.match(await resultValue(), /12:00 PM/i);
+  });
+
+  await check('Duplicate date exceptions are rejected instead of silently overwriting', async () => {
+    await fresh();
+    await page.locator('#exceptionDetails summary').click();
+    await page.locator('#addException').click();
+    await page.locator('.exception-row').nth(0).locator('.exception-date').fill('2026-11-23');
+    await page.locator('#addException').click();
+    await page.locator('.exception-row').nth(1).locator('.exception-date').fill('2026-11-23');
+    await between('2026-11-23T09:00','2026-11-23T17:00');
+    assert.match(await resultValue(), /Only one date exception can be set/i);
+  });
+
   await check('Schedule validation rejects overlapping periods', async () => {
     await fresh();
     await page.locator('#day-0-start1').fill('09:00');
