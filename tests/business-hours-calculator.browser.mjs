@@ -1,5 +1,7 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
 
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
@@ -32,8 +34,21 @@ try {
     assert.match(await page.title(), /Workday/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/business-hours-calculator/');
     assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'index,follow');
-    const previewGuard = await page.locator('script').evaluateAll(nodes => nodes.filter(node => node.textContent.includes('zemtools-review.pages.dev')).length);
-    assert.equal(previewGuard, 1, 'Review-host noindex safeguard should be present while local/production canonical remains indexable.');
+    const pageSource = readFileSync('business-hours-calculator/index.html', 'utf8');
+    const guardScript = pageSource.match(/<script>\\s*([\\s\\S]*?zemtools-review\\.pages\\.dev[\\s\\S]*?)<\\/script>/);
+    assert.ok(guardScript, 'Review-host noindex safeguard should be present in the calculator source.');
+    const robotsValue = hostname => {
+      let content = 'index,follow';
+      const robots = { setAttribute(name, value) { if (name === 'content') content = value; } };
+      runInNewContext(guardScript[1], {
+        window: { location: { hostname } },
+        document: { querySelector: selector => selector === 'meta[name="robots"]' ? robots : null }
+      });
+      return content;
+    };
+    assert.equal(robotsValue('a3f41578.zemtools-review.pages.dev'), 'noindex,nofollow', 'Review preview hosts must not be indexed.');
+    assert.equal(robotsValue('zemtools.com'), 'index,follow', 'Production canonical host must remain indexable.');
+    assert.equal(robotsValue('www.zemtools.com'), 'index,follow', 'Production www host must remain indexable.');
   });
 
   await check('Default 9–5 weekday range counts 40 business hours', async () => {
