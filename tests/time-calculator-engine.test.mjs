@@ -43,6 +43,9 @@ assert.deepEqual(engine.calculateClockOperation('10:30:00', 2, 30, 0, 'add'), {
 });
 assert.equal(engine.calculateClockOperation('00:30:00', 1, 15, 0, 'subtract').clockTime, '23:15:00 (previous day)');
 assert.equal(engine.calculateClockOperation('10:30:00', 1.5, 0, 0, 'add').error, 'invalid-inputs');
+assert.equal(engine.calculateClockOperation('10:30:00', 0, 0, 0, 'add', 1).clockTime, '10:30:00 (next day)');
+assert.equal(engine.calculateClockOperation('10:30:00', 1, 0, 0, 'subtract', 2).clockTime, '09:30:00 (2 days earlier)');
+assert.equal(engine.calculateClockOperation('10:30:00', 0, 0, 0, 'add', 9007199254740991).error, 'invalid-inputs');
 assert.equal(engine.calculateClockOperation('10:30:00', -1, 0, 0, 'add').error, 'invalid-inputs');
 assert.equal(engine.calculateClockOperation('bad', 1, 0, 0, 'add').error, 'invalid-inputs');
 
@@ -51,6 +54,7 @@ assert.equal(engine.execute({ operation: 'duration', start: '09:30:00', end: '17
 assert.equal(engine.execute({ operation: 'duration', start: '23:30:00', end: '01:15:00', nextDay: true }).data.seconds, 6300);
 assert.equal(engine.execute({ operation: 'duration', start: '23:30:00', end: '01:15:00' }).error.code, 'INVALID_RANGE');
 assert.equal(engine.execute({ operation: 'clock-operation', baseTime: '23:30:00', hours: 2, minutes: 30, seconds: 0, action: 'add' }).data.clockTime, '02:00:00 (next day)');
+assert.equal(engine.execute({ operation: 'clock-operation', baseTime: '10:30:00', days: 1, hours: 2, minutes: 0, seconds: 0, action: 'add' }).data.clockTime, '12:30:00 (next day)');
 assert.equal(engine.contractVersion, 1);
 
 assert.equal(engine.formatDurationClock(50 * 3600 + 10 * 60), '50:10:00');
