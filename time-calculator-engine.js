@@ -47,7 +47,11 @@
     const minutes = Math.floor(remaining / 60);
     const seconds = remaining % 60;
     const pad = value => String(Math.trunc(value)).padStart(2, '0');
-    const suffix = dayCount === 0 ? '' : (dayCount > 0 ? ' (next day)' : ' (previous day)');
+    const suffix = dayCount === 0 ? '' :
+      dayCount === 1 ? ' (next day)' :
+      dayCount === -1 ? ' (previous day)' :
+      dayCount > 1 ? ' (' + dayCount + ' days later)' :
+      ' (' + Math.abs(dayCount) + ' days earlier)';
     return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds) + suffix;
   }
 
@@ -71,27 +75,30 @@
     };
   }
 
-  function calculateClockOperation(baseValue, hoursValue, minutesValue, secondsValue, operation) {
+  function calculateClockOperation(baseValue, hoursValue, minutesValue, secondsValue, operation, daysValue) {
     const base = parseClockTime(baseValue);
+    const days = Number(daysValue || 0);
     const hours = Number(hoursValue || 0);
     const minutes = Number(minutesValue || 0);
     const seconds = Number(secondsValue || 0);
     if (
       base === null ||
-      ![hours, minutes, seconds].every(Number.isFinite) ||
-      hours < 0 || minutes < 0 || seconds < 0 ||
-      !Number.isInteger(hours) || !Number.isInteger(minutes) || !Number.isInteger(seconds)
+      ![days, hours, minutes, seconds].every(Number.isSafeInteger) ||
+      days < 0 || hours < 0 || minutes < 0 || seconds < 0
     ) {
       return { ok: false, error: 'invalid-inputs' };
     }
 
-    const amount = hours * 3600 + minutes * 60 + seconds;
+    const amount = days * 86400 + hours * 3600 + minutes * 60 + seconds;
+    if (!Number.isSafeInteger(amount)) return { ok: false, error: 'invalid-inputs' };
     const action = operation === 'add' ? 'add' : 'subtract';
     const resultSeconds = action === 'add' ? base + amount : base - amount;
+    if (!Number.isSafeInteger(resultSeconds)) return { ok: false, error: 'invalid-inputs' };
     return {
       ok: true,
       amount,
       action,
+      days,
       resultSeconds,
       clockTime: formatClockTime(resultSeconds),
       prettyAmount: describeDuration(amount)
@@ -422,7 +429,7 @@
     if (input.operation === 'duration') {
       result = calculateDuration(input.start, input.end, input.nextDay === true);
     } else if (input.operation === 'clock-operation') {
-      result = calculateClockOperation(input.baseTime, input.hours, input.minutes, input.seconds, input.action);
+      result = calculateClockOperation(input.baseTime, input.hours, input.minutes, input.seconds, input.action, input.days);
     } else if (input.operation === 'duration-list') {
       result = calculateDurationList(input.entries);
     } else if (input.operation === 'date-time-duration') {
