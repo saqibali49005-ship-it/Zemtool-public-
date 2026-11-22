@@ -152,22 +152,13 @@ try {
     assert.equal(productionAnalytics.configCount, 1, infoPage.route + ' should configure GA4 exactly once');
   }
 
-  // Simulate the same informational pages on a *.pages.dev host.
+  // Run the preview-host assertion in a fresh page/context. Requests queued by earlier
+  // production-host scenarios must never contaminate the preview-only request counter.
   const analyticsPreviewHost = 'https://analytics-host-guard-test.zemtools-review.pages.dev';
   const previewPages = new Map(infoPageFixtures.map(item => [item.route, item.html]));
+  const previewPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   let previewGoogleTagRequests = 0;
-  page.on('request', request => {
-    if (!request.url().includes('googletagmanager.com/gtag/js')) return;
-    // Count only requests initiated by the simulated preview document. A deferred
-    // production-host GA request from earlier fixtures must not fail this guard.
-    try {
-      const initiatorHost = new URL(request.frame().url()).hostname.toLowerCase();
-      if (initiatorHost === new URL(analyticsPreviewHost).hostname) previewGoogleTagRequests += 1;
-    } catch (_) {
-      // Requests without a page frame are not initiated by this preview document.
-    }
-  });
-  await page.route(analyticsPreviewHost + '/**', async route => {
+  await previewPage.route(analyticsPreviewHost + '/**', async route => {
     const url = new URL(route.request().url());
     if (url.pathname === '/master-ui.js') {
       return route.fulfill({
@@ -183,12 +174,17 @@ try {
     if (html) return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html });
     return route.fulfill({ status: 404, body: 'Not found' });
   });
-  const previewRequestCountBefore = previewGoogleTagRequests;
+  // Intercept and count attempted tag-library loads without sending them to Google.
+  await previewPage.route('https://www.googletagmanager.com/gtag/js*', async route => {
+    previewGoogleTagRequests += 1;
+    await route.abort();
+  });
   for (const infoPage of infoPageFixtures) {
-    await page.goto(analyticsPreviewHost + infoPage.route, { waitUntil: 'domcontentloaded' });
-    await page.waitForFunction(() => performance.getEntriesByType('resource')
+    await previewPage.goto(analyticsPreviewHost + infoPage.route, { waitUntil: 'domcontentloaded' });
+    await previewPage.waitForFunction(() => performance.getEntriesByType('resource')
       .some(resource => new URL(resource.name).pathname === '/master-ui.js'));
-    const previewAnalytics = await page.evaluate(() => ({
+    assert.equal(new URL(previewPage.url()).hostname, 'analytics-host-guard-test.zemtools-review.pages.dev');
+    const previewAnalytics = await previewPage.evaluate(() => ({
       gtagType: typeof window.gtag,
       loaderFlag: window.__zemtoolsGa4Loaded
     }));
@@ -197,9 +193,10 @@ try {
   }
   assert.equal(
     previewGoogleTagRequests,
-    previewRequestCountBefore,
+    0,
     'informational pages on *.pages.dev must never request the Google tag library'
   );
+  await previewPage.close();
 
   console.log('GA4 tool tracking checks: 4 original tool scenarios plus search/privacy/validation passed; preview navigation host check passed.');
 } finally {
