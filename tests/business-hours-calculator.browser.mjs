@@ -239,6 +239,7 @@ try {
 
   await check('One on-hold pause subtracts only the overlapping scheduled minutes', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-end').fill('2026-11-23T13:00');
@@ -253,6 +254,7 @@ try {
 
   await check('Overlapping pause windows are merged and never double-deducted', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-row').nth(0).locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-row').nth(0).locator('.pause-end').fill('2026-11-23T13:00');
@@ -267,6 +269,7 @@ try {
 
   await check('SLA deadline carries forward around an active pause window', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-end').fill('2026-11-23T13:00');
@@ -282,6 +285,7 @@ try {
 
   await check('Incomplete pause windows show a clear validation error', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await between('2026-11-23T09:00','2026-11-23T17:00');
@@ -290,6 +294,7 @@ try {
 
   await check('Removing a pause row restores the unpaused calculation', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-end').fill('2026-11-23T13:00');
@@ -301,6 +306,7 @@ try {
 
   await check('Pauses outside scheduled hours do not reduce business time', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T19:00');
     await page.locator('.pause-end').fill('2026-11-23T21:00');
@@ -311,6 +317,7 @@ try {
 
   await check('Subtracting SLA business time also skips configured pauses', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-end').fill('2026-11-23T13:00');
@@ -327,6 +334,7 @@ try {
 
   await check('CSV export includes pause details and excluded business minutes', async () => {
     await fresh();
+    await page.locator('#pauseDetails summary').click();
     await page.locator('#addPause').click();
     await page.locator('.pause-start').fill('2026-11-23T11:00');
     await page.locator('.pause-end').fill('2026-11-23T13:00');
