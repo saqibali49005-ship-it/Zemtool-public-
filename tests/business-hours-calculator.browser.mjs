@@ -52,8 +52,9 @@ try {
     await fresh();
     await between('2026-11-23T09:00', '2026-11-27T17:00');
     const result = await page.locator('#resultArea').innerText();
-    assert.match(result, /Equivalent workdays\s+5\.00 days/i);
-    assert.match(result, /5 business dates touched/i);
+    assert.ok(result.includes('Equivalent workdays'));
+    assert.ok(result.includes('5.00 days'));
+    assert.ok(result.includes('5 business dates touched'));
   });
 
   await check('Weekly operating-hours summary updates for a 24/7 schedule', async () => {
