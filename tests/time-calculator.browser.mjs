@@ -76,14 +76,14 @@ try {
     await page.locator('#addSeconds').fill('0');
     await page.locator('#calcAdd').click();
     const result = await page.locator('#addResult').innerText();
-    assert.match(result, /12:30:00 \\(next day\\)/);
+    assert.match(result, /12:30:00 \(next day\)/);
     assert.match(result, /1 day 2 hours/);
     await page.locator('#operation').selectOption('subtract');
     await page.locator('#addDays').fill('2');
     await page.locator('#addHours').fill('1');
     await page.locator('#baseTime').fill('10:30');
     await page.locator('#calcAdd').click();
-    assert.match(await page.locator('#addResult').innerText(), /09:30:00 \\(2 days earlier\\)/);
+    assert.match(await page.locator('#addResult').innerText(), /09:30:00 \(2 days earlier\)/);
   });
 
   await check('Subtract operation wraps to the previous day correctly', async () => {
