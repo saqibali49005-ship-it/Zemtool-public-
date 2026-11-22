@@ -114,6 +114,11 @@ assert.equal(dstDuration.decimalHours, '23');
 assert.equal(engine.calculateDateTimeDuration('2026-11-22T17:00:00', '2026-11-22T09:00:00').error, 'end-before-start');
 assert.equal(engine.calculateDateTimeDuration('bad', '2026-11-22T09:00:00').error, 'invalid-datetime');
 
+const fallDuration = engine.calculateDateTimeDuration('2026-10-31T12:00:00', '2026-11-01T12:00:00');
+assert.equal(fallDuration.seconds, 25 * 3600);
+const fallOffset = engine.calculateDateTimeOffset('2026-10-31T12:00:00', '1', '0', '0', '0', 'add');
+assert.equal(fallOffset.resultDateTime, '2026-11-01T11:00:00');
+
 const dstOffset = engine.calculateDateTimeOffset('2026-03-07T12:00:00', '1', '0', '0', '0', 'add');
 assert.equal(dstOffset.ok, true);
 assert.equal(dstOffset.resultDateTime, '2026-03-08T13:00:00');
@@ -150,6 +155,10 @@ const dividedExpression = engine.calculateTimeExpression('3 weeks / 5', 'days');
 assert.equal(dividedExpression.totalSeconds, 362880);
 assert.equal(dividedExpression.outputValue, 4.2);
 assert.equal(engine.calculateTimeExpression('3h + 30m * 2', 'hours').totalSeconds, 14400);
+assert.equal(engine.calculateTimeExpression('2 * 3h', 'hours').outputValue, 6);
+assert.equal(engine.calculateTimeExpression('3h - 5h', 'minutes').outputValue, -120);
+assert.equal(engine.calculateTimeExpression('3h / 2', 'hours').outputValue, 1.5);
+
 assert.equal(engine.calculateTimeExpression('0.5h + 30m', 'minutes').outputValue, 60);
 assert.equal(engine.calculateTimeExpression('3h / 0', 'hours').error, 'division-by-zero');
 assert.equal(engine.calculateTimeExpression('3h * 2h', 'hours').error, 'invalid-expression');
