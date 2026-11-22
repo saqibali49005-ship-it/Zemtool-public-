@@ -98,7 +98,6 @@
       ok: true,
       amount,
       action,
-      days,
       resultSeconds,
       clockTime: formatClockTime(resultSeconds),
       prettyAmount: describeDuration(amount)
