@@ -118,6 +118,7 @@ try {
     await page.waitForFunction(() => document.getElementById('countryHolidayStatus').textContent.includes('1 national'));
     await page.locator('#calculateBetween').click();
     assert.equal(await resultValue(), '0 minutes');
+    await page.locator('#breakdownDetails').evaluate(el => { el.open = true; });
     assert.match(await page.locator('#breakdownArea').innerText(), /Test Federal Holiday/);
     await page.unroute('https://nagerholidays.com/api/v4/Holidays/US/2026');
   });
@@ -165,11 +166,12 @@ try {
     await page.locator('#timezoneId').fill('America/New_York');
     await between('2026-03-06T09:00','2026-03-09T17:00');
     assert.equal(await resultValue(), '16 hours');
-    assert.match(await page.locator('#resultArea').innerText(), /Non-working time\s+63 hours/i);
+    assert.match(await page.locator('#resultArea').innerText(), /Non-working time\s+2 days 15 hours/i);
   });
 
   await check('SLA quick target fills the selected business-hour amount', async () => {
     await fresh();
+    await page.locator('#deadlineTab').click();
     await page.locator('[data-sla-hours="4"]').click();
     assert.equal(await page.locator('#deadlineHours').inputValue(), '4');
     assert.equal(await page.locator('#deadlineMinutes').inputValue(), '0');
