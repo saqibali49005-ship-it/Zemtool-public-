@@ -2,7 +2,8 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
-const page = await browser.newPage({ viewport: { width: 1365, height: 900 } });
+const context = await browser.newContext({ viewport: { width: 1365, height: 900 }, timezoneId: 'America/New_York' });
+const page = await context.newPage();
 let baseUrl = process.env.BASE_URL || 'http://127.0.0.1:4173';
 while (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
 const failures = [];
@@ -204,6 +205,140 @@ try {
     } finally {
       await page.setViewportSize({ width: 1365, height: 900 });
     }
+  });
+
+
+  await check('Work Hours deducts breaks and reports gross, net and decimal hours', async () => {
+    await fresh();
+    await page.locator('#workTab').click();
+    await page.locator('#workStartTime').fill('09:00');
+    await page.locator('#workEndTime').fill('17:00');
+    await page.locator('#workBreakMinutes').fill('30');
+    await page.locator('#calcWork').click();
+    const result = await page.locator('#workResult').innerText();
+    assert.match(result, /7 hours 30 minutes/);
+    assert.match(result, /Gross time\s+8 hours/);
+    assert.match(result, /Break deducted\s+30 minutes/);
+    assert.match(result, /7\\.5/);
+  });
+
+  await check('Work Hours switches between 24-hour and 12-hour input safely', async () => {
+    await fresh();
+    await page.locator('#workTab').click();
+    await page.locator('#workClockFormat').selectOption('12');
+    assert.equal(await page.locator('#workStartTime').inputValue(), '9:00 AM');
+    assert.equal(await page.locator('#workEndTime').inputValue(), '5:00 PM');
+    await page.locator('#calcWork').click();
+    assert.match(await page.locator('#workResult').innerText(), /8 hours/);
+    await page.locator('#workClockFormat').selectOption('24');
+    assert.equal(await page.locator('#workStartTime').inputValue(), '09:00');
+  });
+
+  await check('Work Hours requires next-day confirmation for overnight shifts', async () => {
+    await fresh();
+    await page.locator('#workTab').click();
+    await page.locator('#workStartTime').fill('22:00');
+    await page.locator('#workEndTime').fill('06:00');
+    await page.locator('#calcWork').click();
+    assert.match(await page.locator('#workResult').innerText(), /next-day option/i);
+    await page.locator('#workNextDay').check();
+    await page.locator('#calcWork').click();
+    assert.match(await page.locator('#workResult').innerText(), /8 hours/);
+  });
+
+  await check('Work Hours rejects a break longer than the rounded shift', async () => {
+    await fresh();
+    await page.locator('#workTab').click();
+    await page.locator('#workStartTime').fill('09:00');
+    await page.locator('#workEndTime').fill('10:00');
+    await page.locator('#workBreakMinutes').fill('61');
+    await page.locator('#calcWork').click();
+    assert.match(await page.locator('#workResult').innerText(), /Break time cannot be longer/i);
+  });
+
+  await check('Work Hours rounding applies to start and end inputs', async () => {
+    await fresh();
+    await page.locator('#workTab').click();
+    await page.locator('#workStartTime').fill('09:02');
+    await page.locator('#workEndTime').fill('17:02');
+    await page.locator('#workRounding').selectOption('5');
+    await page.locator('#calcWork').click();
+    const result = await page.locator('#workResult').innerText();
+    assert.match(result, /8 hours/);
+    assert.match(result, /Rounded shift entries: 09:00 to 17:00/);
+  });
+
+  await check('Date and Time calculates elapsed duration across a US daylight-saving transition', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#rangeStartDateTime').fill('2026-03-07T12:00:00');
+    await page.locator('#rangeEndDateTime').fill('2026-03-08T12:00:00');
+    await page.locator('#calcDateRange').click();
+    const result = await page.locator('#dateRangeResult').innerText();
+    assert.match(result, /23 hours/);
+    assert.match(result, /82,800 seconds/);
+  });
+
+  await check('Date and Time rejects a nonexistent local time in a daylight-saving gap', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#rangeStartDateTime').fill('2026-03-08T02:30:00');
+    await page.locator('#rangeEndDateTime').fill('2026-03-08T04:00:00');
+    await page.locator('#calcDateRange').click();
+    assert.match(await page.locator('#dateRangeResult').innerText(), /Check for daylight-saving clock changes/i);
+  });
+
+  await check('Date and Time adds 24 elapsed hours across a daylight-saving change', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#offsetBaseDateTime').fill('2026-03-07T12:00:00');
+    await page.locator('#offsetDays').fill('1');
+    await page.locator('#offsetHours').fill('0');
+    await page.locator('#calcDateOffset').click();
+    assert.match(await page.locator('#dateOffsetResult').innerText(), /2026-03-08 13:00:00/);
+  });
+
+  await check('Date and Time rejects an end date earlier than the start date', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#rangeStartDateTime').fill('2026-11-22T17:00:00');
+    await page.locator('#rangeEndDateTime').fill('2026-11-22T09:00:00');
+    await page.locator('#calcDateRange').click();
+    assert.match(await page.locator('#dateRangeResult').innerText(), /must not be earlier/i);
+  });
+
+  await check('Expression mode evaluates safe duration expressions and selectable units', async () => {
+    await fresh();
+    await page.locator('#expressionTab').click();
+    await page.locator('#timeExpression').fill('1d 2h 3m 4s + 4h 5s - 2030s + 28h');
+    await page.locator('#expressionOutputUnit').selectOption('days');
+    await page.locator('#calcExpression').click();
+    const result = await page.locator('#expressionResult').innerText();
+    assert.match(result, /2 days 9 hours 29 minutes 19 seconds/);
+    assert.match(result, /2\\.39536 days/);
+  });
+
+  await check('Expression mode supports duration multiplication and division by a scalar', async () => {
+    await fresh();
+    await page.locator('#expressionTab').click();
+    await page.locator('#timeExpression').fill('3h 43m 11s * 6');
+    await page.locator('#calcExpression').click();
+    assert.match(await page.locator('#expressionResult').innerText(), /22 hours 19 minutes 6 seconds/);
+    await page.locator('#timeExpression').fill('3 weeks / 5');
+    await page.locator('#expressionOutputUnit').selectOption('days');
+    await page.locator('#calcExpression').click();
+    assert.match(await page.locator('#expressionResult').innerText(), /4\\.2 days/);
+  });
+
+  await check('Expression mode rejects code-like input and division by zero without executing it', async () => {
+    await fresh();
+    await page.locator('#expressionTab').click();
+    await page.locator('#timeExpression').fill('alert(1)');
+    await page.locator('#calcExpression').click();
+    assert.match(await page.locator('#expressionResult').innerText(), /Check the expression/i);
+    await page.locator('#timeExpression').fill('3h / 0');
+    await page.locator('#calcExpression').click();
+    assert.match(await page.locator('#expressionResult').innerText(), /cannot be divided by zero/i);
   });
 
 } finally {
