@@ -6,19 +6,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b2f66">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Business Hours Calculator | Workday Hours &amp; Deadlines</title>
-<meta name="description" content="Use this workday calculator to count scheduled hours between dates, see business days touched, exclude holidays, and add or subtract hours for deadlines.">
+<title>Business Hours Calculator | Between Dates &amp; SLA Deadlines</title>
+<meta name="description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
 <link rel="canonical" href="https://zemtools.com/business-hours-calculator/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Business Hours Calculator | Workday Hours &amp; Deadlines">
-<meta property="og:description" content="Use a custom work schedule to count working hours between dates, see business days touched, exclude holidays, and calculate work-time deadlines.">
+<meta property="og:title" content="Business Hours Calculator | Between Dates &amp; SLA Deadlines">
+<meta property="og:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
 <meta property="og:url" content="https://zemtools.com/business-hours-calculator/">
 <meta property="og:image" content="https://zemtools.com/social-preview.png">
 <meta property="og:image:alt" content="ZemTools — Practical Online Tools">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Business Hours Calculator | Workday Hours &amp; Deadlines">
-<meta name="twitter:description" content="Calculate scheduled work hours between dates, see business days touched, exclude holidays, or find a work-time deadline.">
+<meta name="twitter:title" content="Business Hours Calculator | Between Dates &amp; SLA Deadlines">
+<meta name="twitter:description" content="Calculate business hours between dates with custom shifts, weekends and public holidays. Choose an IANA time zone, handle DST, and calculate SLA deadlines.">
 <meta name="twitter:image" content="https://zemtools.com/social-preview.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Business Hours Calculator","url":"https://zemtools.com/business-hours-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Workday and business-hours calculator for scheduled hours between dates, configurable weekly schedules, holiday exclusions, and work-time deadlines.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -35,6 +35,29 @@
 }/* Keep the weekly schedule table scrollable inside its own card at every viewport. */
 .business-tool .layout,.business-tool .layout>*{min-width:0!important}.business-tool .schedule-table-wrap{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}.business-tool .schedule-table{display:table!important;width:100%!important;min-width:520px!important;max-width:none!important;table-layout:fixed!important;overflow:visible!important;white-space:nowrap!important}
 
+
+.business-tool .timezone-field{margin:14px 0 8px;padding:12px;border:1px solid #dbe5ef;border-radius:12px;background:#f8fbff}
+.business-tool .timezone-field input{max-width:100%}.business-tool .timezone-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.business-tool .timezone-heading label{margin:0}.business-tool #useDeviceTimezone{min-height:34px;padding:6px 10px;font-size:12px}.business-tool #timezoneStatus{margin:8px 0 0;color:#245b88;font-weight:700}
+.business-tool .schedule-presets,.business-tool .quick-sla{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0 12px}
+.business-tool .schedule-presets button,.business-tool .quick-sla button{min-height:34px;padding:7px 10px;border:1px solid #cfdae8;border-radius:9px;background:#fff;color:#24415f;font:700 12px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer}
+.business-tool .schedule-presets button:hover,.business-tool .quick-sla button:hover{border-color:#6d9bd1;background:#eff6ff}
+.business-tool .holiday-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.business-tool .holiday-meta{align-items:flex-start}
+.business-tool .breakdown-details{margin-top:12px;padding:12px;border:1px solid #d8e4f0;border-radius:12px;background:#fbfdff}
+.business-tool .breakdown-details summary{cursor:pointer;color:#164b82;font-weight:800}
+.business-tool .breakdown-wrap{margin-top:10px;max-width:100%;overflow:auto}
+.business-tool .breakdown-table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+.business-tool .breakdown-table th,.business-tool .breakdown-table td{padding:8px 9px;border-bottom:1px solid #e4ebf3;text-align:left;vertical-align:top}
+.business-tool .breakdown-table th{color:#526b87;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.business-tool .breakdown-table td:last-child{color:#657a92}
+.business-tool .breakdown-note{font-size:12px;color:#657a92;margin:8px 0 0}
+@media(max-width:650px){.business-tool .holiday-controls{grid-template-columns:1fr}.business-tool .schedule-presets button,.business-tool .quick-sla button{flex:1 1 auto}.business-tool .timezone-field{padding:10px}}
+
+.business-tool .weekly-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px;padding:12px;border:1px solid #d8e6f4;border-radius:12px;background:#f5f9ff}
+.business-tool .weekly-summary>div{display:grid;gap:4px}
+.business-tool .weekly-summary span{font-size:12px;color:#657b95}
+.business-tool .weekly-summary strong{font-size:20px;color:#194b79}
+.business-tool .weekly-summary p{grid-column:1/-1;margin:0}
 </style>
 </head>
 <body class="tool-page business-tool">
@@ -75,30 +98,57 @@
   <div class="card-head"><div><h2>Business-time calculator</h2><p class="tiny-note">Choose a mode, configure the calendar once, then calculate.</p></div><button class="secondary" id="resetAll" type="button">Reset</button></div>
   <div class="mode-grid" role="tablist" aria-label="Business hours modes">
     <button class="mode-btn active" id="betweenTab" type="button" role="tab" aria-selected="true">Between dates</button>
-    <button class="mode-btn" id="deadlineTab" type="button" role="tab" aria-selected="false">Add / subtract</button>
+    <button class="mode-btn" id="deadlineTab" type="button" role="tab" aria-selected="false">SLA / Add / subtract</button>
+  </div>
+  <div class="field timezone-field">
+    <div class="timezone-heading">
+      <label for="timezoneId">Calculator time zone (IANA)</label>
+      <button class="secondary" id="useDeviceTimezone" type="button">Use device time zone</button>
+    </div>
+    <input id="timezoneId" type="text" list="commonTimeZones" value="America/New_York" autocomplete="off" spellcheck="false" placeholder="Search or enter a time zone, e.g. Asia/Karachi" aria-describedby="timezoneHelp timezoneStatus">
+    <datalist id="commonTimeZones">
+      <option value="Asia/Karachi"></option><option value="Asia/Dubai"></option><option value="Asia/Kolkata"></option><option value="Asia/Dhaka"></option><option value="Asia/Singapore"></option><option value="Asia/Tokyo"></option><option value="Asia/Seoul"></option><option value="Asia/Bangkok"></option><option value="Asia/Hong_Kong"></option>
+      <option value="America/New_York"></option><option value="America/Toronto"></option><option value="America/Chicago"></option><option value="America/Denver"></option><option value="America/Los_Angeles"></option><option value="America/Phoenix"></option><option value="America/Anchorage"></option><option value="America/Vancouver"></option><option value="Pacific/Honolulu"></option>
+      <option value="Europe/London"></option><option value="Europe/Paris"></option><option value="Europe/Berlin"></option><option value="Europe/Amsterdam"></option><option value="Europe/Rome"></option><option value="Europe/Zurich"></option>
+      <option value="Africa/Cairo"></option><option value="Africa/Johannesburg"></option><option value="Australia/Sydney"></option><option value="Australia/Melbourne"></option><option value="Australia/Perth"></option><option value="Pacific/Auckland"></option><option value="UTC"></option>
+    </datalist>
+    <p class="tiny-note" id="timezoneHelp">Search a city/region or enter any valid IANA name. Your date, time and work schedule entries are interpreted in the selected zone; changing zones does not convert the entered clock values.</p>
+    <p class="tiny-note" id="timezoneStatus" role="status" aria-live="polite">Active time zone: America/New_York.</p>
   </div>
 
   <div id="betweenPanel" role="tabpanel">
     <div class="grid">
-      <div class="field"><label for="betweenStart">Start date &amp; time</label><input id="betweenStart" type="datetime-local" step="60" value="2026-09-14T09:00"></div>
-      <div class="field"><label for="betweenEnd">End date &amp; time</label><input id="betweenEnd" type="datetime-local" step="60" value="2026-09-18T17:00"></div>
+      <div class="field"><label for="betweenStart">Start date &amp; time</label><input id="betweenStart" type="datetime-local" step="60" value="2026-11-30T09:00"></div>
+      <div class="field"><label for="betweenEnd">End date &amp; time</label><input id="betweenEnd" type="datetime-local" step="60" value="2026-12-04T17:00"></div>
     </div>
     <div class="actions"><button class="primary" id="calculateBetween" type="button">Calculate business hours</button></div>
   </div>
 
   <div id="deadlinePanel" class="hidden" role="tabpanel">
     <div class="grid">
-      <div class="field"><label for="deadlineBase">Starting date &amp; time</label><input id="deadlineBase" type="datetime-local" step="60" value="2026-09-18T15:00"></div>
+      <div class="field"><label for="deadlineBase">Ticket / task start date &amp; time</label><input id="deadlineBase" type="datetime-local" step="60" value="2026-11-27T15:00"></div>
       <div class="field"><label for="deadlineOperation">Operation</label><select id="deadlineOperation"><option value="add">Add business time</option><option value="subtract">Subtract business time</option></select></div>
-      <div class="field"><label for="deadlineHours">Hours</label><input id="deadlineHours" type="number" min="0" step="1" inputmode="numeric" value="10"></div>
-      <div class="field"><label for="deadlineMinutes">Minutes</label><input id="deadlineMinutes" type="number" min="0" max="59" step="1" inputmode="numeric" value="0"></div>
+      <div class="field"><label for="deadlineHours">SLA / business hours</label><input id="deadlineHours" type="number" min="0" step="1" inputmode="numeric" value="10"></div>
+      <div class="field"><label for="deadlineMinutes">Additional minutes</label><input id="deadlineMinutes" type="number" min="0" max="59" step="1" inputmode="numeric" value="0"></div>
     </div>
-    <div class="actions"><button class="primary" id="calculateDeadline" type="button">Find business-time result</button></div>
+    <div class="quick-sla" aria-label="Common SLA targets">
+      <span class="tiny-note">Quick SLA targets</span>
+      <button type="button" data-sla-hours="1" data-sla-minutes="0">1 hour</button>
+      <button type="button" data-sla-hours="4" data-sla-minutes="0">4 hours</button>
+      <button type="button" data-sla-hours="8" data-sla-minutes="0">8 hours</button>
+      <button type="button" data-sla-hours="24" data-sla-minutes="0">24 hours</button>
+      <button type="button" data-sla-hours="40" data-sla-minutes="0">40 hours</button>
+    </div>
+    <div class="actions"><button class="primary" id="calculateDeadline" type="button">Calculate SLA / business deadline</button></div>
   </div>
 
   <section class="card result-card" id="resultCard" aria-live="polite" style="margin-top:18px">
     <h2>Result</h2>
     <div id="resultArea" class="result-empty">Enter your dates and schedule, then calculate.</div>
+    <details id="breakdownDetails" class="breakdown-details" hidden>
+      <summary>View daily business-hours breakdown</summary>
+      <div id="breakdownArea"></div>
+    </details>
     <div class="download-grid" id="downloadGrid" hidden>
       <button id="downloadTxt" type="button">↓ Download TXT</button>
       <button id="downloadCsv" type="button">↓ Download CSV</button>
@@ -107,28 +157,65 @@
 </section>
 
 <aside class="card">
-  <div class="card-head"><div><h2>Work schedule</h2><p class="tiny-note">Set one or two work periods for each day. Disabled days are treated as non-working.</p></div></div>
+  <div class="card-head"><div><h2>Work schedule</h2><p class="tiny-note">Set one or two work periods for each day. Overnight shifts are supported. Use 00:00 to 00:00 for a full 24-hour day.</p></div></div>
+  <div class="schedule-presets" aria-label="Schedule presets">
+    <span class="tiny-note">Load a schedule preset</span>
+    <button type="button" data-schedule-preset="weekday">9–5 Mon–Fri</button>
+    <button type="button" data-schedule-preset="lunch">8:30–5:30 + lunch</button>
+    <button type="button" data-schedule-preset="sun-thu">Sun–Thu 9–5</button>
+    <button type="button" data-schedule-preset="247">24/7</button>
+  </div>
   <div class="schedule-table-wrap" role="region" aria-label="Weekly work schedule" tabindex="0">
   <table class="schedule-table" aria-label="Weekly business hours schedule">
     <thead><tr><th>Day</th><th>Period 1</th><th>Period 2</th></tr></thead>
     <tbody id="scheduleBody"></tbody>
   </table>
   </div>
-  <p class="schedule-help tiny-note">Example split shift: 09:00–13:00 and 14:00–17:00. Keep the end after the start.</p>
+  <div class="weekly-summary" aria-live="polite">
+    <div><span>Weekly scheduled hours</span><strong id="weeklyTotalHours">40 hours</strong></div>
+    <div><span>Days open</span><strong id="weeklyOpenDays">5 of 7</strong></div>
+    <p class="tiny-note">Recurring weekly schedule total, before public-holiday closures. Overnight shifts count by their full scheduled duration.</p>
+  </div>
+  <p class="schedule-help tiny-note">Example split shift: 09:00–13:00 and 14:00–17:00. A closing time earlier than its start continues into the next day.</p>
 </aside>
 </div>
 
 <section class="card" style="margin-top:22px">
-  <div class="card-head"><div><h2>Holiday exclusions</h2><p class="tiny-note">Enter dates to exclude from business time. Use one YYYY-MM-DD date per line or separate dates with commas.</p></div></div>
-  <label for="holidayDates">Holiday dates</label>
+  <div class="card-head"><div><h2>Public holidays and closures</h2><p class="tiny-note">Load national or first-level regional public holidays, then add company-specific closures manually.</p></div></div>
+  <div class="holiday-controls">
+    <div class="field"><label for="holidayCountry">Public holiday country</label>
+      <select id="holidayCountry">
+        <option value="US" selected>United States</option><option value="GB">United Kingdom</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="NZ">New Zealand</option><option value="DE">Germany</option><option value="FR">France</option><option value="NL">Netherlands</option><option value="">No automatic calendar</option>
+      </select>
+    </div>
+    <div class="field"><label for="holidayRegion">Optional state / province code</label><input id="holidayRegion" type="text" placeholder="e.g. US-CA, CA-ON, AU-NSW" autocomplete="off" spellcheck="false"></div>
+  </div>
+  <div class="holiday-meta"><span id="countryHolidayStatus" role="status" aria-live="polite">Loading national holidays…</span><span>National and selected first-level regional calendars; verify local closures.</span></div>
+  <label for="holidayDates">Additional holiday / closure dates</label>
   <textarea id="holidayDates" class="holiday-box" placeholder="2026-12-25&#10;2026-12-26"></textarea>
-  <div class="holiday-meta"><span id="holidayStatus">0 valid holiday dates</span><span>Only the dates you enter are excluded.</span></div>
+  <div class="holiday-meta"><span id="holidayStatus">0 manual dates</span><span>Use YYYY-MM-DD dates, one per line or comma-separated.</span></div>
 </section>
 
 <section class="support-grid">
-  <section class="card"><h2>What this calculator does</h2><p>It counts only the working minutes that fall inside your configured weekly schedule, then removes any holiday dates you supplied. The same calendar powers the deadline mode.</p></section>
-  <section class="card"><h2>Useful for</h2><ul><li>SLA and support response windows</li><li>Project and contractor working time</li><li>Billable or chargeable hours</li><li>Business deadlines and turnaround times</li></ul></section>
-  <section class="card"><h2>Example</h2><div class="examples"><div class="example">Mon 09:00 → Fri 17:00 = 40 business hours</div><div class="example">Fri 15:00 + 10 business hours = Mon 17:00</div></div></section>
+  <section class="card"><h2>What this calculator does</h2><p>It measures the actual overlap between your selected date range and weekly work schedule. It skips disabled weekdays and loaded or manual public holidays, and uses the selected IANA time zone for daylight-saving-aware elapsed time.</p></section>
+  <section class="card"><h2>Useful for</h2><ul><li>SLA response and resolution windows</li><li>Support-ticket and service deadlines</li><li>Project, contractor and billable hours</li><li>Business hours between timestamps</li></ul></section>
+  <section class="card"><h2>Example</h2><div class="examples"><div class="example">Mon 09:00 → Fri 17:00 = 40 business hours</div><div class="example">Fri 15:00 + 10 business hours = Mon 17:00</div><div class="example">Mon 22:00 → Tue 06:00 = 8 overnight business hours</div></div></section>
+</section>
+
+<section class="card" aria-labelledby="business-hours-between-title">
+  <h2 id="business-hours-between-title">Business Hours Between Two Dates</h2>
+  <p>To calculate business hours between two date-and-time values, the calculator checks each local calendar day in the selected time zone. It counts only the minutes that overlap an enabled work period, then excludes public holidays and custom closure dates. Partial first and last days are clipped to the exact times you enter.</p>
+  <h3>How working hours are calculated</h3>
+  <p>Each work period is measured as a real time interval in the selected IANA time zone. This matters for overnight shifts and daylight-saving changes: a shift crossing a clock change can contain a different number of elapsed minutes than its wall-clock labels suggest. Repeated or non-existent local clock times are rejected so the result is not based on a silent guess.</p>
+  <div class="examples"><div class="example">Tuesday 13:00 → Wednesday 12:00, with 09:00–17:00 hours = 7 business hours</div><div class="example">Friday 16:00 → Monday 10:00, with 09:00–17:00 hours = 2 business hours</div></div>
+</section>
+
+<section class="card" aria-labelledby="sla-business-hours-title">
+  <h2 id="sla-business-hours-title">SLA Business Hours Calculator and Deadline Examples</h2>
+  <p>Service-level agreements often measure response or resolution targets in business hours rather than continuous calendar time. Enter when a ticket or task starts, select the SLA target, and the calculator advances only through enabled work periods. Nights, non-working weekdays and excluded holidays pause the clock.</p>
+  <h3>Example: an 8-business-hour response target</h3>
+  <p>If a ticket arrives on Friday at 16:00 and your calendar runs Monday–Friday from 09:00 to 17:00, one business hour is used on Friday. The remaining seven hours continue from Monday at 09:00, so the deadline is Monday at 16:00. If your schedule or holidays differ, the result changes to match your calendar.</p>
+  <p>The same calendar supports adding or subtracting business hours for contractor deadlines, project turnaround times and other work-time calculations.</p>
 </section>
 
 <section class="card" aria-labelledby="workday-calculator-guide-title">
@@ -152,7 +239,10 @@
   <div class="faq"><button type="button"><span>Can I exclude holidays?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Enter as many holiday dates as needed in the holiday box. A holiday removes all scheduled work periods for that date.</div></div>
   <div class="faq"><button type="button"><span>Can different weekdays have different working hours?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Every weekday has its own enabled state and up to two work periods, so the calendar can model part-time days, split shifts and shorter Fridays.</div></div>
   <div class="faq"><button type="button"><span>Can I add business hours to a deadline?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Use Add / subtract mode to move forward or backward through only the working minutes in your configured calendar.</div></div>
-  <div class="faq"><button type="button"><span>Does this account for time zones or daylight saving time?</span><span class="faq-icon">+</span></button><div class="faq-answer">No. The inputs represent local calendar date and clock time, and the calculator treats each calendar day as 24 hours. It does not know a time zone or model daylight-saving transitions.</div></div>
+  <div class="faq"><button type="button"><span>Does this account for time zones or daylight saving time?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Choose an IANA time zone such as America/New_York or Europe/London. The calculator converts schedule boundaries to real instants. If a local clock time does not exist during a spring-forward gap or occurs twice during a fall-back hour, it asks you to choose a different time instead of guessing.</div></div>
+  <div class="faq"><button type="button"><span>Can I load public holidays automatically?</span><span class="faq-icon">+</span></button><div class="faq-answer">Choose a supported country and, where available, enter a first-level state or province code such as US-CA or CA-ON. National and matching regional dates are loaded from Nager.Date. Municipal, employer-specific and last-minute closures should be added manually and verified with the relevant authority.</div></div>
+  <div class="faq"><button type="button"><span>Can I calculate an SLA response or resolution deadline?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Use the SLA / Add / subtract mode, enter the ticket start date and time, choose the business-hour target, and calculate the due time using the same working calendar, time zone and holiday rules.</div></div>
+  <div class="faq"><button type="button"><span>Can a shift continue overnight?</span><span class="faq-icon">+</span></button><div class="faq-answer">Yes. Set a shift end earlier than its start to finish on the next local calendar day. For example, 22:00–06:00 counts eight scheduled hours. Use 00:00–00:00 only when the business is open for the full 24 hours of that day.</div></div>
 </section>
 
 <section class="card related-wrap related-tools" aria-labelledby="related-title">
@@ -165,7 +255,9 @@
 
 <section class="card">
   <h2>Method &amp; calculation notes</h2>
-  <p class="small">This tool works in calendar minutes. It does not assume a standard Monday–Friday schedule unless you leave the default schedule unchanged. A business minute is counted only when it falls inside an enabled work period on a non-holiday date.</p>
+  <p class="small">The calculator converts each schedule boundary and input date-time into an instant using the selected IANA time zone. It counts actual elapsed minutes that fall inside enabled work periods. Overnight intervals are split at local midnight, and the holiday calendar excludes the whole local date selected as a holiday.</p>
+  <p class="small">Automatic public-holiday dates are supplied by <a href="https://github.com/nager/Nager.Date" target="_blank" rel="noopener noreferrer">Nager.Date</a> (REST API v4). Country and first-level subdivision coverage varies; municipal holidays, employer closures and late official changes are not guaranteed. Verify important deadlines against the official local calendar, and enter any additional closures manually.</p>
+  <p class="small">If a local start or end time is missing during a daylight-saving transition or repeated during a fall-back hour, the calculator rejects that value rather than assuming which instant was intended.</p>
   <p class="small">For general clock-time arithmetic without work schedules, use the <a href="/time-calculator/">Time Calculator</a>.</p>
 </section>
 </main>
@@ -175,174 +267,234 @@
 
 
 <script>
+
+
 (function(){
   'use strict';
   const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  const dayShort=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   const $=id=>document.getElementById(id);
-  const state={lastExport:null};
-
+  const state={lastExport:null,autoHolidays:new Map(),holidayNames:new Map(),holidayCache:new Map(),holidayRequest:0,holidayTimer:null,formatterCache:new Map(),localTimeCache:new Map(),dayBoundaryCache:new Map()};
   function pad(n){return String(n).padStart(2,'0');}
   function isoDate(y,m,d){return y+'-'+pad(m)+'-'+pad(d);}
-  function parseDateOnly(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3];const dt=new Date(Date.UTC(y,mo-1,d));if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d)return null;return {y,m:mo,d};}
-  function parseDateTime(s){const m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(s);if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3],h=+m[4],mi=+m[5];if(!parseDateOnly(isoDate(y,mo,d))||h>23||mi>59)return null;return {y,m:mo,d,h,mi};}
+  function parseDateOnly(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3],dt=new Date(Date.UTC(y,mo-1,d));return dt.getUTCFullYear()===y&&dt.getUTCMonth()===mo-1&&dt.getUTCDate()===d?{y,m:mo,d}:null;}
+  function parseDateTime(s){const m=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(s||'');if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3],h=+m[4],mi=+m[5];return parseDateOnly(isoDate(y,mo,d))&&h<=23&&mi<=59?{y,m:mo,d,h,mi}:null;}
   function timeMinutes(s){const m=/^(\d{2}):(\d{2})$/.exec(s||'');if(!m)return null;const h=+m[1],mi=+m[2];return h>23||mi>59?null:h*60+mi;}
   function dayNumber(p){return Date.UTC(p.y,p.m-1,p.d)/86400000;}
   function fromDayNumber(n){const d=new Date(n*86400000);return {y:d.getUTCFullYear(),m:d.getUTCMonth()+1,d:d.getUTCDate()};}
-  function weekdayIndex(p){const js=new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay();return (js+6)%7;}
+  function weekdayIndex(p){return (new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()+6)%7;}
   function addDays(p,n){return fromDayNumber(dayNumber(p)+n);}
-  function dateTimeText(p,minutes){const dt=new Date(Date.UTC(p.y,p.m-1,p.d,Math.floor(minutes/60),minutes%60));return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short',timeZone:'UTC'}).format(dt);}
-  function datetimeString(p,minutes){return isoDate(p.y,p.m,p.d)+'T'+pad(Math.floor(minutes/60))+':'+pad(minutes%60);}
-  function minutesPretty(total){const h=Math.floor(total/60),m=total%60;return h+' hour'+(h===1?'':'s')+(m?' '+m+' minute'+(m===1?'':'s'):'');}
-  function elapsedText(total){const days=Math.floor(total/1440),rem=total%1440,h=Math.floor(rem/60),m=rem%60;const bits=[];if(days)bits.push(days+' day'+(days===1?'':'s'));if(h)bits.push(h+' hour'+(h===1?'':'s'));if(m||!bits.length)bits.push(m+' minute'+(m===1?'':'s'));return bits.join(' ');}
-  function dateRangeText(a,b){return datetimeString(a.p,a.minutes)+' → '+datetimeString(b.p,b.minutes);}
-  function scheduleData(){
-    return DAYS.map((name,i)=>{
-      const en=$('day-'+i+'-enabled').checked;
-      const start1=$('day-'+i+'-start1').value,end1=$('day-'+i+'-end1').value;
-      const start2=$('day-'+i+'-start2').value,end2=$('day-'+i+'-end2').value;
-      const a=timeMinutes(start1),b=timeMinutes(end1),c=timeMinutes(start2),d=timeMinutes(end2);
-      const incomplete=Boolean(start1)!==Boolean(end1)||Boolean(start2)!==Boolean(end2);
-      return {name,enabled:en,incomplete,intervals:[a!==null&&b!==null?[a,b]:null,c!==null&&d!==null?[c,d]:null].filter(Boolean)};
-    });
+  function timezone(){const zone=String($('timezoneId').value||'').trim();if(!zone)throw new Error('Enter an IANA time zone such as America/New_York or Europe/London.');try{new Intl.DateTimeFormat('en-US',{timeZone:zone});}catch(_){throw new Error('The time zone "'+zone+'" is not recognized. Choose a valid IANA time-zone name.');}return zone;}
+  function populateTimezoneSuggestions(){
+    const common=['Africa/Cairo','Africa/Johannesburg','Africa/Lagos','Africa/Nairobi','America/Anchorage','America/Chicago','America/Denver','America/Los_Angeles','America/Mexico_City','America/New_York','America/Phoenix','America/Sao_Paulo','America/Toronto','America/Vancouver','Asia/Baghdad','Asia/Bangkok','Asia/Dhaka','Asia/Dubai','Asia/Hong_Kong','Asia/Jakarta','Asia/Karachi','Asia/Kolkata','Asia/Riyadh','Asia/Seoul','Asia/Shanghai','Asia/Singapore','Asia/Tokyo','Australia/Melbourne','Australia/Perth','Australia/Sydney','Europe/Amsterdam','Europe/Berlin','Europe/London','Europe/Moscow','Europe/Paris','Europe/Rome','Europe/Zurich','Pacific/Auckland','Pacific/Honolulu','UTC'];
+    let supported=[];
+    try{if(typeof Intl.supportedValuesOf==='function')supported=Intl.supportedValuesOf('timeZone');}catch(_){}
+    const zones=[...new Set([...common,...supported])].sort((a,b)=>a.localeCompare(b));
+    $('commonTimeZones').innerHTML=zones.map(zone=>'<option value="'+escapeHtml(zone)+'"></option>').join('');
   }
-  function holidays(){
-    const tokens=$('holidayDates').value.split(/[\s,;]+/).map(s=>s.trim()).filter(Boolean);
-    const set=new Set(),invalid=[];
-    tokens.forEach(s=>{const p=parseDateOnly(s);if(p)set.add(isoDate(p.y,p.m,p.d));else invalid.push(s);});
-    $('holidayStatus').textContent=set.size+' valid holiday date'+(set.size===1?'':'s')+(invalid.length?' · '+invalid.length+' invalid entr'+(invalid.length===1?'y':'ies'):'');
-    return {set,invalid};
+  function updateTimezoneStatus(zone){$('timezoneStatus').textContent='Active time zone: '+zone+'. Date, time and schedule entries are interpreted in this zone; switching zones does not convert the entered clock values.';}
+  function applyTimezoneChange(){
+    state.localTimeCache.clear();state.dayBoundaryCache.clear();
+    let zone;
+    try{zone=timezone();updateTimezoneStatus(zone);}
+    catch(e){$('timezoneStatus').textContent='Invalid time zone. '+e.message;showError(e.message);return;}
+    if($('deadlinePanel').classList.contains('hidden'))calculateBetween();else calculateDeadline();
   }
-  function validateSchedule(s){
-    const errors=[];
-    s.forEach((day,i)=>{
+  function useDeviceTimezone(){
+    try{const zone=Intl.DateTimeFormat().resolvedOptions().timeZone;if(!zone)throw new Error('Your browser did not report a device time zone. Enter an IANA zone manually.');$('timezoneId').value=zone;applyTimezoneChange();}
+    catch(e){showError(e.message||'Unable to detect the device time zone.');}
+  }
+  function zoneFormatter(zone){if(!state.formatterCache.has(zone))state.formatterCache.set(zone,new Intl.DateTimeFormat('en-US',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}));return state.formatterCache.get(zone);}
+  function partsAt(epoch,zone){const p=Object.fromEntries(zoneFormatter(zone).formatToParts(new Date(epoch)).map(x=>[x.type,x.value]));return {y:+p.year,m:+p.month,d:+p.day,h:+p.hour,mi:+p.minute,s:+p.second};}
+  function sameWallTime(a,b){return a.y===b.y&&a.m===b.m&&a.d===b.d&&a.h===b.h&&a.mi===b.mi&&a.s===0;}
+  function candidatesForLocal(p,zone){
+    const key=zone+'|'+isoDate(p.y,p.m,p.d)+'T'+pad(p.h)+':'+pad(p.mi);
+    if(state.localTimeCache.has(key))return state.localTimeCache.get(key).slice();
+    const naive=Date.UTC(p.y,p.m-1,p.d,p.h,p.mi,0),offsets=new Set();
+    [-48,-24,-12,0,12,24,48].forEach(hours=>{const probe=naive+hours*3600000,q=partsAt(probe,zone);offsets.add(Date.UTC(q.y,q.m-1,q.d,q.h,q.mi,q.s)-probe);});
+    const matches=[...offsets].map(offset=>naive-offset).filter(epoch=>sameWallTime(partsAt(epoch,zone),p)).sort((a,b)=>a-b);
+    state.localTimeCache.set(key,matches);return matches.slice();
+  }
+  function localToEpoch(p,zone,label){
+    const matches=candidatesForLocal(p,zone),name=label||'The selected local time';
+    if(!matches.length)throw new Error(name+' does not exist in '+zone+' because the clock moves forward for daylight saving. Choose another time.');
+    if(matches.length>1)throw new Error(name+' occurs twice in '+zone+' when the clock moves back for daylight saving. Choose a time outside the repeated hour.');
+    return matches[0];
+  }
+  function localDayStart(p,zone){
+    const key=zone+'|'+isoDate(p.y,p.m,p.d);
+    if(state.dayBoundaryCache.has(key))return state.dayBoundaryCache.get(key);
+    for(let minute=0;minute<=180;minute++){const q={y:p.y,m:p.m,d:p.d,h:Math.floor(minute/60),mi:minute%60},matches=candidatesForLocal(q,zone);if(matches.length){state.dayBoundaryCache.set(key,matches[0]);return matches[0];}}
+    throw new Error('Could not determine the start of '+isoDate(p.y,p.m,p.d)+' in '+zone+'.');
+  }
+  function dateTimeText(epoch,zone){return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short',timeZone:zone}).format(new Date(epoch));}
+  function dateTimeInputText(epoch,zone){const p=partsAt(epoch,zone);return isoDate(p.y,p.m,p.d)+'T'+pad(p.h)+':'+pad(p.mi);}
+  function minutesPretty(total){if(total===0)return '0 minutes';const h=Math.floor(total/60),m=total%60;return h+' hour'+(h===1?'':'s')+(m?' '+m+' minute'+(m===1?'':'s'):'');}
+  function elapsedText(total){const mins=Math.max(0,Math.round(total)),days=Math.floor(mins/1440),rem=mins%1440,h=Math.floor(rem/60),m=rem%60,bits=[];if(days)bits.push(days+' day'+(days===1?'':'s'));if(h)bits.push(h+' hour'+(h===1?'':'s'));if(m||!bits.length)bits.push(m+' minute'+(m===1?'':'s'));return bits.join(' ');}
+  function scheduleData(){return DAYS.map((name,i)=>{const enabled=$('day-'+i+'-enabled').checked,fields=[[$('day-'+i+'-start1').value,$('day-'+i+'-end1').value],[$('day-'+i+'-start2').value,$('day-'+i+'-end2').value]],incomplete=fields.some(pair=>Boolean(pair[0])!==Boolean(pair[1])),intervals=fields.map(pair=>[timeMinutes(pair[0]),timeMinutes(pair[1])]).filter(pair=>pair[0]!==null&&pair[1]!==null);return {name,enabled,incomplete,intervals};});}
+  function updateWeeklySummary(){
+    let total=0,openDays=0;
+    scheduleData().forEach(day=>{
       if(!day.enabled)return;
-      if(day.incomplete){errors.push(DAYS[i]+' has an incomplete time period. Enter both a start and end time, or clear both fields.');return;}
-      if(!day.intervals.length)errors.push(DAYS[i]+' needs at least one complete time period.');
-      day.intervals.forEach((r,j)=>{if(r[1]<=r[0])errors.push(DAYS[i]+' period '+(j+1)+' must end after it starts.');});
-      if(day.intervals.length===2 && day.intervals[1][0]<day.intervals[0][1])errors.push(DAYS[i]+' period 2 must start at or after period 1 ends.');
-    });
-    return errors;
-  }
-  function showError(msg){
-    $('resultArea').innerHTML='<div class="result-main error"><div class="result-label">Check the inputs</div><div class="result-value" style="font-size:22px;color:#9b2c2c">'+msg+'</div></div>';
-    $('downloadGrid').hidden=true;
-    state.lastExport=null;
-  }
-  function workMinutesOnDay(p,sched,holidaySet){
-    const iso=isoDate(p.y,p.m,p.d);
-    if(holidaySet.has(iso))return [];
-    return sched[weekdayIndex(p)].enabled?sched[weekdayIndex(p)].intervals:[];
-  }
-  function calculateBetween(){
-    const a=parseDateTime($('betweenStart').value),b=parseDateTime($('betweenEnd').value);
-    if(!a||!b){showError('Enter valid start and end date-time values.');return;}
-    const startN=dayNumber(a),endN=dayNumber(b),startMin=a.h*60+a.mi,endMin=b.h*60+b.mi;
-    const totalElapsed=(endN-startN)*1440+(endMin-startMin);
-    if(totalElapsed<0){showError('End date and time must be on or after the start.');return;}
-    const sched=scheduleData(),hv=holidays(),errs=validateSchedule(sched);if(errs.length){showError(errs.join(' '));return;}
-    let business=0,scheduled=0,businessDays=0,holidayCount=0;
-    for(let n=startN;n<=endN;n++){
-      const p=fromDayNumber(n),iso=isoDate(p.y,p.m,p.d), intervals=workMinutesOnDay(p,sched,hv.set);
-      const isHoliday=hv.set.has(iso);if(isHoliday)holidayCount++;
-      let dayBusiness=0;
-      intervals.forEach(([s,e])=>{
-        scheduled+=Math.max(0,e-s);
-        const left=n===startN?startMin:0,right=n===endN?endMin:1440;
-        dayBusiness+=Math.max(0,Math.min(right,e)-Math.max(left,s));
+      let minutes=0;
+      day.intervals.forEach(([start,end])=>{
+        if(start===0&&end===0)minutes+=1440;
+        else if(end>start)minutes+=end-start;
+        else if(end<start)minutes+=(1440-start)+end;
       });
-      business+=dayBusiness;if(dayBusiness>0)businessDays++;
-    }
-    const nonWorking=Math.max(0,totalElapsed-business),pct=totalElapsed?business/totalElapsed*100:0;
-    $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business time</div><div class="result-value">'+minutesPretty(business)+'</div><div class="result-sub">'+(business/60).toFixed(2).replace(/0+$/,'').replace(/\.$/,'')+' decimal hours</div></div><div class="result-grid"><div class="result-stat"><span>Calendar elapsed</span><strong>'+elapsedText(totalElapsed)+'</strong></div><div class="result-stat"><span>Non-working time</span><strong>'+elapsedText(nonWorking)+'</strong></div><div class="result-stat"><span>Business days touched</span><strong>'+businessDays+'</strong></div><div class="result-stat"><span>Holidays excluded</span><strong>'+holidayCount+'</strong></div></div><p class="add-summary">'+(pct===0?'No configured business minutes overlap the selected range.':business+' business minutes counted across the selected range.')+'</p>';
-    state.lastExport={mode:'between',start:$('betweenStart').value,end:$('betweenEnd').value,business,decimal:(business/60).toFixed(2),elapsed:totalElapsed,nonWorking,businessDays,holidayCount};
-    $('downloadGrid').hidden=false;
+      if(minutes>0)openDays++;
+      total+=minutes;
+    });
+    $('weeklyTotalHours').textContent=minutesPretty(total);
+    $('weeklyOpenDays').textContent=openDays+' of 7';
   }
-  function findForward(p,t,remaining,sched,hset){
-    for(let guard=0;guard<4000;guard++){
-      const intervals=workMinutesOnDay(p,sched,hset);
-      for(const [s,e] of intervals){
-        if(t<e){
-          if(t<s)t=s;
-          const avail=e-t;
-          if(remaining<=avail)return {p,minutes:t+remaining};
-          remaining-=avail;
-        }
+  function holidayData(){const tokens=$('holidayDates').value.split(/[\s,;]+/).map(s=>s.trim()).filter(Boolean),manual=new Set(),invalid=[];tokens.forEach(s=>{const p=parseDateOnly(s);if(p)manual.add(isoDate(p.y,p.m,p.d));else invalid.push(s);});return {set:new Set([...manual,...state.autoHolidays.keys()]),manual,invalid,names:state.holidayNames};}
+  function intervalSegments(pair){const s=pair[0],e=pair[1];if(s===0&&e===0)return [[0,1440]];if(e>s)return [[s,e]];if(e<s)return [[s,1440],[0,e]];return [];}
+  function overlaps(a,b){return Math.max(a[0],b[0])<Math.min(a[1],b[1]);}
+  function validateSchedule(schedule){
+    const errors=[];
+    schedule.forEach(day=>{
+      if(!day.enabled)return;
+      if(day.incomplete){errors.push(day.name+' has an incomplete time period. Enter both a start and end time, or clear both fields.');return;}
+      if(!day.intervals.length){errors.push(day.name+' needs at least one complete time period.');return;}
+      day.intervals.forEach((pair,j)=>{if(pair[0]===pair[1]&&!(pair[0]===0&&pair[1]===0))errors.push(day.name+' period '+(j+1)+' must end at a different time. Use 00:00–00:00 only for a full 24-hour day.');});
+      for(let a=0;a<day.intervals.length;a++)for(let b=a+1;b<day.intervals.length;b++){const x=intervalSegments(day.intervals[a]),y=intervalSegments(day.intervals[b]);if(x.some(s=>y.some(t=>overlaps(s,t))))errors.push(day.name+' has overlapping work periods. Adjust the start/end times.');}
+    });
+    schedule.forEach((previous,i)=>{const next=schedule[(i+1)%7];if(!previous.enabled||!next.enabled)return;previous.intervals.forEach(pair=>{const s=pair[0],e=pair[1];if(e>=s||s===0&&e===0||e===0)return;const carry=[0,e];next.intervals.forEach(nextPair=>{if(intervalSegments(nextPair).some(segment=>overlaps(carry,segment)))errors.push(next.name+' overlaps the overnight shift from '+previous.name+'. Adjust one of the two schedules.');});});});
+    return [...new Set(errors)];
+  }
+  function workIntervalsForDay(p,schedule,holidaySet,zone){
+    const iso=isoDate(p.y,p.m,p.d);if(holidaySet.has(iso))return [];
+    const nextDate=addDays(p,1),dayStart=localDayStart(p,zone),dayEnd=localDayStart(nextDate,zone),out=[],current=schedule[weekdayIndex(p)];
+    if(current.enabled)current.intervals.forEach(pair=>{
+      const s=pair[0],e=pair[1];if(s===0&&e===0){out.push([dayStart,dayEnd]);return;}
+      const start=localToEpoch({y:p.y,m:p.m,d:p.d,h:Math.floor(s/60),mi:s%60},zone,current.name+' work-period start');
+      if(e>s){const end=localToEpoch({y:p.y,m:p.m,d:p.d,h:Math.floor(e/60),mi:e%60},zone,current.name+' work-period end');if(end>start)out.push([start,end]);}
+      else if(e<s)out.push([start,dayEnd]);
+    });
+    const previousDate=addDays(p,-1);if(!holidaySet.has(isoDate(previousDate.y,previousDate.m,previousDate.d))){const previous=schedule[weekdayIndex(previousDate)];if(previous.enabled)previous.intervals.forEach(pair=>{const s=pair[0],e=pair[1];if(e<s&&!(s===0&&e===0)&&e>0){const end=localToEpoch({y:p.y,m:p.m,d:p.d,h:Math.floor(e/60),mi:e%60},zone,previous.name+' overnight-shift end');if(end>dayStart)out.push([dayStart,Math.min(dayEnd,end)]);}});}
+    out.sort((a,b)=>a[0]-b[0]);return out.filter(x=>x[1]>x[0]);
+  }
+  function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+  function showError(message){$('resultArea').innerHTML='<div class="result-main error"><div class="result-label">Check the inputs</div><div class="result-value" style="font-size:22px;color:#9b2c2c">'+escapeHtml(message)+'</div></div>';$('downloadGrid').hidden=true;$('breakdownDetails').hidden=true;state.lastExport=null;}
+  function renderBreakdown(rows){const shown=rows.slice(0,80),body=shown.map(row=>'<tr><td>'+escapeHtml(row.date)+'</td><td>'+escapeHtml(row.day)+'</td><td>'+escapeHtml(row.hours)+'</td><td>'+escapeHtml(row.note)+'</td></tr>').join('');$('breakdownArea').innerHTML='<div class="breakdown-wrap"><table class="breakdown-table"><thead><tr><th>Local date</th><th>Day</th><th>Business time</th><th>Calculation note</th></tr></thead><tbody>'+body+'</tbody></table></div>'+(rows.length>shown.length?'<p class="breakdown-note">Showing the first 80 days here. The CSV export includes all '+rows.length+' days.</p>':'');$('breakdownDetails').hidden=!rows.length;}
+  function calculateBetween(){
+    try{
+      const zone=timezone(),a=parseDateTime($('betweenStart').value),b=parseDateTime($('betweenEnd').value);if(!a||!b){showError('Enter valid start and end date-time values.');return;}
+      const startEpoch=localToEpoch(a,zone,'Start date and time'),endEpoch=localToEpoch(b,zone,'End date and time');if(endEpoch<startEpoch){showError('End date and time must be on or after the start.');return;}
+      const schedule=scheduleData(),hv=holidayData(),errors=validateSchedule(schedule);if(errors.length){showError(errors.join(' '));return;}
+      const startN=dayNumber(a),endN=dayNumber(b);if(endN-startN>3650){showError('Choose a date range of ten years or less so the daily breakdown remains useful.');return;}
+      let business=0,businessDays=0,holidayCount=0;const rows=[];
+      for(let n=startN;n<=endN;n++){
+        const p=fromDayNumber(n),iso=isoDate(p.y,p.m,p.d),isHoliday=hv.set.has(iso);if(isHoliday)holidayCount++;
+        const intervals=workIntervalsForDay(p,schedule,hv.set,zone),dayStart=localDayStart(p,zone),dayEnd=localDayStart(addDays(p,1),zone),left=Math.max(startEpoch,dayStart),right=Math.min(endEpoch,dayEnd);let dayBusiness=0;
+        intervals.forEach(pair=>{dayBusiness+=Math.round(Math.max(0,Math.min(right,pair[1])-Math.max(left,pair[0]))/60000);});
+        business+=dayBusiness;if(dayBusiness>0)businessDays++;
+        const note=isHoliday?(hv.names.get(iso)||'Holiday excluded'):(dayBusiness>0?'Scheduled work time counted':(intervals.length?'No work-period overlap in this range':(schedule[weekdayIndex(p)].enabled?'No enabled interval overlaps':'Non-working day')));
+        rows.push({date:iso,day:DAYS[weekdayIndex(p)],minutes:dayBusiness,hours:minutesPretty(dayBusiness),note});
       }
-      p=addDays(p,1);t=0;
-    }
+      const elapsed=Math.round((endEpoch-startEpoch)/60000),nonWorking=Math.max(0,elapsed-business),pct=elapsed?business/elapsed*100:0;
+      $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business time</div><div class="result-value">'+minutesPretty(business)+'</div><div class="result-sub">'+(business/60).toFixed(2).replace(/0+$/,'').replace(/\.$/,'')+' decimal hours · '+escapeHtml(zone)+'</div></div><div class="result-grid"><div class="result-stat"><span>Actual elapsed time</span><strong>'+elapsedText(elapsed)+'</strong></div><div class="result-stat"><span>Non-working time</span><strong>'+elapsedText(nonWorking)+'</strong></div><div class="result-stat"><span>Business days touched</span><strong>'+businessDays+'</strong></div><div class="result-stat"><span>Holiday dates excluded</span><strong>'+holidayCount+'</strong></div></div><p class="add-summary">'+(pct===0?'No configured business minutes overlap the selected range.':business+' business minutes counted across the selected range.')+'</p>';
+      renderBreakdown(rows);state.lastExport={mode:'between',start:$('betweenStart').value,end:$('betweenEnd').value,timezone:zone,business,decimal:(business/60).toFixed(2),elapsed,nonWorking,businessDays,holidayCount,rows};$('downloadGrid').hidden=false;
+    }catch(e){showError(e.message||'Unable to complete that business-hours calculation.');}
+  }
+  function findForward(p,cursor,remaining,schedule,holidaySet,zone){
+    for(let guard=0;guard<4000;guard++){const intervals=workIntervalsForDay(p,schedule,holidaySet,zone);for(const pair of intervals){if(cursor<pair[1]){const current=Math.max(cursor,pair[0]),available=Math.floor((pair[1]-current)/60000);if(remaining<=available)return current+remaining*60000;remaining-=available;}}p=addDays(p,1);cursor=localDayStart(p,zone);}
     throw new Error('The requested business-time range is too large for this calculator.');
   }
-  function findBackward(p,t,remaining,sched,hset){
-    for(let guard=0;guard<4000;guard++){
-      const intervals=workMinutesOnDay(p,sched,hset).slice().reverse();
-      for(const [s,e] of intervals){
-        if(t>=s){
-          if(t>e)t=e;
-          const avail=t-s;
-          if(remaining<=avail)return {p,minutes:t-remaining};
-          remaining-=avail;
-        }
-      }
-      p=addDays(p,-1);t=1440;
-    }
+  function findBackward(p,cursor,remaining,schedule,holidaySet,zone){
+    for(let guard=0;guard<4000;guard++){const intervals=workIntervalsForDay(p,schedule,holidaySet,zone).slice().reverse();for(const pair of intervals){if(cursor>pair[0]){const current=Math.min(cursor,pair[1]),available=Math.floor((current-pair[0])/60000);if(remaining<=available)return current-remaining*60000;remaining-=available;}}p=addDays(p,-1);cursor=localDayStart(addDays(p,1),zone);}
     throw new Error('The requested business-time range is too large for this calculator.');
   }
   function calculateDeadline(){
-    const base=parseDateTime($('deadlineBase').value),h=Number($('deadlineHours').value),m=Number($('deadlineMinutes').value);
-    if(!base||!Number.isInteger(h)||!Number.isInteger(m)||h<0||m<0||m>59){showError('Enter a valid starting date-time and whole-number hours/minutes.');return;}
-    const amount=h*60+m;if(amount===0){$('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business-time result</div><div class="result-value" style="font-size:24px">No change — 0 business minutes.</div></div>';$('downloadGrid').hidden=true;state.lastExport=null;return;}
-    const sched=scheduleData(),hv=holidays(),errs=validateSchedule(sched);if(errs.length){showError(errs.join(' '));return;}
-    if(!sched.some(x=>x.enabled&&x.intervals.length)){showError('Enable at least one working day with a valid time period.');return;}
     try{
-      const p={y:base.y,m:base.m,d:base.d},t=base.h*60+base.mi;
-      const r=$('deadlineOperation').value==='add'?findForward(p,t,amount,sched,hv.set):findBackward(p,t,amount,sched,hv.set);
-      const op=$('deadlineOperation').value==='add'?'Added':'Subtracted';
-      $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business-time result</div><div class="result-value">'+dateTimeText(r.p,r.minutes)+'</div><div class="result-sub">'+op+' '+minutesPretty(amount)+' of business time.</div></div><div class="result-grid"><div class="result-stat"><span>Starting point</span><strong>'+dateTimeText(p,t)+'</strong></div><div class="result-stat"><span>Business time moved</span><strong>'+minutesPretty(amount)+'</strong></div><div class="result-stat"><span>Operation</span><strong>'+($('deadlineOperation').value==='add'?'Add':'Subtract')+'</strong></div><div class="result-stat"><span>Holiday dates loaded</span><strong>'+hv.set.size+'</strong></div></div>';
-      state.lastExport={mode:'deadline',base:$('deadlineBase').value,operation:$('deadlineOperation').value,hours:h,minutes:m,result:datetimeString(r.p,r.minutes)};
-      $('downloadGrid').hidden=false;
-    }catch(e){showError(e.message||'Unable to complete that business-time calculation.');}
+      const zone=timezone(),base=parseDateTime($('deadlineBase').value),h=Number($('deadlineHours').value),m=Number($('deadlineMinutes').value);if(!base||!Number.isSafeInteger(h)||!Number.isSafeInteger(m)||h<0||m<0||m>59){showError('Enter a valid starting date-time and whole-number hours/minutes.');return;}
+      const amount=h*60+m;if(!Number.isSafeInteger(amount)||amount>5000000){showError('Enter an SLA target below 5,000,000 business minutes.');return;}
+      if(amount===0){$('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business-time result</div><div class="result-value" style="font-size:24px">No change — 0 business minutes.</div></div>';$('breakdownDetails').hidden=true;$('downloadGrid').hidden=true;state.lastExport=null;return;}
+      const schedule=scheduleData(),hv=holidayData(),errors=validateSchedule(schedule);if(errors.length){showError(errors.join(' '));return;}
+      if(!schedule.some(x=>x.enabled&&x.intervals.length)){showError('Enable at least one working day with a valid time period.');return;}
+      const baseEpoch=localToEpoch(base,zone,'Starting date and time'),resultEpoch=$('deadlineOperation').value==='add'?findForward({y:base.y,m:base.m,d:base.d},baseEpoch,amount,schedule,hv.set,zone):findBackward({y:base.y,m:base.m,d:base.d},baseEpoch,amount,schedule,hv.set,zone),operation=$('deadlineOperation').value==='add'?'Added':'Subtracted',resultText=dateTimeText(resultEpoch,zone);
+      $('resultArea').innerHTML='<div class="result-main"><div class="result-label">Business-time deadline</div><div class="result-value">'+escapeHtml(resultText)+'</div><div class="result-sub">'+operation+' '+minutesPretty(amount)+' of scheduled business time · '+escapeHtml(zone)+'</div></div><div class="result-grid"><div class="result-stat"><span>Starting point</span><strong>'+escapeHtml(dateTimeText(baseEpoch,zone))+'</strong></div><div class="result-stat"><span>Business time moved</span><strong>'+minutesPretty(amount)+'</strong></div><div class="result-stat"><span>Operation</span><strong>'+operation+'</strong></div><div class="result-stat"><span>Holiday dates loaded</span><strong>'+hv.set.size+'</strong></div></div><p class="add-summary">The SLA clock pauses outside enabled work periods and on excluded holiday dates.</p>';
+      $('breakdownDetails').hidden=true;state.lastExport={mode:'deadline',base:$('deadlineBase').value,timezone:zone,operation,hours:h,minutes:m,result:dateTimeInputText(resultEpoch,zone),resultText,holidayCount:hv.set.size};$('downloadGrid').hidden=false;
+    }catch(e){showError(e.message||'Unable to complete that business-time deadline.');}
   }
+  function csvCell(value){return '"'+String(value??'').replace(/"/g,'""')+'"';}
   function exportText(){
-    const x=state.lastExport;if(!x)return;
-    let textOut;
-    if(x.mode==='between'){
-      textOut='ZemTools — Business Hours Calculator\n\nMode: Business hours between dates\nStart: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nCalendar elapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHolidays excluded: '+x.holidayCount+'\n';
-    }else{
-      textOut='ZemTools — Business Hours Calculator\n\nMode: Add / subtract business time\nStart: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.result+'\n';
-    }
-    const blob=new Blob([textOut],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+    const x=state.lastExport;if(!x)return;let textOut='ZemTools — Business Hours Calculator\n\nMode: '+(x.mode==='between'?'Business hours between dates':'SLA / add or subtract business time')+'\nTime zone: '+x.timezone+'\n';
+    if(x.mode==='between'){textOut+='Start: '+x.start+'\nEnd: '+x.end+'\nBusiness time: '+x.business+' minutes ('+x.decimal+' hours)\nElapsed: '+x.elapsed+' minutes\nNon-working time: '+x.nonWorking+' minutes\nBusiness days touched: '+x.businessDays+'\nHoliday dates excluded: '+x.holidayCount+'\n\nDaily breakdown:\nDate,Day,Business minutes,Note\n';x.rows.forEach(r=>{textOut+=[r.date,r.day,r.minutes,r.note].map(csvCell).join(',')+'\n';});}
+    else{textOut+='Start: '+x.base+'\nOperation: '+x.operation+'\nBusiness time: '+x.hours+' hours '+x.minutes+' minutes\nResult: '+x.resultText+'\nHoliday dates loaded: '+x.holidayCount+'\n';}
+    const blob=new Blob([textOut],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
   function exportCsv(){
-    const x=state.lastExport;if(!x)return;
-    const rows=x.mode==='between'?[['Field','Value'],['Mode','Business hours between dates'],['Start',x.start],['End',x.end],['Business minutes',x.business],['Business hours',x.decimal],['Calendar elapsed minutes',x.elapsed],['Non-working minutes',x.nonWorking],['Business days touched',x.businessDays],['Holidays excluded',x.holidayCount]]:[['Field','Value'],['Mode','Add / subtract business time'],['Start',x.base],['Operation',x.operation],['Business hours',x.hours],['Business minutes',x.minutes],['Result',x.result]];
-    const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+    const x=state.lastExport;if(!x)return;let rows;
+    if(x.mode==='between'){rows=[['Field','Value'],['Mode','Business hours between dates'],['Time zone',x.timezone],['Start',x.start],['End',x.end],['Business minutes',x.business],['Business hours',x.decimal],['Actual elapsed minutes',x.elapsed],['Non-working minutes',x.nonWorking],['Business days touched',x.businessDays],['Holiday dates excluded',x.holidayCount],[],['Date','Day','Business minutes','Calculation note']];x.rows.forEach(r=>rows.push([r.date,r.day,r.minutes,r.note]));}
+    else rows=[['Field','Value'],['Mode','SLA / add or subtract business time'],['Time zone',x.timezone],['Start',x.base],['Operation',x.operation],['Business hours',x.hours],['Business minutes',x.minutes],['Result',x.resultText],['Holiday dates loaded',x.holidayCount]];
+    const csv=rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-hours-calculation.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
   }
-  function resetSchedule(){
-    DAYS.forEach((_,i)=>{
-      $('day-'+i+'-enabled').checked=i<5;
-      $('day-'+i+'-start1').value='09:00';$('day-'+i+'-end1').value='17:00';
-      $('day-'+i+'-start2').value='';$('day-'+i+'-end2').value='';
-    });
+  function resetSchedule(){DAYS.forEach((_,i)=>{$('day-'+i+'-enabled').checked=i<5;$('day-'+i+'-start1').value='09:00';$('day-'+i+'-end1').value='17:00';$('day-'+i+'-start2').value='';$('day-'+i+'-end2').value='';});}
+  function applySchedulePreset(name){
+    resetSchedule();
+    if(name==='lunch'){for(let i=0;i<5;i++){$('day-'+i+'-start1').value='08:30';$('day-'+i+'-end1').value='12:30';$('day-'+i+'-start2').value='13:30';$('day-'+i+'-end2').value='17:30';}}
+    else if(name==='sun-thu')DAYS.forEach((_,i)=>{$('day-'+i+'-enabled').checked=[0,1,2,3,6].includes(i);});
+    else if(name==='247')DAYS.forEach((_,i)=>{$('day-'+i+'-enabled').checked=true;$('day-'+i+'-start1').value='00:00';$('day-'+i+'-end1').value='00:00';$('day-'+i+'-start2').value='';$('day-'+i+'-end2').value='';});
+    updateWeeklySummary();
   }
-  function buildSchedule(){
-    const body=$('scheduleBody');body.innerHTML=DAYS.map((name,i)=>'<tr><td><label class="day-cell"><input id="day-'+i+'-enabled" type="checkbox" '+(i<5?'checked':'')+'><span>'+name+'</span></label></td><td><div class="range-wrap"><div><span>Start</span><input id="day-'+i+'-start1" type="time" value="09:00" aria-label="'+name+' period 1 start"></div><div><span>End</span><input id="day-'+i+'-end1" type="time" value="17:00" aria-label="'+name+' period 1 end"></div></div></td><td><div class="range-wrap"><div><span>Start</span><input id="day-'+i+'-start2" type="time" aria-label="'+name+' period 2 start"></div><div><span>End</span><input id="day-'+i+'-end2" type="time" aria-label="'+name+' period 2 end"></div></div></td></tr>').join('');
+  function holidayYears(){
+    let first,last;
+    if(!$('betweenPanel').classList.contains('hidden')){const a=parseDateTime($('betweenStart').value),b=parseDateTime($('betweenEnd').value);if(!a||!b)return [new Date().getUTCFullYear()];first=Math.min(a.y,b.y);last=Math.max(a.y,b.y);}
+    else{const a=parseDateTime($('deadlineBase').value);if(!a)return [new Date().getUTCFullYear()];const target=Number($('deadlineHours').value)*60+Number($('deadlineMinutes').value),days=Math.min(3650,Math.ceil(Math.max(0,target||0)/(8*60)*7/5)+14),far=addDays(a,$('deadlineOperation').value==='subtract'?-days:days);first=Math.min(a.y,far.y);last=Math.max(a.y,far.y);}
+    if(last-first>9)return null;const years=[];for(let y=first;y<=last;y++)years.push(y);return years;
   }
+  async function fetchHolidayYear(country,year){
+    const key=country+'|'+year;if(state.holidayCache.has(key))return state.holidayCache.get(key);
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);
+    try{const response=await fetch('https://nagerholidays.com/api/v4/Holidays/'+encodeURIComponent(country)+'/'+year,{headers:{Accept:'application/json'},signal:controller.signal});if(!response.ok)throw new Error('Holiday service returned HTTP '+response.status+'.');const rows=await response.json();if(!Array.isArray(rows))throw new Error('Holiday service returned an unexpected response.');state.holidayCache.set(key,rows);return rows;}
+    finally{clearTimeout(timer);}
+  }
+  async function loadCountryHolidays(){
+    const request=++state.holidayRequest,country=$('holidayCountry').value,region=$('holidayRegion').value.trim().toUpperCase();
+    state.autoHolidays=new Map();state.holidayNames=new Map();
+    if(!country){$('countryHolidayStatus').textContent='Automatic country calendar is off. Manual closure dates are still available.';holidaysStatus();return;}
+    $('countryHolidayStatus').textContent=region&&!region.startsWith(country+'-')?'Region code should begin with '+country+'-. Loading national holidays only…':'Loading public holidays…';
+    const years=holidayYears();if(!years){$('countryHolidayStatus').textContent='This selection spans more than ten calendar years. Add closure dates manually or narrow the date range.';holidaysStatus();return;}
+    try{
+      const all=await Promise.all(years.map(year=>fetchHolidayYear(country,year)));if(request!==state.holidayRequest)return;
+      all.flat().forEach(item=>{const date=String(item.date||'');if(!parseDateOnly(date))return;const national=item.nationalHoliday===true,regional=region&&region.startsWith(country+'-')&&Array.isArray(item.subdivisionCodes)&&item.subdivisionCodes.map(x=>String(x).toUpperCase()).includes(region),types=Array.isArray(item.holidayTypes)?item.holidayTypes:[],relevantType=types.includes('Public')||types.includes('Bank');if((national||regional)&&relevantType){state.autoHolidays.set(date,item.name||item.localName||'Public holiday');state.holidayNames.set(date,(item.name||item.localName||'Public holiday')+' (public holiday)');}});
+      $('countryHolidayStatus').textContent=state.autoHolidays.size+' national'+(region&&region.startsWith(country+'-')?' / selected regional':'')+' public holidays loaded for '+country+' ('+years.join(', ')+') via Nager.Date.';
+      holidaysStatus();
+      if(!$('betweenPanel').classList.contains('hidden')&&state.lastExport)calculateBetween();
+    }catch(e){if(request!==state.holidayRequest)return;$('countryHolidayStatus').textContent='Could not load the country calendar. Manual holiday dates still work. '+(e.name==='AbortError'?'The request timed out.':'Check your connection and try again.');holidaysStatus();}
+  }
+  function holidaysStatus(){const data=holidayData();$('holidayStatus').textContent=data.manual.size+' manual date'+(data.manual.size===1?'':'s')+' · '+state.autoHolidays.size+' automatic date'+(state.autoHolidays.size===1?'':'s')+(data.invalid.length?' · '+data.invalid.length+' invalid entr'+(data.invalid.length===1?'y':'ies'):'');}
+  function queueHolidayLoad(){state.holidayRequest++;clearTimeout(state.holidayTimer);state.holidayTimer=setTimeout(()=>loadCountryHolidays(),350);}
   function resetAll(){
-    $('betweenStart').value='2026-09-14T09:00';$('betweenEnd').value='2026-09-18T17:00';
-    $('deadlineBase').value='2026-09-18T15:00';$('deadlineOperation').value='add';$('deadlineHours').value='10';$('deadlineMinutes').value='0';$('holidayDates').value='';
-    $('holidayStatus').textContent='0 valid holiday dates';resetSchedule();$('betweenTab').click();$('resultArea').className='result-empty';$('resultArea').textContent='Enter your dates and schedule, then calculate.';$('downloadGrid').hidden=true;state.lastExport=null;
+    $('betweenStart').value='2026-11-30T09:00';$('betweenEnd').value='2026-12-04T17:00';$('deadlineBase').value='2026-12-04T15:00';$('deadlineOperation').value='add';$('deadlineHours').value='10';$('deadlineMinutes').value='0';$('timezoneId').value='America/New_York';updateTimezoneStatus('America/New_York');$('holidayDates').value='';
+    resetSchedule();updateWeeklySummary();$('betweenTab').click();$('resultArea').className='result-empty';$('resultArea').textContent='Enter your dates and schedule, then calculate.';$('breakdownDetails').hidden=true;$('downloadGrid').hidden=true;state.lastExport=null;state.localTimeCache.clear();state.dayBoundaryCache.clear();queueHolidayLoad();
   }
-  $('betweenTab').addEventListener('click',()=>{$('betweenTab').classList.add('active');$('deadlineTab').classList.remove('active');$('betweenTab').setAttribute('aria-selected','true');$('deadlineTab').setAttribute('aria-selected','false');$('betweenPanel').classList.remove('hidden');$('deadlinePanel').classList.add('hidden');});
-  $('deadlineTab').addEventListener('click',()=>{$('deadlineTab').classList.add('active');$('betweenTab').classList.remove('active');$('deadlineTab').setAttribute('aria-selected','true');$('betweenTab').setAttribute('aria-selected','false');$('deadlinePanel').classList.remove('hidden');$('betweenPanel').classList.add('hidden');});
-  $('calculateBetween').addEventListener('click',calculateBetween);
-  $('calculateDeadline').addEventListener('click',calculateDeadline);
-  $('holidayDates').addEventListener('input',holidays);
-  $('resetAll').addEventListener('click',resetAll);
-  $('downloadTxt').addEventListener('click',exportText);$('downloadCsv').addEventListener('click',exportCsv);
-  document.querySelectorAll('.faq button').forEach(btn=>btn.addEventListener('click',()=>{const box=btn.parentElement;const open=box.classList.toggle('open');btn.querySelector('.faq-icon').textContent=open?'−':'+';}));
-  buildSchedule();calculateBetween();holidays();
+  $('betweenTab').addEventListener('click',()=>{$('betweenTab').classList.add('active');$('deadlineTab').classList.remove('active');$('betweenTab').setAttribute('aria-selected','true');$('deadlineTab').setAttribute('aria-selected','false');$('betweenPanel').classList.remove('hidden');$('deadlinePanel').classList.add('hidden');queueHolidayLoad();});
+  $('deadlineTab').addEventListener('click',()=>{$('deadlineTab').classList.add('active');$('betweenTab').classList.remove('active');$('deadlineTab').setAttribute('aria-selected','true');$('betweenTab').setAttribute('aria-selected','false');$('deadlinePanel').classList.remove('hidden');$('betweenPanel').classList.add('hidden');queueHolidayLoad();});
+  document.querySelectorAll('[data-schedule-preset]').forEach(btn=>btn.addEventListener('click',()=>applySchedulePreset(btn.dataset.schedulePreset)));
+  document.querySelectorAll('[data-sla-hours]').forEach(btn=>btn.addEventListener('click',()=>{$('deadlineHours').value=btn.dataset.slaHours;$('deadlineMinutes').value=btn.dataset.slaMinutes||'0';$('deadlineTab').click();}));
+  $('calculateBetween').addEventListener('click',calculateBetween);$('calculateDeadline').addEventListener('click',calculateDeadline);
+  $('holidayDates').addEventListener('input',holidaysStatus);
+  $('holidayCountry').addEventListener('change',()=>{state.autoHolidays.clear();state.holidayNames.clear();holidaysStatus();queueHolidayLoad();});
+  $('holidayRegion').addEventListener('change',queueHolidayLoad);
+  $('betweenStart').addEventListener('change',queueHolidayLoad);$('betweenEnd').addEventListener('change',queueHolidayLoad);$('deadlineBase').addEventListener('change',queueHolidayLoad);
+  $('deadlineHours').addEventListener('change',queueHolidayLoad);$('deadlineMinutes').addEventListener('change',queueHolidayLoad);$('deadlineOperation').addEventListener('change',queueHolidayLoad);
+  $('timezoneId').addEventListener('change',applyTimezoneChange);
+  $('timezoneId').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();applyTimezoneChange();}});
+  $('useDeviceTimezone').addEventListener('click',useDeviceTimezone);
+  $('resetAll').addEventListener('click',resetAll);$('downloadTxt').addEventListener('click',exportText);$('downloadCsv').addEventListener('click',exportCsv);
+  document.querySelectorAll('.faq button').forEach(btn=>btn.addEventListener('click',()=>{const box=btn.parentElement,open=box.classList.toggle('open');btn.querySelector('.faq-icon').textContent=open?'−':'+';}));
+  function buildSchedule(){
+    const body=$('scheduleBody');
+    body.innerHTML=DAYS.map((name,i)=>'<tr><td><label class="day-cell"><input id="day-'+i+'-enabled" type="checkbox" '+(i<5?'checked':'')+'><span>'+name+'</span></label></td><td><div class="range-wrap"><div><span>Start</span><input id="day-'+i+'-start1" type="time" value="09:00" aria-label="'+name+' period 1 start"></div><div><span>End</span><input id="day-'+i+'-end1" type="time" value="17:00" aria-label="'+name+' period 1 end"></div></div></td><td><div class="range-wrap"><div><span>Start</span><input id="day-'+i+'-start2" type="time" aria-label="'+name+' period 2 start"></div><div><span>End</span><input id="day-'+i+'-end2" type="time" aria-label="'+name+' period 2 end"></div></div></td></tr>').join('');
+  }
+  $('scheduleBody').addEventListener('input',updateWeeklySummary);
+  $('scheduleBody').addEventListener('change',updateWeeklySummary);
+  populateTimezoneSuggestions();updateTimezoneStatus(timezone());
+  buildSchedule();updateWeeklySummary();calculateBetween();holidaysStatus();queueHolidayLoad();
 })();
+
 </script>
 
 <style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}
