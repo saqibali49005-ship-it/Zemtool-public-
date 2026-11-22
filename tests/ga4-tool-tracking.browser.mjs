@@ -157,7 +157,15 @@ try {
   const previewPages = new Map(infoPageFixtures.map(item => [item.route, item.html]));
   let previewGoogleTagRequests = 0;
   page.on('request', request => {
-    if (request.url().includes('googletagmanager.com/gtag/js')) previewGoogleTagRequests += 1;
+    if (!request.url().includes('googletagmanager.com/gtag/js')) return;
+    // Count only requests initiated by the simulated preview document. A deferred
+    // production-host GA request from earlier fixtures must not fail this guard.
+    try {
+      const initiatorHost = new URL(request.frame().url()).hostname.toLowerCase();
+      if (initiatorHost === new URL(analyticsPreviewHost).hostname) previewGoogleTagRequests += 1;
+    } catch (_) {
+      // Requests without a page frame are not initiated by this preview document.
+    }
   });
   await page.route(analyticsPreviewHost + '/**', async route => {
     const url = new URL(route.request().url());
