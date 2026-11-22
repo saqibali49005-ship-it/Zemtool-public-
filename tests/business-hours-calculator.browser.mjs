@@ -32,7 +32,7 @@ try {
     assert.match(await page.title(), /Workday/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/business-hours-calculator/');
     assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'index,follow');
-    const previewGuard = await page.locator('script').filter({hasText: 'zemtools-review.pages.dev'}).count();
+    const previewGuard = await page.locator('script').evaluateAll(nodes => nodes.filter(node => node.textContent.includes('zemtools-review.pages.dev')).length);
     assert.equal(previewGuard, 1, 'Review-host noindex safeguard should be present while local/production canonical remains indexable.');
   });
 
