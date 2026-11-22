@@ -219,7 +219,7 @@ try {
     assert.match(result, /7 hours 30 minutes/);
     assert.match(result, /Gross time\s+8 hours/);
     assert.match(result, /Break deducted\s+30 minutes/);
-    assert.match(result, /7\\.5/);
+    assert.match(result, /7\.5/);
   });
 
   await check('Work Hours switches between 24-hour and 12-hour input safely', async () => {
@@ -271,8 +271,8 @@ try {
   await check('Date and Time calculates elapsed duration across a US daylight-saving transition', async () => {
     await fresh();
     await page.locator('#dateTimeTab').click();
-    await page.locator('#rangeStartDateTime').fill('2026-03-07T12:00:00');
-    await page.locator('#rangeEndDateTime').fill('2026-03-08T12:00:00');
+    await page.locator('#rangeStartDateTime').fill('2026-03-07T12:00');
+    await page.locator('#rangeEndDateTime').fill('2026-03-08T12:00');
     await page.locator('#calcDateRange').click();
     const result = await page.locator('#dateRangeResult').innerText();
     assert.match(result, /23 hours/);
@@ -282,8 +282,8 @@ try {
   await check('Date and Time rejects a nonexistent local time in a daylight-saving gap', async () => {
     await fresh();
     await page.locator('#dateTimeTab').click();
-    await page.locator('#rangeStartDateTime').fill('2026-03-08T02:30:00');
-    await page.locator('#rangeEndDateTime').fill('2026-03-08T04:00:00');
+    await page.locator('#rangeStartDateTime').fill('2026-03-08T02:30');
+    await page.locator('#rangeEndDateTime').fill('2026-03-08T04:00');
     await page.locator('#calcDateRange').click();
     assert.match(await page.locator('#dateRangeResult').innerText(), /Check for daylight-saving clock changes/i);
   });
@@ -291,7 +291,7 @@ try {
   await check('Date and Time adds 24 elapsed hours across a daylight-saving change', async () => {
     await fresh();
     await page.locator('#dateTimeTab').click();
-    await page.locator('#offsetBaseDateTime').fill('2026-03-07T12:00:00');
+    await page.locator('#offsetBaseDateTime').fill('2026-03-07T12:00');
     await page.locator('#offsetDays').fill('1');
     await page.locator('#offsetHours').fill('0');
     await page.locator('#calcDateOffset').click();
@@ -301,8 +301,8 @@ try {
   await check('Date and Time rejects an end date earlier than the start date', async () => {
     await fresh();
     await page.locator('#dateTimeTab').click();
-    await page.locator('#rangeStartDateTime').fill('2026-11-22T17:00:00');
-    await page.locator('#rangeEndDateTime').fill('2026-11-22T09:00:00');
+    await page.locator('#rangeStartDateTime').fill('2026-11-22T17:00');
+    await page.locator('#rangeEndDateTime').fill('2026-11-22T09:00');
     await page.locator('#calcDateRange').click();
     assert.match(await page.locator('#dateRangeResult').innerText(), /must not be earlier/i);
   });
@@ -315,7 +315,7 @@ try {
     await page.locator('#calcExpression').click();
     const result = await page.locator('#expressionResult').innerText();
     assert.match(result, /2 days 9 hours 29 minutes 19 seconds/);
-    assert.match(result, /2\\.39536 days/);
+    assert.match(result, /2\.395359 days/);
   });
 
   await check('Expression mode supports duration multiplication and division by a scalar', async () => {
@@ -327,7 +327,7 @@ try {
     await page.locator('#timeExpression').fill('3 weeks / 5');
     await page.locator('#expressionOutputUnit').selectOption('days');
     await page.locator('#calcExpression').click();
-    assert.match(await page.locator('#expressionResult').innerText(), /4\\.2 days/);
+    assert.match(await page.locator('#expressionResult').innerText(), /4\.2 days/);
   });
 
   await check('Expression mode rejects code-like input and division by zero without executing it', async () => {
