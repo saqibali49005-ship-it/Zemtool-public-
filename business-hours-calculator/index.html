@@ -61,6 +61,15 @@
 .pause-card{margin-top:18px}.pause-card details{padding:2px 0}.pause-card summary{cursor:pointer;color:#164b82;font-weight:800;font-size:16px}.pause-card .pause-intro{margin:10px 0 14px;color:#5e7188;font-size:13px;line-height:1.55}.pause-list{display:grid;gap:10px}.pause-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end;padding:12px;border:1px solid #dbe5ef;border-radius:12px;background:#f8fbff}.pause-row .field{margin:0;min-width:0}.pause-row input{width:100%;min-width:0}.pause-row .remove-pause{min-height:42px;padding:8px 12px}.pause-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.pause-zone-note{font-size:12px;color:#647b94;margin:8px 0 0}@media(max-width:760px){.pause-row{grid-template-columns:1fr 1fr}.pause-row .pause-reason-field{grid-column:1/-1}.pause-row .remove-pause{grid-column:1/-1;width:100%}}@media(max-width:430px){.pause-row{grid-template-columns:1fr}.pause-row .pause-reason-field,.pause-row .remove-pause{grid-column:auto}}
 .exception-card{margin-top:18px}.exception-card summary{cursor:pointer;color:#164b82;font-weight:800;font-size:16px}.exception-card .exception-intro{margin:10px 0 14px;color:#5e7188;font-size:13px;line-height:1.55}.exception-list{display:grid;gap:10px}.exception-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end;padding:12px;border:1px solid #dbe5ef;border-radius:12px;background:#f8fbff}.exception-row .field{margin:0;min-width:0}.exception-row input,.exception-row select{width:100%;min-width:0}.exception-row .remove-exception{min-height:42px;padding:8px 12px}.exception-hours[hidden]{display:none!important}.exception-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.exception-note{font-size:12px;color:#647b94;margin:8px 0 0}@media(max-width:760px){.exception-row{grid-template-columns:1fr 1fr}.exception-row .exception-reason-field{grid-column:1/-1}.exception-row .remove-exception{grid-column:1/-1;width:100%}}@media(max-width:430px){.exception-row{grid-template-columns:1fr}.exception-row .exception-reason-field,.exception-row .remove-exception{grid-column:auto}}
 </style>
+<script>
+(function(){
+  var host=window.location.hostname.toLowerCase();
+  var isReviewPreview=host.endsWith('.zemtools-review.pages.dev')||host.endsWith('.workers.dev');
+  if(!isReviewPreview)return;
+  var robots=document.querySelector('meta[name="robots"]');
+  if(robots)robots.setAttribute('content','noindex,nofollow');
+})();
+</script>
 </head>
 <body class="tool-page business-tool">
 <a class="skip-link" href="#main-content">Skip to calculator</a>
