@@ -298,6 +298,29 @@ try {
     assert.match(await page.locator('#dateOffsetResult').innerText(), /2026-03-08 13:00:00/);
   });
 
+  await check('Date and Time handles the fall daylight-saving transition as 25 elapsed hours', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#rangeStartDateTime').fill('2026-10-31T12:00');
+    await page.locator('#rangeEndDateTime').fill('2026-11-01T12:00');
+    await page.locator('#calcDateRange').click();
+    const result = await page.locator('#dateRangeResult').innerText();
+    assert.match(result, /1 day 1 hour/);
+    assert.match(result, /90,000 seconds/);
+  });
+
+  await check('Date and Time reset buttons keep the two date calculators independent', async () => {
+    await fresh();
+    await page.locator('#dateTimeTab').click();
+    await page.locator('#rangeStartDateTime').fill('2026-11-20T08:30');
+    await page.locator('#offsetBaseDateTime').fill('2026-11-21T14:45');
+    await page.locator('#resetDateRange').click();
+    assert.equal(await page.locator('#offsetBaseDateTime').inputValue(), '2026-11-21T14:45');
+    const rangeValue = await page.locator('#rangeStartDateTime').inputValue();
+    await page.locator('#resetDateOffset').click();
+    assert.equal(await page.locator('#rangeStartDateTime').inputValue(), rangeValue);
+  });
+
   await check('Date and Time rejects an end date earlier than the start date', async () => {
     await fresh();
     await page.locator('#dateTimeTab').click();
@@ -339,6 +362,42 @@ try {
     await page.locator('#timeExpression').fill('3h / 0');
     await page.locator('#calcExpression').click();
     assert.match(await page.locator('#expressionResult').innerText(), /cannot be divided by zero/i);
+  });
+
+
+  await check('All six modes and new calculator fields fit the mobile viewport', async () => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    try {
+      await fresh();
+      const tabs = await page.evaluate(() => {
+        const el = document.querySelector('.mode-tabs');
+        return { count: el.querySelectorAll('[role="tab"]').length, width: el.clientWidth, scroll: el.scrollWidth };
+      });
+      assert.equal(tabs.count, 6);
+      assert.ok(tabs.scroll <= tabs.width + 1, JSON.stringify(tabs));
+
+      await page.locator('#workTab').click();
+      const workGrid = await page.locator('#workPanel > .grid').evaluate(el => ({ width: el.clientWidth, scroll: el.scrollWidth }));
+      assert.ok(workGrid.scroll <= workGrid.width + 1, JSON.stringify(workGrid));
+
+      await page.locator('#dateTimeTab').click();
+      const dateGrids = await page.locator('#dateTimePanel').evaluate(el => {
+        const selectors = ['.datetime-grid', '.datetime-offset-grid'];
+        return selectors.map(selector => {
+          const item = el.querySelector(selector);
+          return { selector, width: item.clientWidth, scroll: item.scrollWidth };
+        });
+      });
+      for (const item of dateGrids) assert.ok(item.scroll <= item.width + 1, JSON.stringify(item));
+
+      await page.locator('#expressionTab').click();
+      const expression = await page.locator('#timeExpression').evaluate(el => ({
+        width: el.clientWidth, scroll: el.scrollWidth, parent: el.parentElement.clientWidth
+      }));
+      assert.ok(expression.width <= expression.parent + 1, JSON.stringify(expression));
+    } finally {
+      await page.setViewportSize({ width: 1365, height: 900 });
+    }
   });
 
 } finally {
