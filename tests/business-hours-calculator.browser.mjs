@@ -29,6 +29,7 @@ try {
   await check('Primary page metadata and canonical remain specific and indexable', async () => {
     assert.match(await page.title(), /Business Hours Calculator/i);
     assert.match(await page.title(), /SLA Deadlines/i);
+    assert.match(await page.title(), /Workday/i);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/business-hours-calculator/');
     assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'index,follow');
   });
@@ -45,6 +46,14 @@ try {
     await fresh();
     assert.equal(await page.locator('#weeklyTotalHours').innerText(), '40 hours');
     assert.equal(await page.locator('#weeklyOpenDays').innerText(), '5 of 7');
+  });
+
+  await check('Between-dates result shows equivalent workdays separately from dates touched', async () => {
+    await fresh();
+    await between('2026-11-23T09:00', '2026-11-27T17:00');
+    const result = await page.locator('#resultArea').innerText();
+    assert.match(result, /Equivalent workdays\\s+5\\.00 days/i);
+    assert.match(result, /5 business dates touched/i);
   });
 
   await check('Weekly operating-hours summary updates for a 24/7 schedule', async () => {
