@@ -164,3 +164,14 @@ Guardrails: production/live and AdSense untouched; no merge/deploy, Cloudflare w
 - This confirms the public PR validation workflow ran successfully on that PR head. It does **not** clear the private repo's Actions billing gate, nor certify later public-main commits (including navigation test correction) unless their own checks pass.
 - Keep Rule Green scoped to commit-specific evidence. Public main is source of truth; live deployment/Cloudflare production connection, DNS, AdSense, analytics and locked calculator benchmark pages remain untouched.
 - Next: review public PR #2 for current relevance and exact diff/checks; do not merge automatically. Leave PR #7 validation-only/unmerged per its explicit body. Continue site improvements on public main with targeted evidence and checkpoint each step.
+
+
+## Superpowers continuation — public CI workflow + Wire Size review (2026-11-24)
+- Public PR #1 cost-aware Foundation workflow reviewed and merged after successful exact-head check #44941332879. Squash merge commit: `d3b74a331deb76862bb69a12f6491fe7570190b5`. It skips docs-only validation, uses `contents: read`, and cancels superseded runs; no test removal or deployment capability added.
+- Public PR #2 Wire Size clean transfer reviewed. Exact head `fe01f26a4bd1139418bc88d8a6d3838fe7fd87d2`, Foundation Check run #44970853045 completed successfully. Job list confirms the Wire Size browser regression step ran and passed, along with foundation/platform contract, GA4, SEO/internal-link and other browser tests. PR description updated to reflect this evidence.
+- PR #2 remains **draft and unmerged** per its own explicit safety boundary; no merge or production deployment authorized. Keep planning-only scope closed; no additional calculator feature scope.
+- Public PR #7 remains validation-only/unmerged. Do not merge unrelated PRs.
+- Public-main checkpoint itself was updated after PR #1 merge; latest checkpoint commit before this note: `0c7d6d1037526cfbd5362656379cc387c1b4b159`.
+- Private GitHub Actions billing gate remains separate and unresolved; public workflow has now demonstrated a successful run on PR heads. Rule Green is commit-specific: PR #2 head CI passed, but not a blanket live-production or all-current-main claim.
+- Production/live site, Cloudflare production connection, DNS, AdSense, analytics and locked calculator benchmark pages remain untouched.
+- Next safe action: keep PR #2 draft as requested; identify public-main work not blocked by its scope, preferably perform a read-only audit of the category/landing-page content or a narrow code review before proposing any direct-main patch.
