@@ -288,6 +288,6 @@ function normalizeRootNavigationLinks(){
   }catch(_){}
  });
 }
-function initAll(){normalizeRootNavigationLinks();initUnifiedHeader();initSearch();initSearchTracking();initUnifiedFooter();initReport();initToolCalculateTracking();initToolValidationTracking();}
+function initAll(){initUnifiedHeader();initSearch();initSearchTracking();initUnifiedFooter();normalizeRootNavigationLinks();initReport();initToolCalculateTracking();initToolValidationTracking();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){initPreviewNavigation();initAll();},{once:true});else{initPreviewNavigation();initAll();}
 })();
