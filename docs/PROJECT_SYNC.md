@@ -132,3 +132,16 @@ User explicitly asked to save the full audit conclusion at this point and contin
 Resume: (1) inspect private branch/current file and safely mirror only PR #9 patch into private draft PR/branch; (2) verify connected preview commit/deployment and rendered nav on home/nested pages, breadcrumbs, no nested relative URLs/404s, regression tests; (3) document evidence in both records and ask explicit merge approval if passed; production deploy separately approved; (4) after release, broader crawl and verify critical links; (5) improve Math & Science and GA4 measurement separately; (6) reassess AdSense review only after gates, never submit automatically.
 
 Guardrails: production/live and AdSense untouched; no merge/deploy, Cloudflare wiring change, paid audit or broad rewrite without approval. Continue from this checkpoint.
+
+
+## Public-main operating switch — 2026-11-24
+- User explicitly directed: private repo Actions spending/billing limit is exhausted; from this checkpoint manage the project on the public repository `Zemtool-public-`, branch `main`, as the primary working source. Do not depend on private PR #127 or its runner for routine development/validation.
+- Screenshot of Foundation Check #1726 confirms the job never started: GitHub annotation says recent account payments failed or spending limit must be increased (Billing & plans). This is an account billing gate, not evidence of a code/test failure. Do not characterize it as a regression failure; avoid triggering unnecessary Actions runs while the account limit remains.
+- Applied the root-relative shared navigation fix directly to public `main` in three scoped commits:
+  1. `e7866512cd1ea1e8995dbc7d69077cbedd34f12b` — add normalization after shared header/footer initialization in `master-ui.js`.
+  2. `8e4af754eff01a770309f64c54d755a0dd971950` — add `tests/root-relative-navigation.browser.mjs` for Aspect Ratio, Business Hours, Deck Joist Blocking and Wire Size.
+  3. `1a3c98230232ee1ecf6fe4a241fc7a6a7ab5a75e` — register that browser regression in `foundation-check.yml`.
+- Public PR #9 is now redundant because its scoped code/test/workflow patch has been landed on public main; close it to prevent duplicate/unclear review path. Do not merge unrelated open PRs (#1/#2/#7) as part of this switch; retain their existing review states.
+- Main code is updated, but **CI verification is pending/unavailable due billing**. Do not declare Rule Green until the account billing issue is resolved and Foundation Check passes or the same suite is run by a reliable non-billing local validation route. Do not claim the browser regression ran merely because it was committed.
+- Production/live site, Cloudflare production settings, DNS, AdSense, analytics, and locked calculator benchmark pages remain unchanged. Public main is now the source of truth for code management, not an automatic production deploy authorization.
+- Next: verify the three commits/files on public main; inspect public PR states and keep unrelated drafts untouched; continue scoped improvements directly on public main with manual/static checks while Actions is blocked; re-enable CI only after account owner resolves billing. Record every commit and verification level here.
