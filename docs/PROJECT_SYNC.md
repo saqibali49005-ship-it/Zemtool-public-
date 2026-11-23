@@ -145,3 +145,12 @@ Guardrails: production/live and AdSense untouched; no merge/deploy, Cloudflare w
 - Main code is updated, but **CI verification is pending/unavailable due billing**. Do not declare Rule Green until the account billing issue is resolved and Foundation Check passes or the same suite is run by a reliable non-billing local validation route. Do not claim the browser regression ran merely because it was committed.
 - Production/live site, Cloudflare production settings, DNS, AdSense, analytics, and locked calculator benchmark pages remain unchanged. Public main is now the source of truth for code management, not an automatic production deploy authorization.
 - Next: verify the three commits/files on public main; inspect public PR states and keep unrelated drafts untouched; continue scoped improvements directly on public main with manual/static checks while Actions is blocked; re-enable CI only after account owner resolves billing. Record every commit and verification level here.
+
+
+## Public-main regression-test quality pass — 2026-11-24
+- Continued directly on public `main`, as user requested. Code review found the additional nested-path assertion in `tests/root-relative-navigation.browser.mjs` constructed an incorrect path pattern and could miss a duplicated current-page slug.
+- Corrected the test to explicitly reject missing hrefs, protocol-relative links (`//...`) in shared site navigation, and duplicated current-page slugs in resolved paths. Existing assertion still requires root-relative paths or explicit http(s) URLs.
+- Commit: `a83d5a1e5e5eb99460c4ddf5e6e17934cdcce220` (test-only; no calculator logic or production configuration changed).
+- Validation level: source/logic review only. GitHub Actions remains blocked by account billing/spending limit as shown in the user's screenshot; this commit has not been CI-run or browser-run. Do not mark Rule Green.
+- Next safe step: inspect public-main diff for the test-only commit, continue read-only source/route review without triggering paid/billing-gated Actions; after billing is restored, run Foundation Check once and address any actual reported failure.
+- Public main remains source of truth for code management. Cloudflare production repo connection, live deployment, DNS, AdSense, analytics and locked benchmark calculators remain untouched.
