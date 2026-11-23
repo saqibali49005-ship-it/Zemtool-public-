@@ -82,6 +82,8 @@ jobs:
         run: node tests/tap-highlight.browser.mjs
       - name: Run GA4 tool-usage tracking browser tests
         run: node tests/ga4-tool-tracking.browser.mjs
+      - name: Run AdSense preview-host isolation browser tests
+        run: node tests/adsense-preview-host.browser.mjs
       - name: Run SEO metadata and internal-link regression tests
         run: node tests/seo-metadata-and-links.browser.mjs
       - name: Run root-relative navigation regression tests
