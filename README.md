@@ -14,3 +14,11 @@ The Foundation Check workflow runs automated contract, unit, and browser regress
 ## Safety
 
 Electrical calculators provide planning estimates only. They do not replace applicable electrical codes, qualified design, or installation verification.
+
+## Repository operating policy
+
+- **Public-first development:** This repository is the default workspace for normal ZemTools source work, tests, PRs, validation, and non-sensitive progress/operational notes.
+- Track routine workflow/runtime usage, free-tier/quota/build/preview limitations, and sanitized cost or payment-status observations here when useful. Never commit payment credentials, personal billing documents, account identifiers, secrets, tokens, or private security evidence.
+- The private `utility-platform` repository is reserved for the canonical Master Plan and genuinely sensitive/security/confidential records. Do not duplicate ordinary work there.
+- Keep public and private work balanced through relevant, approved synchronization—not repeated or pointless parallel effort.
+- This public repository is not connected to production deployment. A public merge does not publish the live site; release approval and existing verification gates remain mandatory.
