@@ -175,3 +175,15 @@ Guardrails: production/live and AdSense untouched; no merge/deploy, Cloudflare w
 - Private GitHub Actions billing gate remains separate and unresolved; public workflow has now demonstrated a successful run on PR heads. Rule Green is commit-specific: PR #2 head CI passed, but not a blanket live-production or all-current-main claim.
 - Production/live site, Cloudflare production connection, DNS, AdSense, analytics and locked calculator benchmark pages remain untouched.
 - Next safe action: keep PR #2 draft as requested; identify public-main work not blocked by its scope, preferably perform a read-only audit of the category/landing-page content or a narrow code review before proposing any direct-main patch.
+
+
+## Math & Science hub task-guidance improvement — 2026-11-24
+- User said `Go @Superpowers`; continued on public `main` with a scoped source audit of `math-science/index.html`, its catalog entries, and existing browser test.
+- Audit found the page had five accurate tool cards and matching CollectionPage ItemList, but the only explanatory copy was a generic overview. The existing test deliberately enforced a broad guide and no FAQ, so improvement required updating the test contract rather than bypassing it.
+- Added task-based chooser text differentiating: significant-digit precision; ordinary time arithmetic vs schedule-aware business hours; tea weight/yield planning; sourdough starter-aware hydration, feeding and scaling. Added five direct tool-guide links and three concise visible FAQs.
+- Updated meta description, Open Graph/Twitter descriptions, and CollectionPage description to align with the new page intent. Added FAQPage JSON-LD with the exact same 3 questions/answers as visible content.
+- Updated `tests/math-science-category.browser.mjs`: asserts distinct task guidance and exact internal destinations, FAQ visible/structured-data parity, and updated metadata. Existing five-card URL and responsive-overflow tests retained.
+- Commits on public main: `6e80ab765ca673aa4597712d89b45ca2bd563721` (page content/metadata/schema); `d2782ca347fab1fd24f6d5ba138262e348adc733` (link presentation); `7b485666ca93515a34276d0f78a5400561d65a0c` (guide and FAQ browser assertions); `3ec53639cf30656f8bf0f1a04d3d58eeeaeefd09` (metadata assertion aligned).
+- Foundation Check #79 for exact head `3ec53639cf30656f8bf0f1a04d3d58eeeaeefd09` was observed in progress. Earlier runs for superseded intermediate commits were cancelled by the configured concurrency policy; those are expected stale-run cancellations, not test failures. Do not claim pass until run #79 concludes successfully.
+- This is code/content on public main only. No production publish, Cloudflare configuration, DNS, AdSense, analytics, or locked calculator page changed. SEO impact/ranking not yet measured; this improves helpfulness/clarity, not a guaranteed ranking outcome.
+- Next: verify exact-head Foundation Check #79 conclusion and Math & Science browser step. If pass, mark source-level checkpoint green for this commit; then separately review live/preview rendering before any deployment decision.
