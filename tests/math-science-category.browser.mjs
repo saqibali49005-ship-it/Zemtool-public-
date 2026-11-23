@@ -86,7 +86,7 @@ try {
     const data = JSON.parse(json);
     assert.equal(data['@type'], 'CollectionPage');
     assert.equal(data.name, 'Math & Science Tools | ZemTools');
-    assert.match(data.description, /numerical precision.*everyday calculations.*work scheduling.*production-yield/i);
+    assert.match(data.description, /Choose the right Math & Science calculator.*numerical precision.*work schedules.*tea yield.*sourdough recipe scaling/i);
     const urls = data.mainEntity.itemListElement.map(item => item.url);
     assert.deepEqual(urls, [
       'https://zemtools.com/calculator/',
