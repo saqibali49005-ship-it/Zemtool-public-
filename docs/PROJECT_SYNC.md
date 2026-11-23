@@ -43,3 +43,18 @@ For SEO gaps, calculator accuracy, UX/functionality defects, research and user-j
 Select the smallest useful tool combination for each task; do not run every tool indiscriminately or waste credits/quotas. Verify external data connections before relying on results. Record actual sources, baseline, findings, changed files, tests, outcomes and remaining gaps. Never treat competitor observations as permission to copy. No paid credits, auto-reload, plan upgrades, production changes or destructive external actions without explicit approval.
 
 The detailed workflow, task-to-tool matrix and governance rules are maintained in the private canonical Master Plan. This public note is only a safe operational summary.
+
+
+## Post-release SEO snapshot — latest three calculators (2026-11-23)
+
+- The latest three production releases were Wire Size, Time Calculator and Business Hours Calculator. Their Cloudflare Pages production deployments all completed successfully on 2026-11-22.
+- Google Search Console re-crawled all three live canonical URLs on 2026-11-22/23. Each remains indexed, page fetch successful, and Google canonical matches declared canonical.
+- Latest complete GSC window available ends 2026-11-20, before the three releases. Therefore **post-release ranking impact is pending data**.
+- Pre-release GSC baseline (2026-10-24–2026-11-20):
+  - Time Calculator: 1,479 all-country impressions, 4 clicks, avg position 12.3; US 710 impressions, avg position 12.7.
+  - Business Hours Calculator: 181 all-country impressions, 0 clicks, avg position 9.0; US 6 impressions, avg position 32.2.
+  - Wire Size Calculator: 563 all-country impressions, 0 clicks, avg position 70.7; US 260 impressions, avg position 70.3.
+- Sitewide GSC page totals: 819 impressions / 3 clicks in 2026-09-26–2026-10-23 vs 3,335 / 12 in 2026-10-24–2026-11-20. Visibility expanded; average CTR remained about 0.36%, and this is not proof that all page positions improved.
+- GA4 all-channel page views for the canonical host (2026-10-26–2026-11-22): Business Hours 30 views/14 users; Time 24/7; Wire Size 13/5. The canonical-host organic landing report has no entries for these three pages; preview-host rows are excluded from production counts. Measurement reconciliation remains open.
+- Next: hold recently optimized pages steady and measure post-release GSC data once a complete reporting window is available. Do not claim Top-3, ranking uplift or causal effect until the post-release data supports it.
+- This is a public-safe summary. The private canonical Master Plan contains source references, exact query findings and fuller analysis.
