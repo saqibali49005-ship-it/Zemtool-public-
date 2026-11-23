@@ -274,6 +274,20 @@ function initReport(){
  }
  else document.body.appendChild(reportWrap);
 }
-function initAll(){initUnifiedHeader();initSearch();initSearchTracking();initUnifiedFooter();initReport();initToolCalculateTracking();initToolValidationTracking();}
+function normalizeRootNavigationLinks(){
+ // Shared static pages contain legacy relative hrefs in header/footer/breadcrumbs.
+ // Resolve those site-navigation destinations from the origin root, not the current tool folder.
+ document.querySelectorAll('header.site-header a[href], footer a[href], nav.crumbs a[href]').forEach(anchor=>{
+  const raw=anchor.getAttribute('href');
+  if(!raw||raw.startsWith('/')||raw.startsWith('#')||raw.startsWith('?')||/^[a-z][a-z0-9+.-]*:/i.test(raw))return;
+  const rootPath=raw.replace(/^(?:\.\/|\.\.\/)+/,'');
+  if(!rootPath)return;
+  try{
+   const destination=new URL('/'+rootPath,location.origin);
+   anchor.setAttribute('href',destination.pathname+destination.search+destination.hash);
+  }catch(_){}
+ });
+}
+function initAll(){initUnifiedHeader();initSearch();initSearchTracking();initUnifiedFooter();normalizeRootNavigationLinks();initReport();initToolCalculateTracking();initToolValidationTracking();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){initPreviewNavigation();initAll();},{once:true});else{initPreviewNavigation();initAll();}
 })();
