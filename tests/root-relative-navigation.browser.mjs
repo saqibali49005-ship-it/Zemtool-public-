@@ -22,10 +22,14 @@ try {
       }))
     );
     for (const link of links) {
-      assert.ok(link.raw.startsWith('/') || /^https?:\/\//i.test(link.raw),
+      assert.ok(typeof link.raw === 'string' && link.raw.length > 0,
+        `Missing href on shared site navigation link on ${item.path}: ${link.label}`);
+      assert.ok(link.raw.startsWith('/') && !link.raw.startsWith('//') || /^https?:\/\//i.test(link.raw),
         `Non-root-relative site navigation link on ${item.path}: "${link.raw}" (${link.label})`);
-      assert.ok(!link.resolved.startsWith(item.path + item.path.slice(1, -1)),
-        `Nested path unexpectedly resolved on ${item.path}: ${link.resolved}`);
+      const pageSlug = item.path.split('/').filter(Boolean).at(-1);
+      assert.ok(!link.resolved.startsWith(`/${pageSlug}/${pageSlug}/`) &&
+                link.resolved !== `/${pageSlug}/${pageSlug}`,
+        `Duplicated current-page slug in navigation path on ${item.path}: ${link.resolved}`);
     }
     for (const expectedPath of item.expected) {
       assert.ok(links.some(link => link.resolved === expectedPath),
