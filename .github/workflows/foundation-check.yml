@@ -65,14 +65,15 @@ jobs:
         run: node tests/home-search-suggestions.browser.mjs
       - name: Run mobile tap-highlight browser regression tests
         run: node tests/tap-highlight.browser.mjs
+      - name: Run wire-size calculator browser regression tests
+        timeout-minutes: 15
+        run: node tests/wire-size-calculator.browser.mjs
       - name: Run GA4 tool-usage tracking browser tests
         run: node tests/ga4-tool-tracking.browser.mjs
       - name: Run SEO metadata and internal-link regression tests
         run: node tests/seo-metadata-and-links.browser.mjs
       - name: Run fence calculator browser regression tests
         run: node tests/fence-calculator.browser.mjs
-      - name: Run wire-size calculator browser regression tests
-        run: node tests/wire-size-calculator.browser.mjs
       - name: Run conduit-fill calculator browser regression tests
         run: node tests/conduit-fill-calculator.browser.mjs
       - name: Run gravel calculator browser regression tests
