@@ -22,3 +22,10 @@ Electrical calculators provide planning estimates only. They do not replace appl
 - The private `utility-platform` repository is reserved for the canonical Master Plan and genuinely sensitive/security/confidential records. Do not duplicate ordinary work there.
 - Keep public and private work balanced through relevant, approved synchronization—not repeated or pointless parallel effort.
 - This public repository is not connected to production deployment. A public merge does not publish the live site; release approval and existing verification gates remain mandatory.
+
+
+## Paired repository checkpoint policy
+
+ZemTools is managed as one synchronized project across the public development repository and the private canonical Master Plan. Public is the normal execution workspace; private holds the canonical plan and genuinely sensitive records. After every material public milestone, update the private Master Plan and this public-safe checkpoint together. Before new work, reconcile both records. If either update is pending, label the checkpoint **NOT IN SYNC** and close the gap before calling it complete.
+
+The private Master Plan is canonical for decisions and sensitive governance, but it must stay current with public implementation, validation, blockers, Rule Green and next steps. Public records contain only sanitized progress, links, test outcomes, and routine quota/runner/build/preview observations—never credentials, personal billing documents, account identifiers, secrets, or private security evidence. Public merges do not deploy production; release approval remains explicit.
