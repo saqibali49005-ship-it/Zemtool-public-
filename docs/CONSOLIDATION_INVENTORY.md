@@ -28,7 +28,14 @@ This ledger is a public-safe index. Sensitive operational details, internal rese
   - Public-safe policy: `README.md`
   - Public checkpoint: `docs/PROJECT_SYNC.md`
 
-### Current verified repository checkpoints
+### Second-pass historical branch/PR evidence
+
+- Private branch pagination returned 168 branches. The names cluster into explicit backup/restore snapshots, shared UI/header/footer and navigation, calculator QA/logic, SEO/indexing, analytics/AdSense/privacy, research/experiments, and project-governance handovers.
+- Private PR pagination returned 126 PR records (numbers #1–127 with gaps). Public PR pagination returned 9 records (#1–9).
+- Public-safe source ledger PR #10 is open/draft and documentation-only. Private source map PR #128 is open/draft and documentation-only. Neither has been merged; no main branch was changed by these archive documents.
+- The private source map is `docs/ARCHIVE_SOURCE_MAP.md` on `docs/historical-source-map-2026-11-24`; it groups historical evidence by period/topic and marks remaining sources requiring inspection. Do not copy the private source map to Public without sanitization.
+
+## Current verified repository checkpoints
 - Public `main` head at inventory start: `281477e9cc5a0b956a82b397df72c72393a72e2d`.
 - Private `main` recent documented head: `976148067310038788f4bb9803e62a3e9874d0b1` (Nov 23, 2026).
 - Private repository API pagination completed for the first inventory pass: **1,414 commits** returned across 15 pages (oldest returned commit: 2026-09-15; newest: 2026-11-23), **168 branches** across two pages, and **126 pull requests** across two pages. These are repository-level GitHub records, not proof that every chat, local file, or external research source is present.
