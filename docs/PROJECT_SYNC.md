@@ -75,3 +75,10 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - Branch fix/root-relative-navigation-links contains a shared navigation normalization, Playwright coverage on four calculator routes, and a Foundation Check workflow entry.
 - Foundation Check run #61 is queued; results and preview validation are pending. No merge or production deployment. Production untouched; Rule Green remains NOT GREEN.
 - Next: check CI, validate preview rendered destinations, then reconcile both project records. User approval remains required before merge and separately before production.
+
+
+## Navigation-link regression fix — CI result update (2026-11-24)
+- Foundation Check run #61 (45267525409) completed SUCCESS: validate job 54/54 steps, no failed steps. Root-relative navigation regression and configured browser/unit suite passed.
+- PR #9 remains draft/open/unmerged: https://github.com/saqibali49005-ship-it/Zemtool-public-/pull/9
+- No preview deployment URL or preview test evidence surfaced in available PR/check metadata. CI pass alone does not satisfy preview acceptance.
+- Production untouched; no merge or deployment. Rule Green remains NOT GREEN pending preview validation and explicit approval.
