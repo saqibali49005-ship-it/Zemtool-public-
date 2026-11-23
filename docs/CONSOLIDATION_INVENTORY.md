@@ -83,3 +83,10 @@ This ledger is a public-safe index. Sensitive operational details, internal rese
 ## Safety boundary
 
 This branch contains documentation only. It does not change calculator code, public `main`, private `main`, production, Cloudflare, DNS, AdSense, analytics settings, or locked benchmark pages. Do not merge this inventory branch automatically.
+
+
+## Historical patch review — public-safe summary (2026-11-24)
+- Private PR patch/file lists were inspected across early foundation, calculator validation/precision, shared UI/navigation, SEO/indexing, analytics/privacy/AdSense, research/preview experiments, project governance, and latest parity work through PR #127.
+- The private source map contains the detailed PR-range reconstruction. This public file intentionally contains only high-level categories and safe status notes, not private implementation details, billing/security evidence, analytics identifiers, or deployment secrets.
+- Important distinction preserved: merged PR ≠ confirmed production release; open/closed-unmerged PRs and preview-only experiments remain separate evidence states. Backup/restore branches are preservation sources and must not be pruned.
+- Superpowers skills were read and applied to the continuation; remote documentation branches were used because this connector session has no local git-worktree or subagent tool. No calculator code was modified.
