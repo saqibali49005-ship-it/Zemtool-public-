@@ -58,3 +58,12 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - GA4 all-channel page views for the canonical host (2026-10-26–2026-11-22): Business Hours 30 views/14 users; Time 24/7; Wire Size 13/5. The canonical-host organic landing report has no entries for these three pages; preview-host rows are excluded from production counts. Measurement reconciliation remains open.
 - Next: hold recently optimized pages steady and measure post-release GSC data once a complete reporting window is available. Do not claim Top-3, ranking uplift or causal effect until the post-release data supports it.
 - This is a public-safe summary. The private canonical Master Plan contains source references, exact query findings and fuller analysis.
+
+
+## Immediate next priority — 2026-11-24 (verified live-link issue)
+- Read-only 50-page production audit found repeated nested 404/internal-link findings; its crawl hit the page cap, so counts are partial.
+- Fresh live rendered extraction confirmed the shared header/footer emits relative links (for example `tools/`, `about/`, `privacy/`) from calculator routes, producing incorrect nested URLs such as `/aspect-ratio-calculator/tools/` and `/business-hours-calculator/about/`. This is a real URL-resolution defect, not just a crawler false positive.
+- **Next P0:** inspect and fix the shared header/footer or URL helper in Public repo; audit for other relative root links; add/execute route/link regression checks; verify preview and fresh live link extraction. Production remains untouched until explicit approval. Do not mark Rule Green before tests and required gates pass.
+- After P0, investigate Deck Joist Blocking Calculator's near-top-three opportunity (recent GSC+GA4 join: 100 impressions, 3 clicks, avg position 6.33) with query/country evidence before any targeted change.
+- Keep latest three calculator releases steady until complete post-release GSC data; do not repeat indexing requests without a specific need.
+- Private canonical Master Plan updated with exact audit IDs, evidence, scope, acceptance criteria and sequence. Implementation not yet committed; this checkpoint is not Rule Green.
