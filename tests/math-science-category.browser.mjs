@@ -26,7 +26,7 @@ try {
   await check('Category page loads with canonical URL and search-focused metadata', async () => {
     assert.equal(await page.title(), 'Math & Science Tools | ZemTools');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://zemtools.com/math-science/');
-    assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /numerical precision.*everyday calculations.*work scheduling.*production-yield/i);
+    assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /Choose the right Math & Science calculator.*numerical precision.*work schedules.*tea yield.*sourdough/i);
     const description = await page.locator('meta[name="description"]').getAttribute('content');
     assert.equal(await page.locator('meta[property="og:description"]').getAttribute('content'), description);
     assert.equal(await page.locator('meta[name="twitter:description"]').getAttribute('content'), description);
@@ -45,12 +45,25 @@ try {
     assert.match(await cards.nth(4).innerText(), /true hydration.*starter-aware ingredient totals/i);
   });
 
-  await check('Category overview stays broad and leaves detailed tool guidance to the individual pages', async () => {
+  await check('Task-based guide differentiates the five calculators and provides relevant destinations', async () => {
     const guide = await page.locator('.category-guide').innerText();
-    assert.match(guide, /focused tools.*numerical precision.*work scheduling.*production-yield planning/i);
-    assert.doesNotMatch(guide, /Time Calculator|Business Hours Calculator|Significant Figures Calculator|Sourdough Calculator|sourdough hydration|starter feeding|time difference/i);
-    assert.equal(await page.locator('.category-faq').count(), 0);
+    assert.match(guide, /Choose the right calculator/);
+    assert.match(guide, /ordinary elapsed time.*scheduled working time/i);
+    assert.match(guide, /Measured values and rounding/);
+    assert.match(guide, /Work schedules and deadlines/);
+    assert.equal(await page.locator('.math-tool-picker a').count(), 5);
+    const targets = await page.locator('.math-tool-picker a').evaluateAll(nodes => nodes.map(a => new URL(a.href).pathname));
+    assert.deepEqual(targets, ['/calculator/', '/time-calculator/', '/business-hours-calculator/', '/tea-outturn-calculator/', '/sourdough-calculator/']);
+    assert.equal(await page.locator('.category-faq details').count(), 3);
     assert.equal(await page.locator('#time-math-title').count(), 0);
+  });
+
+  await check('FAQ structured data matches visible category questions', async () => {
+    const visible = await page.locator('.category-faq summary').allTextContents();
+    const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const faq = JSON.parse(scripts.find(text => JSON.parse(text)['@type'] === 'FAQPage'));
+    assert.deepEqual(faq.mainEntity.map(item => item.name), visible);
+    assert.equal(faq.mainEntity.length, 3);
   });
 
   await check('Broad category overview remains readable without mobile horizontal overflow', async () => {
