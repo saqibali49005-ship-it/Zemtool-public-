@@ -67,3 +67,11 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - After P0, investigate Deck Joist Blocking Calculator's near-top-three opportunity (recent GSC+GA4 join: 100 impressions, 3 clicks, avg position 6.33) with query/country evidence before any targeted change.
 - Keep latest three calculator releases steady until complete post-release GSC data; do not repeat indexing requests without a specific need.
 - Private canonical Master Plan updated with exact audit IDs, evidence, scope, acceptance criteria and sequence. Implementation not yet committed; this checkpoint is not Rule Green.
+
+
+## PR #9 preview checkpoint — 2026-11-24 (verification complete; CI gate pending)
+- The scoped navigation fix was mirrored into private draft PR #127 on the Cloudflare-connected repository. Exact private preview commit `1d62916b6e759084a5943379d8dc2971565db170` deployed successfully to the isolated review project: https://d260f16f.zemtools-review.pages.dev/ . Production was not deployed.
+- Exact-head browser DOM inspection covered Aspect Ratio, Business Hours, Deck Joist Blocking and Wire Size. Shared header, footer and breadcrumbs use root-relative paths; inspected destinations returned 200 and no 404/navigation errors were observed.
+- Preview inspection caught a sequencing defect in the first patch: normalization ran before dynamic header/footer construction. Both private PR #127 and this public PR #9 now place normalization after shared header/footer initialization. This is a minimal evidence-driven correction, not a broad rewrite.
+- Current public PR #9 remains draft/open/unmerged. Public Foundation CI status must be rechecked at the latest head. Private Foundation Check #1725 failed and Cloudflare preview/config validation workflow #960 failed while production deployment was skipped; exact failed step awaits accessible run logs. A browser preview pass does not substitute for a green regression suite.
+- Rule Green is **not** declared. No public/private main merge, production deployment, DNS/AdSense changes or locked-page edits are authorized. Continue by diagnosing exact CI failures, rerunning the regression and recording final check results.
