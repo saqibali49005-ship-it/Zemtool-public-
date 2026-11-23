@@ -34,7 +34,20 @@
 
 <link rel="stylesheet" href="master-tool-design.css?v=20261114-shell-clean">
 <link rel="stylesheet" href="master-related-tools.css">
-<style>body.time-tool{ }.time-tool .mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px;padding:4px;background:#f7fafe;border:1px solid #e0e9f3;border-radius:14px}.time-tool .mode-tabs button{width:100%;min-height:44px;padding:9px 14px;background:transparent;color:#4e6178;border:1px solid transparent;border-radius:10px;font-weight:850;cursor:pointer}.time-tool .mode-tabs button.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.time-tool .check-row{display:flex;align-items:flex-start;gap:9px;margin:14px 0 0;color:var(--muted)}.time-tool .check-row input{width:auto;min-width:16px;min-height:0;margin:3px 0 0;padding:0}.time-tool #durationPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool #addPanel>.grid{grid-template-columns:repeat(5,minmax(0,1fr))}.time-tool .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}.time-tool .result-grid>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.time-tool .result-grid strong{display:block;font-size:20px;margin-top:4px}.time-tool .duration-row{display:grid;grid-template-columns:1.15fr repeat(3,minmax(0,1fr)) auto;gap:10px;align-items:end;padding:12px;margin:0 0 10px;background:#fff;border:1px solid var(--line);border-radius:12px}.time-tool .duration-row label{display:block;min-width:0;font-size:13px;font-weight:750;color:var(--muted)}.time-tool .duration-row input,.time-tool .duration-row select{width:100%;min-width:0;margin-top:5px}.time-tool .duration-row .row-remove{min-height:42px;padding:8px 10px}.time-tool .big{font-size:28px;font-weight:900;color:#116735}@media(max-width:820px){.time-tool #addPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .duration-row{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .duration-row .row-remove{grid-column:1/-1;justify-self:start}}@media(max-width:650px){.time-tool .mode-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .mode-tabs button{font-size:12px;line-height:1.25;padding:8px 5px;min-height:52px}.time-tool #durationPanel>.grid,.time-tool #addPanel>.grid{grid-template-columns:1fr}.time-tool .duration-row{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
+<style>body.time-tool{ }.time-tool .mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px;padding:4px;background:#f7fafe;border:1px solid #e0e9f3;border-radius:14px}.time-tool .mode-tabs button{width:100%;min-height:44px;padding:9px 14px;background:transparent;color:#4e6178;border:1px solid transparent;border-radius:10px;font-weight:850;cursor:pointer}.time-tool .mode-tabs button.active{background:linear-gradient(135deg,#1767e7,#19a9e8);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(23,104,231,.18)}.time-tool .check-row{display:flex;align-items:flex-start;gap:9px;margin:14px 0 0;color:var(--muted)}.time-tool .check-row input{width:auto;min-width:16px;min-height:0;margin:3px 0 0;padding:0}.time-tool #durationPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool #addPanel>.grid{grid-template-columns:repeat(6,minmax(0,1fr))}.time-tool .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}.time-tool .result-grid>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}.time-tool .result-grid strong{display:block;font-size:20px;margin-top:4px}.time-tool .duration-row{display:grid;grid-template-columns:1.15fr repeat(3,minmax(0,1fr)) auto;gap:10px;align-items:end;padding:12px;margin:0 0 10px;background:#fff;border:1px solid var(--line);border-radius:12px}.time-tool .duration-row label{display:block;min-width:0;font-size:13px;font-weight:750;color:var(--muted)}.time-tool .duration-row input,.time-tool .duration-row select{width:100%;min-width:0;margin-top:5px}.time-tool .duration-row .row-remove{min-height:42px;padding:8px 10px}.time-tool .big{font-size:28px;font-weight:900;color:#116735}@media(max-width:820px){.time-tool #addPanel>.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .duration-row{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .duration-row .row-remove{grid-column:1/-1;justify-self:start}}@media(max-width:650px){.time-tool .mode-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.time-tool .mode-tabs button{font-size:12px;line-height:1.25;padding:8px 5px;min-height:52px}.time-tool #durationPanel>.grid,.time-tool #addPanel>.grid{grid-template-columns:1fr}.time-tool .duration-row{grid-template-columns:repeat(2,minmax(0,1fr))}.time-tool .result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
+<style id="time-calculator-parity-styles">
+.time-tool .datetime-grid,.time-tool #workPanel>.grid,.time-tool .datetime-offset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.time-tool .datetime-grid input,.time-tool #workPanel>.grid input,.time-tool .datetime-offset-grid input{width:100%;min-width:0}
+.time-tool .expression-input{width:100%;min-height:112px;resize:vertical;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.time-tool .subsection-divider{height:1px;background:var(--line);margin:24px 0}
+.time-tool .expression-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}
+.time-tool .mode-tabs button{font-size:13px}
+@media(max-width:650px){
+  .time-tool .mode-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .time-tool .datetime-grid,.time-tool #workPanel>.grid,.time-tool .datetime-offset-grid,.time-tool .expression-controls{grid-template-columns:1fr}
+  .time-tool .mode-tabs button{font-size:12px;min-height:48px;padding:8px 5px}
+}
+</style>
 </head>
 <body class="tool-page time-tool">
 <a class="skip-link" href="#main-content">Skip to calculator</a>
@@ -43,9 +56,16 @@
 <div class="header-actions" aria-label="Header tools"><button class="icon-btn" id="toolHeaderSearch" type="button" aria-label="Open search" aria-expanded="false" title="Search" onclick="(function(b){var p=document.getElementById('toolHeaderSearchPanel'),m=document.getElementById('toolHeaderMenuPanel');if(m)m.classList.remove('is-open');if(p){var o=!p.classList.contains('open');p.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));if(o){var i=document.getElementById('toolHeaderSearchInput');if(i)i.focus();}}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button><button class="icon-btn menu-btn" id="toolHeaderMenu" type="button" aria-label="Open menu" aria-expanded="false" title="Menu" onclick="(function(b){var m=document.getElementById('toolHeaderMenuPanel'),p=document.getElementById('toolHeaderSearchPanel');if(p)p.classList.remove('open');if(m){var o=!m.classList.contains('is-open');m.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}})(this)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div><div class="search-panel" id="toolHeaderSearchPanel"><form id="toolHeaderSearchForm" role="search"><input id="toolHeaderSearchInput" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><button type="submit">Search</button></form><div id="toolHeaderSearchResults" style="display:grid;gap:6px;margin-top:8px;"></div></div><nav class="mobile-nav" id="toolHeaderMenuPanel" aria-label="Mobile navigation"><a href="/">Home</a><a href="tools/">All Tools</a><a href="math-science/">Math &amp; Science</a><a href="digital-developer/">Digital &amp; Developer</a><a href="home-construction/">Home &amp; Construction</a><a href="energy-electrical/">Energy &amp; Electrical</a></nav>
 </div></header>
 <main id="main-content">
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="math-science/">Math &amp; Science</a><span class="crumb-sep">›</span><span>Time Calculator</span></nav><section class="hero"><div class="tool-icon" aria-hidden="true">⏱</div><div><h1>Time Calculator</h1><p>Calculate the duration between two clock times, add or subtract time, or total multiple durations. Results include practical time units and decimal hours.</p></div></section>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">›</span><a href="math-science/">Math &amp; Science</a><span class="crumb-sep">›</span><span>Time Calculator</span></nav><section class="hero"><div class="tool-icon" aria-hidden="true">⏱</div><div><h1>Time Calculator</h1><p>Calculate time between clock times or dates, work hours after breaks, time expressions, or add and subtract durations. View clear results in practical time units and decimal hours.</p></div></section>
 <section class="card">
-<div aria-label="Calculator mode" class="mode-tabs" role="tablist"><button aria-selected="true" class="active" id="durationTab" role="tab" type="button">Time Duration</button><button aria-selected="false" id="addTab" role="tab" type="button">Add / Subtract Time</button><button aria-selected="false" id="durationListTab" role="tab" type="button">Add / Subtract Durations</button></div>
+<div aria-label="Calculator mode" class="mode-tabs" role="tablist">
+<button aria-selected="true" class="active" id="durationTab" role="tab" type="button">Duration</button>
+<button aria-selected="false" id="addTab" role="tab" type="button">Add / Subtract</button>
+<button aria-selected="false" id="durationListTab" role="tab" type="button">Total Durations</button>
+<button aria-selected="false" id="workTab" role="tab" type="button">Work Hours</button>
+<button aria-selected="false" id="dateTimeTab" role="tab" type="button">Date &amp; Time</button>
+<button aria-selected="false" id="expressionTab" role="tab" type="button">Expression</button>
+</div>
 <div id="durationPanel" role="tabpanel">
 <h2>Calculate time between two clock times</h2>
 <div class="grid">
@@ -61,6 +81,7 @@
 <div class="grid">
 <div><label for="baseTime">Base time</label><input id="baseTime" type="time" step="1" value="10:30:00"/></div>
 <div><label for="operation">Operation</label><select id="operation"><option value="add">Add</option><option value="subtract">Subtract</option></select></div>
+<div><label for="addDays">Days</label><input id="addDays" inputmode="numeric" min="0" placeholder="e.g. 1" step="1" type="number" value="0"/></div>
 <div><label for="addHours">Hours</label><input id="addHours" inputmode="numeric" min="0" placeholder="e.g. 2" step="1" type="number" value="2"/></div>
 <div><label for="addMinutes">Minutes</label><input id="addMinutes" inputmode="numeric" min="0" placeholder="e.g. 30" step="1" type="number" value="30"/></div>
 <div><label for="addSeconds">Seconds</label><input id="addSeconds" inputmode="numeric" min="0" placeholder="e.g. 45" step="1" type="number" value="0"/></div>
@@ -84,29 +105,86 @@
 <p aria-live="polite" class="small" id="copyDurationStatus"></p>
 <div aria-live="polite" class="result" id="durationListResult" role="status"></div>
 </div>
+<div class="hidden" id="workPanel" role="tabpanel" aria-labelledby="workTab">
+<h2>Calculate work hours</h2>
+<p>Find a shift's gross hours, deduct unpaid break time, and optionally round start and end entries. Break time is entered as one total in minutes.</p>
+<div class="grid">
+<div><label for="workClockFormat">Clock format</label><select id="workClockFormat"><option value="24">24-hour</option><option value="12">12-hour</option></select></div>
+<div><label for="workRounding">Round start and end times</label><select id="workRounding"><option value="0">Do not round</option><option value="5">Nearest 5 minutes</option><option value="6">Nearest 6 minutes</option><option value="15">Nearest 15 minutes</option></select></div>
+<div><label for="workStartTime">Start time</label><input id="workStartTime" type="text" inputmode="text" autocomplete="off" value="09:00" placeholder="HH:MM"/></div>
+<div><label for="workEndTime">End time</label><input id="workEndTime" type="text" inputmode="text" autocomplete="off" value="17:00" placeholder="HH:MM"/></div>
+<div><label for="workBreakMinutes">Break time to deduct (minutes)</label><input id="workBreakMinutes" type="number" min="0" step="1" value="0" inputmode="numeric"/></div>
+</div>
+<label class="check-row"><input id="workNextDay" type="checkbox"/> End time is on the next day.</label>
+<div class="actions"><button id="calcWork" type="button">Calculate work hours</button><button class="secondary" id="resetWork" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="workResult" role="status"></div>
+<p class="small">Optional rounding is applied to the start and end entries before break deduction. This is an arithmetic setting, not payroll or legal-compliance advice; use the rules that apply to your workplace.</p>
+</div>
+<div class="hidden" id="dateTimePanel" role="tabpanel" aria-labelledby="dateTimeTab">
+<h2>Calculate time between dates and times</h2>
+<p>Enter both local date-time values to calculate the actual elapsed duration, including intervals longer than one day.</p>
+<div class="datetime-grid">
+<div><label for="rangeStartDateTime">Start date and time</label><input id="rangeStartDateTime" type="datetime-local" step="1"/></div>
+<div><label for="rangeEndDateTime">End date and time</label><input id="rangeEndDateTime" type="datetime-local" step="1"/></div>
+</div>
+<div class="actions"><button id="calcDateRange" type="button">Calculate elapsed time</button><button class="secondary" id="resetDateRange" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="dateRangeResult" role="status"></div>
+<div class="subsection-divider"></div>
+<h2>Add or subtract time from a date</h2>
+<p>Move a local date and time forward or backward by days, hours, minutes and seconds. In this mode, one day means 24 elapsed hours.</p>
+<div class="grid datetime-offset-grid">
+<div><label for="offsetBaseDateTime">Starting date and time</label><input id="offsetBaseDateTime" type="datetime-local" step="1"/></div>
+<div><label for="offsetOperation">Operation</label><select id="offsetOperation"><option value="add">Add</option><option value="subtract">Subtract</option></select></div>
+<div><label for="offsetDays">Days</label><input id="offsetDays" type="number" min="0" step="1" value="0" inputmode="numeric"/></div>
+<div><label for="offsetHours">Hours</label><input id="offsetHours" type="number" min="0" step="1" value="1" inputmode="numeric"/></div>
+<div><label for="offsetMinutes">Minutes</label><input id="offsetMinutes" type="number" min="0" step="1" value="0" inputmode="numeric"/></div>
+<div><label for="offsetSeconds">Seconds</label><input id="offsetSeconds" type="number" min="0" step="1" value="0" inputmode="numeric"/></div>
+</div>
+<div class="actions"><button id="calcDateOffset" type="button">Calculate date and time</button><button class="secondary" id="resetDateOffset" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="dateOffsetResult" role="status"></div>
+<p class="small">Date and time fields use your browser/device local time zone. Nonexistent clock times during daylight-saving changes are rejected. Repeated times when clocks move back follow your browser's date handling. This tool does not convert between time zones or count workdays/holidays.</p>
+</div>
+<div class="hidden" id="expressionPanel" role="tabpanel" aria-labelledby="expressionTab">
+<h2>Time expression calculator</h2>
+<p>Add, subtract, multiply or divide durations with a safe time-expression parser. Use d (days), w (weeks), h (hours), m (minutes) or s (seconds). Multiplication and division use a number as the factor.</p>
+<label for="timeExpression">Time expression</label>
+<textarea id="timeExpression" class="expression-input" rows="3" spellcheck="false">1d 2h 3m 4s + 4h 5s - 2030s + 28h</textarea>
+<div class="grid expression-controls">
+<div><label for="expressionOutputUnit">Show result in</label><select id="expressionOutputUnit"><option value="hours">Hours</option><option value="days">Days</option><option value="minutes">Minutes</option><option value="seconds">Seconds</option></select></div>
+</div>
+<div class="actions"><button id="calcExpression" type="button">Calculate expression</button><button class="secondary" id="resetExpression" type="button">Reset</button></div>
+<div aria-live="polite" class="result" id="expressionResult" role="status"></div>
+<p class="small">Examples: <code>1d 2h + 45m - 10s</code>, <code>3h 43m 11s * 6</code>, <code>3 weeks / 5</code>. A week is 7 days. Calendar months and years are not supported because their lengths vary. Expressions do not execute code or accept parentheses.</p>
+</div>
 </section>
-<section class="card"><h2>What the results mean</h2><p>The duration result shows days, hours, minutes and seconds, plus total minutes, total seconds and decimal hours. The Add / Subtract Durations mode combines multiple entries into one running total, including totals longer than 24 hours. Decimal hours are useful for timesheets and billing: 1 hour 30 minutes is 1.5 hours.</p><div class="example"><strong>Example:</strong> 9:30 AM to 5:15 PM = <strong>7 hours 45 minutes</strong> = <strong>7.75 hours</strong>.</div></section>
-<section class="card"><h2>How time calculations work</h2><p>Clock time is based on 60 seconds per minute and 60 minutes per hour. The duration calculator subtracts the start timestamp from the end timestamp. When an interval crosses midnight, the next-day option adds 24 hours before calculating.</p><p>For clock add/subtract calculations, the entered duration is converted to seconds and applied to the base clock time. In Add / Subtract Durations mode, every row is converted to seconds, added or subtracted from the running total, then shown as a duration. This also supports totals longer than one day and negative totals.</p></section>
+<section class="card"><h2>What the results mean</h2><p>Duration results show days, hours, minutes and seconds, total minutes, total seconds and decimal hours. Work Hours separates gross shift time, break time and net time. Date &amp; Time uses actual elapsed time between local date-time values. Expression mode can display a result in seconds, minutes, hours or days.</p><div class="example"><strong>Example:</strong> 9:30 AM to 5:15 PM = <strong>7 hours 45 minutes</strong> = <strong>7.75 hours</strong>.</div></section>
+<section class="card"><h2>How time calculations work</h2><p>Clock calculations use 60 seconds per minute and 60 minutes per hour. Clock-only duration mode compares two times on a 24-hour clock; select the next-day option when the interval crosses midnight. Date &amp; Time mode compares local date-time timestamps, so daylight-saving transitions can make a calendar day shorter or longer than 24 elapsed hours.</p><p>Work Hours calculates the time between the entered shift start and end, applies optional start/end rounding, then deducts the total break minutes. Expression mode converts each unit to seconds before applying addition, subtraction, multiplication or division by a scalar. One week equals seven days; calendar months and years are not treated as fixed-duration units.</p></section>
 <section class="card">
 <h2>Examples: elapsed time, adding and subtracting time</h2>
 <p>Use the Time Duration mode as an elapsed time calculator when you know a start and end clock time. Choose Add / Subtract Time when you want to move a base clock time forward or backward by a duration.</p>
 <div class="example"><strong>Overnight elapsed-time example:</strong> Start at 10:45 PM and finish at 6:15 AM the next morning. Select the next-day option to calculate <strong>7 hours 30 minutes</strong>, or <strong>7.5 decimal hours</strong>.</div>
 <div class="example"><strong>Time addition example:</strong> Add 2 hours 30 minutes to a base time of 10:30 AM. The result is <strong>1:00 PM</strong> (13:00).</div>
 <div class="example"><strong>Time subtraction example:</strong> Subtract 1 hour 45 minutes from 1:15 AM. The result is <strong>11:30 PM on the previous day</strong>.</div>
-<p>These examples use clock-time arithmetic. They do not add calendar dates, time zones or daylight-saving adjustments.</p>
+<div class="example"><strong>Work-hours example:</strong> A 9:00 AM–5:00 PM shift with a 30-minute break gives <strong>7 hours 30 minutes</strong> or <strong>7.5 decimal hours</strong>.</div>
+<div class="example"><strong>Date-time example:</strong> From March 7, 2026 at noon to March 8 at noon in New York is <strong>23 elapsed hours</strong> because daylight-saving time begins during that interval.</div>
+<div class="example"><strong>Expression example:</strong> <code>3h 43m 11s * 6</code> equals <strong>22 hours 19 minutes 6 seconds</strong>.</div>
+<p>Date &amp; Time values use the browser/device local time zone. This page does not convert between different time zones.</p>
 </section>
-<section class="card"><h2>Common uses</h2><ul><li>Find elapsed time for work shifts, study sessions, travel, workouts or appointments.</li><li>Convert a duration to decimal hours for timesheets or invoices.</li><li>Add a planned duration to a start time to estimate an end time.</li><li>Subtract a duration from a deadline or scheduled time.</li><li>Total several work, study, travel, audio or video sessions and subtract breaks.</li></ul></section>
-<section class="card"><h2>Frequently asked questions</h2><details><summary>How do I calculate the time between two times?</summary><p>Enter the start and end clock times and calculate. When the interval crosses midnight, use the next-day option if the end clock time is earlier than the start time.</p></details><details><summary>What is the duration from 9:30 AM to 5:15 PM?</summary><p>It is 7 hours 45 minutes, which is 7.75 decimal hours.</p></details><details><summary>Why do minutes not work like decimal numbers?</summary><p>An hour contains 60 minutes, not 100. Therefore 2 hours 30 minutes equals 2.5 hours, while 2 hours 45 minutes equals 2.75 hours.</p></details><details><summary>Can the calculator handle times across midnight?</summary><p>Yes. Enable the next-day option in the duration calculator when the end time belongs to the following day.</p></details><details><summary>Does this calculate dates and time zones?</summary><p>No. This tool focuses on clock-time arithmetic and elapsed time within a 24-hour cycle. Use a dedicated date or time-zone calculator when calendar dates or time-zone changes are part of the problem.</p></details>
+<section class="card"><h2>Common uses</h2><ul><li>Find elapsed time for work shifts, study sessions, travel, workouts or appointments.</li><li>Calculate paid or unpaid shift time after deducting a break and view decimal hours.</li><li>Calculate durations across multiple calendar dates in your local time zone.</li><li>Add or subtract time from a scheduled date and time.</li><li>Combine time values or scale a duration with a multiplication/division expression.</li><li>Total several work, study, travel, audio or video sessions and subtract breaks.</li></ul></section>
+<section class="card"><h2>Frequently asked questions</h2><details><summary>How do I calculate the time between two times?</summary><p>Enter the start and end clock times and calculate. When the interval crosses midnight, use the next-day option if the end clock time is earlier than the start time.</p></details><details><summary>What is the duration from 9:30 AM to 5:15 PM?</summary><p>It is 7 hours 45 minutes, which is 7.75 decimal hours.</p></details><details><summary>Why do minutes not work like decimal numbers?</summary><p>An hour contains 60 minutes, not 100. Therefore 2 hours 30 minutes equals 2.5 hours, while 2 hours 45 minutes equals 2.75 hours.</p></details><details><summary>Can the calculator handle times across midnight?</summary><p>Yes. Enable the next-day option in the duration calculator when the end time belongs to the following day.</p></details><details><summary>Can I calculate time between calendar dates?</summary><p>Yes. Open Date &amp; Time, enter a start and end date with their local clock times, then calculate the elapsed duration. The browser/device local time zone is used; cross-zone conversion is not included.</p></details>
 <details><summary>Can I use this as a time addition calculator?</summary><p>Yes. Select Add / Subtract Time, enter a base clock time, choose Add or Subtract, and enter the hours, minutes and seconds. The result shows the new clock time and whether it falls on the previous or next day.</p></details>
-<details><summary>Does the calculator automatically subtract lunch or rest breaks?</summary><p>The Time Duration mode does not automatically deduct breaks. In Add / Subtract Durations mode, add each work interval and enter unpaid breaks as rows set to Subtract (−).</p></details>
+<details><summary>Can I deduct lunch or rest breaks from work hours?</summary><p>Yes. Open Work Hours, enter the shift start and end, and enter the total break time in minutes. The result shows gross shift time, the break deduction, net time and decimal hours. You can also subtract individual break durations in Add / Subtract Durations.</p></details>
 <details><summary>Can I add or subtract multiple time durations?</summary><p>Yes. Open Add / Subtract Durations, enter hours, minutes and seconds in each row, choose Add (+) or Subtract (−), then calculate the total. You can add or remove rows as needed.</p></details>
 <details><summary>Can the total be longer than 24 hours?</summary><p>Yes. Multiple durations can total more than one day. The result shows the full hours:minutes:seconds duration, the day/hour breakdown, total minutes and seconds, and decimal hours.</p></details>
-<details><summary>Can I calculate a duration across several days?</summary><p>No. The inputs are clock times, not calendar dates. The next-day option handles one midnight crossing; it does not calculate multi-day date ranges. Use a date-aware calculator for durations spanning several calendar days.</p></details></section>
+<details><summary>Can I calculate a duration across several days?</summary><p>Yes. Use Date &amp; Time and enter both calendar dates and clock times. This mode reports elapsed time across multiple days.</p></details>
+<details><summary>Can I add or subtract time from a date and time?</summary><p>Yes. In Date &amp; Time, enter a starting local date/time, choose Add or Subtract, and enter days, hours, minutes and seconds. One day is treated as 24 elapsed hours.</p></details>
+<details><summary>Can I calculate a time expression or multiply a duration?</summary><p>Yes. Expression mode accepts duration units d, w, h, m and s with addition and subtraction. You can also multiply or divide a duration by a number, such as 3h 43m 11s * 6. Division by zero and ambiguous or unsupported expressions are rejected.</p></details>
+<details><summary>Can I round work start and end times?</summary><p>Work Hours offers optional nearest 5-, 6- or 15-minute rounding. The selected rounding is applied to both entered shift times before the break deduction. Check your workplace rules before using rounding for payroll.</p></details></section>
 
 
 <section class="card"><h2>Related tools</h2><p>Need calendar-aware working time rather than simple clock arithmetic? Use the <a href="/business-hours-calculator/">Business Hours Calculator</a> to count business hours across dates, holidays and custom work schedules.</p></section>
 
-<section class="card"><h2>Method &amp; reference notes</h2><p class="small">The calculator uses straightforward elapsed-time arithmetic rather than assumptions about time zones, daylight-saving changes, leap seconds or calendar dates. For calendar-aware calculations, business days, holidays, or custom work schedules, use the Business Hours Calculator.</p><p class="small">Related reference material: <a href="https://www.timeanddate.com/date/timeduration.html" rel="noopener noreferrer" target="_blank">Timeanddate time-duration calculator</a> and <a href="https://www.calculator.net/time-calculator/" rel="noopener noreferrer" target="_blank">Calculator.net time calculator</a>.</p></section>
+<section class="card"><h2>Method &amp; reference notes</h2><p class="small">Clock-only modes operate on a 24-hour clock. Date &amp; Time modes use the browser/device local time zone and actual elapsed timestamps; nonexistent local clock times during daylight-saving gaps are rejected, while repeated times follow the browser's date handling. Date-time offsets treat one day as 24 elapsed hours. Cross-time-zone conversion, workday/holiday counting, calendar months/years and leap-second calculations are not included. Work Hours rounding is a calculation option, not a statement of payroll-law compliance.</p><p class="small">For business-day schedules, holidays and custom work hours, use the <a href="/business-hours-calculator/">Business Hours Calculator</a>. Related references: <a href="https://www.timeanddate.com/date/timeduration.html" rel="noopener noreferrer" target="_blank">Timeanddate time-duration calculator</a>, <a href="https://www.calculatorsoup.com/calculators/time/hours.php" rel="noopener noreferrer" target="_blank">CalculatorSoup Hours Calculator</a> and <a href="https://www.calculator.net/time-calculator.html" rel="noopener noreferrer" target="_blank">Calculator.net Time Calculator</a>.</p></section>
 
 
 <section class="card related-tools" aria-labelledby="related-title">
@@ -135,12 +213,12 @@ $('calcDuration').addEventListener('click',()=>{
   setMessage($('durationResult'),'<div class="big">'+result.pretty+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Total: '+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+result.seconds.toLocaleString()+' seconds · '+result.decimalHours+' decimal hours</div>');
 });
 $('calcAdd').addEventListener('click',()=>{
-  const result=engine.calculateClockOperation($('baseTime').value,$('addHours').value,$('addMinutes').value,$('addSeconds').value,$('operation').value);
+  const result=engine.calculateClockOperation($('baseTime').value,$('addHours').value,$('addMinutes').value,$('addSeconds').value,$('operation').value,$('addDays').value);
   if(!result.ok){setMessage($('addResult'),'<strong>Enter a valid base time and whole-number duration values.</strong>');return;}
   setMessage($('addResult'),'<div class="big">'+result.clockTime+'</div><div class="small" style="margin-top:8px">'+result.action+' '+result.prettyAmount+' '+(result.action==='add'?'to':'from')+' '+$('baseTime').value+'.</div>');
 });
 function resetDuration(){$('startTime').value='09:30:00';$('endTime').value='17:15:00';$('nextDay').checked=false;setMessage($('durationResult'),'');}
-function resetAdd(){$('baseTime').value='10:30:00';$('operation').value='add';$('addHours').value='2';$('addMinutes').value='30';$('addSeconds').value='0';setMessage($('addResult'),'');}
+function resetAdd(){$('baseTime').value='10:30:00';$('operation').value='add';$('addDays').value='0';$('addHours').value='2';$('addMinutes').value='30';$('addSeconds').value='0';setMessage($('addResult'),'');}
 $('resetDuration').addEventListener('click',resetDuration);$('resetAdd').addEventListener('click',resetAdd);
 
 let latestDurationListResult=null;
@@ -213,7 +291,10 @@ $('copyDurationList').addEventListener('click',async()=>{
 });
 
 function activateMode(activeTab,activePanel){
-  const modes=[['durationTab','durationPanel'],['addTab','addPanel'],['durationListTab','durationListPanel']];
+  const modes=[
+    ['durationTab','durationPanel'],['addTab','addPanel'],['durationListTab','durationListPanel'],
+    ['workTab','workPanel'],['dateTimeTab','dateTimePanel'],['expressionTab','expressionPanel']
+  ];
   modes.forEach(([tabId,panelId])=>{
     const selected=tabId===activeTab;
     $(tabId).classList.toggle('active',selected);
@@ -224,7 +305,122 @@ function activateMode(activeTab,activePanel){
 $('durationTab').addEventListener('click',()=>activateMode('durationTab','durationPanel'));
 $('addTab').addEventListener('click',()=>activateMode('addTab','addPanel'));
 $('durationListTab').addEventListener('click',()=>activateMode('durationListTab','durationListPanel'));
-updateRemoveButtons();
+$('workTab').addEventListener('click',()=>activateMode('workTab','workPanel'));
+$('dateTimeTab').addEventListener('click',()=>activateMode('dateTimeTab','dateTimePanel'));
+$('expressionTab').addEventListener('click',()=>activateMode('expressionTab','expressionPanel'));
+
+function localDateTimeValue(date, hour, minute){
+  const pad=value=>String(value).padStart(2,'0');
+  return date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate())+'T'+pad(hour)+':'+pad(minute)+':00';
+}
+function setDateRangeDefaults(){
+  const today=new Date();
+  const start=new Date(today.getFullYear(),today.getMonth(),today.getDate(),9,0,0);
+  const end=new Date(today.getFullYear(),today.getMonth(),today.getDate(),17,0,0);
+  $('rangeStartDateTime').value=localDateTimeValue(start,9,0);
+  $('rangeEndDateTime').value=localDateTimeValue(end,17,0);
+}
+function setDateOffsetDefaults(){
+  const today=new Date();
+  const offset=new Date(today.getFullYear(),today.getMonth(),today.getDate(),10,0,0);
+  $('offsetBaseDateTime').value=localDateTimeValue(offset,10,0);
+}
+function setDateTimeDefaults(){
+  setDateRangeDefaults();
+  setDateOffsetDefaults();
+}
+function formatWorkTimeFields(){
+  const format=$('workClockFormat').value;
+  $('workStartTime').placeholder=format==='12'?'h:mm AM/PM':'HH:MM';
+  $('workEndTime').placeholder=format==='12'?'h:mm AM/PM':'HH:MM';
+}
+$('workClockFormat').addEventListener('change',()=>{
+  const previous=$('workClockFormat').value==='12'?'24':'12';
+  ['workStartTime','workEndTime'].forEach(id=>{
+    const current=engine.parseFormattedClock($(id).value,previous);
+    if(current!==null) $(id).value=engine.formatFormattedClock(current,$('workClockFormat').value);
+    else $(id).value=$('workClockFormat').value==='12'?'9:00 AM':'09:00';
+  });
+  formatWorkTimeFields();
+  $('workResult').innerHTML='';
+});
+$('calcWork').addEventListener('click',()=>{
+  const result=engine.calculateWorkHours(
+    $('workStartTime').value,$('workEndTime').value,$('workBreakMinutes').value,
+    $('workNextDay').checked,$('workClockFormat').value,$('workRounding').value
+  );
+  if(!result.ok){
+    const message=result.error==='end-before-start'
+      ?'End time is earlier than start time. Select the next-day option for an overnight shift.'
+      :result.error==='break-exceeds-shift'
+        ?'Break time cannot be longer than the rounded shift duration.'
+        :'Enter valid start/end times and a whole-number break duration.';
+    setMessage($('workResult'),'<strong>'+message+'</strong>');
+    return;
+  }
+  const rounding=result.roundingMinutes
+    ?'<div class="small">Rounded shift entries: '+result.roundedStart+' to '+result.roundedEnd+' (nearest '+result.roundingMinutes+' minutes).</div>'
+    :'';
+  setMessage($('workResult'),'<div class="big">'+result.netPretty+'</div><div class="result-grid"><div><span class="small">Gross time</span><strong>'+result.grossPretty+'</strong></div><div><span class="small">Break deducted</span><strong>'+result.breakPretty+'</strong></div><div><span class="small">Net minutes</span><strong>'+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+'</strong></div><div><span class="small">Decimal hours</span><strong>'+result.decimalHours+'</strong></div></div>'+rounding);
+});
+$('resetWork').addEventListener('click',()=>{
+  $('workClockFormat').value='24';$('workStartTime').value='09:00';$('workEndTime').value='17:00';
+  $('workBreakMinutes').value='0';$('workNextDay').checked=false;$('workRounding').value='0';
+  formatWorkTimeFields();$('workResult').innerHTML='';
+});
+$('calcDateRange').addEventListener('click',()=>{
+  const result=engine.calculateDateTimeDuration($('rangeStartDateTime').value,$('rangeEndDateTime').value);
+  if(!result.ok){
+    setMessage($('dateRangeResult'),'<strong>'+(result.error==='end-before-start'?'End date and time must not be earlier than the start.':'Enter valid start and end dates and times. Check for daylight-saving clock changes.')+'</strong>');
+    return;
+  }
+  const p=result.parts;
+  setMessage($('dateRangeResult'),'<div class="big">'+result.pretty+'</div><div class="result-grid"><div><span class="small">Days</span><strong>'+p.days+'</strong></div><div><span class="small">Hours</span><strong>'+p.hours+'</strong></div><div><span class="small">Minutes</span><strong>'+p.mins+'</strong></div><div><span class="small">Seconds</span><strong>'+p.secs+'</strong></div></div><div class="small" style="margin-top:12px">Elapsed: '+result.totalMinutes.toLocaleString(undefined,{maximumFractionDigits:2})+' minutes · '+result.seconds.toLocaleString()+' seconds · '+result.decimalHours+' decimal hours.</div>');
+});
+$('resetDateRange').addEventListener('click',()=>{
+  setDateRangeDefaults();$('dateRangeResult').innerHTML='';
+});
+$('calcDateOffset').addEventListener('click',()=>{
+  const result=engine.calculateDateTimeOffset(
+    $('offsetBaseDateTime').value,$('offsetDays').value,$('offsetHours').value,
+    $('offsetMinutes').value,$('offsetSeconds').value,$('offsetOperation').value
+  );
+  if(!result.ok){
+    setMessage($('dateOffsetResult'),'<strong>Enter a valid starting date/time and whole, non-negative duration fields.</strong>');
+    return;
+  }
+  const date=new Date(result.resultTimestamp);
+  setMessage($('dateOffsetResult'),'<div class="big">'+date.toLocaleString()+'</div><div class="small">'+result.action+' '+result.prettyAmount+' '+(result.action==='add'?'to':'from')+' the starting date and time.</div><div class="small">Local date-time value: '+result.resultDateTime.replace('T',' ')+'</div>');
+});
+$('resetDateOffset').addEventListener('click',()=>{
+  setDateOffsetDefaults();$('offsetOperation').value='add';$('offsetDays').value='0';
+  $('offsetHours').value='1';$('offsetMinutes').value='0';$('offsetSeconds').value='0';
+  $('dateOffsetResult').innerHTML='';
+});
+$('calcExpression').addEventListener('click',()=>{
+  const result=engine.calculateTimeExpression($('timeExpression').value,$('expressionOutputUnit').value);
+  if(!result.ok){
+    setMessage($('expressionResult'),'<strong>'+(
+      result.error==='division-by-zero'?'A duration cannot be divided by zero.':
+      'Check the expression. Use d, w, h, m or s units; + and − for durations; and multiply/divide by a number.'
+    )+'</strong>');
+    return;
+  }
+  setMessage($('expressionResult'),'<div class="big">'+result.pretty+'</div><div class="small">Total: '+result.outputValue.toLocaleString(undefined,{maximumFractionDigits:6})+' '+result.outputLabel+' · '+result.durationClock+' (h:mm:ss) · '+result.decimalHours+' decimal hours.</div>');
+});
+$('resetExpression').addEventListener('click',()=>{
+  $('timeExpression').value='1d 2h 3m 4s + 4h 5s - 2030s + 28h';
+  $('expressionOutputUnit').value='hours';$('expressionResult').innerHTML='';
+});
+function clearResultOnEdit(containerId,resultId){
+  $(containerId).addEventListener('input',()=>{$(resultId).innerHTML='';});
+  $(containerId).addEventListener('change',()=>{$(resultId).innerHTML='';});
+}
+clearResultOnEdit('workPanel','workResult');
+clearResultOnEdit('dateTimePanel','dateRangeResult');
+clearResultOnEdit('dateTimePanel','dateOffsetResult');
+clearResultOnEdit('expressionPanel','expressionResult');
+setDateTimeDefaults();formatWorkTimeFields();updateRemoveButtons();
 $('calcDuration').click();
 </script>
 <style id="tool-header-search-style">.tool-header-empty{padding:8px 10px;color:#687b92;font-size:13px}</style>

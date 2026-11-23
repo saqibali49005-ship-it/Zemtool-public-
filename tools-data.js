@@ -39,8 +39,11 @@ window.UTILITY_CATEGORIES = [
 ];
 
 /* Load the AdSense publisher script on canonical site pages that include this
-   shared head-loaded catalog. The homepage already has the static snippet. */
+   shared head-loaded catalog. Staging and local preview hosts never load production ads.
+   The homepage already has the static snippet. */
 (function () {
+  var hostname = window.location.hostname.toLowerCase();
+  if (hostname !== "zemtools.com" && hostname !== "www.zemtools.com") return;
   var publisherId = "ca-pub-5440482047619484";
   var scriptUrl = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + publisherId;
   var scripts = document.getElementsByTagName("script");
