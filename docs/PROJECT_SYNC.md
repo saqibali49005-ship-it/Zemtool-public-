@@ -154,3 +154,13 @@ Guardrails: production/live and AdSense untouched; no merge/deploy, Cloudflare w
 - Validation level: source/logic review only. GitHub Actions remains blocked by account billing/spending limit as shown in the user's screenshot; this commit has not been CI-run or browser-run. Do not mark Rule Green.
 - Next safe step: inspect public-main diff for the test-only commit, continue read-only source/route review without triggering paid/billing-gated Actions; after billing is restored, run Foundation Check once and address any actual reported failure.
 - Public main remains source of truth for code management. Cloudflare production repo connection, live deployment, DNS, AdSense, analytics and locked benchmark calculators remain untouched.
+
+
+## Public Foundation workflow cost-control merged — 2026-11-24
+- User approved continuing with `@Superpowers Go`; reviewed public PR #1 `CI efficiency: skip docs-only runs and cancel stale checks` before merge.
+- Patch scope was limited to `.github/workflows/foundation-check.yml`: docs-only path ignores, minimal `contents: read` permission, and concurrency cancellation for superseded runs. No test jobs removed and no deploy step/secret added.
+- PR head `593f26d5d32cacc8c2db0c2a145448822f04c238` had a successful Foundation Check run #44941332879 (conclusion success). PR was mergeable and user said Go; merged via squash.
+- Merge commit on public main: `d3b74a331deb76862bb69a12f6491fe7570190b5`. PR #1 is merged.
+- This confirms the public PR validation workflow ran successfully on that PR head. It does **not** clear the private repo's Actions billing gate, nor certify later public-main commits (including navigation test correction) unless their own checks pass.
+- Keep Rule Green scoped to commit-specific evidence. Public main is source of truth; live deployment/Cloudflare production connection, DNS, AdSense, analytics and locked calculator benchmark pages remain untouched.
+- Next: review public PR #2 for current relevance and exact diff/checks; do not merge automatically. Leave PR #7 validation-only/unmerged per its explicit body. Continue site improvements on public main with targeted evidence and checkpoint each step.
