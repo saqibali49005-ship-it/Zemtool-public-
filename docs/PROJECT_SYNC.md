@@ -67,3 +67,11 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - After P0, investigate Deck Joist Blocking Calculator's near-top-three opportunity (recent GSC+GA4 join: 100 impressions, 3 clicks, avg position 6.33) with query/country evidence before any targeted change.
 - Keep latest three calculator releases steady until complete post-release GSC data; do not repeat indexing requests without a specific need.
 - Private canonical Master Plan updated with exact audit IDs, evidence, scope, acceptance criteria and sequence. Implementation not yet committed; this checkpoint is not Rule Green.
+
+
+## Navigation-link regression fix — 2026-11-24
+- Source inspection found legacy relative navigation hrefs in calculator HTML; the shared runtime rebuilt header/footer with root paths but did not normalize breadcrumb links.
+- Public draft PR #9: https://github.com/saqibali49005-ship-it/Zemtool-public-/pull/9
+- Branch fix/root-relative-navigation-links contains a shared navigation normalization, Playwright coverage on four calculator routes, and a Foundation Check workflow entry.
+- Foundation Check run #61 is queued; results and preview validation are pending. No merge or production deployment. Production untouched; Rule Green remains NOT GREEN.
+- Next: check CI, validate preview rendered destinations, then reconcile both project records. User approval remains required before merge and separately before production.
