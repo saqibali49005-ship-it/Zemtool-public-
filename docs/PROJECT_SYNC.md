@@ -88,3 +88,9 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - Cloudflare Pages test preview project `zemtools-pages-test` is connected to private `utility-platform`, while PR #9's source is public `Zemtool-public-`.
 - Existing preview deployment entries belong to other private-repo branches, not PR #9's head commit. They are not valid visual evidence for this fix.
 - Preview gate is therefore blocked by repository wiring; no code was deployed. Keep PR #9 draft/open/unmerged and production untouched until a safe preview route is approved/available.
+
+
+## Pages test deployment clarification — 2026-11-24
+- Canonical private-log sync caused Cloudflare Pages test project `zemtools-pages-test` to deploy private `utility-platform/main` commit `07340f363f1805bbcd6f93f50380085bccbcea64`; deployment `12e76074-8673-4a68-a2c8-6fdaeb169e3d` completed successfully at https://12e76074.zemtools-pages-test.pages.dev.
+- This is the isolated `pages.dev` test project (configured with robots disallow and X-Robots noindex/nofollow), not public `zemtools.com` production and not a deployment of PR #9.
+- PR #9 remains draft/unmerged; public production untouched. Preview-source mismatch still needs an approved solution before visual validation.
