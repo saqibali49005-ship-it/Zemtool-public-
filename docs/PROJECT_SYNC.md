@@ -82,3 +82,9 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - PR #9 remains draft/open/unmerged: https://github.com/saqibali49005-ship-it/Zemtool-public-/pull/9
 - No preview deployment URL or preview test evidence surfaced in available PR/check metadata. CI pass alone does not satisfy preview acceptance.
 - Production untouched; no merge or deployment. Rule Green remains NOT GREEN pending preview validation and explicit approval.
+
+
+## PR #9 preview wiring finding — 2026-11-24
+- Cloudflare Pages test preview project `zemtools-pages-test` is connected to private `utility-platform`, while PR #9's source is public `Zemtool-public-`.
+- Existing preview deployment entries belong to other private-repo branches, not PR #9's head commit. They are not valid visual evidence for this fix.
+- Preview gate is therefore blocked by repository wiring; no code was deployed. Keep PR #9 draft/open/unmerged and production untouched until a safe preview route is approved/available.
