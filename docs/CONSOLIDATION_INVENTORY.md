@@ -31,8 +31,8 @@ This ledger is a public-safe index. Sensitive operational details, internal rese
 ### Current verified repository checkpoints
 - Public `main` head at inventory start: `281477e9cc5a0b956a82b397df72c72393a72e2d`.
 - Private `main` recent documented head: `976148067310038788f4bb9803e62a3e9874d0b1` (Nov 23, 2026).
-- Private `main` has a substantial set of historical feature, fix, audit, and backup branches; exact branch count and complete pagination remain to be established.
-- Public repository has development and validation branches. Relevant PR states at this checkpoint:
+- Private repository API pagination completed for the first inventory pass: **1,414 commits** returned across 15 pages (oldest returned commit: 2026-09-15; newest: 2026-11-23), **168 branches** across two pages, and **126 pull requests** across two pages. These are repository-level GitHub records, not proof that every chat, local file, or external research source is present.
+- Public repository API pagination completed for this pass: **31 commits**, **9 branches**, and **9 pull requests**. Public `main` history is much shorter than private history; private Git history must not be pushed wholesale into Public without security and licensing review. Relevant PR states at this checkpoint:
   - PR #1 cost-aware Foundation workflow: merged.
   - PR #2 Wire Size clean transfer: open/draft; do not merge as part of archive work.
   - PR #7 Business Hours validation-only: open/unmerged; retain as validation evidence.
@@ -68,8 +68,8 @@ This ledger is a public-safe index. Sensitive operational details, internal rese
 ## Current blockers / unknowns
 
 - Dropbox root currently has no project files; a backup destination structure has not been created.
-- Complete branch/commit/PR pagination is still pending.
-- Full pre-November 15 history and all historical chat/Superpowers records have not yet been recovered.
+- GitHub branch/commit/PR pagination is complete for both repositories in this first pass. Issues, releases/tags, workflow runs/artifacts, repository trees, private branch contents, commit-level sensitive-data scan, and older external/local archives still need inventory.
+- Private Git history reaches at least 2026-09-15 in the returned commit list, before the Master Plan initialization date. Full older history beyond this Git repository, historical ChatGPT conversations, and all Superpowers tool traces have not yet been recovered.
 - Archive size, storage fit, checksums, and secret-scan results are not yet measured.
 - The public/private Master Plan synchronization status must be reconciled after the inventory is complete.
 
