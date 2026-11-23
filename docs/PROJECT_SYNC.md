@@ -24,3 +24,22 @@ This is a **public-safe synchronization marker**, not a copy of the private Mast
 2. Compare against the newest private Master Plan checkpoint.
 3. Update both after any material work, including outcome, Rule Green status, blockers and next step.
 4. Keep production untouched unless separately approved.
+
+
+## Professional optimization toolchain — 2026-11-23
+
+For SEO gaps, calculator accuracy, UX/functionality defects, research and user-journey improvements, use a task-appropriate combination of:
+
+- **OpenSEO:** search intent, SERPs, keyword/competitor gaps, GSC/GA4 context and technical audits.
+- **Firecrawl:** source-linked public web research and structured competitor/site inspection.
+- **TinyFish:** reproducible browser inspection of public user journeys and interactive behaviours.
+- **Mixpanel:** event, funnel, retention and replay evidence when valid instrumentation/data is available.
+- **Windsor.ai:** cross-channel marketing/analytics data when the relevant sources are connected and authorized.
+- **Wolfram:** independent formula, numerical, scientific and unit validation for calculators.
+- **Context7:** current official library/framework/API documentation before coding.
+- **Superpowers:** structured engineering workflow support when available in the active working session; otherwise follow the same scoped-plan/test/review discipline manually.
+- **GitHub:** source implementation, PR review, tests, CI and release evidence.
+
+Select the smallest useful tool combination for each task; do not run every tool indiscriminately or waste credits/quotas. Verify external data connections before relying on results. Record actual sources, baseline, findings, changed files, tests, outcomes and remaining gaps. Never treat competitor observations as permission to copy. No paid credits, auto-reload, plan upgrades, production changes or destructive external actions without explicit approval.
+
+The detailed workflow, task-to-tool matrix and governance rules are maintained in the private canonical Master Plan. This public note is only a safe operational summary.
