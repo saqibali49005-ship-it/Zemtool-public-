@@ -104,3 +104,13 @@ The detailed workflow, task-to-tool matrix and governance rules are maintained i
 - GSC shows legacy .html variants alongside slash URLs; audit redirects/canonicals/sitemap. GA4 organic report includes pages.dev preview hosts, contaminating production-only analysis; filter host/stop preview event sending and define useful calculator-completion events.
 - Priority: (1) PR #9 preview/render validation then explicit merge approval; (2) URL/canonical/sitemap consistency; (3) useful original content for Math & Science/category hubs; (4) real value for common utilities, no filler; (5) GA4 host/event measurement; (6) trim 2 meta descriptions; (7) broader crawl and Lighthouse when budget permits.
 - Hold AdSense review until navigation live/verified, URL consistency confirmed, low-differentiation pages improved, trust pages/sitemap verified, and fresh crawl has no critical internal broken links. Approval not guaranteed. Production and review untouched.
+
+
+
+## Audit follow-up verification (2026-11-24)
+- Live sitemap.xml has 36 canonical slash-form content URLs and no legacy .html variants; robots.txt permits crawling and references sitemap.
+- Live fetches of five sampled legacy .html URLs resolved to the canonical slash pages with final status 200. No duplicate-content issue is confirmed; GSC legacy rows are likely historical redirect-source data. Monitor rather than change redirects unnecessarily.
+- /math-science/ is short (~158 extracted words) but currently has unique summaries for five tools and a category conclusion. Improve with a concise, helpful selection workflow/example—not filler. Pre-release GSC: 170 impressions, 0 clicks, avg position 19.6.
+- Digital & Developer, Energy & Electrical, and Home & Construction live hubs include differentiated workflows/measurement guidance; do not classify them as thin just from length.
+- UUID tool offers browser-local secure generation, v4/v7, batch, validation, timestamp inspection and download; Aspect Ratio offers ratio, missing dimension, resize, preview and presets. Common utility pages should be assessed by actual functionality, not word-count alone.
+- Cloudflare review and production projects are connected to private utility-platform; PR #9 is in public repo. Public/private main master-ui.js SHA currently matches. Review project supports all branch previews. A private-repo draft PR would provide the connected preview route; not created in this audit. No deployment or repo wiring changed.
