@@ -21,8 +21,9 @@ try {
   assert.ok(!existsSync(join(outputDir, 'README.md')), 'Repository README must be excluded');
   assert.ok(!copied.has('docs/PROJECT_SYNC.md'), 'Public sync notes are not website assets');
 
+  const newline = String.fromCharCode(10);
   const robots = readFileSync(join(outputDir, 'robots.txt'), 'utf8');
-  assert.equal(robots, 'User-agent: *\\nDisallow: /\\n');
+  assert.equal(robots, ['User-agent: *', 'Disallow: /', ''].join(newline));
   const headers = readFileSync(join(outputDir, '_headers'), 'utf8');
   assert.match(headers, /X-Robots-Tag: noindex, nofollow/);
   assert.match(headers, /Cache-Control: no-store/);
@@ -31,6 +32,7 @@ try {
   assert.equal(isPublishableAsset('docs/private-notes.md'), false);
   assert.equal(isPublishableAsset('tests/site.test.mjs'), false);
   assert.equal(isPublishableAsset('.github/workflows/check.yml'), false);
+  assert.equal(isPublishableAsset('private/credentials.txt'), false);
   assert.equal(isPublishableAsset('privacy/index.html'), true);
   assert.equal(isPublishableAsset('assets/site.css'), true);
 
