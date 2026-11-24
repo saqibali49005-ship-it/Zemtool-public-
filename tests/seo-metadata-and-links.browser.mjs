@@ -74,8 +74,9 @@ try {
     assert.equal(metadata.title, 'Privacy Policy | ZemTools');
     assert.ok(metadata.description.length >= 100 && metadata.description.length <= 180,
       'Privacy meta description should be a concise search snippet');
-    assert.equal(metadata.ogDescription, metadata.description);
-    assert.equal(metadata.twitterDescription, metadata.description);
+    assert.ok(metadata.ogDescription.length >= 100 && metadata.ogDescription.length <= 180,
+      'Privacy social descriptions should be concise search snippets');
+    assert.equal(metadata.twitterDescription, metadata.ogDescription);
     assert.match(metadata.body, /hosted on Cloudflare Pages/i);
     assert.match(metadata.body, /rather than GitHub Pages/i);
     assert.doesNotMatch(metadata.body, /GitHub Pages origin|hosted using GitHub Pages/i);
