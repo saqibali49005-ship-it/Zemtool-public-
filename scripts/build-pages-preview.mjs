@@ -9,9 +9,11 @@ import {
   writeFileSync
 } from 'node:fs';
 import { basename, dirname, resolve, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const PROJECT_ROOT = process.cwd();
 const DEFAULT_OUTPUT_DIR = resolve(PROJECT_ROOT, 'dist');
+const NEWLINE = String.fromCharCode(10);
 
 const EXCLUDED_TOP_LEVEL = new Set([
   '.git',
@@ -60,7 +62,7 @@ const EXCLUDED_EXTENSIONS = new Set([
 ]);
 
 export function isPublishableAsset(relativePath) {
-  const normalized = relativePath.replaceAll('\\\\', '/');
+  const normalized = relativePath;
   const parts = normalized.split('/');
   const lowerName = basename(normalized).toLowerCase();
   const extension = lowerName.includes('.') ? lowerName.slice(lowerName.lastIndexOf('.')) : '';
@@ -69,7 +71,8 @@ export function isPublishableAsset(relativePath) {
   if (EXCLUDED_TOP_LEVEL.has(parts[0])) return false;
   if (EXCLUDED_NAMES.has(lowerName)) return false;
   if (EXCLUDED_EXTENSIONS.has(extension)) return false;
-  if (parts.some(part => part.toLowerCase() === '.git' || part.toLowerCase() === '.github')) return false;
+  if (parts.some(part => part.startsWith('.') && part !== '.well-known')) return false;
+  if (parts.some(part => ['private', 'backups', 'internal'].includes(part.toLowerCase()))) return false;
 
   return true;
 }
@@ -83,7 +86,7 @@ export function buildPreview({ outputDir = DEFAULT_OUTPUT_DIR } = {}) {
   const trackedFiles = execFileSync('git', ['ls-files', '-z'], {
     cwd: PROJECT_ROOT,
     encoding: 'utf8'
-  }).split('\\0').filter(Boolean);
+  }).split(String.fromCharCode(0)).filter(Boolean);
 
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
@@ -108,17 +111,21 @@ export function buildPreview({ outputDir = DEFAULT_OUTPUT_DIR } = {}) {
   }
 
   // Preview hosts must not be indexed or treated as canonical public destinations.
-  writeFileSync(resolve(output, 'robots.txt'), 'User-agent: *\\nDisallow: /\\n', 'utf8');
+  writeFileSync(
+    resolve(output, 'robots.txt'),
+    ['User-agent: *', 'Disallow: /', ''].join(NEWLINE),
+    'utf8'
+  );
   writeFileSync(
     resolve(output, '_headers'),
-    '/*\\n  X-Robots-Tag: noindex, nofollow\\n  Cache-Control: no-store\\n',
+    ['/*', '  X-Robots-Tag: noindex, nofollow', '  Cache-Control: no-store', ''].join(NEWLINE),
     'utf8'
   );
 
   return { outputDir: output, copiedFiles: copied };
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === resolve(new URL(import.meta.url).pathname)) {
+if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url))) {
   const result = buildPreview();
   console.log(`Prepared ${result.copiedFiles.length} public assets in ${result.outputDir}`);
   console.log('Preview robots.txt and X-Robots-Tag noindex protections applied.');
