@@ -13,13 +13,13 @@
   function parseDecimal(raw) {
     const text = String(raw).trim();
     if (!text || text.length > MAX_INPUT_LENGTH) throw new Error('Enter a number within the supported input length.');
-    const match = text.match(/^([+-]?)(?:(\\d+)(?:\\.(\\d*))?|\\.(\\d+))(?:[eE]([+-]?\\d+))?$/);
+    const match = text.match(/^([+-]?)(?:(\d+)(?:\.(\d*))?|\.(\d+))(?:[eE]([+-]?\d+))?$/);
     if (!match) throw new Error('Enter a valid decimal number.');
     const exponent = match[5] ? Number(match[5]) : 0;
     if (!Number.isSafeInteger(exponent) || Math.abs(exponent) > MAX_ABS_EXPONENT) throw new Error('The exponent is outside the supported range.');
     const fraction = match[3] !== undefined ? match[3] : (match[4] || '');
     const whole = match[2] || '0';
-    const digits = (whole + fraction).replace(/^0+(?=\\d)/, '') || '0';
+    const digits = (whole + fraction).replace(/^0+(?=\d)/, '') || '0';
     const coefficient = BigInt(digits) * (match[1] === '-' ? -1n : 1n);
     const scale = fraction.length - exponent;
     if (Math.abs(scale) > MAX_ABS_EXPONENT) throw new Error('The decimal scale is outside the supported range.');
@@ -62,7 +62,7 @@
   function significantCount(raw) {
     const value = normalizeNumeric(raw).toLowerCase();
     if (!value || /^[-+]?0$/.test(value)) return 1;
-    const digits = value.split('e')[0].replace(/^[+-]/, '').replace(/\\./g, '');
+    const digits = value.split('e')[0].replace(/^[+-]/, '').replace(/\./g, '');
     const first = digits.search(/[1-9]/);
     return first < 0 ? 1 : digits.length - first;
   }
