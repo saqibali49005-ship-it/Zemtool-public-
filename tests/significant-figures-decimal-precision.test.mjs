@@ -45,4 +45,21 @@ assert.equal(engine.calculate('round', { number: '12,34', target: '3' }).ok, fal
 assert.equal(engine.calculate('round', { number: '1e999999999', target: '2' }).ok, false);
 assert.equal(engine.calculate('round', { number: '1'.repeat(10000), target: '2' }).ok, false);
 
+
+assert.equal(engine.roundToSig('9.995', 3), '10.0');
+assert.equal(engine.roundToSig('-9.996', 3), '-1.00e+1');
+assert.equal(engine.roundToSig('999.6', 3), '1.00e+3');
+assert.equal(engine.roundToSig('0.00009996', 3), '0.000100');
+assert.equal(engine.roundToSig('0.0009996', 3), '0.00100');
+assert.equal(engine.roundToSig('1000', 2), '1.0e+3');
+assert.equal(engine.significantCount('0.0001000'), 4);
+assert.equal(engine.significantCount('1.000e3'), 4);
+assert.equal(engine.significantCount('1.23e-7'), 3);
+assert.equal(engine.calculate('add', { expression: '1.230 + 2.10' }).value, '3.33');
+assert.equal(engine.calculate('add', { expression: '1.20 + 3.4' }).value, '4.6');
+assert.equal(engine.calculate('add', { expression: '1.2e3 + 1.2e3' }).value, '2.4e+3');
+assert.equal(engine.calculate('multiply', { expression: '0.01234 × 0.0567' }).value, '0.000700');
+assert.equal(engine.calculate('multiply', { expression: '1e-200 × 1.0' }).value, '1.0e-200');
+assert.equal(engine.calculate('multiply', { expression: '1.0 ÷ 3.0' }).value, '0.33');
+
 console.log('Significant-figures decimal precision contract: passed.');
