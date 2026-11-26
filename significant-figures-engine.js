@@ -127,7 +127,7 @@
     return roundDecimalToSig(parseDecimal(normalizeNumeric(raw)), count);
   }
 
-  function formatForSig  function formatForSig(value, count) {
+  function formatForSig(value, count) {
     if (typeof value === 'string') return roundToSig(value, count);
     if (!Number.isFinite(value)) throw new Error('Enter a valid number.');
     return roundToSig(String(value), count);
