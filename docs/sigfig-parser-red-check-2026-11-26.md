@@ -1,0 +1,12 @@
+# Significant Figures parser test checkpoint — 26 November 2026
+
+- Added `tests/significant-figures-expression-parser.test.mjs` to require valid thousands-grouped operands such as `1,234.50 + 2.0` to parse, while malformed groupings such as `1,2,3.4` are rejected.
+- Added the test to Foundation Check and temporarily included the migration candidate branch in the pull-request trigger filter, all on feature branch `feature/significant-figures-grouped-expression-tests-2026-11-26`.
+- Draft PR #13: https://github.com/saqibali49005-ship-it/Zemtool-public-/pull/13 (base: migration PR #11 head). This branch does not target public main.
+- No engine/page/calculator UI code has been changed. No parser implementation has been attempted.
+- The repository's `fetch_commit_workflow_runs` returned no PR-triggered runs for commit `dd542266a46562153c7ed2e985347cd04cdc831c`. Therefore, the new test's expected failure has **not** yet been observed in CI. Do not call this a confirmed RED result.
+- Context7 official Decimal.js v10.6.0 documentation confirms `plus`, `minus`, and `dividedBy` all round operation results to the clone's configured significant-digit precision. The 40-digit setting therefore caps all such operations, not just repeating division. A future precision-policy correction and tests are required before describing finite arithmetic as unrestricted exact.
+- Wolfram's SignificantDigits documentation confirms integer trailing zeros are treated as insignificant by default, decimal-real trailing zeros require explicit preservation/precision metadata, and precision is distinct from decimal-place accuracy. This supports keeping source notation and measurement precision explicit rather than inferring from JS Number results.
+- Master Plan review: new public repository `Zemtool-public-` is intended as future development source, while legacy `utility-platform` remains historical/live-connected. Migration PR #11 remains open, draft, unmerged. Continue using migration candidate as the PR base for this tool work until migration is approved; do not change either `main`.
+- No merge, release, production deployment, DNS, Cloudflare, AdSense, analytics, or locked-tool changes.
+- Next: make this validation reliably execute against the intended branch using a supported GitHub Actions trigger; observe RED; only then implement the smallest parser fix and rerun unit + browser + full Foundation checks.
