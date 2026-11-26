@@ -178,7 +178,14 @@
         const rounded = roundToScale(result, position);
         const significant = result.coefficient === 0n ? 1 : Math.max(1, decimalExponent(rounded) + position + 1);
         const subtitle = position < 0 ? 'rounded to nearest ' + (10 ** (-position)).toLocaleString('en-US') : position === 0 ? 'rounded to the nearest whole number' : 'rounded to ' + position + ' decimal place' + (position === 1 ? '' : 's');
-        return { ok: true, value: formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, position)), subtitle, fullPrecision, count: String(significant) };
+        let displayValue = formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, position));
+        if (rounded.coefficient !== 0n && position < 0) {
+          const exponent = decimalExponent(rounded);
+          const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
+          const mantissa = digits.length === 1 ? digits : digits[0] + '.' + digits.slice(1);
+          displayValue = (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+        }
+        return { ok: true, value: displayValue, subtitle, fullPrecision, count: String(significant) };
       }
       return { ok: true, value: roundToSig(fullPrecision, count), subtitle: count + ' significant figures', fullPrecision, count: String(count) };
     } catch (error) {
