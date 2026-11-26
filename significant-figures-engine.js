@@ -6,82 +6,132 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  function normalizeNumeric(value) {
-    return String(value).trim().replace(/,/g, '');
+  const MAX_INPUT_LENGTH = 256;
+  const MAX_ABS_EXPONENT = 1000;
+  const DIVISION_PRECISION = 60;
+
+  function parseDecimal(raw) {
+    const text = String(raw).trim();
+    if (!text || text.length > MAX_INPUT_LENGTH) throw new Error('Enter a number within the supported input length.');
+    const match = text.match(/^([+-]?)(?:(\\d+)(?:\\.(\\d*))?|\\.(\\d+))(?:[eE]([+-]?\\d+))?$/);
+    if (!match) throw new Error('Enter a valid decimal number.');
+    const exponent = match[5] ? Number(match[5]) : 0;
+    if (!Number.isSafeInteger(exponent) || Math.abs(exponent) > MAX_ABS_EXPONENT) throw new Error('The exponent is outside the supported range.');
+    const fraction = match[3] !== undefined ? match[3] : (match[4] || '');
+    const whole = match[2] || '0';
+    const digits = (whole + fraction).replace(/^0+(?=\\d)/, '') || '0';
+    const coefficient = BigInt(digits) * (match[1] === '-' ? -1n : 1n);
+    const scale = fraction.length - exponent;
+    if (Math.abs(scale) > MAX_ABS_EXPONENT) throw new Error('The decimal scale is outside the supported range.');
+    return { coefficient, scale };
+  }
+
+  function pow10(n) {
+    if (!Number.isInteger(n) || n < 0 || n > 2000) throw new Error('The requested calculation exceeds the supported range.');
+    return 10n ** BigInt(n);
+  }
+
+  function formatDecimal(coefficient, scale, minFraction = 0) {
+    if (coefficient === 0n) return minFraction ? '0.' + '0'.repeat(minFraction) : '0';
+    const negative = coefficient < 0n;
+    let digits = (negative ? -coefficient : coefficient).toString();
+    if (scale < 0) { digits += '0'.repeat(-scale); scale = 0; }
+    if (scale > 0) { digits = digits.padStart(scale + 1, '0'); const split = digits.length - scale; digits = digits.slice(0, split) + '.' + digits.slice(split); }
+    if (minFraction > 0) { const have = (digits.split('.')[1] || '').length; if (!digits.includes('.')) digits += '.'; digits += '0'.repeat(Math.max(0, minFraction - have)); }
+    return (negative ? '-' : '') + digits;
+  }
+
+  function normalizeNumeric(raw) {
+    const text = String(raw).trim();
+    if (!text) return '';
+    const sign = /^[+-]/.test(text) ? text[0] : '';
+    const body = sign ? text.slice(1) : text;
+    const e = body.search(/[eE]/);
+    let mantissa = e < 0 ? body : body.slice(0, e);
+    const exponent = e < 0 ? '' : body.slice(e);
+    if (mantissa.includes(',')) {
+      const grouped = mantissa.match(/^(\\d{1,3}(?:,\\d{3})+)(\\.\\d*)?$/);
+      if (!grouped) throw new Error('Use commas only as thousands separators (for example, 1,234.5).');
+      mantissa = grouped[1].replace(/,/g, '') + (grouped[2] || '');
+    }
+    const normalized = sign + mantissa + exponent;
+    parseDecimal(normalized);
+    return normalized;
   }
 
   function significantCount(raw) {
     const value = normalizeNumeric(raw).toLowerCase();
-    if (!value || value === '0' || value === '-0' || value === '+0') return 1;
-    const mantissa = value.split('e')[0];
-    const digits = mantissa.replace(/^[+-]/, '').replace(/\./g, '');
-    if (!digits) return 1;
-    let first = 0;
-    while (first < digits.length && digits[first] === '0') first++;
-    if (first === digits.length) return 1;
-    return digits.length - first;
+    if (!value || /^[-+]?0$/.test(value)) return 1;
+    const digits = value.split('e')[0].replace(/^[+-]/, '').replace(/\\./g, '');
+    const first = digits.search(/[1-9]/);
+    return first < 0 ? 1 : digits.length - first;
   }
 
-  function formatForSig(value, count) {
-    if (value === 0) return '0';
-    const exponent = Math.floor(Math.log10(Math.abs(value)));
-    const ambiguousTrailingZeros = Number.isInteger(value) &&
-      Math.abs(value) >= 10 && String(Math.abs(value)).endsWith('0');
-    if (exponent >= count || exponent <= -4 || ambiguousTrailingZeros) {
-      return value.toExponential(Math.max(0, count - 1));
-    }
-    const decimals = Math.max(0, count - 1 - exponent);
-    return value.toFixed(decimals);
+  function decimalExponent(value) {
+    if (value.coefficient === 0n) return 0;
+    const digits = (value.coefficient < 0n ? -value.coefficient : value.coefficient).toString();
+    return digits.length - 1 - value.scale;
+  }
+
+  function roundHalfUp(numerator, denominator) {
+    if (denominator === 0n) throw new Error('Division by zero is not allowed.');
+    const negative = (numerator < 0n) !== (denominator < 0n);
+    const n = numerator < 0n ? -numerator : numerator;
+    const d = denominator < 0n ? -denominator : denominator;
+    const q = n / d;
+    const r = n % d;
+    const rounded = q + (r * 2n >= d ? 1n : 0n);
+    return negative ? -rounded : rounded;
+  }
+
+  function roundToScale(value, targetScale) {
+    if (targetScale >= value.scale) return { coefficient: value.coefficient * pow10(targetScale - value.scale), scale: targetScale };
+    return { coefficient: roundHalfUp(value.coefficient, pow10(value.scale - targetScale)), scale: targetScale };
   }
 
   function roundToSig(raw, count) {
-    const value = Number(normalizeNumeric(raw));
-    if (!Number.isFinite(value) || !Number.isInteger(count) || count < 1 || count > 100) {
-      throw new Error('Enter a valid number and significant-figure count.');
-    }
-    if (value === 0) return '0';
-    const rounded = Number(value.toExponential(count - 1));
-    return formatForSig(rounded, count);
+    if (!Number.isInteger(count) || count < 1 || count > 100) throw new Error('Enter a valid number and significant-figure count.');
+    const value = parseDecimal(normalizeNumeric(raw));
+    if (value.coefficient === 0n) return '0';
+    const targetScale = count - 1 - decimalExponent(value);
+    const rounded = roundToScale(value, targetScale);
+    const exponent = decimalExponent(rounded);
+    const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
+    const sig = digits.padEnd(count, '0').slice(0, count);
+    const mantissa = sig.length === 1 ? sig : sig[0] + '.' + sig.slice(1);
+    if (exponent <= -4 || exponent >= count) return (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
   }
+
+  function formatForSig(value, count) {
+    if (typeof value === 'string') return roundToSig(value, count);
+    if (!Number.isFinite(value)) throw new Error('Enter a valid number.');
+    return roundToSig(String(value), count);
+  }
+
+  function decimalPlacePosition(raw) { return parseDecimal(normalizeNumeric(raw)).scale; }
 
   function parseExpression(expression, allowedOperators) {
-    const cleaned = String(expression).trim()
-      .replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
-    const match = cleaned.match(/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*([+\-*/])\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*$/i);
-    if (!match || !allowedOperators.includes(match[2])) {
-      throw new Error('Enter a valid expression with two numbers and a supported operator.');
-    }
-    return { a: match[1], op: match[2], b: match[3] };
+    const cleaned = String(expression).trim().replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+    const token = String.raw`[+-]?(?:(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d*)?|\\.\\d+)(?:[eE][+-]?\\d+)?`;
+    const pattern = new RegExp('^\\\\s*(' + token + ')\\\\s*([+\\\\-*/])\\\\s*(' + token + ')\\\\s*$', 'i');
+    const match = cleaned.match(pattern);
+    if (!match || !allowedOperators.includes(match[2])) throw new Error('Enter a valid expression with two numbers and a supported operator.');
+    return { a: normalizeNumeric(match[1]), op: match[2], b: normalizeNumeric(match[3]) };
   }
 
-  function decimalPlacePosition(raw) {
-    const value = normalizeNumeric(raw).toLowerCase();
-    const parts = value.split('e');
-    const mantissa = parts[0];
-    const exponent = parts.length > 1 ? Number(parts[1]) : 0;
-    return (mantissa.split('.')[1] || '').length - exponent;
-  }
-
-  function roundAtDecimalPosition(value, position) {
-    if (value === 0) return { text: '0', significant: 1 };
-    let rounded;
-    if (position < 0) {
-      const factor = 10 ** (-position);
-      rounded = Math.sign(value) * Math.round(Math.abs(value) / factor) * factor;
-    } else if (position <= 100) {
-      rounded = Number(value.toFixed(position));
-    } else {
-      rounded = value;
-    }
-    if (rounded === 0) return { text: '0', significant: 1 };
-    const exponent = Math.floor(Math.log10(Math.abs(rounded)));
-    const count = Math.max(1, exponent + position + 1);
-    const text = position < 0
-      ? formatForSig(rounded, count)
-      : position <= 100
-        ? rounded.toFixed(position)
-        : rounded.toExponential(Math.max(0, count - 1));
-    return { text, significant: count };
+  function divideDecimal(a, b) {
+    if (b.coefficient === 0n) throw new Error('Division by zero is not allowed.');
+    if (a.coefficient === 0n) return { coefficient: 0n, scale: 0 };
+    const numerator = a.coefficient * pow10(b.scale);
+    const denominator = b.coefficient * pow10(a.scale);
+    const n = numerator < 0n ? -numerator : numerator;
+    const d = denominator < 0n ? -denominator : denominator;
+    let exponent = n.toString().length - d.toString().length;
+    if (exponent >= 0 ? n < d * pow10(exponent) : n * pow10(-exponent) < d) exponent--;
+    const decimalPlaces = DIVISION_PRECISION - 1 - exponent;
+    if (decimalPlaces >= 0) return { coefficient: roundHalfUp(numerator * pow10(decimalPlaces), denominator), scale: decimalPlaces };
+    return { coefficient: roundHalfUp(numerator, denominator * pow10(-decimalPlaces)), scale: decimalPlaces };
   }
 
   function calculate(mode, inputs) {
@@ -93,63 +143,42 @@
         const count = significantCount(raw);
         return { ok: true, value: String(count), subtitle: 'significant figures', fullPrecision: raw, count: String(count) };
       }
-
       if (mode === 'round') {
         const raw = normalizeNumeric(values.number || '');
         const count = Number(values.target);
         if (!raw) throw new Error('Enter a number.');
-        const output = roundToSig(raw, count);
-        return {
-          ok: true,
-          value: output,
-          subtitle: count + ' significant figures',
-          fullPrecision: String(Number(raw)),
-          count: String(count)
-        };
+        return { ok: true, value: roundToSig(raw, count), subtitle: count + ' significant figures', fullPrecision: raw, count: String(count) };
       }
-
       const allowed = mode === 'add' ? ['+', '-'] : mode === 'multiply' ? ['*', '/'] : [];
       if (!allowed.length) throw new Error('Choose a supported calculation mode.');
       const expression = parseExpression(values.expression || '', allowed);
-      const a = Number(expression.a);
-      const b = Number(expression.b);
-      if (!Number.isFinite(a) || !Number.isFinite(b)) throw new Error('Enter valid numbers.');
-
+      const a = parseDecimal(expression.a);
+      const b = parseDecimal(expression.b);
+      const count = Math.min(significantCount(expression.a), significantCount(expression.b));
       let result;
-      if (expression.op === '+') result = a + b;
-      else if (expression.op === '-') result = a - b;
-      else if (expression.op === '*') result = a * b;
-      else {
-        if (b === 0) throw new Error('Division by zero is not allowed.');
-        result = a / b;
+      if (expression.op === '+' || expression.op === '-') {
+        const scale = Math.max(a.scale, b.scale);
+        const av = a.coefficient * pow10(scale - a.scale);
+        const bv = b.coefficient * pow10(scale - b.scale);
+        result = { coefficient: expression.op === '+' ? av + bv : av - bv, scale };
+      } else if (expression.op === '*') {
+        result = { coefficient: a.coefficient * b.coefficient, scale: a.scale + b.scale };
+      } else {
+        result = divideDecimal(a, b);
       }
-
-      if (!Number.isFinite(result)) throw new Error('The result is outside the supported numeric range.');
+      const fullPrecision = formatDecimal(result.coefficient, result.scale);
       if (mode === 'add') {
         const position = Math.min(decimalPlacePosition(expression.a), decimalPlacePosition(expression.b));
-        const rounded = roundAtDecimalPosition(result, position);
-        const subtitle = position < 0
-          ? 'rounded to nearest ' + (10 ** (-position)).toLocaleString('en-US')
-          : position === 0
-            ? 'rounded to the nearest whole number'
-            : 'rounded to ' + position + ' decimal place' + (position === 1 ? '' : 's');
-        return { ok: true, value: rounded.text, subtitle, fullPrecision: String(result), count: String(rounded.significant) };
+        const rounded = roundToScale(result, position);
+        const significant = result.coefficient === 0n ? 1 : Math.max(1, decimalExponent(rounded) + position + 1);
+        const subtitle = position < 0 ? 'rounded to nearest ' + (10 ** (-position)).toLocaleString('en-US') : position === 0 ? 'rounded to the nearest whole number' : 'rounded to ' + position + ' decimal place' + (position === 1 ? '' : 's');
+        return { ok: true, value: formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, position)), subtitle, fullPrecision, count: String(significant) };
       }
-
-      const count = Math.min(significantCount(expression.a), significantCount(expression.b));
-      return {
-        ok: true,
-        value: formatForSig(result, count),
-        subtitle: count + ' significant figures',
-        fullPrecision: String(result),
-        count: String(count)
-      };
+      return { ok: true, value: roundToSig(fullPrecision, count), subtitle: count + ' significant figures', fullPrecision, count: String(count) };
     } catch (error) {
       return { ok: false, error: error && error.message ? error.message : 'Unable to calculate this value.' };
     }
   }
-
-
   function execute(request) {
     const input = request || {};
     const mode = input.operation;
