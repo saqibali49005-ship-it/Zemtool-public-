@@ -47,11 +47,13 @@
   function parseExpression(expression, allowedOperators) {
     const cleaned = String(expression).trim()
       .replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
-    const match = cleaned.match(/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*([+\-*/])\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\s*$/i);
+    const numericToken = String.raw`[+-]?(?:(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?`;
+    const expressionPattern = new RegExp('^\\s*(' + numericToken + ')\\s*([+\\-*/])\\s*(' + numericToken + ')\\s*$', 'i');
+    const match = cleaned.match(expressionPattern);
     if (!match || !allowedOperators.includes(match[2])) {
       throw new Error('Enter a valid expression with two numbers and a supported operator.');
     }
-    return { a: match[1], op: match[2], b: match[3] };
+    return { a: normalizeNumeric(match[1]), op: match[2], b: normalizeNumeric(match[3]) };
   }
 
   function decimalPlacePosition(raw) {
