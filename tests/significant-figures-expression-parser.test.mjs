@@ -12,7 +12,7 @@ assert.deepEqual(engine.parseExpression('1,234.50 + 2.0', ['+']), {
 });
 assert.equal(
   engine.calculate('add', { expression: '1,234.50 + 2.0' }).value,
-  '1,236.5'
+  '1236.5'
 );
 assert.equal(
   engine.calculate('add', { expression: '-1,234.50 + 2.0' }).value,
@@ -46,7 +46,7 @@ assert.equal(
 );
 assert.equal(
   engine.calculate('add', { expression: '1234.50 + 2.0' }).value,
-  '1,236.5'
+  '1236.5'
 );
 
 console.log('Significant-figures expression parser contract: passed.');
