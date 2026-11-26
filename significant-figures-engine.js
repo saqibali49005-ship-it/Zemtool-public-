@@ -209,11 +209,6 @@
     calculate
   });
 });
-, 'i');
-    const match = cleaned.match(pattern);
-    if (!match || !allowedOperators.includes(match[2])) throw new Error('Enter a valid expression with two numbers and a supported operator.');
-    return { a: normalizeNumeric(match[1]), op: match[2], b: normalizeNumeric(match[3]) };
-  }
 
   function divideDecimal(a, b) {
     if (b.coefficient === 0n) throw new Error('Division by zero is not allowed.');
