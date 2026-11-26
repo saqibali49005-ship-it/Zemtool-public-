@@ -108,6 +108,20 @@
     return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
   }
 
+  function roundDecimalToSig(value, count) {
+    if (!Number.isInteger(count) || count < 1 || count > 100) throw new Error('Enter a valid significant-figure count.');
+    if (value.coefficient === 0n) return '0';
+    const targetScale = count - 1 - decimalExponent(value);
+    const rounded = roundToScale(value, targetScale);
+    const exponent = decimalExponent(rounded);
+    const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
+    const sig = digits.padEnd(count, '0').slice(0, count);
+    const mantissa = sig.length === 1 ? sig : sig[0] + '.' + sig.slice(1);
+    const sign = rounded.coefficient < 0n ? '-' : '';
+    if (exponent <= -4 || exponent >= count || digits.length > count) return sign + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
+  }
+
   function formatForSig(value, count) {
     if (typeof value === 'string') return roundToSig(value, count);
     if (!Number.isFinite(value)) throw new Error('Enter a valid number.');
@@ -192,7 +206,7 @@
         }
         return { ok: true, value: displayValue, subtitle, fullPrecision, count: String(significant) };
       }
-      return { ok: true, value: roundToSig(fullPrecision, count), subtitle: count + ' significant figures', fullPrecision, count: String(count) };
+      return { ok: true, value: roundDecimalToSig(result, count), subtitle: count + ' significant figures', fullPrecision, count: String(count) };
     } catch (error) {
       return { ok: false, error: error && error.message ? error.message : 'Unable to calculate this value.' };
     }
