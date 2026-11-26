@@ -7,7 +7,7 @@ on:
       - '**/*.md'
       - 'docs/**'
   pull_request:
-    branches: [main]
+    branches: [main, migration/verified-source-consolidation-2026-11-24]
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
@@ -40,6 +40,8 @@ jobs:
         run: node tests/spreader-calibration-engine.test.mjs
       - name: Run significant-figures engine unit checks
         run: node tests/significant-figures-engine.test.mjs
+      - name: Run significant-figures decimal precision contract tests
+        run: node tests/significant-figures-decimal-precision.test.mjs
       - name: Run mulch calculator engine unit checks
         run: node tests/mulch-calculator-engine.test.mjs
       - name: Run raised bed soil engine unit checks
