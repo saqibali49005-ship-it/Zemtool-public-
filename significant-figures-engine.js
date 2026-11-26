@@ -121,7 +121,7 @@
   function parseExpression(expression, allowedOperators) {
     const cleaned = String(expression).trim().replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
     const token = String.raw`[+-]?(?:(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?`;
-    const pattern = new RegExp('^\\s*(' + token + ')\\s*([+\\-*/])\\s*(' + token + ')\\s*
+    const pattern = new RegExp('^\\\\s*(' + token + ')\\\\s*([+\\\\-*/])\\\\s*(' + token + ')\\\\s*$', 'i');
     const match = cleaned.match(pattern);
     if (!match || !allowedOperators.includes(match[2])) throw new Error('Enter a valid expression with two numbers and a supported operator.');
     return { a: normalizeNumeric(match[1]), op: match[2], b: normalizeNumeric(match[3]) };
