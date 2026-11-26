@@ -76,7 +76,7 @@
     return hasDecimalPoint ? significant.length : (significant.replace(/0+$/, '').length || 1);
   }
 
-  function decimalExponent  function decimalExponent(value) {
+  function decimalExponent(value) {
     if (value.coefficient === 0n) return 0;
     const digits = (value.coefficient < 0n ? -value.coefficient : value.coefficient).toString();
     return digits.length - 1 - value.scale;
