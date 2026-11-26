@@ -99,7 +99,12 @@
     const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
     const sig = digits.padEnd(count, '0').slice(0, count);
     const mantissa = sig.length === 1 ? sig : sig[0] + '.' + sig.slice(1);
+    // Base notation must preserve the requested significant digits after a
+    // rounding carry (for example, 9.996 to 3 SF becomes 1.00e+1).
     if (exponent <= -4 || exponent >= count || (exponent >= 1 && digits.length > count)) return (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    if (exponent >= 0 && exponent < count - 1 && digits.length > count) {
+      return (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    }
     return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
   }
 
