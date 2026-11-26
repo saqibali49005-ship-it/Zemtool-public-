@@ -50,7 +50,7 @@
     let mantissa = e < 0 ? body : body.slice(0, e);
     const exponent = e < 0 ? '' : body.slice(e);
     if (mantissa.includes(',')) {
-      const grouped = mantissa.match(/^(\\d{1,3}(?:,\\d{3})+)(\\.\\d*)?$/);
+      const grouped = mantissa.match(/^(\d{1,3}(?:,\d{3})+)(\.\d*)?$/);
       if (!grouped) throw new Error('Use commas only as thousands separators (for example, 1,234.5).');
       mantissa = grouped[1].replace(/,/g, '') + (grouped[2] || '');
     }
