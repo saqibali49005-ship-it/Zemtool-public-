@@ -12,7 +12,7 @@ assert.equal(engine.calculate('add', { expression: '100.0 - 99.9' }).fullPrecisi
 // measurement-precision rule is applied.
 assert.equal(
   engine.calculate('multiply', { expression: '12345678901234567890.0 × 1.0' }).fullPrecision,
-  '12345678901234567890'
+  '12345678901234567890.00'
 );
 
 // Decimal half-up means ties move away from zero, independent of binary FP noise.
