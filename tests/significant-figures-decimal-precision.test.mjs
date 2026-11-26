@@ -62,7 +62,7 @@ assert.equal(engine.significantCount('0.00'), 2);
 assert.equal(engine.calculate('add', { expression: '1.230 + 2.10' }).value, '3.33');
 assert.equal(engine.calculate('add', { expression: '1.20 + 3.4' }).value, '4.6');
 assert.equal(engine.calculate('add', { expression: '1.2e3 + 1.2e3' }).value, '2.4e+3');
-assert.equal(engine.calculate('multiply', { expression: '0.01234 × 0.0567' }).value, '0.000700');
+assert.equal(engine.calculate('multiply', { expression: '0.01234 × 0.0567' }).value, '7.00e-4');
 assert.equal(engine.calculate('multiply', { expression: '1e-200 × 1.0' }).value, '1e-200');
 assert.equal(engine.calculate('multiply', { expression: '1.0 ÷ 3.0' }).value, '0.33');
 
