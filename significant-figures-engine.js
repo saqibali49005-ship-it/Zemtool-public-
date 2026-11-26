@@ -61,13 +61,22 @@
 
   function significantCount(raw) {
     const value = normalizeNumeric(raw).toLowerCase();
-    if (!value || /^[-+]?0$/.test(value)) return 1;
-    const digits = value.split('e')[0].replace(/^[+-]/, '').replace(/\./g, '');
+    if (!value) return 1;
+    const mantissa = value.split('e')[0].replace(/^[+-]/, '');
+    const hasDecimalPoint = mantissa.includes('.');
+    const digits = mantissa.replace(/\./g, '');
     const first = digits.search(/[1-9]/);
-    return first < 0 ? 1 : digits.length - first;
+    if (first < 0) {
+      // In an all-zero decimal, digits to the right of the decimal point
+      // communicate measured precision (0.00 has two significant zeros).
+      return hasDecimalPoint ? Math.max(1, (mantissa.split('.')[1] || '').length) : 1;
+    }
+    const significant = digits.slice(first);
+    // Integer trailing zeros are ambiguous and therefore insignificant by default.
+    return hasDecimalPoint ? significant.length : (significant.replace(/0+$/, '').length || 1);
   }
 
-  function decimalExponent(value) {
+  function decimalExponent  function decimalExponent(value) {
     if (value.coefficient === 0n) return 0;
     const digits = (value.coefficient < 0n ? -value.coefficient : value.coefficient).toString();
     return digits.length - 1 - value.scale;
@@ -89,40 +98,36 @@
     return { coefficient: roundHalfUp(value.coefficient, pow10(value.scale - targetScale)), scale: targetScale };
   }
 
-  function roundToSig(raw, count) {
-    if (!Number.isInteger(count) || count < 1 || count > 100) throw new Error('Enter a valid number and significant-figure count.');
-    const value = parseDecimal(normalizeNumeric(raw));
-    if (value.coefficient === 0n) return '0';
-    const targetScale = count - 1 - decimalExponent(value);
-    const rounded = roundToScale(value, targetScale);
-    const exponent = decimalExponent(rounded);
-    const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
-    const sig = digits.padEnd(count, '0').slice(0, count);
-    const mantissa = sig.length === 1 ? sig : sig[0] + '.' + sig.slice(1);
-    // Base notation must preserve the requested significant digits after a
-    // rounding carry (for example, 9.996 to 3 SF becomes 1.00e+1).
-    if (exponent <= -4 || exponent >= count || (exponent >= 1 && digits.length > count)) return (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
-    if (exponent >= 0 && exponent < count - 1 && digits.length > count) {
-      return (rounded.coefficient < 0n ? '-' : '') + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
-    }
-    return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
-  }
-
   function roundDecimalToSig(value, count) {
     if (!Number.isInteger(count) || count < 1 || count > 100) throw new Error('Enter a valid significant-figure count.');
     if (value.coefficient === 0n) return '0';
-    const targetScale = count - 1 - decimalExponent(value);
-    const rounded = roundToScale(value, targetScale);
-    const exponent = decimalExponent(rounded);
+    const originalExponent = decimalExponent(value);
+    const initialScale = count - 1 - originalExponent;
+    let rounded = roundToScale(value, initialScale);
+    let exponent = decimalExponent(rounded);
+    const targetScale = count - 1 - exponent;
+    // A rounding carry can change the decimal exponent. Re-quantize at the
+    // new exponent so the displayed result has exactly the requested digits.
+    if (targetScale !== initialScale) rounded = roundToScale(rounded, targetScale);
+    exponent = decimalExponent(rounded);
     const digits = (rounded.coefficient < 0n ? -rounded.coefficient : rounded.coefficient).toString();
     const sig = digits.padEnd(count, '0').slice(0, count);
     const mantissa = sig.length === 1 ? sig : sig[0] + '.' + sig.slice(1);
     const sign = rounded.coefficient < 0n ? '-' : '';
-    if (exponent <= -4 || exponent >= count || digits.length > count) return sign + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    const carriedIntegerBoundary = exponent > originalExponent && exponent >= 1;
+    const ambiguousIntegerPrecision = exponent >= 1 && targetScale <= 0;
+    if (exponent <= -4 || exponent >= count || carriedIntegerBoundary || ambiguousIntegerPrecision) {
+      return sign + mantissa + 'e' + (exponent >= 0 ? '+' : '') + exponent;
+    }
     return formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, targetScale));
   }
 
-  function formatForSig(value, count) {
+  function roundToSig(raw, count) {
+    if (!Number.isInteger(count) || count < 1 || count > 100) throw new Error('Enter a valid number and significant-figure count.');
+    return roundDecimalToSig(parseDecimal(normalizeNumeric(raw)), count);
+  }
+
+  function formatForSig  function formatForSig(value, count) {
     if (typeof value === 'string') return roundToSig(value, count);
     if (!Number.isFinite(value)) throw new Error('Enter a valid number.');
     return roundToSig(String(value), count);
