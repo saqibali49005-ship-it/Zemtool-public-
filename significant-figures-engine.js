@@ -111,6 +111,13 @@
 
   function decimalPlacePosition(raw) { return parseDecimal(normalizeNumeric(raw)).scale; }
 
+  function roundAtDecimalPosition(rawValue, position) {
+    const value = typeof rawValue === 'number' ? parseDecimal(String(rawValue)) : rawValue;
+    if (!Number.isInteger(position) || Math.abs(position) > MAX_ABS_EXPONENT) throw new Error('The requested decimal place is outside the supported range.');
+    const rounded = roundToScale(value, position);
+    const significant = rounded.coefficient === 0n ? 1 : Math.max(1, decimalExponent(rounded) + position + 1);
+    return { text: formatDecimal(rounded.coefficient, rounded.scale, Math.max(0, position)), significant };
+  }
   function parseExpression(expression, allowedOperators) {
     const cleaned = String(expression).trim().replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
     const token = String.raw`[+-]?(?:(?:\\d{1,3}(?:,\\d{3})+|\\d+)(?:\\.\\d*)?|\\.\\d+)(?:[eE][+-]?\\d+)?`;
