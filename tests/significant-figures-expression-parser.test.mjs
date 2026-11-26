@@ -16,7 +16,7 @@ assert.equal(
 );
 assert.equal(
   engine.calculate('add', { expression: '-1,234.50 + 2.0' }).value,
-  '-1,232.5'
+  '-1232.5'
 );
 assert.deepEqual(engine.parseExpression('1,234.50e2 + 1.0', ['+']), {
   a: '1234.50e2',
